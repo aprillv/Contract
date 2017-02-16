@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import MBProgressHUD
+import Foundation
 
 class LoginViewController: BaseViewController, UITextFieldDelegate {
 
@@ -217,12 +218,16 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
 //    self.noticeOnlyText(CConstants.LoginingMsg)
         
     }
+    
+   
+    
     private func doLogin(sender: UIButton){
         emailTxt.resignFirstResponder()
         passwordTxt.resignFirstResponder()
         
         let email = emailTxt.text
         let password = passwordTxt.text
+//        print(password, MD5(str: password!))
         
         if IsNilOrEmpty(email) {
             self.toEablePageControl()

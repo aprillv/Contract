@@ -1007,7 +1007,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
             CConstants.ServerURL + serviceUrl!,
             parameters: param).responseJSON{ (response) -> Void in
                 hud.hide(true)
-//                print(param, serviceUrl)
+                print(param, serviceUrl)
                 if response.result.isSuccess {
                     
                     if let rtnValue = response.result.value as? [String: AnyObject]{

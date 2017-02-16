@@ -311,10 +311,10 @@ class SetDotValue : NSObject {
                     pv.value = pdfInfo!.agent_address!
                 case SignContractPDFFields.insurance_company:
                     pv.value = pdfInfo!.insurance_company!
-//                case SignContractPDFFields.estimatedclosing_MMdd:
-//                    pv.value = pdfInfo!.estimatedclosing_MMdd!
-//                case SignContractPDFFields.estimatedclosing_yy:
-//                    pv.value = pdfInfo!.estimatedclosing_yy!
+                case SignContractPDFFields.estimatedclosing_MMdd:
+                    pv.value = pdfInfo!.estimatedclosing_MMdd!
+                case SignContractPDFFields.estimatedclosing_yy:
+                    pv.value = pdfInfo!.estimatedclosing_yy!
                 case SignContractPDFFields.tobuyer1:
                     if (pdfInfo?.client2 ?? "") != "" {
                         pv.value = pdfInfo!.client! + " / " +  pdfInfo!.client2!
@@ -559,6 +559,11 @@ class SetDotValue : NSObject {
                         if radio.exportValue == "6a2" {
                             radio.setValue2("1")
                         }
+                    }
+                case "7e1":
+                    if let p = pdfInfo?.estimatedclosing_MMdd {
+                        pv.value = p
+                        
                     }
                 default:
                     break

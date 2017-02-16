@@ -486,11 +486,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/LoginViewController.swift"
-            timestampString = "505379509.749386"
+            timestampString = "507519265.639246"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "doLogin(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1430,11 +1430,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/LoginViewController.swift"
-            timestampString = "505379509.749386"
+            timestampString = "507519265.639246"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
             landmarkName = "doLogin(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1798,11 +1798,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/LoginViewController.swift"
-            timestampString = "505379509.749386"
+            timestampString = "507519265.639246"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
             landmarkName = "doLogin(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5148,6 +5148,22 @@
             startingLineNumber = "436"
             endingLineNumber = "436"
             landmarkName = "-drawInRect:withContext:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Contract/Views/LoginViewController.swift"
+            timestampString = "507519225.883474"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
+            landmarkName = "doLogin(sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
