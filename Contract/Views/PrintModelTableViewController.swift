@@ -11,7 +11,7 @@ import Alamofire
 
 protocol ToDoPrintDelegate
 {
-    func GoToPrint(modelNm: [String])
+    func GoToPrint(_ modelNm: [String])
 }
 class PrintModelTableViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate{
     // MARK: - Constanse
@@ -21,18 +21,18 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
     @IBOutlet var printBtn: UIButton!{
         didSet{
             printBtn.layer.cornerRadius = 5.0
-            printBtn.hidden = true
+            printBtn.isHidden = true
         }
     }
     var delegate : ToDoPrintDelegate?
     
     
     
-    @IBAction func dismissSelf(sender: UITapGestureRecognizer) {
+    @IBAction func dismissSelf(_ sender: UITapGestureRecognizer) {
         //        print(sender)
         //        let point = sender.locationInView(view)
         //        if !CGRectContainsPoint(tableview.frame, point) {
-        self.dismissViewControllerAnimated(true){}
+        self.dismiss(animated: true){}
         //        }
         
     }
@@ -40,9 +40,9 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
     
     @IBOutlet var tablex: NSLayoutConstraint!
     @IBOutlet var tabley: NSLayoutConstraint!
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
-        let point = touch.locationInView(view)
-        return !CGRectContainsPoint(tableview.frame, point)
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        let point = touch.location(in: view)
+        return !tableview.frame.contains(point)
     }
     @IBOutlet var tableview: UITableView!{
         didSet{
@@ -56,7 +56,7 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
         //        view.superview?.bounds = CGRect(x: 0, y: 0, width: tableview.frame.width, height: 44 * CGFloat(5))
     }
     
-    private struct constants{
+    fileprivate struct constants{
         static let Title : String = "Select"
         static let CellIdentifier : String = "Address Cell Identifier"
         
@@ -96,8 +96,8 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
 //        canEdit = true
         
         tableview.allowsSelection = canEdit
-        let userInfo = NSUserDefaults.standardUserDefaults()
-        if userInfo.boolForKey(CConstants.UserInfoIsContract) {
+        let userInfo = UserDefaults.standard
+        if userInfo.bool(forKey: CConstants.UserInfoIsContract) {
             printList.append(CConstants.ActionTitleBuyersExpect)
             printList.append(CConstants.ActionTitleAddendumC)
             printList.append(CConstants.ActionTitleAddendumD)
@@ -213,41 +213,41 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
     
    
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return constants.cellHeight
     }
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return constants.cellHeight
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCellWithIdentifier(constants.cellFirstReuseIndentifier)
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCell(withIdentifier: constants.cellFirstReuseIndentifier)
         cell!.textLabel!.text = "Select Form"
         cell?.textLabel?.font = UIFont(name: CConstants.ApplicationBarFontName, size: CConstants.ApplicationBarItemFontSize)
-        cell?.textLabel?.textColor =  UIColor.whiteColor()
+        cell?.textLabel?.textColor =  UIColor.white
         cell?.textLabel?.backgroundColor = CConstants.ApplicationColor
-        cell!.textLabel!.textAlignment = NSTextAlignment.Center
+        cell!.textLabel!.textAlignment = NSTextAlignment.center
         return cell
     }
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCellWithIdentifier(constants.cellLastReuseIndentifier) as! AddressListModelLastCell
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCell(withIdentifier: constants.cellLastReuseIndentifier) as! AddressListModelLastCell
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
         cell.preservesSuperviewLayoutMargins = false
         cell.print?.text = constants.printBtnTitle
         
-        cell.print?.textAlignment = .Center
-        cell.print?.textColor = UIColor.whiteColor()
+        cell.print?.textAlignment = .center
+        cell.print?.textColor = UIColor.white
         cell.print?.backgroundColor = CConstants.ApplicationColor
         cell.print?.font = UIFont(name: CConstants.ApplicationBarFontName, size: CConstants.ApplicationBarItemFontSize)
         cell.cancel?.text = constants.cancelBtnTitle
         
-        cell.cancel?.textAlignment = .Center
-        cell.cancel?.textColor = UIColor.whiteColor()
+        cell.cancel?.textAlignment = .center
+        cell.cancel?.textColor = UIColor.white
         cell.cancel?.backgroundColor = CConstants.ApplicationColor
         cell.cancel?.font = UIFont(name: CConstants.ApplicationBarFontName, size: CConstants.ApplicationBarItemFontSize)
         
@@ -255,8 +255,8 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
         tab.numberOfTapsRequired = 1
         cell.tag = 0
         cell.addGestureRecognizer(tab)
-        let userinfo = NSUserDefaults.standardUserDefaults()
-        if let filesNames = userinfo.valueForKey(CConstants.UserInfoPrintModel) as? [String] {
+        let userinfo = UserDefaults.standard
+        if let filesNames = userinfo.value(forKey: CConstants.UserInfoPrintModel) as? [String] {
             if filesNames.count == printList.count{
                 cell.tag = 1
             }
@@ -264,12 +264,12 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
         return cell
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return printList.count - 1
     }
     
-    private func isAllCellSelected(){
+    fileprivate func isAllCellSelected(){
         var selectedh = 0;
         for i in 1...selected!.count-1 {
 //            let index1 = NSIndexPath(forRow: i, inSection: 0)
@@ -277,8 +277,8 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
                 selectedh+=1
             }
         }
-            let index1 = NSIndexPath(forRow: 0, inSection: 0)
-            if let cell = tableview.cellForRowAtIndexPath(index1) as? PrintModelTableViewCell{
+            let index1 = IndexPath(row: 0, section: 0)
+            if let cell = tableview.cellForRow(at: index1) as? PrintModelTableViewCell{
                 if selectedh == selected!.count-1 {
                     selected![0] = true
                     cell.imageBtn.image = UIImage(named: CConstants.CheckedImgNm)
@@ -320,15 +320,15 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
     
     var canEdit : Bool = false
     
-    func touched(tap : UITapGestureRecognizer){
+    func touched(_ tap : UITapGestureRecognizer){
 
         if let cell = tap.view as? AddressListModelLastCell {
-            let point = tap.locationInView(tap.view)
+            let point = tap.location(in: tap.view)
             if (cell.print.frame.contains(point)){
-                var selectedCellArray = [NSIndexPath]()
+                var selectedCellArray = [IndexPath]()
                 
                 for i in 1...printList.count-2 {
-                    let index = NSIndexPath(forRow: i, inSection: 0)
+                    let index = IndexPath(row: i, section: 0)
                     let c = selected![i]
                     if c {
                         selectedCellArray.append(index)
@@ -339,7 +339,7 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
                     return
                 }else{
 //                    print(NSDate)
-                    self.dismissViewControllerAnimated(false){
+                    self.dismiss(animated: false){
                         var filesNames = [String]()
                         for indexPath0 in selectedCellArray {
                             let title = self.printList[indexPath0.row]
@@ -361,7 +361,7 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
                     }
                 }
             }else if cell.cancel.frame.contains(point){
-                self.dismissViewControllerAnimated(true){}
+                self.dismiss(animated: true){}
             
             }
         }
@@ -372,7 +372,7 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
     }
     
     
-    func UpdatePrintedFileList(filesNames : [String]){
+    func UpdatePrintedFileList(_ filesNames : [String]){
         var printedList : [String] = [String]()
         for x in filesNames {
             switch x {
@@ -418,31 +418,33 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
         
         
         if let c = projectInfo {
-            let param = ["idcontract1" : c.idnumber ?? "", "idfilelist": printedList.joinWithSeparator(",")]
+            let param = ["idcontract1" : c.idnumber ?? "", "idfilelist": printedList.joined(separator: ",")]
 //            print(param)
-            Alamofire.request(.POST, CConstants.ServerURL + "bacontract_UpdatePrintedFileList.json", parameters: param).responseJSON{ (response) -> Void in
-//                print(response.result.value)
-                if response.result.isSuccess {
-                    //                    contract?.printList = response.result.value as? String
-                    //                    self.performSegueWithIdentifier(CConstants.SegueToPrintModel, sender: contract)
-                    //                    print(response.result.value)
-                }else{
-                    //                    contract?.printList = nil
-                    //                    self.performSegueWithIdentifier(CConstants.SegueToPrintModel, sender: contract)
-                }
-            }
+            // april need to change
+            
+//            Alamofire.request(.POST, CConstants.ServerURL + "bacontract_UpdatePrintedFileList.json", parameters: param).responseJSON{ (response) -> Void in
+////                print(response.result.value)
+//                if response.result.isSuccess {
+//                    //                    contract?.printList = response.result.value as? String
+//                    //                    self.performSegue(withIdentifier: CConstants.SegueToPrintModel, sender: contract)
+//                    //                    print(response.result.value)
+//                }else{
+//                    //                    contract?.printList = nil
+//                    //                    self.performSegue(withIdentifier: CConstants.SegueToPrintModel, sender: contract)
+//                }
+//            }
         }
     }
     
 //    var filesNames : [String]?
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
-        let cell = tableView.dequeueReusableCellWithIdentifier(constants.cellReuseIdentifier, forIndexPath: indexPath) as! PrintModelTableViewCell
-            cell.separatorInset = UIEdgeInsetsZero
-            cell.layoutMargins = UIEdgeInsetsZero
+        let cell = tableView.dequeueReusableCell(withIdentifier: constants.cellReuseIdentifier, for: indexPath) as! PrintModelTableViewCell
+            cell.separatorInset = UIEdgeInsets.zero
+            cell.layoutMargins = UIEdgeInsets.zero
             cell.preservesSuperviewLayoutMargins = false
             cell.contentLbl?.text = printList[indexPath.row]
-            cell.textLabel?.textAlignment = .Left
+            cell.textLabel?.textAlignment = .left
             
 //            let userinfo = NSUserDefaults.standardUserDefaults()
 //            if let filesNames = userinfo.valueForKey(CConstants.UserInfoPrintModel) as? [String] {
@@ -480,9 +482,9 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            let cell = tableView.cellForRowAtIndexPath(indexPath) as? PrintModelTableViewCell
+            let cell = tableView.cellForRow(at: indexPath) as? PrintModelTableViewCell
             //            cell?.contentView.tag = 1 - cell!.contentView.tag
             let iv :UIImage?
             let c = selected![indexPath.row]
@@ -505,14 +507,14 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
                 for i in 1...(selected!.count-1) {
                     selected![i] = !c
 //                    selected![i] = true
-                    let indexother = NSIndexPath(forRow: i, inSection: 0)
-                    if let cell = tableView.cellForRowAtIndexPath(indexother) as? PrintModelTableViewCell {
+                    let indexother = IndexPath(row: i, section: 0)
+                    if let cell = tableView.cellForRow(at: indexother) as? PrintModelTableViewCell {
                         cell.imageBtn?.image =  iv
                     }
                 }
             
         }else if indexPath.row < (printList.count - 1) {
-            let cell = tableView.cellForRowAtIndexPath(indexPath) as? PrintModelTableViewCell
+            let cell = tableView.cellForRow(at: indexPath) as? PrintModelTableViewCell
 //            cell?.contentView.tag = 1 - cell!.contentView.tag
             let iv :UIImage?
             let c = selected![indexPath.row]
@@ -528,7 +530,7 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
             
         }else{
             
-            var selectedCellArray = [NSIndexPath]()
+            var selectedCellArray = [IndexPath]()
             
             for i in 0...printList.count-1 {
 //                let index = NSIndexPath(forRow: i, inSection: 0)
@@ -540,7 +542,7 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
 //                    
 //                }
                 let c = selected![i]
-                let index = NSIndexPath(forRow: i, inSection: 0)
+                let index = IndexPath(row: i, section: 0)
                 if c {
                     selectedCellArray.append(index)
                 }
@@ -550,14 +552,14 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
             if selectedCellArray.count == 0 {
                 return
             }else{
-                self.dismissViewControllerAnimated(true){
+                self.dismiss(animated: true){
                     if let delegate1 = self.delegate {
                         var filesNames = [String]()
                         for indexPath0 in selectedCellArray {
                             let title = self.printList[indexPath0.row]
                             filesNames.append(title)
                         }
-                        let userinfo = NSUserDefaults.standardUserDefaults()
+                        let userinfo = UserDefaults.standard
                         userinfo.setValue(filesNames, forKey: CConstants.UserInfoPrintModel)
                         delegate1.GoToPrint(filesNames)
                     }
@@ -576,7 +578,7 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
         set { super.preferredContentSize = newValue }
     }
     
-    private func getTableHight() -> CGFloat{
+    fileprivate func getTableHight() -> CGFloat{
 //        print(constants.cellHeight * CGFloat(printList.count + 1), 680, (min(view.frame.height, view.frame.width) - 40))
 //        print(min(CGFloat(constants.cellHeight * CGFloat(printList.count + 1)), 680, (min(view.frame.height, view.frame.width) - 40)))
        return min(CGFloat(constants.cellHeight * CGFloat(printList.count + 1)), 680, (min(view.frame.height, view.frame.width) - 40))

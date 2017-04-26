@@ -20,9 +20,9 @@ class ContractRequestItem: NSObject {
     }
     
     func DictionaryFromObject() -> [String: String]{
-        let userinfo = NSUserDefaults.standardUserDefaults()
+        let userinfo = UserDefaults.standard
         
-        if userinfo.boolForKey(CConstants.UserInfoIsContract){
+        if userinfo.bool(forKey: CConstants.UserInfoIsContract){
             let a = ["idnumber" : cInfo?.idnumber ?? ""
                 , "idcity" : cInfo?.idcity ?? ""
                 , "idcia": cInfo?.idcia ?? ""
@@ -41,9 +41,9 @@ class ContractRequestItem: NSObject {
         }
     }
     
-    func DictionaryFromBasePdf(model :ContractPDFBaseModel) -> [String: String]{
-        let userinfo = NSUserDefaults.standardUserDefaults()
-        if userinfo.boolForKey(CConstants.UserInfoIsContract){
+    func DictionaryFromBasePdf(_ model :ContractPDFBaseModel) -> [String: String]{
+        let userinfo = UserDefaults.standard
+        if userinfo.bool(forKey: CConstants.UserInfoIsContract){
             let a = ["idnumber" : model.idnumber!
                 , "idcity" : model.idcity!
                 , "idcia": model.idcia!

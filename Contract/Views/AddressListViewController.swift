@@ -9,11 +9,24 @@
 import UIKit
 import Alamofire
 import MBProgressHUD
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l < r
+    case (nil, _?):
+        return true
+    default:
+        return false
+    }
+}
+
 
 class AddressListViewController: UITableViewController, UISearchBarDelegate, ToDoPrintDelegate, FilterViewDelegate{
     @IBOutlet var viewHeight: NSLayoutConstraint!{
         didSet{
-            viewHeight.constant = 1.0 / UIScreen.mainScreen().scale
+            viewHeight.constant = 1.0 / UIScreen.main.scale
         }
     }
     
@@ -24,44 +37,44 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
         didSet{
             txtField.layer.cornerRadius = 5.0
             txtField.placeholder = "Search"
-            txtField.clearButtonMode = .WhileEditing
-            txtField.leftViewMode = .Always
+            txtField.clearButtonMode = .whileEditing
+            txtField.leftViewMode = .always
             txtField.leftView = UIImageView(image: UIImage(named: "search"))
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddressListViewController.textFieldDidChange(_:)), name: UITextFieldTextDidChangeNotification, object: txtField)
+            NotificationCenter.default.addObserver(self, selector: #selector(AddressListViewController.textFieldDidChange(_:)), name: NSNotification.Name.UITextFieldTextDidChange, object: txtField)
         }
         
     }
     
-    func textFieldDidChange(notifications : NSNotification){
-        if let txt = txtField.text?.lowercaseString{
+    func textFieldDidChange(_ notifications : Notification){
+        if let txt = txtField.text?.lowercased(){
             if txt.isEmpty{
                 self.showAllInCurrentFilter()
             }else{
                 AddressList = AddressList?.filter(){
                     if tableView.tag == 2 {
-                        return $0.cianame!.lowercaseString.containsString(txt)
-                            || $0.assignsales1name!.lowercaseString.containsString(txt)
-                            || $0.nproject!.lowercaseString.containsString(txt)
-                            || $0.client!.lowercaseString.containsString(txt)
+                        return $0.cianame!.lowercased().contains(txt)
+                            || $0.assignsales1name!.lowercased().contains(txt)
+                            || $0.nproject!.lowercased().contains(txt)
+                            || $0.client!.lowercased().contains(txt)
                     }else{
-                        return $0.cianame!.lowercaseString.containsString(txt)
-                            || $0.nproject!.lowercaseString.containsString(txt)
+                        return $0.cianame!.lowercased().contains(txt)
+                            || $0.nproject!.lowercased().contains(txt)
                     }
                     
                 }
             }
         }else{
             self.showAllInCurrentFilter()
-//            AddressList = AddressListOrigin
+            //            AddressList = AddressListOrigin
         }
     }
-//    var lastSelectedIndexPath : NSIndexPath?
-   
+    //    var lastSelectedIndexPath : NSIndexPath?
+    
     @IBOutlet var backItem: UIBarButtonItem!
     @IBOutlet var switchItem: UIBarButtonItem!
-//    @IBOutlet var searchBar: UISearchBar!
-    @IBAction func doLogout(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
+    //    @IBOutlet var searchBar: UISearchBar!
+    @IBAction func doLogout(_ sender: AnyObject) {
+        self.navigationController?.popViewController(animated: true)
     }
     var head : AddressListViewHeadView?
     var AddressListOrigin : [ContractsItem]?{
@@ -76,10 +89,10 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
         }
     }
     
-    private func showAllInCurrentFilter(){
+    fileprivate func showAllInCurrentFilter(){
         if tableView.tag == 2 {
-            let userinfo = NSUserDefaults.standardUserDefaults()
-            let a = userinfo.integerForKey(CConstants.ShowFilter)
+            let userinfo = UserDefaults.standard
+            let a = userinfo.integer(forKey: CConstants.ShowFilter)
             if a == 1 {
                 showHomeOwnerSign()
                 //                self.AddressList = self.AddressListOrigin?.filter(){
@@ -103,11 +116,11 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
     var AddressListOrigin2 : [ContractsItem]?
     
     
-    private var filesNms : [String]?
-    private var AddressList : [ContractsItem]? {
+    fileprivate var filesNms : [String]?
+    fileprivate var AddressList : [ContractsItem]? {
         didSet{
-            AddressList?.sortInPlace(){$0.idcia < $1.idcia}
-//            AddressList?
+            AddressList?.sort(){$0.idcia < $1.idcia}
+            //            AddressList?
             
             if AddressList != nil{
                 CiaNmArray = [String : [ContractsItem]]()
@@ -139,22 +152,22 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
             self.tableView?.reloadData()
         }
     }
-    private var CiaNm : [String]?
-    private var CiaNmArray : [String : [ContractsItem]]?
+    fileprivate var CiaNm : [String]?
+    fileprivate var CiaNmArray : [String : [ContractsItem]]?
     
     
     @IBOutlet weak var LoginUserName: UIBarButtonItem!{
         didSet{
-            let userInfo = NSUserDefaults.standardUserDefaults()
-            LoginUserName.title = userInfo.objectForKey(CConstants.LoggedUserNameKey) as? String
+            let userInfo = UserDefaults.standard
+            LoginUserName.title = userInfo.object(forKey: CConstants.LoggedUserNameKey) as? String
         }
     }
     // MARK: - Constanse
-    private struct constants{
+    fileprivate struct constants{
         static let Title : String = "Address List"
         static let CellIdentifier : String = "Address Cell Identifier"
         static let DraftCellIdentifier : String = "AddressDraft Cell Identifier"
-       
+        
     }
     
     
@@ -167,7 +180,7 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
         self.navigationItem.hidesBackButton = true
         self.title = constants.Title
         if tableTag != 2 {
-            salesBtn.hidden = true
+            salesBtn.isHidden = true
         }
         
         
@@ -176,16 +189,16 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
     }
     
     
-
+    
     
     // MARK: - Search Bar Deleagte
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-       
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
         
     }
-
+    
     // MARK: - Table view data source
-    override func tableView(tableView1: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView1: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if tableView.tag == 2 {
             let  heada = AddressListViewHeadView(frame: CGRect(x: 0, y: 0, width: tableView1.frame.width, height: 44))
@@ -195,9 +208,9 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
         }else{
             return nil
         }
-       
+        
     }
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if tableView.tag == 1 {
             let ddd = CiaNmArray?[CiaNm?[section] ?? ""]
             return ddd?.first?.cianame ?? ""
@@ -205,22 +218,22 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
             return nil
         }
     }
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return CiaNm?.count ?? 1
     }
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CiaNmArray?[CiaNm?[section] ?? ""]!.count ?? 0
     }
-
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return tableView.tag == 2 ? 66 : 30
     }
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: UITableViewCell;
         if tableView.tag == 2{
-             cell = tableView.dequeueReusableCellWithIdentifier(constants.CellIdentifier, forIndexPath: indexPath)
-//            cell.separatorInset = UIEdgeInsetsZero
-//            cell.layoutMargins = UIEdgeInsetsZero
+            cell = tableView.dequeueReusableCell(withIdentifier: constants.CellIdentifier, for: indexPath)
+            //            cell.separatorInset = UIEdgeInsetsZero
+            //            cell.layoutMargins = UIEdgeInsetsZero
             cell.preservesSuperviewLayoutMargins = false
             if let cellitem = cell as? AddressListViewCell {
                 let ddd = CiaNmArray?[CiaNm?[indexPath.section] ?? ""]
@@ -232,31 +245,31 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
             
             
         }else{
-            cell = tableView.dequeueReusableCellWithIdentifier(constants.DraftCellIdentifier, forIndexPath: indexPath)
-//            cell.separatorInset = UIEdgeInsetsZero
-//            cell.layoutMargins = UIEdgeInsetsZero
+            cell = tableView.dequeueReusableCell(withIdentifier: constants.DraftCellIdentifier, for: indexPath)
+            //            cell.separatorInset = UIEdgeInsetsZero
+            //            cell.layoutMargins = UIEdgeInsetsZero
             cell.preservesSuperviewLayoutMargins = false
             if let cellitem = cell as? AddressDraftListViewCell {
                 let ddd = CiaNmArray?[CiaNm?[indexPath.section] ?? ""]
                 cellitem.contractInfo = ddd![indexPath.row]
             }
         }
-//        if let indexa = tableView.indexPathForSelectedRow{
-//            if indexa == indexPath{
-//                cell.contentView.backgroundColor = CConstants.SearchBarBackColor
-//            }else{
-//                cell.contentView.backgroundColor = UIColor.whiteColor()
-//            }
-//        }
+        //        if let indexa = tableView.indexPathForSelectedRow{
+        //            if indexa == indexPath{
+        //                cell.contentView.backgroundColor = CConstants.SearchBarBackColor
+        //            }else{
+        //                cell.contentView.backgroundColor = UIColor.whiteColor()
+        //            }
+        //        }
         
         return cell
         
     }
     
-    private func getLongString(originStr : String) -> String{
+    fileprivate func getLongString(_ originStr : String) -> String{
         if originStr.characters.count < 16 {
             let tmp = "                "
-            return originStr.stringByAppendingString(tmp.substringFromIndex(originStr.endIndex))
+            return originStr + tmp.substring(from: originStr.endIndex)
         }else{
             return originStr
         }
@@ -264,33 +277,33 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
     
     @IBOutlet var copyrightlbl: UIBarButtonItem!{
         didSet{
-            let currentDate = NSDate()
-            let usDateFormat = NSDateFormatter()
-            usDateFormat.dateFormat = NSDateFormatter.dateFormatFromTemplate("yyyy", options: 0, locale: NSLocale(localeIdentifier: "en-US"))
+            let currentDate = Date()
+            let usDateFormat = DateFormatter()
+            usDateFormat.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy", options: 0, locale: Locale(identifier: "en-US"))
             
-            copyrightlbl.title = "Copyright © " + usDateFormat.stringFromDate(currentDate) + " All Rights Reserved"
+            copyrightlbl.title = "Copyright © " + usDateFormat.string(from: currentDate) + " All Rights Reserved"
         }
     }
-    func GoToPrint(modelNm: [String]) {
-         self.filesNms = modelNm
-//        self.filesNms = ["Addendum C"]
-//        if modelNm.count == 1 {
-//            callService(modelNm)
-//        }else{
-            if modelNm.contains(CConstants.ActionTitleAddendumC){
-                callService(modelNm)
-            }else{
-                self.performSegueWithIdentifier(CConstants.SegueToPrintPdf, sender: modelNm)
-            }
-//        }
+    func GoToPrint(_ modelNm: [String]) {
+        self.filesNms = modelNm
+        //        self.filesNms = ["Addendum C"]
+        //        if modelNm.count == 1 {
+        //            callService(modelNm)
+        //        }else{
+        if modelNm.contains(CConstants.ActionTitleAddendumC){
+            callService(modelNm)
+        }else{
+            self.performSegue(withIdentifier: CConstants.SegueToPrintPdf, sender: modelNm)
+        }
+        //        }
         
         
-
+        
     }
     
     @IBOutlet var filterItem: UIBarButtonItem!
     
-    private func callService(printModelNms: [String]){
+    fileprivate func callService(_ printModelNms: [String]){
         var serviceUrl: String?
         var printModelNm : String
         if printModelNms.count == 1 {
@@ -310,111 +323,111 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
             let ddd = self.CiaNmArray?[self.CiaNm?[indexPath.section] ?? ""]
             let item: ContractsItem = ddd![indexPath.row]
             
-//            print(ContractRequestItem(contractInfo: item).DictionaryFromObject())
-            let hud = MBProgressHUD.showHUDAddedTo(UIApplication.sharedApplication().keyWindow, animated: true)
+            //            print(ContractRequestItem(contractInfo: item).DictionaryFromObject())
+            let hud = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow, animated: true)
             //                hud.mode = .AnnularDeterminate
-            hud.labelText = CConstants.RequestMsg
-            Alamofire.request(.POST,
-                CConstants.ServerURL + serviceUrl!,
-                parameters: ContractRequestItem(contractInfo: item).DictionaryFromObject()).responseJSON{ (response) -> Void in
-                    hud.hide(true)
-//                    print(ContractRequestItem(contractInfo: item).DictionaryFromObject())
-                        if response.result.isSuccess {
-                            
-                            if let rtnValue = response.result.value as? [String: AnyObject]{
-                                if let msg = rtnValue["message"] as? String{
-                                    if msg.isEmpty{
-                                        switch printModelNm {
-                                        case CConstants.ActionTitleAddendumC:
-//                                            if printModelNms.count == 1 {
-//                                                let rtn = ContractAddendumC(dicInfo: rtnValue)
-//                                                self.performSegueWithIdentifier(CConstants.SegueToAddendumC, sender: rtn)
-//                                            }else{
-//                                            print(response.result.value)
-                                                let rtn = ContractAddendumC(dicInfo: rtnValue)
-                                                self.performSegueWithIdentifier(CConstants.SegueToPrintPdf, sender: rtn)
-//                                            }
-                                        default:
-                                            self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            hud?.labelText = CConstants.RequestMsg
+            
+            Alamofire.request(
+                              CConstants.ServerURL + serviceUrl!, method: .post,
+                              parameters: ContractRequestItem(contractInfo: item).DictionaryFromObject()).responseJSON{ (response) -> Void in
+                                hud?.hide(true)
+                                //                    print(ContractRequestItem(contractInfo: item).DictionaryFromObject())
+                                if response.result.isSuccess {
+                                    
+                                    if let rtnValue = response.result.value as? [String: AnyObject]{
+                                        if let msg = rtnValue["message"] as? String{
+                                            if msg.isEmpty{
+                                                switch printModelNm {
+                                                case CConstants.ActionTitleAddendumC:
+                                                    //                                            if printModelNms.count == 1 {
+                                                    //                                                let rtn = ContractAddendumC(dicInfo: rtnValue)
+                                                    //                                                self.performSegue(withIdentifier: CConstants.SegueToAddendumC, sender: rtn)
+                                                    //                                            }else{
+                                                    //                                            print(response.result.value)
+                                                    let rtn = ContractAddendumC(dicInfo: rtnValue)
+                                                    self.performSegue(withIdentifier:CConstants.SegueToPrintPdf, sender: rtn)
+                                                //                                            }
+                                                default:
+                                                    self.tableView.deselectRow(at: indexPath, animated: true)
+                                                }
+                                                
+                                                
+                                            }else{
+                                                self.tableView.deselectRow(at: indexPath, animated: true)
+                                                self.PopMsgWithJustOK(msg: msg)
+                                            }
+                                        }else{
+                                            self.tableView.deselectRow(at: indexPath, animated: true)
+                                            self.PopMsgWithJustOK(msg: CConstants.MsgServerError)
                                         }
-                                        
-                                        
                                     }else{
-                                        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-                                        self.PopMsgWithJustOK(msg: msg)
+                                        self.tableView.deselectRow(at: indexPath, animated: true)
+                                        self.PopMsgWithJustOK(msg: CConstants.MsgServerError)
                                     }
                                 }else{
-                                    self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-                                    self.PopMsgWithJustOK(msg: CConstants.MsgServerError)
+                                    self.tableView.deselectRow(at: indexPath, animated: true)
+                                    self.PopMsgWithJustOK(msg: CConstants.MsgNetworkError)
                                 }
-                            }else{
-                                self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-                                self.PopMsgWithJustOK(msg: CConstants.MsgServerError)
-                            }
-                        }else{
-                            self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-//                            self.spinner?.stopAnimating()
-                            self.PopMsgWithJustOK(msg: CConstants.MsgNetworkError)
-                        }
-                    }
+            }
             
             
         }
     }
     
     
-//    override func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
-//        removebackFromCell()
-//        if let cell  = tableView.cellForRowAtIndexPath(indexPath) {
-//        cell.contentView.backgroundColor = CConstants.SearchBarBackColor
-//        }
-//        
-//    }
-//    
-//    override func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
-//        if let cell  = tableView.cellForRowAtIndexPath(indexPath) {
-//            lastSelectedIndexPath = indexPath
-//            cell.contentView.backgroundColor = .clearColor()
-//        }
-//        
-//    }
-
-//    private func removebackFromCell(){
-//        if let _ = lastSelectedIndexPath {
-//            if let cell = tableView.cellForRowAtIndexPath(lastSelectedIndexPath!){
-//                cell.contentView.backgroundColor = .clearColor()
-//            }
-//        }
-//    }
+    //    override func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+    //        removebackFromCell()
+    //        if let cell  = tableView.cellForRowAtIndexPath(indexPath) {
+    //        cell.contentView.backgroundColor = CConstants.SearchBarBackColor
+    //        }
+    //
+    //    }
+    //
+    //    override func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+    //        if let cell  = tableView.cellForRowAtIndexPath(indexPath) {
+    //            lastSelectedIndexPath = indexPath
+    //            cell.contentView.backgroundColor = .clearColor()
+    //        }
+    //
+    //    }
     
-//    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-//        removebackFromCell()
-//    }
-   
-    var selectRowIndex : NSIndexPath?
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
-       self.txtField.resignFirstResponder()
+    //    private func removebackFromCell(){
+    //        if let _ = lastSelectedIndexPath {
+    //            if let cell = tableView.cellForRowAtIndexPath(lastSelectedIndexPath!){
+    //                cell.contentView.backgroundColor = .clearColor()
+    //            }
+    //        }
+    //    }
+    
+    //    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    //        removebackFromCell()
+    //    }
+    
+    var selectRowIndex : IndexPath?
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        self.txtField.resignFirstResponder()
         var contract : ContractsItem?
         if tableView.tag == 2{
-            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? AddressListViewCell {
+            if let cell = tableView.cellForRow(at: indexPath) as? AddressListViewCell {
                 contract = cell.contractInfo
             }
         }else{
-            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? AddressDraftListViewCell {
+            if let cell = tableView.cellForRow(at: indexPath) as? AddressDraftListViewCell {
                 contract = cell.contractInfo
             }
         }
         selectRowIndex = indexPath
-        let userInfo = NSUserDefaults.standardUserDefaults()
+        let userInfo = UserDefaults.standard
         
-        userInfo.setBool(self.tableView.tag == 2, forKey: CConstants.UserInfoIsContract)
+        userInfo.set(self.tableView.tag == 2, forKey: CConstants.UserInfoIsContract)
         if self.tableView.tag == 2 {
-            if (contract?.status ?? "") == CConstants.ApprovedStatus && !(contract?.signfinishdate ?? "").containsString("1980"){
-                if (userInfo.stringForKey(CConstants.UserInfoEmail) ?? "").lowercaseString == CConstants.Administrator {
+            if (contract?.status ?? "") == CConstants.ApprovedStatus && !(contract?.signfinishdate ?? "").contains("1980"){
+                if (userInfo.string(forKey: CConstants.UserInfoEmail) ?? "").lowercased() == CConstants.Administrator {
                     GetPrintedFileList(contract)
                 }else{
-                    self.performSegueWithIdentifier("showSendEmailAfterAprroved1", sender: contract)
+                    self.performSegue(withIdentifier: "showSendEmailAfterAprroved1", sender: contract)
                 }
                 
             }else{
@@ -423,23 +436,24 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
             
         }else{
             contract?.printList = nil
-            self.performSegueWithIdentifier(CConstants.SegueToPrintModel, sender: contract)
+            self.performSegue(withIdentifier: CConstants.SegueToPrintModel, sender: contract)
         }
     }
     
-    func GetPrintedFileList(contract : ContractsItem?){
+    func GetPrintedFileList(_ contract : ContractsItem?){
         if let c = contract {
             let param = ["idcontract1" : c.idnumber ?? ""]
-//            print(param,  CConstants.ServerURL + "bacontract_GetPrintedFileList.json")
-            Alamofire.request(.POST, CConstants.ServerURL + "bacontract_GetPrintedFileList.json", parameters: param).responseJSON{ (response) -> Void in
-//                print(response.result.value)
+            //            print(param,  CConstants.ServerURL + "bacontract_GetPrintedFileList.json")
+
+            Alamofire.request(CConstants.ServerURL + "bacontract_GetPrintedFileList.json", method: .post, parameters: param).responseJSON{ (response) -> Void in
+                //                print(response.result.value)
                 if response.result.isSuccess {
                     contract?.printList = response.result.value as? [Int]
-                    self.performSegueWithIdentifier(CConstants.SegueToPrintModel, sender: contract)
-//                    print(response.result.value)
+                    self.performSegue(withIdentifier: CConstants.SegueToPrintModel, sender: contract)
+                    //                    print(response.result.value)
                 }else{
                     contract?.printList = nil
-                    self.performSegueWithIdentifier(CConstants.SegueToPrintModel, sender: contract)
+                    self.performSegue(withIdentifier: CConstants.SegueToPrintModel, sender: contract)
                 }
             }
         }
@@ -448,46 +462,46 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
     
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
             case "showSendEmailAfterAprroved1":
-                if let con = segue.destinationViewController as? EmailAfterApprovedViewController {
+                if let con = segue.destination as? EmailAfterApprovedViewController {
                     con.contractInfo = sender as? ContractsItem
                 }
             case CConstants.SegueToPrintModel:
                 
-                if let controller = segue.destinationViewController as? PrintModelTableViewController {
-                   controller.delegate = self
+                if let controller = segue.destination as? PrintModelTableViewController {
+                    controller.delegate = self
                     controller.projectInfo = sender as? ContractsItem
                 }
                 break
             case "showFilter":
-//                self.detailsPopover = [[self storyboard] instantiateViewControllerWithIdentifier:@"identifierName"];
-//                
-//                //... config code for the popover
-//                
-//                UIPopoverController *pc = [[UIPopoverController alloc] initWithContentViewController:detailsPopover];
-//                
-//                //... store popover view controller in an ivar
-//                
-//                [self.annotationPopoverController presentPopoverFromRect:selectedAnnotationView.bounds inView:selectedAnnotationView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                //                self.detailsPopover = [[self storyboard] instantiateViewControllerWithIdentifier:@"identifierName"];
+                //
+                //                //... config code for the popover
+                //
+                //                UIPopoverController *pc = [[UIPopoverController alloc] initWithContentViewController:detailsPopover];
+                //
+                //                //... store popover view controller in an ivar
+                //
+                //                [self.annotationPopoverController presentPopoverFromRect:selectedAnnotationView.bounds inView:selectedAnnotationView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
                 
                 
-//                let p = UIStoryboard(name: "Main").instantiateViewControllerWithIdentifier(identifier: "FilterViewController")
-//                
-//                let pc = UIPopoverController(contentViewController: p)
-//                self.navigationController?.presentViewController(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+                //                let p = UIStoryboard(name: "Main").instantiateViewControllerWithIdentifier(identifier: "FilterViewController")
+                //
+                //                let pc = UIPopoverController(contentViewController: p)
+                //                self.navigationController?.presentViewController(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
                 
-                if let controller = segue.destinationViewController as? FilterViewController {
+                if let controller = segue.destination as? FilterViewController {
                     controller.delegate1 = self
-//                    self.popoverPresentationController?.sourceView = salesBtn;
-//                    self.popoverPresentationController?.sourceRect = salesBtn.bounds;
+                    //                    self.popoverPresentationController?.sourceView = salesBtn;
+                    //                    self.popoverPresentationController?.sourceRect = salesBtn.bounds;
                     
                 }
                 break
             case CConstants.SegueToPrintPdf:
-                if let controller = segue.destinationViewController as? PDFPrintViewController {
+                if let controller = segue.destination as? PDFPrintViewController {
                     if let indexPath = (tableView.indexPathForSelectedRow ?? selectRowIndex){
                         let ddd = self.CiaNmArray?[self.CiaNm?[indexPath.section] ?? ""]
                         let item: ContractsItem = ddd![indexPath.row]
@@ -496,10 +510,10 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
                         if let info = sender as? ContractAddendumC {
                             controller.pdfInfo0 = info
                             controller.addendumCpdfInfo = info
-//                            controller.AddressList = self.AddressListOrigin
-//                            print(self.filesNms!)
+                            //                            controller.AddressList = self.AddressListOrigin
+                            //                            print(self.filesNms!)
                             controller.filesArray = self.filesNms!
-//                            print(controller.filesArray)
+                            //                            print(controller.filesArray)
                             controller.contractInfo = item
                             var itemList = [[String]]()
                             var i = 0
@@ -508,15 +522,15 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
                                     
                                     var itemList1 = [String]()
                                     let textView = UITextView(frame: CGRect(x: 0, y: 0, width: 657.941, height: 13.2353))
-                                    textView.scrollEnabled = false
+                                    textView.isScrollEnabled = false
                                     textView.font = UIFont(name: "Verdana", size: 11.0)
                                     textView.text = items.xdescription!
                                     textView.sizeToFit()
-                                    textView.layoutManager.enumerateLineFragmentsForGlyphRange(NSMakeRange(0, items.xdescription!.characters.count), usingBlock: { (rect, usedRect, textContainer, glyphRange, _) -> Void in
+                                    textView.layoutManager.enumerateLineFragments(forGlyphRange: NSMakeRange(0, items.xdescription!.characters.count), using: { (rect, usedRect, textContainer, glyphRange, _) -> Void in
                                         if  let a : NSString = items.xdescription! as NSString {
                                             
                                             i += 1
-                                            itemList1.append(a.substringWithRange(glyphRange))
+                                            itemList1.append(a.substring(with: glyphRange))
                                         }
                                     })
                                     //                            itemList1.append("april test")
@@ -542,31 +556,31 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
                             info.nproject = item.nproject
                             controller.contractInfo = item
                             controller.pdfInfo0 = info
-//                            controller.AddressList = self.AddressListOrigin
+                            //                            controller.AddressList = self.AddressListOrigin
                             controller.filesArray = self.filesNms
                             controller.page2 = false
                         }
-                        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                        self.tableView.deselectRow(at: indexPath, animated: true)
                     }
                     
                 }
-            
+                
             default:
                 break;
             }
         }
     }
-
-    @IBAction func refreshAddressList(sender: UIRefreshControl) {
+    
+    @IBAction func refreshAddressList(_ sender: UIRefreshControl) {
         
         self.getAddressListFromServer(sender)
     }
     
-    private func getAddressListFromServer(sender: UIRefreshControl?){
-//        print("getAddressListFromServer......")
-        let userInfo = NSUserDefaults.standardUserDefaults()
-        let email = userInfo.valueForKey(CConstants.UserInfoEmail) as? String
-        let password = userInfo.valueForKey(CConstants.UserInfoPwd) as? String
+    fileprivate func getAddressListFromServer(_ sender: UIRefreshControl?){
+        //        print("getAddressListFromServer......")
+        let userInfo = UserDefaults.standard
+        let email = userInfo.value(forKey: CConstants.UserInfoEmail) as? String
+        let password = userInfo.value(forKey: CConstants.UserInfoPwd) as? String
         
         
         let loginUserInfo = LoginUser(email: email!, password: password!, iscontract:  (self.tableView.tag == 2 ? "1" : "0"))
@@ -574,18 +588,19 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
         let a = loginUserInfo.DictionaryFromObject()
         var hud : MBProgressHUD?
         if sender == nil {
-            hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             hud?.labelText = CConstants.RequestMsg
         }
-//       print(a)
-        Alamofire.request(.POST, CConstants.ServerURL + CConstants.LoginServiceURL, parameters: a).responseJSON{ (response) -> Void in
+        //       print(a)
+        // april need to change
+        Alamofire.request(CConstants.ServerURL + CConstants.LoginServiceURL, method: .post, parameters: a).responseJSON{ (response) -> Void in
             if response.result.isSuccess {
-//                print(response.result.value)
+                //                print(response.result.value)
                 if let rtnValue = response.result.value as? [String: AnyObject]{
                     let rtn = Contract(dicInfo: rtnValue)
                     
                     if rtn.activeyn == 1{
-                        if (self.tableView.tag == 2 && userInfo.boolForKey(CConstants.UserInfoIsContract)) || (self.tableView.tag == 1 && !userInfo.boolForKey(CConstants.UserInfoIsContract) ){
+                        if (self.tableView.tag == 2 && userInfo.bool(forKey: CConstants.UserInfoIsContract)) || (self.tableView.tag == 1 && !userInfo.bool(forKey: CConstants.UserInfoIsContract) ){
                             self.AddressListOrigin = rtn.contracts
                         }
                     }
@@ -593,67 +608,67 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
             }
             hud?.hide(true)
             sender?.endRefreshing()
-            self.switchItem.enabled = true
+            self.switchItem.isEnabled = true
         }
         
     }
     
-    private func PopMsgWithJustOK(msg msg1: String){
+    fileprivate func PopMsgWithJustOK(msg msg1: String){
         
-        let alert: UIAlertController = UIAlertController(title: CConstants.MsgTitle, message: msg1, preferredStyle: .Alert)
+        let alert: UIAlertController = UIAlertController(title: CConstants.MsgTitle, message: msg1, preferredStyle: .alert)
         
         //Create and add the OK action
-        let oKAction: UIAlertAction = UIAlertAction(title: CConstants.MsgOKTitle, style: .Cancel) { Void in
+        let oKAction: UIAlertAction = UIAlertAction(title: CConstants.MsgOKTitle, style: .cancel) { Void in
             
         }
         alert.addAction(oKAction)
         
         
         //Present the AlertController
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         
         
     }
     
-    override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.txtField.resignFirstResponder()
     }
-    @IBAction func toSwitch(sender: UIBarButtonItem){
-        self.navigationController?.popToRootViewControllerAnimated(true)
+    @IBAction func toSwitch(_ sender: UIBarButtonItem){
+        self.navigationController?.popToRootViewController(animated: true)
         return
-//        self.view.backgroundColor = UIColor.whiteColor()
-        //to print draft
-        sender.enabled = false
+            //        self.view.backgroundColor = UIColor.whiteColor()
+            //to print draft
+            sender.isEnabled = false
         if sender.tag == 2 {
             sender.tag = 1
             self.tableView.tag = 1
             sender.title = "Print Contract"
             self.backItem.image =  nil
-//            self.backItem.title = "s"
-//                        self.backItem.width = 0.01
+            //            self.backItem.title = "s"
+            //                        self.backItem.width = 0.01
         }else{
             sender.tag = 2
             self.tableView.tag = 2
             sender.title = "Print Draft"
             self.backItem.image = UIImage(named: "back")
             self.backItem.width = 0
-//            self.backItem.title = "s"
+            //            self.backItem.title = "s"
         }
         let tmp = AddressListOrigin2
         AddressListOrigin2 = AddressListOrigin
         AddressListOrigin = tmp
         self.refreshControl?.endRefreshing()
-        NSUserDefaults.standardUserDefaults().setBool(self.tableView.tag == 2, forKey: CConstants.UserInfoIsContract)
-        UIView.transitionFromView(tableView, toView: tableView, duration: 0.8, options: [self.tableView.tag == 2 ? .TransitionFlipFromRight : .TransitionFlipFromLeft, .ShowHideTransitionViews], completion: { (_) -> Void in
+        UserDefaults.standard.set(self.tableView.tag == 2, forKey: CConstants.UserInfoIsContract)
+        UIView.transition(from: tableView, to: tableView, duration: 0.8, options: [self.tableView.tag == 2 ? .transitionFlipFromRight : .transitionFlipFromLeft, .showHideTransitionViews], completion: { (_) -> Void in
             //                self.getTrackList()
             
             self.tableView.reloadData()
             if tmp == nil {
-//                self.tableView.setContentOffset(CGPoint(x: 0, y: -self.refreshControl!.frame.height*2), animated: true)
-            
+                //                self.tableView.setContentOffset(CGPoint(x: 0, y: -self.refreshControl!.frame.height*2), animated: true)
+                
                 self.getAddressListFromServer(nil)
             }else{
-                sender.enabled = true
+                sender.isEnabled = true
             }
             
         })
@@ -661,37 +676,37 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
     }
     
     
-        
-    override func viewWillAppear(animated: Bool) {
+    
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.navigationController?.hidesBarsOnSwipe = true
-        let userinfo = NSUserDefaults.standardUserDefaults()
+        //        self.navigationController?.hidesBarsOnSwipe = true
+        let userinfo = UserDefaults.standard
         userinfo.setValue(nil, forKey: CConstants.UserInfoPrintModel)
-        kCFDateFormatterDoesRelativeDateFormattingKey
+        CFDateFormatterKey.doesRelativeDateFormattingKey
         
         self.refreshControl?.beginRefreshing()
         self.getAddressListFromServer(self.refreshControl)
         
-//        self.extendedLayoutIncludesOpaqueBars = true
-//        self.edgesForExtendedLayout = .None
-//        self.automaticallyAdjustsScrollViewInsets = true
+        //        self.extendedLayoutIncludesOpaqueBars = true
+        //        self.edgesForExtendedLayout = .None
+        //        self.automaticallyAdjustsScrollViewInsets = true
         
     }
     
     func showAll() {
-        let userInfo = NSUserDefaults.standardUserDefaults()
+        let userInfo = UserDefaults.standard
         if tableView.tag == 2{
-            if (userInfo.stringForKey(CConstants.UserInfoEmail) ?? "").lowercaseString == CConstants.Administrator {
+            if (userInfo.string(forKey: CConstants.UserInfoEmail) ?? "").lowercased() == CConstants.Administrator {
                 AddressList = AddressListOrigin?.filter(){
-                    return !((!($0.status!.containsString("iPad Sign") || $0.status!.containsString("Email Sign"))) && (!($0.signfinishdate ?? "1980").containsString("1980")))
+                    return !((!($0.status!.contains("iPad Sign") || $0.status!.contains("Email Sign"))) && (!($0.signfinishdate ?? "1980").contains("1980")))
                 }
-                salesBtn.setTitle("Filter", forState: .Normal)
+                salesBtn.setTitle("Filter", for: UIControlState())
             }else{
                 //            AddressList = AddressListOrigin
                 AddressList = AddressListOrigin?.filter(){
-                    return !((!($0.status!.containsString("iPad Sign") || $0.status!.containsString("Email Sign"))) && (!($0.signfinishdate ?? "1980").containsString("1980")))
+                    return !((!($0.status!.contains("iPad Sign") || $0.status!.contains("Email Sign"))) && (!($0.signfinishdate ?? "1980").contains("1980")))
                 }
-                salesBtn.setTitle("Filter", forState: .Normal)
+                salesBtn.setTitle("Filter", for: UIControlState())
             }
         }else{
             AddressList = AddressListOrigin
@@ -701,31 +716,31 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
     }
     func showHomeOwnerSign() {
         AddressList = AddressListOrigin?.filter(){
-             return $0.status!.containsString("iPad Sign") || $0.status!.containsString("Email Sign")
+            return $0.status!.contains("iPad Sign") || $0.status!.contains("Email Sign")
         }
-        salesBtn.setTitle("Homeowner Sign", forState: .Normal)
+        salesBtn.setTitle("Homeowner Sign", for: UIControlState())
     }
     
     @IBOutlet var salesBtn: UIButton!
     func showSalesSign() {
         
-            AddressList = AddressListOrigin?.filter(){
-                return (!($0.status!.containsString("iPad Sign") || $0.status!.containsString("Email Sign"))) && (($0.signfinishdate ?? "1980").containsString("1980"))
-            }
-            salesBtn.setTitle("Sales Sign", forState: .Normal)
+        AddressList = AddressListOrigin?.filter(){
+            return (!($0.status!.contains("iPad Sign") || $0.status!.contains("Email Sign"))) && (($0.signfinishdate ?? "1980").contains("1980"))
+        }
+        salesBtn.setTitle("Sales Sign", for: UIControlState())
         
     }
     
     func showReCreate() {
         AddressList = AddressListOrigin?.filter(){
-            return (!($0.status!.containsString("iPad Sign") || $0.status!.containsString("Email Sign"))) && (!($0.signfinishdate ?? "1980").containsString("1980"))
+            return (!($0.status!.contains("iPad Sign") || $0.status!.contains("Email Sign"))) && (!($0.signfinishdate ?? "1980").contains("1980"))
         }
-        let userInfo = NSUserDefaults.standardUserDefaults()
-        if (userInfo.stringForKey(CConstants.UserInfoEmail) ?? "").lowercaseString == CConstants.Administrator {
+        let userInfo = UserDefaults.standard
+        if (userInfo.string(forKey: CConstants.UserInfoEmail) ?? "").lowercased() == CConstants.Administrator {
             
-            salesBtn.setTitle("Re-Create", forState: .Normal)
+            salesBtn.setTitle("Re-Create", for: UIControlState())
         }else{
-            salesBtn.setTitle("Finished", forState: .Normal)
+            salesBtn.setTitle("Finished", for: UIControlState())
         }
         
     }

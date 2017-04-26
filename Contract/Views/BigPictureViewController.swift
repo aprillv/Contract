@@ -14,7 +14,7 @@ import MBProgressHUD
 
 class BigPictureViewController: BaseViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    var imageUrl: NSURL? {
+    var imageUrl: URL? {
         didSet{
             self.loadImage()
         }
@@ -22,12 +22,12 @@ class BigPictureViewController: BaseViewController, UIImagePickerControllerDeleg
     
     var contractPdfInfo : ContractSignature?{
         didSet{
-            lbl?.hidden = ((contractPdfInfo?.hasCheckedPhoto ?? "0") == "1")
+            lbl?.isHidden = ((contractPdfInfo?.hasCheckedPhoto ?? "0") == "1")
         }
     }
     @IBOutlet var lbl: UILabel?{
         didSet{
-            lbl?.hidden = ((contractPdfInfo?.hasCheckedPhoto ?? "0") == "1")
+            lbl?.isHidden = ((contractPdfInfo?.hasCheckedPhoto ?? "0") == "1")
         }
     }
     @IBOutlet var image: UIImageView!{
@@ -40,18 +40,18 @@ class BigPictureViewController: BaseViewController, UIImagePickerControllerDeleg
     }
     @IBOutlet var spinner: UIActivityIndicatorView!
     
-    private func loadImage(){
+    fileprivate func loadImage(){
         if let url = imageUrl {
             if image != nil {
 //                print(url)
                 
-                let hud = MBProgressHUD.showHUDAddedTo(image, animated: true)
+                let hud = MBProgressHUD.showAdded(to: image, animated: true)
                 //                hud.mode = .AnnularDeterminate
-                hud.labelText = "Loading Picutre"
-                hud.show(true)
+                hud?.labelText = "Loading Picutre"
+                hud?.show(true)
                 
-                image.sd_setImageWithURL(url, completed: { (_, _, _, _) -> Void in
-                    hud.hide(true)
+                image.sd_setImage(with: url, completed: { (_, _, _, _) -> Void in
+                    hud?.hide(true)
                 })
 //                image.sd_setImageWithURL(url)
             }
@@ -61,9 +61,9 @@ class BigPictureViewController: BaseViewController, UIImagePickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let ds = self.contractPdfInfo?.signfinishdate, ss = self.contractPdfInfo?.status {
+        if let ds = self.contractPdfInfo?.signfinishdate, let ss = self.contractPdfInfo?.status {
             if  ds != "01/01/1980" && ss == CConstants.ApprovedStatus {
-                saveBtn.hidden = true
+                saveBtn.isHidden = true
 //                justShowEmail = true
             }
         }
@@ -84,7 +84,7 @@ class BigPictureViewController: BaseViewController, UIImagePickerControllerDeleg
         set { super.preferredContentSize = newValue }
     }
     
-    private func setCornerRadius(btn : UIButton) {
+    fileprivate func setCornerRadius(_ btn : UIButton) {
         btn.layer.cornerRadius = 5.0
     }
     @IBOutlet var closeBtn: UIButton!{
@@ -100,47 +100,47 @@ class BigPictureViewController: BaseViewController, UIImagePickerControllerDeleg
     }
     
     var imagePicker : UIImagePickerController?
-    @IBAction func doSave(sender: UIButton) {
+    @IBAction func doSave(_ sender: UIButton) {
 //        if let img = image.image {
 //            UIImageWriteToSavedPhotosAlbum(img, self, #selector(BigPictureViewController.image(_:didFinishSavingWithError:contextInfo:)), nil);
 //        }
         
-        let alert: UIAlertController = UIAlertController(title: "Attach Photo Check", message: nil, preferredStyle: .Alert)
+        let alert: UIAlertController = UIAlertController(title: "Attach Photo Check", message: nil, preferredStyle: .alert)
         
         //Create and add the OK action
-        let oKAction: UIAlertAction = UIAlertAction(title: "Photo Library", style: .Default) { action -> Void in
+        let oKAction: UIAlertAction = UIAlertAction(title: "Photo Library", style: .default) { action -> Void in
             //Do some stuff
             self.imagePicker =  UIImagePickerController()
             self.imagePicker?.delegate = self
             //            self.imagePicker?.allowsEditing = true
-            self.imagePicker?.sourceType = .PhotoLibrary
-            self.presentViewController(self.imagePicker!, animated: true, completion: nil)
+            self.imagePicker?.sourceType = .photoLibrary
+            self.present(self.imagePicker!, animated: true, completion: nil)
         }
         alert.addAction(oKAction)
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Take Photo", style: .Cancel) { action -> Void in
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Take Photo", style: .cancel) { action -> Void in
             //Do some stuff
             self.imagePicker =  UIImagePickerController()
             self.imagePicker?.delegate = self
             //            self.imagePicker?.allowsEditing = true
-            self.imagePicker?.sourceType = .Camera
-            self.presentViewController(self.imagePicker!, animated: true, completion: nil)
+            self.imagePicker?.sourceType = .camera
+            self.present(self.imagePicker!, animated: true, completion: nil)
         }
         
         alert.addAction(cancelAction)
         
         //Present the AlertController
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         
     }
     
-    func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
+    func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer) {
         if error == nil {
             
             
             var hud : MBProgressHUD?
-            hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-            hud?.mode = .CustomView
+            hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud?.mode = .customView
             let image = UIImage(named: CConstants.SuccessImageNm)
             hud?.customView = UIImageView(image: image)
             hud?.labelText = CConstants.SavedSuccessMsg
@@ -150,8 +150,8 @@ class BigPictureViewController: BaseViewController, UIImagePickerControllerDeleg
             
         } else {
             var hud : MBProgressHUD?
-            hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-            hud?.mode = .CustomView
+            hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud?.mode = .customView
             let image = UIImage(named: CConstants.SuccessImageNm)
             hud?.customView = UIImageView(image: image)
             hud?.labelText = CConstants.SavedFailMsg
@@ -161,33 +161,33 @@ class BigPictureViewController: BaseViewController, UIImagePickerControllerDeleg
         }
     }
     
-    private struct constants{
+    fileprivate struct constants{
         static let operationMsg = "Are you sure you want to take photo of the check again?"
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        imagePicker?.dismissViewControllerAnimated(true, completion: nil)
+        imagePicker?.dismiss(animated: true, completion: nil)
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
            
             if (contractPdfInfo?.hasCheckedPhoto ?? "0") == "1" {
-                let alert: UIAlertController = UIAlertController(title: CConstants.MsgTitle, message: constants.operationMsg, preferredStyle: .Alert)
+                let alert: UIAlertController = UIAlertController(title: CConstants.MsgTitle, message: constants.operationMsg, preferredStyle: .alert)
                 
                 //Create and add the OK action
-                let oKAction: UIAlertAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
+                let oKAction: UIAlertAction = UIAlertAction(title: "Yes", style: .default) { action -> Void in
                     self.image.image = image
                     self.uploadAttachedPhoto(image)
                 }
                 alert.addAction(oKAction)
                 
-                let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+                let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                 alert.addAction(cancelAction)
                 
                 //Present the AlertController
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.present(alert, animated: true, completion: nil)
             }else{
-                self.lbl?.hidden = true
+                self.lbl?.isHidden = true
                 self.image.image = image
                 
                 self.uploadAttachedPhoto(image)
@@ -201,23 +201,23 @@ class BigPictureViewController: BaseViewController, UIImagePickerControllerDeleg
     }
     
     var hud : MBProgressHUD?
-    private func uploadAttachedPhoto(image : UIImage){
+    fileprivate func uploadAttachedPhoto(_ image : UIImage){
         let imageData = UIImageJPEGRepresentation(image, 0.65)
-        let string = imageData!.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.EncodingEndLineWithLineFeed)
-        hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        let string = imageData!.base64EncodedString(options: NSData.Base64EncodingOptions.endLineWithLineFeed)
+        hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         //                hud.mode = .AnnularDeterminate
         self.hud?.labelText = "Uploading photo to BA Server..."
         let param = ["idcontract1" : contractPdfInfo?.idnumber ?? "0" , "checked_photo" : string]
 //        print(param)
-        Alamofire.request(.POST,
-            CConstants.ServerURL + CConstants.UploadCheckedPhotoURL,
-            parameters: param).responseJSON{ (response) -> Void in
+        Alamofire.request(
+            (CConstants.ServerURL + CConstants.UploadCheckedPhotoURL)
+            , method: .post
+            , parameters: param).responseJSON{ (response) -> Void in
                 //                hud.hide(true)
                 //                print(param, serviceUrl, response.result.value)
-                SDImageCache.sharedImageCache().clearMemory()
-                 SDImageCache.sharedImageCache().cleanDisk()
-                
-                SDImageCache.sharedImageCache().removeImageForKey(CConstants.ServerURL + "bacontract_photoCheck.json?ContractID=" + (self.contractPdfInfo?.idnumber ?? ""))
+                SDImageCache.shared().clearMemory()
+                 SDImageCache.shared().cleanDisk()
+                SDImageCache.shared().removeImage(forKey: (CConstants.ServerURL + "bacontract_photoCheck.json?ContractID=" + (self.contractPdfInfo?.idnumber ?? "")))
                 if response.result.isSuccess {
                    
                     
@@ -225,11 +225,10 @@ class BigPictureViewController: BaseViewController, UIImagePickerControllerDeleg
                         
                         if rtnValue{
                             if let _ = self.imageUrl {
-                                
-                                SDImageCache.sharedImageCache().storeImage(image, recalculateFromImage: false, imageData: imageData, forKey: CConstants.ServerURL + "bacontract_photoCheck.json?ContractID=" + (self.contractPdfInfo?.idnumber ?? ""), toDisk: true)
+                                SDImageCache.shared().store(image, recalculateFromImage: false, imageData: imageData, forKey: CConstants.ServerURL + "bacontract_photoCheck.json?ContractID=" + (self.contractPdfInfo?.idnumber ?? ""), toDisk: true)
                             }
                             self.contractPdfInfo?.hasCheckedPhoto = "1"
-                            self.hud?.mode = .CustomView
+                            self.hud?.mode = .customView
                             let image = UIImage(named: CConstants.SuccessImageNm)
                             self.hud?.customView = UIImageView(image: image)
                             
@@ -245,8 +244,8 @@ class BigPictureViewController: BaseViewController, UIImagePickerControllerDeleg
                     //                            self.spinner?.stopAnimating()
                     self.PopMsgWithJustOK(msg: CConstants.MsgNetworkError)
                 }
-                self.performSelector(#selector(BigPictureViewController.dismissProgress as (BigPictureViewController) -> () -> ()), withObject: nil, afterDelay: 0.5)
-                self.performSelector(#selector(BigPictureViewController.dismissProgress2 as (BigPictureViewController) -> () -> ()), withObject: nil, afterDelay: 0.8)
+                self.perform(#selector(BigPictureViewController.dismissProgress as (BigPictureViewController) -> () -> ()), with: nil,afterDelay: 0.5)
+                self.perform(#selector(BigPictureViewController.dismissProgress2 as (BigPictureViewController) -> () -> ()), with: nil,afterDelay: 0.8)
         }
     }
     
@@ -254,16 +253,16 @@ class BigPictureViewController: BaseViewController, UIImagePickerControllerDeleg
         self.hud?.hide(true)
     }
     func dismissProgress2(){
-       self.dismissViewControllerAnimated(true, completion: nil)
+       self.dismiss(animated: true, completion: nil)
     }
     
     
     
-    func afterSave(sender : AnyObject) {
+    func afterSave(_ sender : AnyObject) {
 //        print(sender)
     }
-    @IBAction func doClose(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func doClose(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

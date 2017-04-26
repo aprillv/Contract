@@ -8,7 +8,7 @@
 
 import UIKit
 protocol GoToFileDelegate {
-    func skipToFile(filenm : String)
+    func skipToFile(_ filenm : String)
 }
 class GoToFileViewController: BaseViewController , UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate{
     // MARK: - Constanse
@@ -18,18 +18,18 @@ class GoToFileViewController: BaseViewController , UITableViewDataSource, UITabl
     @IBOutlet var printBtn: UIButton!{
         didSet{
             printBtn.layer.cornerRadius = 5.0
-            printBtn.hidden = true
+            printBtn.isHidden = true
         }
     }
     var delegate : GoToFileDelegate?
     
     
     
-    @IBAction func dismissSelf(sender: UITapGestureRecognizer) {
+    @IBAction func dismissSelf(_ sender: UITapGestureRecognizer) {
         //        print(sender)
         //        let point = sender.locationInView(view)
         //        if !CGRectContainsPoint(tableview.frame, point) {
-        self.dismissViewControllerAnimated(true){}
+        self.dismiss(animated: true){}
         //        }
         
     }
@@ -50,7 +50,7 @@ class GoToFileViewController: BaseViewController , UITableViewDataSource, UITabl
         super.viewWillLayoutSubviews()
         view.superview?.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)    }
     
-    private struct constants{
+    fileprivate struct constants{
         
         static let cellReuseIdentifier = "cellIdentifier"
         static let cellFirstReuseIndentifier = "firstCell"
@@ -69,43 +69,43 @@ class GoToFileViewController: BaseViewController , UITableViewDataSource, UITabl
     
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
 //    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 //        return constants.cellHeight
 //    }
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return constants.cellHeight
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCellWithIdentifier(constants.cellFirstReuseIndentifier)
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCell(withIdentifier: constants.cellFirstReuseIndentifier)
         cell!.textLabel!.text = "Skip to File"
         cell?.textLabel?.font = UIFont(name: CConstants.ApplicationBarFontName, size: CConstants.ApplicationBarItemFontSize)
-        cell?.textLabel?.textColor =  UIColor.whiteColor()
+        cell?.textLabel?.textColor =  UIColor.white
         cell?.textLabel?.backgroundColor = CConstants.ApplicationColor
-        cell!.textLabel!.textAlignment = NSTextAlignment.Center
+        cell!.textLabel!.textAlignment = NSTextAlignment.center
         return cell
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return printList.count
     }
     
    
     //    var filesNames : [String]?
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(constants.cellReuseIdentifier, forIndexPath: indexPath)
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
+        let cell = tableView.dequeueReusableCell(withIdentifier: constants.cellReuseIdentifier, for: indexPath)
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
         cell.preservesSuperviewLayoutMargins = false
         cell.textLabel?.text = printList[indexPath.row]
-        cell.textLabel?.textAlignment = .Left
-        cell.selectionStyle = .Default
+        cell.textLabel?.textAlignment = .left
+        cell.selectionStyle = .default
         
         
         
@@ -114,9 +114,9 @@ class GoToFileViewController: BaseViewController , UITableViewDataSource, UITabl
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let filenm = printList[indexPath.row]
-        self.dismissViewControllerAnimated(true) {
+        self.dismiss(animated: true) {
             if let del = self.delegate {
                 del.skipToFile(filenm)
             }
@@ -131,7 +131,7 @@ class GoToFileViewController: BaseViewController , UITableViewDataSource, UITabl
         set { super.preferredContentSize = newValue }
     }
     
-    private func getTableHight() -> CGFloat{
+    fileprivate func getTableHight() -> CGFloat{
         //        print(constants.cellHeight * CGFloat(printList.count + 1), 680, (min(view.frame.height, view.frame.width) - 40))
         //        print(min(CGFloat(constants.cellHeight * CGFloat(printList.count + 1)), 680, (min(view.frame.height, view.frame.width) - 40)))
         return min(CGFloat(constants.cellHeight * CGFloat(printList.count + 1)), 680, (min(view.frame.height, view.frame.width) - 40))

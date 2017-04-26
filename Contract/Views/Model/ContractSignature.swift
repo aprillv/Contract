@@ -87,6 +87,7 @@ class ContractSignature: ContractPDFBaseModel {
     var verify_code2 : String?
     var buyer1SignFinishedyn : NSNumber?
     var buyer2SignFinishedyn : NSNumber?
+    var isFortworth : String?
     
     
 }

@@ -10,7 +10,7 @@ import UIKit
 
 
 class AddressDraftListViewCell: UITableViewCell {
-    private var ProjectNmLbl: UILabel!
+    fileprivate var ProjectNmLbl: UILabel!
 //    private var ConsultantLbl: UILabel!
 //    privates var ClientLbl: UILabel!
     required init?(coder aDecoder: NSCoder) {
@@ -20,37 +20,37 @@ class AddressDraftListViewCell: UITableViewCell {
         self.contentView.addSubview(v)
         v.backgroundColor = CConstants.BorderColor
         let leadingConstraint = NSLayoutConstraint(item:v,
-            attribute: .LeadingMargin,
-            relatedBy: .Equal,
+            attribute: .leadingMargin,
+            relatedBy: .equal,
             toItem: self.contentView,
-            attribute: .LeadingMargin,
+            attribute: .leadingMargin,
             multiplier: 1.0,
             constant: 0);
         let trailingConstraint = NSLayoutConstraint(item:v,
-            attribute: .TrailingMargin,
-            relatedBy: .Equal,
+            attribute: .trailingMargin,
+            relatedBy: .equal,
             toItem: self.contentView,
-            attribute: .TrailingMargin,
+            attribute: .trailingMargin,
             multiplier: 1.0,
             constant: 0);
         
         let bottomConstraint = NSLayoutConstraint(item: v,
-            attribute: .BottomMargin,
-            relatedBy: .Equal,
+            attribute: .bottomMargin,
+            relatedBy: .equal,
             toItem: self.contentView,
-            attribute: .BottomMargin,
+            attribute: .bottomMargin,
             multiplier: 1.0,
             constant: 0);
         
         let heightContraint = NSLayoutConstraint(item: v,
-            attribute: .Height,
-            relatedBy: .Equal,
+            attribute: .height,
+            relatedBy: .equal,
             toItem: nil,
-            attribute: .NotAnAttribute,
+            attribute: .notAnAttribute,
             multiplier: 1.0,
-            constant: 1.0 / (UIScreen.mainScreen().scale));
+            constant: 1.0 / (UIScreen.main.scale));
         v.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activateConstraints([leadingConstraint, trailingConstraint, bottomConstraint, heightContraint])
+        NSLayoutConstraint.activate([leadingConstraint, trailingConstraint, bottomConstraint, heightContraint])
     }
     
     @IBOutlet weak var cview: UIView!{
@@ -69,20 +69,20 @@ class AddressDraftListViewCell: UITableViewCell {
         }
     }
     
-    override func setHighlighted(highlighted: Bool, animated: Bool) {
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         if highlighted {
             self.contentView.backgroundColor = CConstants.SearchBarBackColor
         }else{
-            self.contentView.backgroundColor = UIColor.whiteColor()
+            self.contentView.backgroundColor = UIColor.white
         }
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
             self.contentView.backgroundColor = CConstants.SearchBarBackColor
         }else{
-            self.contentView.backgroundColor = UIColor.whiteColor()
+            self.contentView.backgroundColor = UIColor.white
         }
     }
     

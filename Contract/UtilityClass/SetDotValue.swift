@@ -7,11 +7,35 @@
 //
 
 import Foundation
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class SetDotValue : NSObject {
     
     // MARK: Sign Contract
-    private struct SignContractPDFFields{
+    fileprivate struct SignContractPDFFields{
         
         static let CompanyName = "sellercompany"
         static let Buyer = "buyer"
@@ -116,11 +140,11 @@ class SetDotValue : NSObject {
         
     }
     
-    private func getFileName(pdfInfo: ContractSignature?) -> String{
+    fileprivate func getFileName(_ pdfInfo: ContractSignature?) -> String{
         return "contract1pdf_" + pdfInfo!.idcity! + "_" + pdfInfo!.idcia!
     }
     
-    func setSignContractDots(pdfInfo:ContractSignature?, additionViews: [PDFWidgetAnnotationView], pdfview: PDFView, item: ContractsItem?){
+    func setSignContractDots(_ pdfInfo:ContractSignature?, additionViews: [PDFWidgetAnnotationView], pdfview: PDFView, item: ContractsItem?){
 //        print("first")
 //        if let filedsFromTxt = readContractFieldsFromTxt(getFileName(pdfInfo)) {
 //            
@@ -137,16 +161,16 @@ class SetDotValue : NSObject {
         var tobuyer3 : String
         var tobuyer4 : String
         if let b = pdfInfo!.bmobile1 == "" ? pdfInfo?.boffice1! : pdfInfo?.bmobile1! {
-            if b.containsString("-") {
-                let a = b.componentsSeparatedByString("-")
+            if b.contains("-") {
+                let a = b.components(separatedBy: "-")
                 if a.count > 2 {
                     tobuyer3 = a[0]
                     if tobuyer3.characters.count != 3 {
                         tobuyer3 = ""
                         tobuyer4 = b
                     }else{
-                        let index1 = b.startIndex.advancedBy(4)
-                        tobuyer4 = b.substringFromIndex(index1)
+                        let index1 = b.characters.index(b.startIndex, offsetBy: 4)
+                        tobuyer4 = b.substring(from: index1)
                     }
                 }else{
                     tobuyer3 = ""
@@ -154,9 +178,9 @@ class SetDotValue : NSObject {
                 }
             
             }else if strlen(b) >= 10 {
-                let ss = b.startIndex.advancedBy(3)
-                tobuyer3 = b.substringToIndex(ss)
-                tobuyer4 = b.substringFromIndex(ss)
+                let ss = b.characters.index(b.startIndex, offsetBy: 3)
+                tobuyer3 = b.substring(to: ss)
+                tobuyer4 = b.substring(from: ss)
             }else{
                 tobuyer3 = ""
                 tobuyer4 = b
@@ -176,20 +200,20 @@ class SetDotValue : NSObject {
         var tobuyer5 : String
         var tobuyer6 : String
         if let b = pdfInfo!.bfax1 {
-            if b.containsString("-") {
-                let a = b.componentsSeparatedByString("-")
+            if b.contains("-") {
+                let a = b.components(separatedBy: "-")
                 if a.count > 2 {
                     tobuyer5 = a[0]
-                    let index1 = b.startIndex.advancedBy(4)
-                    tobuyer6 = b.substringFromIndex(index1)
+                    let index1 = b.characters.index(b.startIndex, offsetBy: 4)
+                    tobuyer6 = b.substring(from: index1)
                 }else{
                     tobuyer5 = ""
                     tobuyer6 = b
                 }
             }else if strlen(b) >= 10 {
-                let ss = b.startIndex.advancedBy(3)
-                tobuyer5 = b.substringToIndex(ss)
-                tobuyer6 = b.substringFromIndex(ss)
+                let ss = b.characters.index(b.startIndex, offsetBy: 3)
+                tobuyer5 = b.substring(to: ss)
+                tobuyer6 = b.substring(from: ss)
             }else{
                 tobuyer5 = ""
                 tobuyer6 = b
@@ -253,7 +277,7 @@ class SetDotValue : NSObject {
                     
                 }else{
                     if let a = overrideFields[pv.xname!]{
-                        pv.value = pdfInfo!.valueForKey(a) as! String
+                        pv.value = pdfInfo!.value(forKey: a) as! String
                     }
                     
                 }
@@ -266,7 +290,7 @@ class SetDotValue : NSObject {
                     pv.value = pdfInfo!.seller_address!
                 case SignContractPDFFields.seller_tel1:
                     if let tel = pdfInfo?.seller_tel {
-                    let d = tel.componentsSeparatedByString(".")
+                    let d = tel.components(separatedBy: ".")
                         if d.count > 1 {
                         pv.value = d[0]
                         }
@@ -274,7 +298,7 @@ class SetDotValue : NSObject {
                     
                 case SignContractPDFFields.seller_tel2:
                     if let tel = pdfInfo?.seller_tel {
-                        let d = tel.componentsSeparatedByString(".")
+                        let d = tel.components(separatedBy: ".")
                         if d.count > 2 {
                             pv.value = "\(d[1])-\(d[2])"
                         }else{
@@ -283,7 +307,7 @@ class SetDotValue : NSObject {
                     }
                 case SignContractPDFFields.seller_fax1:
                     if let tel = pdfInfo?.seller_fax {
-                        let d = tel.componentsSeparatedByString(".")
+                        let d = tel.components(separatedBy: ".")
                         if d.count > 1 {
                             pv.value = d[0]
                         }
@@ -291,7 +315,7 @@ class SetDotValue : NSObject {
                     
                 case SignContractPDFFields.seller_fax2:
                     if let tel = pdfInfo?.seller_fax {
-                        let d = tel.componentsSeparatedByString(".")
+                        let d = tel.components(separatedBy: ".")
                         if d.count > 2 {
                             pv.value = "\(d[1])-\(d[2])"
                         }else{
@@ -346,7 +370,7 @@ class SetDotValue : NSObject {
                 case SignContractPDFFields.executeddd:
                     if let item1 = item {
                         if item1.status == CConstants.ApprovedStatus {
-                            pv.value = pdfInfo!.approveMonthdate!.componentsSeparatedByString(" ")[0]
+                            pv.value = pdfInfo!.approveMonthdate!.components(separatedBy: " ")[0]
                         }else{
                             pv.value = ""
                         }
@@ -361,7 +385,7 @@ class SetDotValue : NSObject {
                 case SignContractPDFFields.executedmm:
                     if let item1 = item {
                         if item1.status == CConstants.ApprovedStatus {
-                            pv.value = pdfInfo!.approveMonthdate!.componentsSeparatedByString(" ")[1]
+                            pv.value = pdfInfo!.approveMonthdate!.components(separatedBy: " ")[1]
                         }else{
                             pv.value = ""
                         }
@@ -374,9 +398,12 @@ class SetDotValue : NSObject {
                 case SignContractPDFFields.executedyy:
                     if let item1 = item {
                         if item1.status == CConstants.ApprovedStatus {
-                            pv.value = pdfInfo!.approveMonthdate!.componentsSeparatedByString(" ")[2]
-                            let a = pv.value.startIndex
-                            pv.value = pv.value.substringFromIndex(a.advancedBy(2))
+                            pv.value = pdfInfo!.approveMonthdate!.components(separatedBy: " ")[2]
+                            let a = pv.value.index(pv.value.startIndex,offsetBy: 2)
+                            pv.value = pv.value.substring(from: a)
+//                            let a = pv.value.startIndex
+//                            pv.value = pv.value.substring(from: pv.value.characters.index(a, offsetBy: index))
+//                            pv.value = pv.value.substring(from: String.CharacterView corresponding to `a`.index(a, offsetBy: 2))
                         }else{
                             pv.value = ""
                         }
@@ -449,7 +476,7 @@ class SetDotValue : NSObject {
                     pv.value = pdfInfo!.page9OtherBrokerFirm
                 case "otherbroker":
                     if let p = pdfInfo?.broker_percent {
-                        if !p.containsString("0."){
+                        if !p.contains("0."){
                         pv.value = "\(p)%"
                         }
                         
@@ -575,7 +602,7 @@ class SetDotValue : NSObject {
         }
     }
     
-    private func doPhoneNo( txtphone : String) -> String{
+    fileprivate func doPhoneNo( _ txtphone : String) -> String{
         let na = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
         var s1 = ""
         var s2 = ""
@@ -604,15 +631,15 @@ class SetDotValue : NSObject {
         }
     }
     
-    private func readContractFieldsFromTxt(fileName: String) ->[String: String]? {
-        if let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "txt") {
+    fileprivate func readContractFieldsFromTxt(_ fileName: String) ->[String: String]? {
+        if let path = Bundle.main.path(forResource: fileName, ofType: "txt") {
             var fieldsDic = [String : String]()
             do {
-                let fieldsStr = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-                let n = fieldsStr.componentsSeparatedByString("\n")
+                let fieldsStr = try NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)
+                let n = fieldsStr.components(separatedBy: "\n")
                 
                 for one in n{
-                    let s = one.componentsSeparatedByString(":")
+                    let s = one.components(separatedBy: ":")
                     if s.count != 2 {
 //                        print(one)
                     }else{
@@ -627,7 +654,7 @@ class SetDotValue : NSObject {
         return nil
     }
     // MARK: Closing Memo
-    private struct ClosingMemoPDFFields{
+    fileprivate struct ClosingMemoPDFFields{
         static let CiaNm = "txtCiaNm"
         static let Address = "txtAddress"
         static let CityStateZip = "txtCityStateZip"
@@ -677,7 +704,7 @@ class SetDotValue : NSObject {
         static let Amount = "txtAmount"
     }
     
-    func setCloingMemoDots(pdfInfo: ContractClosingMemo?, additionViews: [PDFWidgetAnnotationView], pdfview: PDFView) ->[PDFWidgetAnnotationView]{
+    func setCloingMemoDots(_ pdfInfo: ContractClosingMemo?, additionViews: [PDFWidgetAnnotationView], pdfview: PDFView) ->[PDFWidgetAnnotationView]{
         var bankField : PDFFormTextField?
         var checkField : PDFFormTextField?
         var typeField : PDFFormTextField?
@@ -809,7 +836,7 @@ class SetDotValue : NSObject {
         var originy = bankField!.frame.origin.y
         originy += bankField!.frame.size.height * 1.2
         let line = PDFWidgetAnnotationView(frame: CGRect(x: bankField!.frame.origin.x - 3, y: originy, width: amountField!.frame.size.width + amountField!.frame.origin.x + 6 - bankField!.frame.origin.x, height: 1))
-        line.backgroundColor = UIColor.lightGrayColor()
+        line.backgroundColor = UIColor.lightGray
         addedAnnotationViews.append(line)
         line.pagenomargin = (bankField?.pagenomargin ?? 0.0)!
         
@@ -830,7 +857,7 @@ class SetDotValue : NSObject {
                         var bankFrame = itemField.frame
                         bankFrame.origin.y = originy
                         let xvalue : String
-                        var alignment : NSTextAlignment = .Left
+                        var alignment : NSTextAlignment = .left
                         switch y {
                         case 0:
                             xvalue = item.bankName!
@@ -840,22 +867,22 @@ class SetDotValue : NSObject {
                             xvalue = item.type!
                         case 3:
                             xvalue = item.amount!
-                            alignment = .Right
+                            alignment = .right
                         default:
                             xvalue = ""
                             break
                         }
                         let bank1 = PDFFormTextField(frame: bankFrame, multiline: false, alignment: alignment, secureEntry: false, readOnly: true, withFont: font)
-                        bank1.xname = "april"
-                        bank1.value = xvalue
-                        bank1.pagenomargin = (bankField?.pagenomargin ?? 0.0)!
+                        bank1?.xname = "april"
+                        bank1?.value = xvalue
+                        bank1?.pagenomargin = (bankField?.pagenomargin ?? 0.0)!
 //                        print(bank1.pagenomargin)
-                        addedAnnotationViews.append(bank1)
+                        addedAnnotationViews.append(bank1!)
                         y += 1
                     }
                     originy += bankField!.frame.size.height * 1.2
                     let line = PDFWidgetAnnotationView(frame: CGRect(x: bankField!.frame.origin.x - 3, y: originy, width: amountField!.frame.size.width + amountField!.frame.origin.x + 6 - bankField!.frame.origin.x, height: 1))
-                    line.backgroundColor = UIColor.lightGrayColor()
+                    line.backgroundColor = UIColor.lightGray
                     line.pagenomargin = (bankField?.pagenomargin ?? 0.0)!
                     addedAnnotationViews.append(line)
                 }
@@ -867,7 +894,7 @@ class SetDotValue : NSObject {
         return addedAnnotationViews
     }
     // MARK: Addendum A
-    private struct AddendumAPDFFields{
+    fileprivate struct AddendumAPDFFields{
         static let Nonrefundable = "Nonrefundable"
         static let CompanyName = "CompanyName"
         static let delayfees_word = "delayfees_word"
@@ -879,7 +906,7 @@ class SetDotValue : NSObject {
         
     }
     
-    func setAddendumADots(pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
+    func setAddendumADots(_ pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
         for pv : PDFWidgetAnnotationView in additionViews{
             switch pv.xname {
             case AddendumAPDFFields.adate:
@@ -903,7 +930,7 @@ class SetDotValue : NSObject {
     }
     
     // MARK: ADDENDUM C
-    private struct AddendumCPDFFields{
+    fileprivate struct AddendumCPDFFields{
         
         static let CompanyName = "txtCiaNm"
         static let Address = "txtAddress"
@@ -931,7 +958,7 @@ class SetDotValue : NSObject {
         
     }
     
-    func setAddendumCDots(pdfInfo: ContractAddendumC?, additionViews: [PDFWidgetAnnotationView], pdfview: PDFView, has2Pages0: Bool) -> [PDFWidgetAnnotationView]{
+    func setAddendumCDots(_ pdfInfo: ContractAddendumC?, additionViews: [PDFWidgetAnnotationView], pdfview: PDFView, has2Pages0: Bool) -> [PDFWidgetAnnotationView]{
         var aPrice : PDFFormTextField?
         var aPrice2 : PDFFormTextField?
         var aPrice3 : PDFFormTextField?
@@ -1012,7 +1039,7 @@ class SetDotValue : NSObject {
             if has2Pages0 {
                 while yo > aPrice2!.frame.origin.y - aPrice!.frame.origin.y {
                     yo -= aPrice2!.frame.origin.y - aPrice!.frame.origin.y
-                    j++
+                    j += 1
                 }
             }
             
@@ -1025,7 +1052,7 @@ class SetDotValue : NSObject {
                     i += 1
                     let font = floor(aPrice!.currentFontSize())
                     
-                    pf = PDFFormTextField(frame: CGRect(x: x, y: y, width: 25, height: h), multiline: false, alignment: NSTextAlignment.Left, secureEntry: false, readOnly: true, withFont: font)
+                    pf = PDFFormTextField(frame: CGRect(x: x, y: y, width: 25, height: h), multiline: false, alignment: NSTextAlignment.left, secureEntry: false, readOnly: true, withFont: font)
                     pf?.xname = "april"
                     pf?.value = "\(i)"
                     pf?.pageno = has2Pages ? "0" : "1";
@@ -1037,7 +1064,7 @@ class SetDotValue : NSObject {
                     for description in items {
                         k += 1
                         //                        print("----" + a.substringWithRange(glyphRange))
-                        pf = PDFFormTextField(frame: CGRect(x: x+25, y: y, width: w-25, height: h), multiline: false, alignment: NSTextAlignment.Left, secureEntry: false, readOnly: true, withFont: font)
+                        pf = PDFFormTextField(frame: CGRect(x: x+25, y: y, width: w-25, height: h), multiline: false, alignment: NSTextAlignment.left, secureEntry: false, readOnly: true, withFont: font)
                         pf?.xname = "april"
                         pf?.value = description
                         pf?.pageno = has2Pages ? "0" : "1";
@@ -1053,7 +1080,7 @@ class SetDotValue : NSObject {
                     
                     y = y + 2
                     line = PDFWidgetAnnotationView(frame: CGRect(x: x, y: y, width: w, height: 1))
-                    line?.backgroundColor = UIColor.lightGrayColor()
+                    line?.backgroundColor = UIColor.lightGray
                     line?.pageno = has2Pages ? "0" : "1";
                     line?.pagenomargin = (aPrice?.pagenomargin ?? 0.0)!
 //                    print(line?.pagenomargin)
@@ -1083,7 +1110,7 @@ class SetDotValue : NSObject {
                 has2Pages = false
                 y = aPrice2!.frame.origin.y + aPrice2!.frame.size.height + 20
             }
-            pf = PDFFormTextField(frame: CGRect(x: x, y: y, width: w, height: h), multiline: false, alignment: NSTextAlignment.Left, secureEntry: false, readOnly: true, withName: nil)
+            pf = PDFFormTextField(frame: CGRect(x: x, y: y, width: w, height: h), multiline: false, alignment: NSTextAlignment.left, secureEntry: false, readOnly: true, withName: nil)
             pf?.xname = "april"
             y = y + price.frame.size.height + 2
             pf?.value = pdfInfo?.agree!
@@ -1126,7 +1153,7 @@ class SetDotValue : NSObject {
                     addedAnnotationViews.append(sign!)
                 }else{
                     
-                    pf = PDFFormTextField(frame: CGRect(x: x, y: y+h/2 , width: w * 0.28, height: price.frame.height), multiline: false, alignment: NSTextAlignment.Left, secureEntry: false, readOnly: true, withName: nil)
+                    pf = PDFFormTextField(frame: CGRect(x: x, y: y+h/2 , width: w * 0.28, height: price.frame.height), multiline: false, alignment: NSTextAlignment.left, secureEntry: false, readOnly: true, withName: nil)
 //                    pf?.xname = "april"
                     switch i{
                         
@@ -1135,7 +1162,7 @@ class SetDotValue : NSObject {
                         pf?.value = pdfInfo?.approvedate
                     case 4:
                         pf?.xname = "buyer2DateSign1"
-                        if  (pdfInfo?.buyer ?? "").containsString(" / ") {
+                        if  (pdfInfo?.buyer ?? "").contains(" / ") {
                             pf?.value = pdfInfo?.approvedate
                         }
                     default:
@@ -1150,12 +1177,12 @@ class SetDotValue : NSObject {
                
                 
                 line = PDFWidgetAnnotationView(frame: CGRect(x: x, y: y + 2+h, width: w * 0.28, height: 1))
-                line?.backgroundColor = UIColor.lightGrayColor()
+                line?.backgroundColor = UIColor.lightGray
                 line?.pageno = has2Pages ? "0" : "1";
                 line?.pagenomargin = (aPrice?.pagenomargin ?? 0.0)!
                 addedAnnotationViews.append(line!)
                 
-                pf = PDFFormTextField(frame: CGRect(x: x, y: y + h + 3 , width: w * 0.28, height: price.frame.height), multiline: false, alignment: NSTextAlignment.Left, secureEntry: false, readOnly: true, withName: nil)
+                pf = PDFFormTextField(frame: CGRect(x: x, y: y + h + 3 , width: w * 0.28, height: price.frame.height), multiline: false, alignment: NSTextAlignment.left, secureEntry: false, readOnly: true, withName: nil)
                 pf?.xname = "april"
                 pf?.value = AddendumCPDFFields.SignArray[i]
                 pf?.pageno = has2Pages ? "0" : "1";
@@ -1199,7 +1226,7 @@ class SetDotValue : NSObject {
     }
     
     // MARK: DesignCenter
-    private struct DesignCenterPDFFields{
+    fileprivate struct DesignCenterPDFFields{
         static let txtCiaNm = "txtCiaNm"
         static let txtAddress = "txtAddress"
         static let txtCityStateZip = "txtCityStateZip"
@@ -1245,16 +1272,16 @@ class SetDotValue : NSObject {
         static let dcChkHandware = "dcChkHandware"
     }
     
-    func setDesignCenterDots(pdfInfo: ContractDesignCenter?, additionViews: [PDFWidgetAnnotationView]){
+    func setDesignCenterDots(_ pdfInfo: ContractDesignCenter?, additionViews: [PDFWidgetAnnotationView]){
         var itemList1 = [String]()
         let textView = UITextView(frame: CGRect(x: 0, y: 0, width: 657.941, height: 13.2353))
-        textView.scrollEnabled = false
+        textView.isScrollEnabled = false
         textView.font = UIFont(name: "Verdana", size: 11.0)
         textView.text = pdfInfo!.notes!
         textView.sizeToFit()
-        textView.layoutManager.enumerateLineFragmentsForGlyphRange(NSMakeRange(0, pdfInfo!.notes!.characters.count), usingBlock: { (rect, usedRect, textContainer, glyphRange, _) -> Void in
+        textView.layoutManager.enumerateLineFragments(forGlyphRange: NSMakeRange(0, pdfInfo!.notes!.characters.count), using: { (rect, usedRect, textContainer, glyphRange, _) -> Void in
             if  let a : NSString = pdfInfo!.notes! as NSString {
-                itemList1.append(a.substringWithRange(glyphRange))
+                itemList1.append(a.substring(with: glyphRange))
             }
         })
         
@@ -1329,79 +1356,79 @@ class SetDotValue : NSObject {
                     pv.value = itemList1[3]
                 }
             case DesignCenterPDFFields.dcChkMaster:
-                pv.value = String(pdfInfo!.dcChkMaster!)
+                pv.value = String(describing: pdfInfo!.dcChkMaster!)
                 if let radio = pv as? PDFFormButtonField {
-                    radio.setValue2(String(pdfInfo!.dcChkMaster!))
+                    radio.setValue2(String(describing: pdfInfo!.dcChkMaster!))
                 }
             case DesignCenterPDFFields.dcChkMasterCountertop:
-                pv.value = String(pdfInfo!.dcChkMasterCountertop!)
+                pv.value = String(describing: pdfInfo!.dcChkMasterCountertop!)
                 if let radio = pv as? PDFFormButtonField {
-                    radio.setValue2(String(pdfInfo!.dcChkMasterCountertop!))
+                    radio.setValue2(String(describing: pdfInfo!.dcChkMasterCountertop!))
                 }
             case DesignCenterPDFFields.dcChkSecond:
-                pv.value = String(pdfInfo!.dcChkSecond!)
+                pv.value = String(describing: pdfInfo!.dcChkSecond!)
                 if let radio = pv as? PDFFormButtonField {
-                    radio.setValue2(String(pdfInfo!.dcChkSecond!))
+                    radio.setValue2(String(describing: pdfInfo!.dcChkSecond!))
                 }
             case DesignCenterPDFFields.dcChkPowder:
-                pv.value = String(pdfInfo!.dcChkPowder!)
+                pv.value = String(describing: pdfInfo!.dcChkPowder!)
                 if let radio = pv as? PDFFormButtonField {
-                    radio.setValue2(String(pdfInfo!.dcChkPowder!))
+                    radio.setValue2(String(describing: pdfInfo!.dcChkPowder!))
                 }
             case DesignCenterPDFFields.dcChkWood:
-                pv.value = String(pdfInfo!.dcChkWood!)
+                pv.value = String(describing: pdfInfo!.dcChkWood!)
                 if let radio = pv as? PDFFormButtonField {
-                    radio.setValue2(String(pdfInfo!.dcChkWood!))
+                    radio.setValue2(String(describing: pdfInfo!.dcChkWood!))
                 }
             case DesignCenterPDFFields.dcChkKitchenCountertop:
-                pv.value = String(pdfInfo!.dcChkKitchenCountertop!)
+                pv.value = String(describing: pdfInfo!.dcChkKitchenCountertop!)
                 if let radio = pv as? PDFFormButtonField {
-                    radio.setValue2(String(pdfInfo!.dcChkKitchenCountertop!))
+                    radio.setValue2(String(describing: pdfInfo!.dcChkKitchenCountertop!))
                 }
             case DesignCenterPDFFields.dcChkMasterBath:
-                pv.value = String(pdfInfo!.dcChkMasterBath!)
+                pv.value = String(describing: pdfInfo!.dcChkMasterBath!)
                 if let radio = pv as? PDFFormButtonField {
-                    radio.setValue2(String(pdfInfo!.dcChkMasterBath!))
+                    radio.setValue2(String(describing: pdfInfo!.dcChkMasterBath!))
                 }
             case DesignCenterPDFFields.dcChk2ndBath:
-                pv.value = String(pdfInfo!.dcChk2ndBath!)
+                pv.value = String(describing: pdfInfo!.dcChk2ndBath!)
                 if let radio = pv as? PDFFormButtonField {
-                    radio.setValue2(String(pdfInfo!.dcChk2ndBath!))
+                    radio.setValue2(String(describing: pdfInfo!.dcChk2ndBath!))
                 }
             case DesignCenterPDFFields.dcChkEntryFloor:
-                pv.value = String(pdfInfo!.dcChkEntryFloor!)
+                pv.value = String(describing: pdfInfo!.dcChkEntryFloor!)
                 if let radio = pv as? PDFFormButtonField {
-                    radio.setValue2(String(pdfInfo!.dcChkEntryFloor!))
+                    radio.setValue2(String(describing: pdfInfo!.dcChkEntryFloor!))
                 }
             case DesignCenterPDFFields.dcChkCarpet:
-                pv.value = String(pdfInfo!.dcChkCarpet!)
+                pv.value = String(describing: pdfInfo!.dcChkCarpet!)
                 if let radio = pv as? PDFFormButtonField {
-                    radio.setValue2(String(pdfInfo!.dcChkCarpet!))
+                    radio.setValue2(String(describing: pdfInfo!.dcChkCarpet!))
                 }
             case DesignCenterPDFFields.dcChkKitchenBacksplash:
-                pv.value = String(pdfInfo!.dcChkKitchenBacksplash!)
+                pv.value = String(describing: pdfInfo!.dcChkKitchenBacksplash!)
                 if let radio = pv as? PDFFormButtonField {
-                    radio.setValue2(String(pdfInfo!.dcChkKitchenBacksplash!))
+                    radio.setValue2(String(describing: pdfInfo!.dcChkKitchenBacksplash!))
                 }
             case DesignCenterPDFFields.dcChkUtility:
-                pv.value = String(pdfInfo!.dcChkUtility!)
+                pv.value = String(describing: pdfInfo!.dcChkUtility!)
                 if let radio = pv as? PDFFormButtonField {
-                    radio.setValue2(String(pdfInfo!.dcChkUtility!))
+                    radio.setValue2(String(describing: pdfInfo!.dcChkUtility!))
                 }
             case DesignCenterPDFFields.dcChkInterior:
-                pv.value = String(pdfInfo!.dcChkInterior!)
+                pv.value = String(describing: pdfInfo!.dcChkInterior!)
                 if let radio = pv as? PDFFormButtonField {
-                    radio.setValue2(String(pdfInfo!.dcChkInterior!))
+                    radio.setValue2(String(describing: pdfInfo!.dcChkInterior!))
                 }
             case DesignCenterPDFFields.dcChkPlumbing:
-                pv.value = String(pdfInfo!.dcChkPlumbing!)
+                pv.value = String(describing: pdfInfo!.dcChkPlumbing!)
                 if let radio = pv as? PDFFormButtonField {
-                    radio.setValue2(String(pdfInfo!.dcChkPlumbing!))
+                    radio.setValue2(String(describing: pdfInfo!.dcChkPlumbing!))
                 }
             case DesignCenterPDFFields.dcChkHandware:
-                pv.value = String(pdfInfo!.dcChkHandware!)
+                pv.value = String(describing: pdfInfo!.dcChkHandware!)
                 if let radio = pv as? PDFFormButtonField {
-                    radio.setValue2(String(pdfInfo!.dcChkHandware!))
+                    radio.setValue2(String(describing: pdfInfo!.dcChkHandware!))
                 }
             default:
                 break
@@ -1412,7 +1439,7 @@ class SetDotValue : NSObject {
     
     
     // MARK: Third Party Finacing Addendum
-    private struct ThirdPartyFinacingAddendumPDFFields{
+    fileprivate struct ThirdPartyFinacingAddendumPDFFields{
         static let AddressCity = "Street Address and City"
         static let PropertyAddress = "Address of Property"
         
@@ -1420,7 +1447,7 @@ class SetDotValue : NSObject {
         
     }
     
-    func setThirdPartyFinacingAddendumDots(pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
+    func setThirdPartyFinacingAddendumDots(_ pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
         for pv : PDFWidgetAnnotationView in additionViews{
             switch pv.xname {
             case ThirdPartyFinacingAddendumPDFFields.AddressCity,  ThirdPartyFinacingAddendumPDFFields.PropertyAddress:
@@ -1437,14 +1464,14 @@ class SetDotValue : NSObject {
     
     
     // MARK: Exhibit A
-    private struct ExhibitAPDFFields{
+    fileprivate struct ExhibitAPDFFields{
         static let To = "1"
         static let Property = "PROPERTY 1"
         static let CompanyName = "CompanyName"
         static let adate = "PROPERTY 2Sign1"
     }
     
-    func setExhibitADots(pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
+    func setExhibitADots(_ pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
 //        print(additionViews)
         for pv : PDFWidgetAnnotationView in additionViews{
             switch pv.xname {
@@ -1464,7 +1491,7 @@ class SetDotValue : NSObject {
     }
     
     // MARK: Exhibit B
-    private struct ExhibitBPDFFields{
+    fileprivate struct ExhibitBPDFFields{
         static let To = "1"
         //        static let From = "CompanyName"
         static let Property = "PROPERTY 1"
@@ -1472,7 +1499,7 @@ class SetDotValue : NSObject {
           static let adate = "PROPERTY 2Sign1"
     }
     
-    func setExhibitBDots(pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
+    func setExhibitBDots(_ pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
         for pv : PDFWidgetAnnotationView in additionViews{
             switch pv.xname {
             case ExhibitBPDFFields.To:
@@ -1490,13 +1517,13 @@ class SetDotValue : NSObject {
     }
     
     // MARK: Exhibit C
-    private struct ExhibitCPDFFields{
+    fileprivate struct ExhibitCPDFFields{
         static let GeneralPartner = "GeneralPartner"
         static let CompanyName = "CompanyName"
          static let adate = "SignatureDate"
     }
     
-    func setExhibitCDots(pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
+    func setExhibitCDots(_ pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
         for pv : PDFWidgetAnnotationView in additionViews{
             switch pv.xname {
             case ExhibitCPDFFields.GeneralPartner:
@@ -1511,12 +1538,12 @@ class SetDotValue : NSObject {
         }
     }
     // MARK: Buyers Expect
-    private struct BuyersExpectPDFFields{
+    fileprivate struct BuyersExpectPDFFields{
         static let CompanyName = "CompanyName"
         static let Version = "version"
     }
     
-    func setBuyersExpectDots(pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView], pdfview: PDFView){
+    func setBuyersExpectDots(_ pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView], pdfview: PDFView){
         for pv : PDFWidgetAnnotationView in additionViews{
             switch pv.xname {
             case BuyersExpectPDFFields.CompanyName:
@@ -1531,7 +1558,7 @@ class SetDotValue : NSObject {
     }
     
     // MARK: Warranty Acknowledege
-    private struct WarrantyAcknowledegePDFFields{
+    fileprivate struct WarrantyAcknowledegePDFFields{
         static let CompanyName = "CompanyName"
         static let GeneralPartner = "GeneralPartner"
         static let property1 = "Address for Notice Purposes 1_2"
@@ -1544,7 +1571,7 @@ class SetDotValue : NSObject {
         
     }
     
-    func setWarrantyAcknowledegeDots(pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
+    func setWarrantyAcknowledegeDots(_ pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
         for pv : PDFWidgetAnnotationView in additionViews{
             switch pv.xname {
             case WarrantyAcknowledegePDFFields.GeneralPartner:
@@ -1557,8 +1584,8 @@ class SetDotValue : NSObject {
                 pv.value = "Houston, TX 77007"
             case WarrantyAcknowledegePDFFields.printedName1:
                 if let c = pdfInfo?.Client {
-                    if c.containsString(" / ") {
-                        pv.value = c.componentsSeparatedByString(" / ")[0]
+                    if c.contains(" / ") {
+                        pv.value = c.components(separatedBy: " / ")[0]
                     }else{
                         pv.value = c
                     }
@@ -1567,8 +1594,8 @@ class SetDotValue : NSObject {
                 }
             case WarrantyAcknowledegePDFFields.printedName2:
                 if let c = pdfInfo?.Client {
-                    if c.containsString(" / ") {
-                        pv.value = c.componentsSeparatedByString(" / ")[1]
+                    if c.contains(" / ") {
+                        pv.value = c.components(separatedBy: " / ")[1]
                     }else{
                         pv.value = ""
                     }
@@ -1585,12 +1612,12 @@ class SetDotValue : NSObject {
         }
     }
     // MARK: HOA Checklist
-    private struct HoaChecklistPDFFields{
+    fileprivate struct HoaChecklistPDFFields{
         static let PropertyName = "Address of Property"
         static let PropertyName2 = "Address of Property_2"
     }
     
-    func setHoaChecklistDots(pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
+    func setHoaChecklistDots(_ pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
         for pv : PDFWidgetAnnotationView in additionViews{
             switch pv.xname {
             case HoaChecklistPDFFields.PropertyName,HoaChecklistPDFFields.PropertyName2:
@@ -1602,7 +1629,7 @@ class SetDotValue : NSObject {
     }
     
     // MARK: Addendum 1Hoa
-    private struct AddendumHoaPDFFields{
+    fileprivate struct AddendumHoaPDFFields{
         static let AddressName = "Street Address and City"
         static let PropertyName = "Name of Property Owners Association Association and Phone Number"
         static let fee = "D DEPOSITS FOR RESERVES Buyer shall pay any deposits for reserves required at closing by the Association"
@@ -1611,7 +1638,7 @@ class SetDotValue : NSObject {
         static let E = "Buyer"
     }
     
-    func setAddendumHoaDots(pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
+    func setAddendumHoaDots(_ pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
         for pv : PDFWidgetAnnotationView in additionViews{
             switch pv.xname {
             case AddendumHoaPDFFields.AddressName:
@@ -1630,17 +1657,17 @@ class SetDotValue : NSObject {
         }
     }
     // MARK: FloodPlain Acknowledgement
-    private struct FloodPlainAcknowledgementPDFFields{
+    fileprivate struct FloodPlainAcknowledgementPDFFields{
         static let PropertyName = "Property Address 1"
         static let PropertyName2 = "Property Address 2"
     }
     
-    func setFloodPlainAcknowledgementDots(pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
+    func setFloodPlainAcknowledgementDots(_ pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
         var h : String?
         var h2 : String?
         if let c = pdfInfo?.nproject {
-            if c.containsString("(") {
-                let d = c.componentsSeparatedByString("(")
+            if c.contains("(") {
+                let d = c.components(separatedBy: "(")
                 h = d[0]
                 h2 = "(\(d[1])"
             }else{
@@ -1663,10 +1690,10 @@ class SetDotValue : NSObject {
         }
     }
     
-    private func getCurrentYear() -> Int{
+    fileprivate func getCurrentYear() -> Int{
         
-        let format = NSCalendar.currentCalendar().components(.Year, fromDate: NSDate()) 
-        return format.year
+        let format = (Calendar.current as NSCalendar).components(.year, from: Date()) 
+        return format.year!
     }
     
     

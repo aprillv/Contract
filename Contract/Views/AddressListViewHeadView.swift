@@ -12,12 +12,12 @@ class AddressListViewHeadView: UIView {
     
     var CiaNmLbl: UILabel!
     
-    private var ProjectNmLbl: UILabel!
-    private var ConsultantLbl: UILabel!
-    private var ClientLbl: UILabel!
-    private var StatusLbl: UILabel!
+    fileprivate var ProjectNmLbl: UILabel!
+    fileprivate var ConsultantLbl: UILabel!
+    fileprivate var ClientLbl: UILabel!
+    fileprivate var StatusLbl: UILabel!
     
-    private struct constants{
+    fileprivate struct constants{
         static let ProjectNM = "Project"
         static let Consultant = "Consultant"
         static let Client = "Client"
@@ -34,32 +34,32 @@ class AddressListViewHeadView: UIView {
         
         CiaNmLbl = UILabel()
         self.addSubview(CiaNmLbl)
-        CiaNmLbl.font = UIFont.boldSystemFontOfSize(17)
-        CiaNmLbl.textAlignment = NSTextAlignment.Left
+        CiaNmLbl.font = UIFont.boldSystemFont(ofSize: 17)
+        CiaNmLbl.textAlignment = NSTextAlignment.left
         
         ProjectNmLbl = UILabel()
         addSubview(ProjectNmLbl)
-        ProjectNmLbl.textAlignment = .Left
+        ProjectNmLbl.textAlignment = .left
         ProjectNmLbl.text = constants.ProjectNM
-        ProjectNmLbl.font = UIFont.boldSystemFontOfSize(16)
+        ProjectNmLbl.font = UIFont.boldSystemFont(ofSize: 16)
         
         ConsultantLbl = UILabel()
         addSubview(ConsultantLbl)
         ConsultantLbl.text = constants.Consultant
-        ConsultantLbl.textAlignment = .Left
-        ConsultantLbl.font = UIFont.boldSystemFontOfSize(16)
+        ConsultantLbl.textAlignment = .left
+        ConsultantLbl.font = UIFont.boldSystemFont(ofSize: 16)
         
         ClientLbl = UILabel()
         addSubview(ClientLbl)
-        ClientLbl.textAlignment = .Left
+        ClientLbl.textAlignment = .left
         ClientLbl.text = constants.Client
-        ClientLbl.font = UIFont.boldSystemFontOfSize(16)
+        ClientLbl.font = UIFont.boldSystemFont(ofSize: 16)
         
         StatusLbl = UILabel()
         addSubview(StatusLbl)
-        StatusLbl.textAlignment = .Left
+        StatusLbl.textAlignment = .left
         StatusLbl.text = constants.Status
-        StatusLbl.font = UIFont.boldSystemFontOfSize(16)
+        StatusLbl.font = UIFont.boldSystemFont(ofSize: 16)
         
         setDisplaySubViews()
         

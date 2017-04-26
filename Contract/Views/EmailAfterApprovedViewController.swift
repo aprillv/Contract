@@ -13,9 +13,9 @@ import MBProgressHUD
 
 class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, SaveAndEmailViewControllerDelegate, GoToFileDelegate{
 
-    @IBAction func reloadPDF(sender: AnyObject?) {
-        errorLbl.hidden = true
-        reloadBtn.hidden = true
+    @IBAction func reloadPDF(_ sender: AnyObject?) {
+        errorLbl.isHidden = true
+        reloadBtn.isHidden = true
         
         let url = "https://contractssl.buildersaccess.com/bacontract_contractDocument2?idcia=" + (contractInfo?.idcia ?? "") + "&idproject=" + (contractInfo?.idproject ?? "")
         
@@ -24,13 +24,13 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
         
         
         
-        if let nsurl = NSURL(string: url) {
+        if let nsurl = URL(string: url) {
             ////            CGPDFDocumentRef pdf = CGPDFDocumentCreateWithURL((CFURLRef)url);
             ////            self.pdfPageCount = (int)CGPDFDocumentGetNumberOfPages(pdf);
             //
             //            let pdf  =
             
-            let request = NSURLRequest(URL: nsurl)
+            let request = URLRequest(url: nsurl)
             webview.loadRequest(request)
             spinner.startAnimating()
         }
@@ -42,59 +42,59 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
         didSet{
         webview.scrollView.bouncesZoom = false
             webview.scrollView.zoomScale = 1
-            webview.scrollView.backgroundColor = UIColor.whiteColor()
+            webview.scrollView.backgroundColor = UIColor.white
         }
     }
     @IBOutlet var spinner: UIActivityIndicatorView!
     
-    private struct constants {
+    fileprivate struct constants {
         static let segueToEmail = "showSendEmailBox"
     }
-    @IBAction func SendEmail(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier(constants.segueToEmail, sender: nil)
+    @IBAction func SendEmail(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: constants.segueToEmail, sender: nil)
     }
     
     var contractInfo: ContractsItem?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.webview.opaque = false
+        self.webview.isOpaque = false
         
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         self.title = contractInfo?.nproject ?? ""
         
-        webview.scrollView.contentOffset = CGPointZero
+        webview.scrollView.contentOffset = CGPoint.zero
         
         
        reloadPDF(nil)
     }
     
-    @IBAction func goBack(sender: AnyObject) {
+    @IBAction func goBack(_ sender: AnyObject) {
         webview.stopLoading()
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK : UIWebView delegate
-    func webViewDidStartLoad(webView: UIWebView) {
+    func webViewDidStartLoad(_ webView: UIWebView) {
         spinner.startAnimating()
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         spinner.stopAnimating()
-        errorLbl.hidden = false
-        reloadBtn.hidden = false
+        errorLbl.isHidden = false
+        reloadBtn.isHidden = false
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         spinner.stopAnimating()
 //          print(view.frame, webview.frame, webview.scrollView.frame)
     }
 
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
             case constants.segueToEmail:
-                if let controller = segue.destinationViewController as? SaveAndEmailViewController{
+                if let controller = segue.destination as? SaveAndEmailViewController{
                     if let contrat = self.contractInfo {
                         controller.delegate = self
                         controller.xtitle = "Send Email"
@@ -110,15 +110,15 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
                         emailList.append("heatherb@kirbytitle.com")
                         
                         controller.xemailList = emailList
-                        let userInfo = NSUserDefaults.standardUserDefaults()
-                        let email = userInfo.valueForKey(CConstants.UserInfoEmail) as? String
+                        let userInfo = UserDefaults.standard
+                        let email = userInfo.value(forKey: CConstants.UserInfoEmail) as? String
                         
                         controller.xemailcc = email ?? ""
                         controller.xdes = "This is the contract of your new house."
                     }
                 }
             case "GoToFile2":
-                if let controller = segue.destinationViewController as? GoToFileViewController {
+                if let controller = segue.destination as? GoToFileViewController {
                     controller.delegate = self
                     if let a = sender as? [String] {
                     controller.printList = a
@@ -134,50 +134,68 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
     }
     
     var hud : MBProgressHUD?
-    func GoToEmailSubmit(email: String, emailcc: String, msg: String) {
+    func GoToEmailSubmit(_ email: String, emailcc: String, msg: String) {
         let str = "bacontract_SendEmail2.json"
         
-        var email1 = email.stringByReplacingOccurrencesOfString(" ", withString: "")
-        email1 = email1.stringByReplacingOccurrencesOfString("\n", withString: "")
+        var email1 = email.replacingOccurrences(of: " ", with: "")
+        email1 = email1.replacingOccurrences(of: "\n", with: "")
         if email1.hasSuffix(",") {
-            email1 = email1.stringByReplacingOccurrencesOfString(",", withString: "")
+            email1 = email1.replacingOccurrences(of: ",", with: "")
         }
-        var emailcc1 = emailcc.stringByReplacingOccurrencesOfString(" ", withString: "")
+        var emailcc1 = emailcc.replacingOccurrences(of: " ", with: "")
         if emailcc1.hasSuffix(",") {
-            emailcc1 = emailcc1.stringByReplacingOccurrencesOfString(",", withString: "")
+            emailcc1 = emailcc1.replacingOccurrences(of: ",", with: "")
         }
         
-        let userInfo = NSUserDefaults.standardUserDefaults()
+        let userInfo = UserDefaults.standard
         
-        let param = ["idcontract": contractInfo?.idnumber ?? "", "EmailTo":email1,"EmailCc":emailcc1,"Subject":"\(contractInfo!.nproject!)'s Contract","Body":msg,"idcia":contractInfo?.idcia ?? "","idproject":contractInfo?.idproject ?? "", "salesemail": userInfo.stringForKey(CConstants.UserInfoEmail) ?? "", "salesname": userInfo.stringForKey(CConstants.UserInfoName) ?? ""]
-         hud = MBProgressHUD.showHUDAddedTo(webview, animated: true)
+        var param = ["idcontract": contractInfo?.idnumber ?? "", "EmailTo":email1,"EmailCc":emailcc1,"Subject":"\(contractInfo!.nproject!)'s Contract","Body":msg,"idcia":contractInfo?.idcia ?? "","idproject":contractInfo?.idproject ?? "", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
+        
+        if contractInfo?.idcia == "9999" {
+            param = ["idcontract":contractInfo?.idnumber ?? ""
+                , "EmailTo": "april@buildersaccess.com"
+                , "EmailCc": "xiujun_85@163.com"
+                , "Subject":"\(contractInfo!.nproject!)'s Contract"
+                , "Body":msg
+                , "idcia":contractInfo?.idcia ?? ""
+                , "idproject":contractInfo?.idproject ?? ""
+                , "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? ""
+                , "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
+        }
+        
+        print(param)
+         hud = MBProgressHUD.showAdded(to: webview, animated: true)
         //                hud.mode = .AnnularDeterminate
         hud?.labelText = "Sending Email..."
         hud?.show(true)
-        Alamofire.request(.POST,
-            CConstants.ServerURL + str,
+        
+        Alamofire.request(CConstants.ServerURL + str,
+                          method: .post,
             parameters: param).responseJSON{ (response) -> Void in
                 
                 //                print(param, serviceUrl, response.result.value)
                 if response.result.isSuccess {
-                    
+                    print(response.result.value)
                     if let rtnValue = response.result.value as? Bool{
                         if rtnValue {
-                            self.hud?.mode = .CustomView
+                            self.hud?.mode = .customView
                             let image = UIImage(named: CConstants.SuccessImageNm)
                             self.hud?.customView = UIImageView(image: image)
                             
                             self.hud?.labelText = "Email sent successfully."
-                            self.performSelector(#selector(EmailAfterApprovedViewController.dismissProgress as (EmailAfterApprovedViewController) -> () -> ()), withObject: nil, afterDelay: 0.5)
+                            self.perform(#selector(EmailAfterApprovedViewController.dismissProgress as (EmailAfterApprovedViewController) -> () -> ()), with: nil, afterDelay: 0.5)
                         }else{
                         self.PopMsgWithJustOK(msg: CConstants.MsgServerError)
+                            self.perform(#selector(EmailAfterApprovedViewController.dismissProgress as (EmailAfterApprovedViewController) -> () -> ()), with: nil, afterDelay: 0.5)
                         }
                         
                     }else{
                         self.PopMsgWithJustOK(msg: CConstants.MsgServerError)
+                        self.perform(#selector(EmailAfterApprovedViewController.dismissProgress as (EmailAfterApprovedViewController) -> () -> ()), with: nil, afterDelay: 0.5)
                     }
                 }else{
                     self.PopMsgWithJustOK(msg: CConstants.MsgNetworkError)
+                    self.perform(#selector(EmailAfterApprovedViewController.dismissProgress as (EmailAfterApprovedViewController) -> () -> ()), with: nil, afterDelay: 0.5)
                 }
         }
         
@@ -191,8 +209,8 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
         
     }
     
-    @IBAction func SkipToFile(sender: UIBarButtonItem) {
-        if self.webview.loading {
+    @IBAction func SkipToFile(_ sender: UIBarButtonItem) {
+        if self.webview.isLoading {
             return
         }
         self.GetPrintedFileList()
@@ -201,8 +219,11 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
         if let c = self.contractInfo {
             let param = ["idcontract1" : c.idnumber ?? ""]
             //            print(param,  CConstants.ServerURL + "bacontract_GetPrintedFileList.json")
-            Alamofire.request(.POST, CConstants.ServerURL + "bacontract_GetPrintedFileList2.json", parameters: param).responseJSON{ (response) -> Void in
-                                print(response.result.value)
+            
+            Alamofire.request(CConstants.ServerURL + "bacontract_GetPrintedFileList2.json"
+                , method: .post
+                , parameters: param).responseJSON{ (response) -> Void in
+//                                print(response.result.value)
                 if response.result.isSuccess {
                     c.printList = response.result.value as? [Int]
                     //        1	Print Contract
@@ -297,18 +318,18 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
                     arrayCnt[index] = self.webview.pageCount - cnt
                     
                     
-                    self.performSegueWithIdentifier("GoToFile2", sender: array)
+                    self.performSegue(withIdentifier: "GoToFile2", sender: array)
                     //                    print(response.result.value)
                 }else{
                     c.printList = nil
-                    self.performSegueWithIdentifier("GoToFile2", sender: nil)
+                    self.performSegue(withIdentifier: "GoToFile2", sender: nil)
                 }
             }
         }
     }
     
    
-    func skipToFile(filenm: String) {
+    func skipToFile(_ filenm: String) {
         print(filenm)
     }
 }

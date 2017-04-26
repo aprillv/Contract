@@ -9,7 +9,7 @@
 import UIKit
     protocol EmailContractToBuyerViewControllerDelegate
     {
-        func GoToSendEmailToBuyer(msg msg: String, hasbuyer1: Bool, hasbuyer2: Bool)
+        func GoToSendEmailToBuyer(msg: String, hasbuyer1: Bool, hasbuyer2: Bool)
         
     }
 
@@ -56,7 +56,7 @@ import UIKit
         }
         @IBOutlet var xtitlelbl: UILabel!{
             didSet{
-                xtitlelbl.textColor = UIColor.whiteColor()
+                xtitlelbl.textColor = UIColor.white
             }
         }
        
@@ -66,7 +66,7 @@ import UIKit
                 desView.delegate = self
                 desView.layer.cornerRadius = 5.0
                 desView.layer.borderWidth = 1.0/(UIScreen().scale)
-                desView.layer.borderColor = UIColor(red: 205.0/255.0, green: 205.0/255.0, blue: 205.0/255.0, alpha: 1).CGColor
+                desView.layer.borderColor = UIColor(red: 205.0/255.0, green: 205.0/255.0, blue: 205.0/255.0, alpha: 1).cgColor
             }
         }
         @IBOutlet var submitBtn: UIButton!{
@@ -98,21 +98,21 @@ import UIKit
                             self.buyer1Email.text = (info.client2 ?? "") + " (" + (info.bemail1 ?? "") + ")"
                         }
                         self.topDistance.constant = 11
-                        self.buyer2Email.hidden  = true
-                        self.buyer2Btn.hidden = true
+                        self.buyer2Email.isHidden  = true
+                        self.buyer2Btn.isHidden = true
                         self.view.updateConstraints()
                     }else if (info.buyer2SignFinishedyn == 1 || info.verify_code2 != ""){
                         self.topDistance.constant = 11
-                        self.buyer2Email.hidden  = true
-                        self.buyer2Btn.hidden = true
+                        self.buyer2Email.isHidden  = true
+                        self.buyer2Btn.isHidden = true
                         self.view.updateConstraints()
                     }
                     
                     
                 }else{
                 self.topDistance.constant = 11
-                    self.buyer2Email.hidden  = true
-                    self.buyer2Btn.hidden = true
+                    self.buyer2Email.isHidden  = true
+                    self.buyer2Btn.isHidden = true
                     self.view.updateConstraints()
                 }
                 
@@ -131,19 +131,19 @@ import UIKit
         }
         
         
-        @IBAction func showDropList(sender: AnyObject) {
+        @IBAction func showDropList(_ sender: AnyObject) {
             self.desView.resignFirstResponder()
             let ct = emailListTbView.frame
             //        var ct2 = emailListTbView.frame
             //        ct2.height = 0.0
             emailListTbView.frame = CGRect(x: ct.origin.x, y: ct.origin.y, width: ct.width, height: 0)
-            emailListTbView.hidden = false
+            emailListTbView.isHidden = false
             
-            UIView.animateWithDuration(0.4, animations: {
+            UIView.animate(withDuration: 0.4, animations: {
                 self.emailListTbView.frame = CGRect(x: ct.origin.x, y: ct.origin.y, width: ct.width, height: CGFloat(33 * (self.xemailList?.count ?? 0)))
-            }) { (_) in
+            }, completion: { (_) in
                 
-            }
+            }) 
             
             
         }
@@ -152,17 +152,17 @@ import UIKit
             didSet{
                 emailListTbView.layer.cornerRadius = 5.0
                 emailListTbView.layer.borderWidth = 1.0/(UIScreen().scale)
-                emailListTbView.layer.borderColor = UIColor(red: 205.0/255.0, green: 205.0/255.0, blue: 205.0/255.0, alpha: 1).CGColor
+                emailListTbView.layer.borderColor = UIColor(red: 205.0/255.0, green: 205.0/255.0, blue: 205.0/255.0, alpha: 1).cgColor
                 
             }
         }
         
-        @IBAction func close(sender: UIButton) {
-            self.dismissViewControllerAnimated(true) {
+        @IBAction func close(_ sender: UIButton) {
+            self.dismiss(animated: true) {
                 
             }
         }
-        @IBAction func doSubmit(sender: UIButton) {
+        @IBAction func doSubmit(_ sender: UIButton) {
 //            print(self.buyer1Email.text, self.buyer2Email.text)
 //            return
             var a = self.buyer1Btn.tag == 1
@@ -176,7 +176,7 @@ import UIKit
 //                    b = a
 //                    a = false
 //                }
-                if self.buyer2Btn.hidden {
+                if self.buyer2Btn.isHidden {
                     b = false
                 }
             }else {
@@ -199,7 +199,7 @@ import UIKit
                 return
             }
             
-            self.dismissViewControllerAnimated(true) {
+            self.dismiss(animated: true) {
                 if self.delegate != nil {
                     
                     
@@ -218,12 +218,12 @@ import UIKit
             set { super.preferredContentSize = newValue }
         }
         
-        func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return xemailList?.count ?? 0
         }
         
-        func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCellWithIdentifier("emailCell", forIndexPath: indexPath)
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "emailCell", for: indexPath)
             
             cell.textLabel?.text = xemailList![indexPath.row]
             
@@ -232,21 +232,21 @@ import UIKit
             return cell
         }
         
-        func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 33
         }
         
-        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             
             let ct = emailListTbView.frame
             
-            UIView.animateWithDuration(0.4, animations: {
+            UIView.animate(withDuration: 0.4, animations: {
                 self.emailListTbView.frame = CGRect(x: ct.origin.x, y: ct.origin.y, width: ct.width, height: 0)
-            }) { (_) in
-                self.emailListTbView.hidden = true
+            }, completion: { (_) in
+                self.emailListTbView.isHidden = true
                 self.emailListTbView.frame = ct
-                tableView.deselectRowAtIndexPath(indexPath, animated: false)
-            }
+                tableView.deselectRow(at: indexPath, animated: false)
+            }) 
             
             //        btnEmail.setTitle("   \(xemailList![indexPath.row])", forState: UIControlState.Normal)
         }
@@ -256,49 +256,49 @@ import UIKit
         
         @IBOutlet var hight2: NSLayoutConstraint!{
             didSet{
-                hight2.active = false
+                hight2.isActive = false
             }
         }
         
-        override func viewWillAppear(animated: Bool) {
+        override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
             //        [[NSNotificationCenter defaultCenter] addObserver:self
             //            selector:@selector(myKeyboardWillHideHandler:)
             //        name:UIKeyboardWillHideNotification
             //        object:nil];
             
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(myKeyboardWillHideHandler(_:)), name: UIKeyboardWillHideNotification, object: nil)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(myKeyboardWillShowHandler(_:)), name: UIKeyboardWillShowNotification, object: nil)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(OrientationchangedHandler(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(myKeyboardWillHideHandler(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(myKeyboardWillShowHandler(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(OrientationchangedHandler(_:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         }
         
-        override func viewWillDisappear(animated: Bool) {
+        override func viewWillDisappear(_ animated: Bool) {
             super.viewWillDisappear(animated)
-            NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
-            NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-            NSNotificationCenter.defaultCenter().removeObserver(self, name: UIDeviceOrientationDidChangeNotification, object: nil)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
             //        [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
             
         }
-        func OrientationchangedHandler(orientation : UIInterfaceOrientation)  {
+        func OrientationchangedHandler(_ orientation : UIInterfaceOrientation)  {
             
             self.changeHeight()
             
             
         }
         
-        private func changeHeight(){
-            if desView.isFirstResponder() {
+        fileprivate func changeHeight(){
+            if desView.isFirstResponder {
                 //        print(max(self.view.frame.size.width, self.view.frame.size.height))
                 //        if max(self.view.frame.size.width, self.view.frame.size.height) <= 1024 {
-                let orientation = UIApplication.sharedApplication().statusBarOrientation
-                if orientation == .LandscapeLeft || orientation == .LandscapeRight{
-                    hightConstraints.active = false
-                    hight2?.active = true
+                let orientation = UIApplication.shared.statusBarOrientation
+                if orientation == .landscapeLeft || orientation == .landscapeRight{
+                    hightConstraints.isActive = false
+                    hight2?.isActive = true
                     self.view.updateConstraintsIfNeeded()
                 }else{
-                    hightConstraints.active = true
-                    hight2?.active = false
+                    hightConstraints.isActive = true
+                    hight2?.isActive = false
                     self.view.updateConstraintsIfNeeded()
                 }
                 //        }
@@ -306,24 +306,24 @@ import UIKit
             
             
         }
-        func myKeyboardWillShowHandler(noti : NSNotification) {
+        func myKeyboardWillShowHandler(_ noti : Notification) {
             changeHeight()
         }
-        func myKeyboardWillHideHandler(noti : NSNotification) {
-            hightConstraints.active = true
-            hight2?.active = false
+        func myKeyboardWillHideHandler(_ noti : Notification) {
+            hightConstraints.isActive = true
+            hight2?.isActive = false
             self.view.updateConstraintsIfNeeded()
         }
-        func textViewDidBeginEditing(textView: UITextView) {
+        func textViewDidBeginEditing(_ textView: UITextView) {
             changeHeight()
         }
         
         @IBOutlet var topDistance: NSLayoutConstraint!
-        @IBAction func buyer1Changed(sender: UIButton) {
+        @IBAction func buyer1Changed(_ sender: UIButton) {
             if sender.tag == 0 {
-                sender.setImage(UIImage(named: "checked"), forState: .Normal)
+                sender.setImage(UIImage(named: "checked"), for: UIControlState())
             }else{
-                sender.setImage(UIImage(named: "check"), forState: .Normal)
+                sender.setImage(UIImage(named: "check"), for: UIControlState())
             }
             sender.tag = 1 - sender.tag
             

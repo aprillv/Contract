@@ -31,7 +31,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-    private struct constants{
+    fileprivate struct constants{
         static let cellReuseIdentifier = "filterCell"
         static let rowHeight : CGFloat = 44
 //        static let operationShowAll = "Show All"
@@ -45,9 +45,9 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var showIndex : Int?
     override func viewDidLoad() {
         super.viewDidLoad()
-        let userinfo = NSUserDefaults.standardUserDefaults()
-        showIndex = userinfo.integerForKey(CConstants.ShowFilter)
-        if (userinfo.stringForKey(CConstants.UserInfoEmail) ?? "").lowercaseString == CConstants.Administrator {
+        let userinfo = UserDefaults.standard
+        showIndex = userinfo.integer(forKey: CConstants.ShowFilter)
+        if (userinfo.string(forKey: CConstants.UserInfoEmail) ?? "").lowercased() == CConstants.Administrator {
         itemList = [constants.operationShowAll, constants.operationHomeownerSign, constants.operationSalesSign, constants.operationReCreate]
         }else{
         itemList = [constants.operationShowAll, constants.operationHomeownerSign, constants.operationSalesSign, constants.operationFinished]
@@ -55,17 +55,17 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return constants.rowHeight
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemList?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(constants.cellReuseIdentifier, forIndexPath: indexPath)
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: constants.cellReuseIdentifier, for: indexPath)
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
         cell.preservesSuperviewLayoutMargins = false
         if let cell1 = cell as? filterCell {
             cell1.textlbl.text = itemList![indexPath.row]
@@ -81,20 +81,20 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let userinfo = NSUserDefaults.standardUserDefaults()
-        let a = userinfo.integerForKey(CConstants.ShowFilter)
-        let lastIndex = NSIndexPath(forRow: a, inSection: 0 )
-        if let cell1 = tableView.cellForRowAtIndexPath(lastIndex) as? filterCell {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let userinfo = UserDefaults.standard
+        let a = userinfo.integer(forKey: CConstants.ShowFilter)
+        let lastIndex = IndexPath(row: a, section: 0 )
+        if let cell1 = tableView.cellForRow(at: lastIndex) as? filterCell {
             cell1.checkImg.image = nil
         }
-        if let cell1 = tableView.cellForRowAtIndexPath(indexPath) as? filterCell {
+        if let cell1 = tableView.cellForRow(at: indexPath) as? filterCell {
             cell1.checkImg.image = UIImage(named: "checkmark2")
         }
-        userinfo.setInteger(indexPath.row, forKey: CConstants.ShowFilter)
+        userinfo.set(indexPath.row, forKey: CConstants.ShowFilter)
         
         
-        self.dismissViewControllerAnimated(true){
+        self.dismiss(animated: true){
             
             if let delegate0 = self.delegate1{
                 switch self.itemList![indexPath.row]{

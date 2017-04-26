@@ -108,6 +108,8 @@
 		11EDB0CA1D151ACB0070BE3E /* EmailContractToBuyerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EDB0C91D151ACB0070BE3E /* EmailContractToBuyerViewController.swift */; };
 		11EEF03B1CCF5679006422ED /* SignatrureFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF03A1CCF5679006422ED /* SignatrureFields.swift */; };
 		11EEF03F1CCF6145006422ED /* toolpdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF03E1CCF6145006422ED /* toolpdf.swift */; };
+		426F83F41EAF237D00C099DD /* AddendumA_DallasFortWorth.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 426F83F31EAF237D00C099DD /* AddendumA_DallasFortWorth.pdf */; };
+		426F83F61EAF27B600C099DD /* EXHIBIT_B_DallasFortWorth.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 426F83F51EAF27B600C099DD /* EXHIBIT_B_DallasFortWorth.pdf */; };
 		640AC2494E0AC9F5E5CA743E /* Pods_Contract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F18C19584528B1717CD718 /* Pods_Contract.framework */; };
 /* End PBXBuildFile section */
 
@@ -261,6 +263,8 @@
 		11EEF03A1CCF5679006422ED /* SignatrureFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatrureFields.swift; sourceTree = "<group>"; };
 		11EEF03E1CCF6145006422ED /* toolpdf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = toolpdf.swift; sourceTree = "<group>"; };
 		22F18C19584528B1717CD718 /* Pods_Contract.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Contract.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		426F83F31EAF237D00C099DD /* AddendumA_DallasFortWorth.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumA_DallasFortWorth.pdf; sourceTree = "<group>"; };
+		426F83F51EAF27B600C099DD /* EXHIBIT_B_DallasFortWorth.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_B_DallasFortWorth.pdf; sourceTree = "<group>"; };
 		8FD0FE342786EA5417C6A9FD /* Pods-Contract.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Contract.release.xcconfig"; path = "Pods/Target Support Files/Pods-Contract/Pods-Contract.release.xcconfig"; sourceTree = "<group>"; };
 		AB0FE999F8EB22254D6D15D8 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E423097CA2371A0B4502711B /* Pods-Contract.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Contract.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Contract/Pods-Contract.debug.xcconfig"; sourceTree = "<group>"; };
@@ -515,6 +519,8 @@
 		119AA3231E3338EE00EF8D3C /* pdf */ = {
 			isa = PBXGroup;
 			children = (
+				426F83F51EAF27B600C099DD /* EXHIBIT_B_DallasFortWorth.pdf */,
+				426F83F31EAF237D00C099DD /* AddendumA_DallasFortWorth.pdf */,
 				119AA3241E33391000EF8D3C /* AddendumA_Austin.pdf */,
 				119AA3251E33391000EF8D3C /* AddendumA_Austin0.pdf */,
 				119AA3261E33391000EF8D3C /* AddendumA.pdf */,
@@ -571,13 +577,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1108B1C31BFC2691004B5D48 /* Build configuration list for PBXNativeTarget "Contract" */;
 			buildPhases = (
-				E13C99A7898A777581128094 /* 📦 Check Pods Manifest.lock */,
+				E13C99A7898A777581128094 /* [CP] Check Pods Manifest.lock */,
 				1108B1A51BFC2690004B5D48 /* Sources */,
 				1108B1A61BFC2690004B5D48 /* Frameworks */,
 				1108B1A71BFC2690004B5D48 /* Resources */,
 				113CB5DB1BFEE4990081FDE7 /* Embed Frameworks */,
-				7FCF7F64E137686B930EE05B /* 📦 Embed Pods Frameworks */,
-				957C77327E1C8714CB724CA2 /* 📦 Copy Pods Resources */,
+				7FCF7F64E137686B930EE05B /* [CP] Embed Pods Frameworks */,
+				957C77327E1C8714CB724CA2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -600,7 +606,7 @@
 					1108B1A81BFC2690004B5D48 = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = 7D8CVP7EK4;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -630,6 +636,7 @@
 				119AA3461E33391000EF8D3C /* AddendumE.pdf in Resources */,
 				119AA3401E33391000EF8D3C /* AddendumA.pdf in Resources */,
 				119AA3551E33391000EF8D3C /* Third_Party_Financing_Addendum_TREC.pdf in Resources */,
+				426F83F61EAF27B600C099DD /* EXHIBIT_B_DallasFortWorth.pdf in Resources */,
 				119AA34F1E33391000EF8D3C /* EXHIBIT_C_General.pdf in Resources */,
 				119AA3501E33391000EF8D3C /* FloodaplainAcknowledement.pdf in Resources */,
 				119AA3411E33391000EF8D3C /* AddendumA201609060.pdf in Resources */,
@@ -640,6 +647,7 @@
 				119AA3431E33391000EF8D3C /* AddendumC2.pdf in Resources */,
 				119AA3481E33391000EF8D3C /* BaseContract.pdf in Resources */,
 				119AA3441E33391000EF8D3C /* AddendumD.pdf in Resources */,
+				426F83F41EAF237D00C099DD /* AddendumA_DallasFortWorth.pdf in Resources */,
 				119AA34B1E33391000EF8D3C /* EXHIBIT_A.pdf in Resources */,
 				119AA3451E33391000EF8D3C /* AddendumD201609060.pdf in Resources */,
 				119AA3421E33391000EF8D3C /* AddendumC.pdf in Resources */,
@@ -662,14 +670,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7FCF7F64E137686B930EE05B /* 📦 Embed Pods Frameworks */ = {
+		7FCF7F64E137686B930EE05B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -677,14 +685,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Contract/Pods-Contract-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		957C77327E1C8714CB724CA2 /* 📦 Copy Pods Resources */ = {
+		957C77327E1C8714CB724CA2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -692,19 +700,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Contract/Pods-Contract-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E13C99A7898A777581128094 /* 📦 Check Pods Manifest.lock */ = {
+		E13C99A7898A777581128094 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -913,7 +921,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = BAForTestNew;
 				SWIFT_OBJC_BRIDGING_HEADER = "Contract/Views/Contract-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -940,7 +948,7 @@
 				PROVISIONING_PROFILE = "b2239817-2abf-4fab-a2a2-3764f9027169";
 				PROVISIONING_PROFILE_SPECIFIER = BAForTestNew;
 				SWIFT_OBJC_BRIDGING_HEADER = "Contract/Views/Contract-Bridging-Header.h";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

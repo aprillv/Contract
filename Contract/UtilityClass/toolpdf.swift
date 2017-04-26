@@ -749,7 +749,7 @@ let pdfBuyer2SignatureFields = [
     "p1ACbuyer2Sign",
     "p1ACseller1Sign"]]
     
-     func isBuyer2Sign(sign : SignatureView) -> Bool{
+     func isBuyer2Sign(_ sign : SignatureView) -> Bool{
         for (_, h) in self.pdfBuyer2SignatureFields {
             if h.contains(sign.xname) {
                 return true
@@ -758,7 +758,7 @@ let pdfBuyer2SignatureFields = [
         return false
     }
     
-     func isBuyer1Sign(sign : SignatureView) -> Bool{
+     func isBuyer1Sign(_ sign : SignatureView) -> Bool{
         if sign.xname == "p1EBExhibitbp1sellerInitialSign" {
             return true
         }
@@ -770,7 +770,7 @@ let pdfBuyer2SignatureFields = [
         return false
     }
     
-     func isSellerSign(sign : SignatureView) -> Bool{
+     func isSellerSign(_ sign : SignatureView) -> Bool{
         for (_, h) in self.sellerSign {
             if h.contains(sign.xname) {
                 return true
@@ -780,7 +780,7 @@ let pdfBuyer2SignatureFields = [
         return false
     }
     
-    func CheckBuyerFinish( fileDotsDic : [String : [PDFWidgetAnnotationView]]?, documents : [PDFDocument]?, isbuyer1: Bool) -> (Bool, SignatureView?) {
+    func CheckBuyerFinish( _ fileDotsDic : [String : [PDFWidgetAnnotationView]]?, documents : [PDFDocument]?, isbuyer1: Bool) -> (Bool, SignatureView?) {
         
         var tmpa = [String]()
          var alldots = [PDFWidgetAnnotationView]()
@@ -789,7 +789,7 @@ let pdfBuyer2SignatureFields = [
                 
                     if let tmp = self.pdfBuyer1SignatureFields[x] {
                         
-                            tmpa.appendContentsOf(tmp)
+                            tmpa.append(contentsOf: tmp)
                         
                         
                     }
@@ -797,19 +797,19 @@ let pdfBuyer2SignatureFields = [
                 
             }else{
                 if let tmp = self.pdfBuyer2SignatureFields[x] {
-                    tmpa.appendContentsOf(tmp)
+                    tmpa.append(contentsOf: tmp)
                 }
             }
             
             if let n = fileDotsDic?[x] {
 //                print(fn)
-                alldots.appendContentsOf(n)
+                alldots.append(contentsOf: n)
                 
             }
             if x == "Addendum C" {
                 for doc in documents!{
                     if let a = doc.addedviewss as? [PDFWidgetAnnotationView]{
-                        alldots.appendContentsOf(a)
+                        alldots.append(contentsOf: a)
                     }
                 }
             }
@@ -820,7 +820,7 @@ let pdfBuyer2SignatureFields = [
             if let a = c as? SignatureView {
                 if tmpa.contains(a.xname) {
                     if a.xname != "p1EBExhibitbp1sellerInitialSign"{
-                        if !(a.lineArray != nil && a.lineArray.count > 0 && a.LineWidth != 0.0){
+                        if !(a.lineArray != nil && a.lineArray.count > 0 && a.lineWidth != 0.0){
                             //                        print(a.xname)
                             return (false, a)
                         }
@@ -833,26 +833,26 @@ let pdfBuyer2SignatureFields = [
         return (true, nil)
     }
     
-    func CheckSellerFinish( fileDotsDic : [String : [PDFWidgetAnnotationView]]?, documents : [PDFDocument]?) -> (Bool, SignatureView?) {
+    func CheckSellerFinish( _ fileDotsDic : [String : [PDFWidgetAnnotationView]]?, documents : [PDFDocument]?) -> (Bool, SignatureView?) {
         
         var tmpa = [String]()
         var alldots = [PDFWidgetAnnotationView]()
         for x in self.filenm {
            
             if let tmp = self.sellerSign[x] {
-                tmpa.appendContentsOf(tmp)
+                tmpa.append(contentsOf: tmp)
             }
             
             
             if let n = fileDotsDic?[x] {
                 //                print(fn)
-                alldots.appendContentsOf(n)
+                alldots.append(contentsOf: n)
                 
             }
             if x == "Addendum C" {
                 for doc in documents!{
                     if let a = doc.addedviewss as? [PDFWidgetAnnotationView]{
-                        alldots.appendContentsOf(a)
+                        alldots.append(contentsOf: a)
                     }
                 }
             }
@@ -862,7 +862,7 @@ let pdfBuyer2SignatureFields = [
         for c in alldots {
             if let a = c as? SignatureView {
                 if tmpa.contains(a.xname) {
-                    if !(a.lineArray != nil && a.lineArray.count > 0 && a.LineWidth != 0.0){
+                    if !(a.lineArray != nil && a.lineArray.count > 0 && a.lineWidth != 0.0){
                         //                        print(a.xname)
                         return (false, a)
                     }

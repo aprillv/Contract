@@ -69,7 +69,7 @@ class SendOperationViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     
-    private struct constants{
+    fileprivate struct constants{
         static let cellReuseIdentifier = "operationCellIdentifier"
         static let rowHeight : CGFloat = 44
         static let operationSavetoServer = "Save Contract"
@@ -103,8 +103,8 @@ class SendOperationViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let userinfo = NSUserDefaults.standardUserDefaults()
-        if userinfo.boolForKey(CConstants.UserInfoIsContract){
+        let userinfo = UserDefaults.standard
+        if userinfo.bool(forKey: CConstants.UserInfoIsContract){
             if justShowEmail! {
 //            itemList = [constants.operationEmail, constants.operationViewAttatchPhoto]
                 
@@ -265,8 +265,8 @@ class SendOperationViewController: UIViewController, UITableViewDelegate, UITabl
                             }
                             
                             if itemList!.contains(constants.operationEmailToBuyer){
-                                if let i = itemList!.indexOf(constants.operationEmailToBuyer){
-                                    itemList?.removeAtIndex(i)}
+                                if let i = itemList!.index(of: constants.operationEmailToBuyer){
+                                    itemList?.remove(at: i)}
                             }
                             itemList?.append(constants.operationEmailToBuyer)
                         }
@@ -319,52 +319,52 @@ class SendOperationViewController: UIViewController, UITableViewDelegate, UITabl
             
             
         }else{
-            if userinfo.integerForKey("ClearDraftInfo") == 0 {
+            if userinfo.integer(forKey: "ClearDraftInfo") == 0 {
                 itemList = [constants.operationEmail, constants.operationClearDraftInfo]
             }else {
                 itemList = [constants.operationEmail, constants.operationFillDraftInfo]
             }
         }
         if itemList?.contains(constants.operationSubmit) ?? false {
-            if let i1 = itemList?.indexOf(constants.operationSubmitBuyer1){
-                itemList?.removeAtIndex(i1)
+            if let i1 = itemList?.index(of: constants.operationSubmitBuyer1){
+                itemList?.remove(at: i1)
             }
-            if let i2 = itemList?.indexOf(constants.operationSubmitBuyer2){
-                itemList?.removeAtIndex(i2)
+            if let i2 = itemList?.index(of: constants.operationSubmitBuyer2){
+                itemList?.remove(at: i2)
             }
         }
         
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return constants.rowHeight
     }
-     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemList?.count ?? 0
     }
     
-     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(constants.cellReuseIdentifier, forIndexPath: indexPath)
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: constants.cellReuseIdentifier, for: indexPath)
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
         cell.preservesSuperviewLayoutMargins = false
         cell.textLabel?.text = itemList![indexPath.row]
         if (cell.textLabel?.text == constants.operationStartOver || cell.textLabel?.text == constants.operationSavetoServer) {
             if (!showSave!){
-                cell.textLabel?.textColor = UIColor.darkGrayColor()
+                cell.textLabel?.textColor = UIColor.darkGray
             }else{
-                cell.textLabel?.textColor = UIColor.blackColor()
+                cell.textLabel?.textColor = UIColor.black
             }
         }
         
         if (cell.textLabel?.text == constants.operationSubmit || cell.textLabel?.text == constants.operationSaveFinish || cell.textLabel?.text == constants.operationSaveEmail) {
             if (!showSubmit!) {
-                cell.textLabel?.textColor = UIColor.darkGrayColor()
+                cell.textLabel?.textColor = UIColor.darkGray
             }else{
-                cell.textLabel?.textColor = UIColor.blackColor()
+                cell.textLabel?.textColor = UIColor.black
             }
         }
-        cell.accessoryType = .None
+        cell.accessoryType = .none
         if cell.textLabel?.text == constants.operationAttatchPhoto{
             if let c = self.hasCheckedPhoto {
                 if c == "1" {
@@ -373,15 +373,15 @@ class SendOperationViewController: UIViewController, UITableViewDelegate, UITabl
             }
         }else if cell.textLabel?.text == constants.operationSubmitBuyer1Finished || cell.textLabel?.text == constants.operationSubmitBuyer2Finished{
 //            cell.accessoryView = UIImageView(image: UIImage(named: "check3"))
-            cell.textLabel?.textColor = UIColor.darkGrayColor()
+            cell.textLabel?.textColor = UIColor.darkGray
         }
         
-        cell.textLabel?.textAlignment = .Center
+        cell.textLabel?.textAlignment = .center
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.dismissViewControllerAnimated(true){
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.dismiss(animated: true){
             if let delegate0 = self.delegate1{
                 switch self.itemList![indexPath.row]{
                     case constants.operationSavetoServer:
@@ -391,8 +391,8 @@ class SendOperationViewController: UIViewController, UITableViewDelegate, UITabl
 //                    case constants.operationPrint:
 //                        delegate0.doPrint()
                     case constants.operationEmail:
-                        let userinfo = NSUserDefaults.standardUserDefaults()
-                        if userinfo.boolForKey(CConstants.UserInfoIsContract){
+                        let userinfo = UserDefaults.standard
+                        if userinfo.bool(forKey: CConstants.UserInfoIsContract){
                             delegate0.sendEmail2()
                         }else{
                             delegate0.sendEmail()

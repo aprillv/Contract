@@ -7,9 +7,22 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 protocol ToSwitchAddressDelegate
 {
-    func GoToAddress(item : ContractsItem)
+    func GoToAddress(_ item : ContractsItem)
 }
 class AddressListModelViewController: BaseViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
 
@@ -24,9 +37,9 @@ class AddressListModelViewController: BaseViewController, UISearchBarDelegate, U
         }
     }
     
-    private var AddressList : [ContractsItem]? {
+    fileprivate var AddressList : [ContractsItem]? {
         didSet{
-            AddressList?.sortInPlace(){$0.idcia < $1.idcia}
+            AddressList?.sort(){$0.idcia < $1.idcia}
             //            AddressList?
             
             if AddressList != nil{
@@ -57,31 +70,31 @@ class AddressListModelViewController: BaseViewController, UISearchBarDelegate, U
         }
     }
     
-    private var CiaNm : [String]?
-    private var CiaNmArray : [String : [ContractsItem]]?
+    fileprivate var CiaNm : [String]?
+    fileprivate var CiaNmArray : [String : [ContractsItem]]?
     // MARK: - Constanse
-    private struct constants{
+    fileprivate struct constants{
         static let CellIdentifier : String = "AddressModelUITableViewCell"
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return CiaNm?.count ?? 1
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CiaNmArray?[CiaNm?[section] ?? ""]!.count ?? 0
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let info = CiaNmArray?[CiaNm?[section] ?? ""]![0] {
             return info.cianame
         }
         return ""
     }
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 25
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(constants.CellIdentifier, forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: constants.CellIdentifier, for: indexPath)
         
         
         let ddd = CiaNmArray?[CiaNm?[indexPath.section] ?? ""]
@@ -92,10 +105,10 @@ class AddressListModelViewController: BaseViewController, UISearchBarDelegate, U
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBar.resignFirstResponder()
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         if let delegate1 = self.delegate {
             let ddd = self.CiaNmArray?[self.CiaNm?[indexPath.section] ?? ""]
             let item: ContractsItem = ddd![indexPath.row]
@@ -113,7 +126,7 @@ class AddressListModelViewController: BaseViewController, UISearchBarDelegate, U
 //        cell.preservesSuperviewLayoutMargins = false
 //    }
     
-     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.searchBar.resignFirstResponder()
     }
     
@@ -133,8 +146,8 @@ class AddressListModelViewController: BaseViewController, UISearchBarDelegate, U
     }
     
     // MARK: - Search Bar Deleagte
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if let txt = searchBar.text?.lowercaseString{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if let txt = searchBar.text?.lowercased(){
             if txt.isEmpty{
                 AddressList = AddressListOrigin
             }else{
@@ -143,8 +156,8 @@ class AddressListModelViewController: BaseViewController, UISearchBarDelegate, U
 //                        || $0.assignsales1name!.lowercaseString.containsString(txt)
 //                        || $0.nproject!.lowercaseString.containsString(txt)
 //                        || $0.client!.lowercaseString.containsString(txt)
-                    return $0.cianame!.lowercaseString.containsString(txt)
-                        || $0.nproject!.lowercaseString.containsString(txt)
+                    return $0.cianame!.lowercased().contains(txt)
+                        || $0.nproject!.lowercased().contains(txt)
                 }
             }
         }else{
