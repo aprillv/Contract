@@ -350,6 +350,28 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
                         
                         if let delegate1 = self.delegate {
                             
+                            let item = self.projectInfo
+                            if (item?.idcia == "100" && ((item?.idproject ?? "").hasPrefix("214") || (item?.idproject ?? "").hasPrefix("205"))) || (item?.idcia == "9999"){
+                                
+                                if (item?.idcia == "100" && ((item?.idproject ?? "").hasPrefix("214") || (item?.idproject ?? "").hasPrefix("205"))) || (item?.idcia == "9999"){
+                                    var beforeList = ["Sign Contract", "Third Party Financing Addendum", "Information about Brokerage Services", "Addendum A", "Exhibit A", "Exhibit B", "Exhibit C General"];
+                                    
+                                    
+                                    var index : Int?
+                                    for i in 0..<beforeList.count {
+                                        index = filesNames.index(of: beforeList[beforeList.count - 1 - i]);
+                                        if (index != nil){
+                                            break
+                                        }
+                                    }
+                                    if index == nil {
+                                        index = 0
+                                    }
+                                    filesNames.insert(CConstants.ActionTitleAcknowledgmentOfEnvironmental, at: index!)
+                                }
+                                
+                                
+                            }
                             delegate1.GoToPrint(filesNames)
                             if self.projectInfo?.status ?? "" != "" && self.canEdit {
                                 self.UpdatePrintedFileList(filesNames)
@@ -373,6 +395,7 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
     
     
     func UpdatePrintedFileList(_ filesNames : [String]){
+        
         var printedList : [String] = [String]()
         for x in filesNames {
             switch x {
@@ -390,6 +413,8 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
                 printedList.append("6")
             case CConstants.ActionTitleEXHIBIT_C:
                 printedList.append("7")
+            case CConstants.ActionTitleAcknowledgmentOfEnvironmental:
+                printedList.append("20")
             case CConstants.ActionTitleBuyersExpect:
                 printedList.append("8")
             case CConstants.ActionTitleAddendumC:
@@ -421,6 +446,12 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
             let param = ["idcontract1" : c.idnumber ?? "", "idfilelist": printedList.joined(separator: ",")]
 //            print(param)
             // april need to change
+            Alamofire.request(CConstants.ServerURL + "bacontract_UpdatePrintedFileList.json", method: .post, parameters: param).responseJSON{ (response) -> Void in
+                if response.result.isSuccess {
+                    
+                }
+            }
+            
             
 //            Alamofire.request(.POST, CConstants.ServerURL + "bacontract_UpdatePrintedFileList.json", parameters: param).responseJSON{ (response) -> Void in
 ////                print(response.result.value)

@@ -35,5 +35,16 @@ class SignatrureFields: ContractObject {
     var email : String?
     var flood : String?
     var environment : String?
+    
+    
+    var hasPage1Buyer1Initial : String?
+    var hasPage1Buyer2Initial : String?
+    var hasPage1SellerInitial : String?
+    var hasPage2Buyer1Initial : String?
+    var hasPage2Buyer2Initial : String?
+    var hasPage2SellerInitial : String?
+    var hasPage2Buyer1Sign : String?
+    var hasPage2Buyer2Sign : String?
+    
 //
 }

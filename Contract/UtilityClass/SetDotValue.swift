@@ -499,11 +499,21 @@ class SetDotValue : NSObject {
 //                    }
                 case SignContractPDFFields.AssociateNameNo:
                     pv.value = pdfInfo!.page9AssociateNameNo
+                    
                 case SignContractPDFFields.p9AssociatesName:
-                    pv.value = pdfInfo!.page9LicensedSupervisor
+                    
+                    if pdfInfo?.nproject == "4012 Woodshire Village Estates" {
+                        pv.value = "Cheri Fama"
+                    }else{
+                        pv.value = pdfInfo!.page9LicensedSupervisor
+                    }
 //                    pv.value = pdfInfo!.page9AssociatesName
                 case SignContractPDFFields.LicensedSupervisorNo:
-                    pv.value = pdfInfo!.page9LicensedSupervisorNo
+                    if pdfInfo?.nproject == "4012 Woodshire Village Estates" {
+                        pv.value = "360812"
+                    }else{
+                        pv.value = pdfInfo!.page9LicensedSupervisorNo
+                    }
                 case SignContractPDFFields.OtherBrokerAddress:
                     pv.value = pdfInfo!.page9OtherBrokerAddress
                 case SignContractPDFFields.OtherBrokerAddressFax:
@@ -513,7 +523,12 @@ class SetDotValue : NSObject {
                 case SignContractPDFFields.CityStateZip:
                     pv.value = pdfInfo!.page9CityZip
                 case SignContractPDFFields.p9AssociatesEmailAddress:
-                    pv.value = pdfInfo!.page9AssociatesEmailAddress
+                    if pdfInfo?.nproject == "4012 Woodshire Village Estates" {
+                        pv.value = "ericp@johndaughery.com"
+                    }else{
+                        pv.value = pdfInfo!.page9AssociatesEmailAddress
+                    }
+                    
                     //                    static let chkfinancing = "financing"
                     //                    static let chk6c = "6c"
                     //                    static let chkcer2 = "cer2"
@@ -1656,6 +1671,51 @@ class SetDotValue : NSObject {
             }
         }
     }
+    // MARK: Acknowledgment Of Environmental
+    fileprivate struct AcknowledgmentEnvironmentalPDFFields{
+        static let lot = "lot"
+        static let block = "block1"
+        static let buyer = "buyer"
+        static let day = "day"
+        static let month = "month"
+        static let year = "year"
+    }
+    
+    func setAcknowledgmentOfEnvironmental(_ pdfInfo: ContractSignature?, additionViews: [PDFWidgetAnnotationView]){
+        for pv : PDFWidgetAnnotationView in additionViews{
+            switch pv.xname {
+            case AcknowledgmentEnvironmentalPDFFields.lot:
+                pv.value = pdfInfo?.lot ?? ""
+            case AcknowledgmentEnvironmentalPDFFields.block:
+                pv.value = pdfInfo?.block ?? ""
+            case AcknowledgmentEnvironmentalPDFFields.buyer:
+                pv.value = pdfInfo?.client ?? ""
+                if let buyer2 = pdfInfo?.client2 {
+                    if buyer2 != "" {
+                        pv.value = (pdfInfo?.client ?? "") + " / " + buyer2
+                    }
+                    
+                }
+            
+            case AcknowledgmentEnvironmentalPDFFields.day:
+                if pdfInfo?.status == CConstants.ApprovedStatus {
+                pv.value = pdfInfo?.executeddd ?? ""
+                }
+                
+            case AcknowledgmentEnvironmentalPDFFields.month:
+                if pdfInfo?.status == CConstants.ApprovedStatus {
+                    pv.value = pdfInfo?.executedmm ?? ""
+                }
+            case AcknowledgmentEnvironmentalPDFFields.year:
+                if pdfInfo?.status == CConstants.ApprovedStatus {
+                    pv.value = pdfInfo?.executedyy ?? ""
+                }
+            default:
+                break
+            }
+        }
+    }
+    
     // MARK: FloodPlain Acknowledgement
     fileprivate struct FloodPlainAcknowledgementPDFFields{
         static let PropertyName = "Property Address 1"

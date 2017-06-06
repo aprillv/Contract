@@ -112,6 +112,7 @@ struct CConstants{
     static let PdfFileNameHoaChecklist2 = "Hoa_Checklist2"
     static let PdfFileNameWarrantyAcknowledgement = "Warranty_Builder_s"
     static let PdfFileNameAddendumHOA = "trec_36-8"
+    static let PdfFileNameAcknowledgmentOfEnvironmental = "Acknowledgment_of_Environmental"
     
     static let PdfPageHeight : CGFloat = 976.688235
 //    static let PdfPageMarginUserDefault = "pageHMargin"
@@ -171,7 +172,7 @@ struct CConstants{
     static let ActionTitleFloodPlainAck : String = "Floodplain Acknowledgement"
     static let ActionTitleHoaChecklist : String = "HOA Checklist"
     static let ActionTitleWarrantyAcknowledgement : String = "Warranty Acknowledgement"
-    
+    static let ActionTitleAcknowledgmentOfEnvironmental = "Acknowledgment of Environmental"
     static let ApplicationColor  = UIColor(red: 0, green: 164/255.0, blue: 236/255.0, alpha: 1)
     static let SearchBarBackColor = UIColor(red: 238/255.0, green: 238/255.0, blue: 238/255.0, alpha: 1)
     static let ApplicationBarFontName  =  "Futura"

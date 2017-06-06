@@ -161,6 +161,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                             tool.setFloodPlainAcknowledgementDots(info, additionViews: dots)
                         case CConstants.ActionTitleAddendumHOA:
                             tool.setAddendumHoaDots(info, additionViews: dots)
+                        
                         default:
                             break
                         }
@@ -242,6 +243,8 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
             
             //           print("second")
             if let info = contractPdfInfo {
+                
+                
                 setSendItema()
                 contractInfo?.status = info.status
                 contractInfo?.signfinishdate = info.signfinishdate
@@ -293,12 +296,16 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                         case CConstants.ActionTitleContract,
                              CConstants.ActionTitleDraftContract:
                             tool.setSignContractDots(info, additionViews: dots, pdfview: self.pdfView!, item: contractInfo)
-                            return
+                            
+                        case CConstants.ActionTitleAcknowledgmentOfEnvironmental:
+                            tool.setAcknowledgmentOfEnvironmental(self.contractPdfInfo, additionViews: dots)
+                            
                         default:
                             break
                         }
                     }
                 }
+            
             }
             
         }
@@ -445,6 +452,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                 
                 filePageCnt += CConstants.PdfFileNameINFORMATION_ABOUT_BROKERAGE_SERVICESPageCount
             case CConstants.ActionTitleAddendumA:
+//                print(contractInfo?.idcity, contractInfo?.isFortworth)
                 if contractInfo?.idcity ?? "1" == "3" {
                     str = CConstants.PdfFileNameAddendumA_austin
                 }else if (contractInfo?.idcity ?? "1" == "2" && (contractInfo?.isFortworth ?? "0") == "1") {
@@ -454,6 +462,9 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                 }
                 
                 filePageCnt += CConstants.PdfFileNameAddendumAPageCount
+            case CConstants.ActionTitleAcknowledgmentOfEnvironmental:
+                str = CConstants.PdfFileNameAcknowledgmentOfEnvironmental
+                filePageCnt += 2
             case CConstants.ActionTitleAddendumHOA:
                 str = CConstants.PdfFileNameAddendumHOA
                 filePageCnt += CConstants.PdfFileNameAddendumHoaPageCount
@@ -1862,8 +1873,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         var b2s : [[String]]?
         var s1i : [[String]]?
         var s1s : [[String]]?
-        //        var si : String?
-        //        var ss : String?
         
         
         var pdfname = [String]()
@@ -1899,37 +1908,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         var hoapage2 : [String]
         var hoapage3 : [String]
         
-        
-        //        if self.initial_b1yn != nil{
-        //            b1iynArray = self.initial_b1yn!
-        //            b2iynArray = self.initial_b2yn!
-        //            b1isnArray = self.signature_b1yn!
-        //            b2isnArray = self.signature_b2yn!
-        //
-        //            if let _ = self.initial_s1yn {
-        //                s1iynArray = self.initial_s1yn!
-        //                s1isnArray = self.signature_s1yn!
-        //            }else{
-        //                s1iynArray = [[String]]()
-        //                s1isnArray = [[String]]()
-        //                for i in 0...(cntArray.count-1){
-        //                    s1iynArray.append([String]())
-        //                    s1isnArray.append([String]())
-        //
-        //                    for _ in 0...cntArray[i]-1 {
-        //                        s1iynArray[i].append("0")
-        //                        s1isnArray[i].append("0")
-        //                    }
-        //                }
-        //            }
-        //
-        //            exhibitB = self.initial_index![0]
-        //            hoapage1 = self.initial_index![1]
-        //            hoapage2 = self.initial_index![2]
-        //            hoapage3 = self.initial_index![3]
-        //
-        //
-        //        }else{
         b1iynArray = [[String]]()
         b2iynArray = [[String]]()
         b1isnArray = [[String]]()
@@ -1992,6 +1970,16 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         
         var brokerb1 = false
         var brokerb2 = false
+        
+        var hasPage1Buyer1Initial = "0"
+        var hasPage1Buyer2Initial = "0"
+        var hasPage1SellerInitial = "0"
+        var hasPage2Buyer1Initial = "0"
+        var hasPage2Buyer2Initial = "0"
+        var hasPage2SellerInitial = "0"
+        var hasPage2Buyer1Sign = "0"
+        var hasPage2Buyer2Sign = "0"
+        
         for d in alldots{
             if let sign = d as? SignatureView {
                 //                print("\"\(sign.xname!)\",")
@@ -2001,7 +1989,12 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                             if b1i == nil {
                                 b1i = sign.lineArray as? [[String]]
                             }
-                            if sign.xname == "p1EBExhibitbp1sellerInitialSign"{
+                            
+                            if sign.xname == "AOEbottom1" {
+                                hasPage1Buyer1Initial = "1"
+                            }else if sign.xname == "AOE2bottom1" {
+                                hasPage2Buyer1Initial = "1";
+                            }else if sign.xname == "p1EBExhibitbp1sellerInitialSign"{
                                 exhibitB[0] = "1"
                             }else if sign.xname.hasSuffix("Sign3") {
                                 //                                print(sign.xname)
@@ -2052,20 +2045,29 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                                 //                                b2i = "\(sign.lineArray)"
                                 b2i = sign.lineArray as? [[String]]
                             }
-                            var cont = true
-                            for j in 0...nameArray.count-1 {
-                                if cont {
-                                    let names = nameArray[nameArray.count-1-j]
-                                    for k in 0...names.count-1 {
-                                        let name = names[k]
-                                        if sign.xname.hasPrefix(name) {
-                                            b2iynArray[nameArray.count-1-j][k] = "1"
-                                            cont = false
+                            
+                            if sign.xname == "AOEbottom2" {
+                                hasPage1Buyer2Initial = "1"
+                            }else if sign.xname == "AOE2bottom2" {
+                                hasPage2Buyer2Initial = "1";
+                            }else {
+                                var cont = true
+                                for j in 0...nameArray.count-1 {
+                                    if cont {
+                                        let names = nameArray[nameArray.count-1-j]
+                                        for k in 0...names.count-1 {
+                                            let name = names[k]
+                                            if sign.xname.hasPrefix(name) {
+                                                b2iynArray[nameArray.count-1-j][k] = "1"
+                                                cont = false
+                                            }
                                         }
                                     }
+                                    
                                 }
-                                
                             }
+                            
+                            
                         }
                     }
                     if sign.xname.hasSuffix("buyer1Sign") {
@@ -2074,22 +2076,29 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                             if b1s == nil {
                                 b1s = sign.lineArray as? [[String]]
                             }
-                            var cont = true
-                            for j in 0...nameArray.count-1 {
-                                if cont {
-                                    let names = nameArray[nameArray.count-1-j]
-                                    for k in 0...names.count-1 {
-                                        let name = names[k]
-                                        if sign.xname == "p2Ibroker2buyer1Sign" {
-                                            brokerb1 = true
-                                        } else if sign.xname.hasPrefix(name) {
-                                            b1isnArray[nameArray.count-1-j][k] = "1"
-                                            cont = false
+                            
+                            if sign.xname == "AOEbuyer1Sign" {
+                                hasPage2Buyer1Sign = "1"
+                            }else{
+                                var cont = true
+                                for j in 0...nameArray.count-1 {
+                                    if cont {
+                                        let names = nameArray[nameArray.count-1-j]
+                                        for k in 0...names.count-1 {
+                                            let name = names[k]
+                                            if sign.xname == "p2Ibroker2buyer1Sign" {
+                                                brokerb1 = true
+                                            } else if sign.xname.hasPrefix(name) {
+                                                b1isnArray[nameArray.count-1-j][k] = "1"
+                                                cont = false
+                                            }
                                         }
                                     }
+                                    
                                 }
-                                
                             }
+                            
+                            
                         }
                     }
                     if sign.xname.hasSuffix("buyer2Sign") {
@@ -2098,23 +2107,27 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                                 //                                b2s = "\(sign.lineArray)"
                                 b2s = sign.lineArray as? [[String]]
                             }
-                            
-                            var cont = true
-                            for j in 0...nameArray.count-1 {
-                                if cont {
-                                    let names = nameArray[nameArray.count-1-j]
-                                    for k in 0...names.count-1 {
-                                        let name = names[k]
-                                        if sign.xname == "p2Ibroker2buyer2Sign" {
-                                            brokerb2 = true
-                                        }else if sign.xname.hasPrefix(name) {
-                                            b2isnArray[nameArray.count-1-j][k] = "1"
-                                            cont = false
+                            if sign.xname == "AOEbuyer2Sign" {
+                                hasPage2Buyer2Sign = "1"
+                            }else{
+                                var cont = true
+                                for j in 0...nameArray.count-1 {
+                                    if cont {
+                                        let names = nameArray[nameArray.count-1-j]
+                                        for k in 0...names.count-1 {
+                                            let name = names[k]
+                                            if sign.xname == "p2Ibroker2buyer2Sign" {
+                                                brokerb2 = true
+                                            }else if sign.xname.hasPrefix(name) {
+                                                b2isnArray[nameArray.count-1-j][k] = "1"
+                                                cont = false
+                                            }
                                         }
                                     }
+                                    
                                 }
-                                
                             }
+                            
                             
                         }
                     }
@@ -2128,6 +2141,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                             if s1s == nil {
                                 s1s = sign.lineArray as? [[String]]
                             }
+                            
                             var cont = true
                             for j in 0...nameArray.count-1 {
                                 if cont {
@@ -2148,19 +2162,27 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                             if s1i == nil {
                                 s1i = sign.lineArray as? [[String]]
                             }
-                            var cont = true
-                            for j in 0...nameArray.count-1 {
-                                if cont {
-                                    let names = nameArray[nameArray.count-1-j]
-                                    for k in 0...names.count-1 {
-                                        let name = names[k]
-                                        if sign.xname.hasPrefix(name) {
-                                            s1iynArray[nameArray.count-1-j][k] = "1"
-                                            cont = false
+                            if sign.xname == "AOEbottom3" {
+                                hasPage1SellerInitial = "1"
+                            } else if sign.xname == "AOE2bottom3" {
+                                hasPage2SellerInitial = "1"
+                            }else{
+                                var cont = true
+                                for j in 0...nameArray.count-1 {
+                                    if cont {
+                                        let names = nameArray[nameArray.count-1-j]
+                                        for k in 0...names.count-1 {
+                                            let name = names[k]
+                                            if sign.xname.hasPrefix(name) {
+                                                s1iynArray[nameArray.count-1-j][k] = "1"
+                                                cont = false
+                                            }
                                         }
                                     }
                                 }
                             }
+                        
+                            
                         }
                     }
                 }
@@ -2246,6 +2268,36 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         self.hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         self.hud?.labelText = CConstants.SavedMsg
         
+        
+        if self.contractInfo?.idcia == "9999" || (self.contractInfo?.idcia == "100" && ((self.contractInfo?.idproject ?? "").hasPrefix("214") || (self.contractInfo?.idproject ?? "").hasPrefix("205"))) {
+            
+            var param0 = [String: String]()
+            param0["whichBuyer"] = "0"
+            param0["isSeller"] = (self.contractPdfInfo?.status == CConstants.ApprovedStatus) ? "1" : "0"
+            param0["idcontract1"] = self.contractInfo?.idnumber
+            param0["hasPage1Buyer1Initail"] = hasPage1Buyer1Initial
+            param0["hasPage1Buyer2Initail"] = hasPage1Buyer2Initial
+            param0["hasPage1SellerInitail"] = hasPage1SellerInitial
+            param0["hasPage2Buyer1Initail"] = hasPage2Buyer1Initial
+            param0["hasPage2Buyer2Initail"] = hasPage2Buyer2Initial
+            param0["hasPage2SellerInitail"] = hasPage2SellerInitial
+            param0["hasPage2Buyer1Sign"] = hasPage2Buyer1Sign
+            param0["hasPage2Buyer2Sign"] = hasPage2Buyer2Sign
+                
+            Alamofire.request(CConstants.ServerURL + "bacontract_save_sign_AcknowledgmentOfEnvironmental.json",
+                              method: .post,
+                              parameters: param0).responseJSON{ (response) -> Void in
+                                
+//                                print(CConstants.ServerURL + "bacontract_save_sign_AcknowledgmentOfEnvironmental.json")
+//                                print(param0)
+                                if response.result.isSuccess {
+                                    if let rtnValue = response.result.value as? Bool{
+                                        print("asdfasdfasd")
+                                    }
+                                }
+            
+            }
+        }
         
         Alamofire.request(CConstants.ServerURL + reurl,
                           method: .post,
@@ -2358,13 +2410,21 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         //        print(["idcontract1" : self.contractInfo!.idnumber!])
         
        
-        Alamofire.request(CConstants.ServerURL + "bacontract_GetSignedContract.json", method: .post,
+        var serviceURL = "bacontract_GetSignedContract.json"
+        if self.contractInfo?.idcia == "9999" || (self.contractInfo?.idcia == "100" && ((self.contractInfo?.idproject ?? "").hasPrefix("214") || (self.contractInfo?.idproject ?? "").hasPrefix("205"))) {
+            serviceURL = "bacontract_GetAcknowledgmentOfEnvironmentalSignedContract.json"
+            
+            }
+        Alamofire.request(CConstants.ServerURL + serviceURL, method: .post,
                           parameters: ["idcontract1" : self.contractInfo!.idnumber!]).responseJSON{ (response) -> Void in
                             //                hud.hide(true)
                             if response.result.isSuccess {
                                 //                    print(response.result.value)
                                 if let rtnValue = response.result.value as? [String: AnyObject]{
-                                    //                       print(rtnValue)
+//                                                           print(rtnValue)
+                                    
+                                  let isRavenna = self.contractInfo?.idcia == "9999" || (self.contractInfo?.idcia == "100" && ((self.contractInfo?.idproject ?? "").hasPrefix("214") || (self.contractInfo?.idproject ?? "").hasPrefix("205")))
+                                    
                                     let rtn = SignatrureFields(dicInfo: rtnValue)
                                     if rtn.initial_b1yn! != "" {
                                         //                             print(rtn.initial_b1yn)
@@ -2444,33 +2504,13 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                                             }
                                         }
                                         
-                                        //                            for h in alldots{
-                                        //                            print(h.xname)
-                                        //                            }
-                                        
                                         var showseller = true
-                                        //                            if let ds = self.contractInfo?.signfinishdate, ss = self.contractInfo?.status {
-                                        //                                showseller =  ds != "01/01/1980" && ss == CConstants.ApprovedStatus
-                                        //                            }
                                         if let ss = self.contractInfo?.status {
-                                            //                                showseller =  (ds != "01/01/1980" && ss == CConstants.ApprovedStatus)
                                             showseller =  ss == CConstants.ApprovedStatus
                                         }
-                                        //                            let v = SignatureView()
-                                        //                            let initial_b1Line = v.getNewOriginLine(self.initial_b1.componentsSeparatedByString(";").map(){$0.componentsSeparatedByString("|")})
-                                        //                            var initial_b2Line : String?
-                                        //                            var signature_b1Line : String?
-                                        //                            var signature_b2Line : String?
-                                        //                            var initial_s1Line : String?
-                                        //                            var signature_s1Line : String?
                                         
                                         for d in alldots{
                                             if let sign = d as? SignatureView {
-                                                //                                    if  sign.xname.hasSuffix("bottom4")
-                                                //                                        || sign.xname.hasSuffix("seller2Sign")
-                                                //                                        {
-                                                //                                        print("\"" + sign.xname + "\"" + ",")
-                                                //                                    }
                                                 
                                                 
                                                 if sign.xname == "p2Ibroker2buyer1Sign" {
@@ -2480,10 +2520,56 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                                                     continue
                                                 }else if sign.xname == "p2Ibroker2buyer2Sign" {
                                                     self.setShowSignature(sign, signs: self.signature_b2!, idcator: (brokerb2 ? "1" : "0"))
-                                                    
-                                                    
                                                     continue
                                                 }
+                                                
+                                                if isRavenna {
+                                                    if sign.xname == "AOEbottom1" {
+                                                        self.setShowSignature(sign, signs: self.initial_b1!, idcator: rtn.hasPage1Buyer1Initial ?? "0")
+                                                    }
+                                                    
+                                                    
+                                                    
+                                                    if sign.xname == "AOE2bottom1" {
+                                                        self.setShowSignature(sign, signs: self.initial_b1!, idcator: rtn.hasPage2Buyer1Initial ?? "0")
+                                                    }
+                                                    
+                                                    
+                                                    
+                                                    if sign.xname == "AOEbuyer1Sign" {
+                                                        self.setShowSignature(sign, signs: self.signature_b1!, idcator: rtn.hasPage2Buyer1Sign ?? "0")
+                                                    }
+                                                    
+                                                    if self.contractInfo!.client2! != "" {
+                                                        if sign.xname == "AOEbottom2" {
+                                                            self.setShowSignature(sign, signs: self.initial_b2!, idcator: rtn.hasPage1Buyer2Initial ?? "0")
+                                                        }
+                                                        
+                                                        if sign.xname == "AOE2bottom2" {
+                                                            self.setShowSignature(sign, signs: self.initial_b2!, idcator: rtn.hasPage2Buyer2Initial ?? "0")
+                                                        }
+                                                        
+                                                        if sign.xname == "AOEbuyer2Sign" {
+                                                            self.setShowSignature(sign, signs: self.signature_b2!, idcator: rtn.hasPage2Buyer2Sign ?? "0")
+                                                        }
+                                                    }
+                                                    
+                                                    if self.contractPdfInfo?.status == CConstants.ApprovedStatus {
+                                                        if sign.xname == "AOEbottom3" {
+                                                            self.setShowSignature(sign, signs: self.initial_s1!, idcator: rtn.hasPage1SellerInitial ?? "0")
+                                                        }
+                                                        
+                                                        
+                                                        if sign.xname == "AOE2bottom3" {
+                                                            self.setShowSignature(sign, signs: self.initial_s1!, idcator: rtn.hasPage2SellerInitial ?? "0")
+                                                        }
+
+                                                    }
+                                                    
+                                                    
+                                                    
+                                                }
+                                                
                                                 
                                                 if sign.xname.hasSuffix("bottom1") {
                                                     if sign.xname == "p3Hbottom1" {
@@ -3032,8 +3118,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                 savedPdfData = document?.savedStaticPDFData()
             }
         }
-        
-        //        return
         
         let fileBase64String = savedPdfData?.base64EncodedString(options: NSData.Base64EncodingOptions.endLineWithLineFeed)
         

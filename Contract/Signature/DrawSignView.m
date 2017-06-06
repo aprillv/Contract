@@ -85,7 +85,7 @@ static NSMutableArray *colors;
 //    layer.borderWidth = 1;
 //     self.backgroundColor = [UIColor colorWithRed:59./255. green:73./255. blue:82./255. alpha:1];
 //    layer.backgroundColor = [UIColor colorWithRed:59./255. green:73./255. blue:82./255. alpha:1].CGColor;
-self.backgroundColor = [UIColor colorWithRed: 35/255.0 green: 174/255.0 blue: 235/255.0 alpha: 1];
+    self.backgroundColor = [UIColor colorWithRed: 35/255.0 green: 174/255.0 blue: 235/255.0 alpha: 1];
 
     //contentLbl
     contentLbl = [[UILabel alloc]init];

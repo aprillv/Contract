@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/AddressListViewController.swift"
-            timestampString = "513333571.254616"
+            timestampString = "516162792.056346"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "436"
-            endingLineNumber = "436"
+            startingLineNumber = "449"
+            endingLineNumber = "449"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/PDFPrintViewController.swift"
-            timestampString = "514795681.152682"
+            timestampString = "518408936.639839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2763"
-            endingLineNumber = "2763"
+            startingLineNumber = "2849"
+            endingLineNumber = "2849"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
             <Locations>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/PDFPrintViewController.swift"
-            timestampString = "514795681.152682"
+            timestampString = "518408936.639839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2970"
-            endingLineNumber = "2970"
+            startingLineNumber = "3056"
+            endingLineNumber = "3056"
             landmarkName = "GoToSubmit(_:emailcc:msg:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/PDFPrintViewController.swift"
-            timestampString = "514795681.152682"
+            timestampString = "518408936.639839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3051"
-            endingLineNumber = "3051"
+            startingLineNumber = "3135"
+            endingLineNumber = "3135"
             landmarkName = "saveAndFinish2(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/PDFPrintViewController.swift"
-            timestampString = "514795681.152682"
+            timestampString = "518408936.639839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3056"
-            endingLineNumber = "3056"
+            startingLineNumber = "3140"
+            endingLineNumber = "3140"
             landmarkName = "saveAndFinish2(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/PDFPrintViewController.swift"
-            timestampString = "514795681.152682"
+            timestampString = "518408936.639839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "808"
-            endingLineNumber = "808"
+            startingLineNumber = "819"
+            endingLineNumber = "819"
             landmarkName = "setSendItema()"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/PDFPrintViewController.swift"
-            timestampString = "514795681.152682"
+            timestampString = "518408936.639839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3145"
-            endingLineNumber = "3145"
+            startingLineNumber = "3229"
+            endingLineNumber = "3229"
             landmarkName = "GoToEmailSubmit(_:emailcc:msg:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/PDFPrintViewController.swift"
-            timestampString = "514795681.152682"
+            timestampString = "518408936.639839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3391"
-            endingLineNumber = "3391"
+            startingLineNumber = "3475"
+            endingLineNumber = "3475"
             landmarkName = "GoToSendEmailToBuyer(msg:hasbuyer1:hasbuyer2:)"
             landmarkType = "7">
             <Locations>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/PDFPrintViewController.swift"
-            timestampString = "514795681.152682"
+            timestampString = "518408936.639839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3390"
-            endingLineNumber = "3390"
+            startingLineNumber = "3474"
+            endingLineNumber = "3474"
             landmarkName = "GoToSendEmailToBuyer(msg:hasbuyer1:hasbuyer2:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/PDFPrintViewController.swift"
-            timestampString = "514789770.324854"
+            timestampString = "516091284.794241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "contractPdfInfo"
             landmarkType = "24">
          </BreakpointContent>
@@ -298,27 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/PDFPrintViewController.swift"
-            timestampString = "514795681.152682"
+            timestampString = "518408936.639839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1043"
-            endingLineNumber = "1043"
-            landmarkName = "callService(_:param:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Contract/Views/PDFPrintViewController.swift"
-            timestampString = "514801230.862165"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "448"
-            endingLineNumber = "448"
+            startingLineNumber = "456"
+            endingLineNumber = "456"
             landmarkName = "loadPDFView()"
             landmarkType = "7">
             <Locations>
@@ -330,12 +314,12 @@
                   moduleName = "Contract"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/aprillv/Desktop/BuildersAccess/Contract/Contract/Views/PDFPrintViewController.swift"
-                  timestampString = "514801231.249976"
+                  timestampString = "518409321.165091"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "448"
-                  endingLineNumber = "448"
-                  offsetFromSymbolStart = "6821">
+                  startingLineNumber = "456"
+                  endingLineNumber = "456"
+                  offsetFromSymbolStart = "7805">
                </Location>
                <Location
                   shouldBeEnabled = "No"
@@ -345,11 +329,11 @@
                   moduleName = "Contract"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/aprillv/Desktop/BuildersAccess/Contract/Contract/Views/PDFPrintViewController.swift"
-                  timestampString = "514801231.252309"
+                  timestampString = "518409321.169219"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "448"
-                  endingLineNumber = "448"
+                  startingLineNumber = "456"
+                  endingLineNumber = "456"
                   offsetFromSymbolStart = "12">
                </Location>
             </Locations>
@@ -399,6 +383,246 @@
                   startingLineNumber = "269"
                   endingLineNumber = "269"
                   offsetFromSymbolStart = "114">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Contract/Views/AddressListViewController.swift"
+            timestampString = "516099734.137147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "GoToPrint(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Contract.AddressListViewController.GoToPrint (Swift.Array&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "Contract"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aprillv/Desktop/BuildersAccess/Contract/Contract/Views/AddressListViewController.swift"
+                  timestampString = "516093242.882862"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "289"
+                  endingLineNumber = "289"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Contract.AddressListViewController.(GoToPrint (Swift.Array&lt;Swift.String&gt;) -&gt; ()).(implicit closure #1)"
+                  moduleName = "Contract"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aprillv/Desktop/BuildersAccess/Contract/Contract/Views/AddressListViewController.swift"
+                  timestampString = "516093242.887014"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "289"
+                  endingLineNumber = "289"
+                  offsetFromSymbolStart = "23">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Contract/Views/AddressListViewController.swift"
+            timestampString = "516099734.137147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
+            landmarkName = "GoToPrint(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Contract/Views/PDFPrintViewController.swift"
+            timestampString = "518408936.639839"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1219"
+            endingLineNumber = "1219"
+            landmarkName = "afterGotofield()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Contract/Views/PrintModelTableViewController.swift"
+            timestampString = "516162913.446749"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "445"
+            endingLineNumber = "445"
+            landmarkName = "UpdatePrintedFileList(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Contract.PrintModelTableViewController.UpdatePrintedFileList (Swift.Array&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "Contract"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aprillv/Desktop/BuildersAccess/Contract/Contract/Views/PrintModelTableViewController.swift"
+                  timestampString = "516162913.45459"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "445"
+                  endingLineNumber = "445"
+                  offsetFromSymbolStart = "14492">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Contract.PrintModelTableViewController.UpdatePrintedFileList (Swift.Array&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "Contract"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aprillv/Desktop/BuildersAccess/Contract/Contract/Views/PrintModelTableViewController.swift"
+                  timestampString = "516162913.458405"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "445"
+                  endingLineNumber = "445"
+                  offsetFromSymbolStart = "14550">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Contract/Views/AddressListViewController.swift"
+            timestampString = "516162933.132894"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "307"
+            endingLineNumber = "307"
+            landmarkName = "GoToPrint(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Contract/Views/AddressListViewController.swift"
+            timestampString = "516162933.965322"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
+            landmarkName = "GoToPrint(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Contract/Views/PDFPrintViewController.swift"
+            timestampString = "518408936.639839"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2268"
+            endingLineNumber = "2268"
+            landmarkName = "saveToServer1(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Contract/Views/PDFPrintViewController.swift"
+            timestampString = "518408936.639839"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2287"
+            endingLineNumber = "2287"
+            landmarkName = "saveToServer1(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Contract/Views/PDFPrintViewController.swift"
+            timestampString = "518408936.639839"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "512"
+            endingLineNumber = "512"
+            landmarkName = "loadPDFView()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Contract.PDFPrintViewController.loadPDFView () -&gt; ()"
+                  moduleName = "Contract"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aprillv/Desktop/BuildersAccess/Contract/Contract/Views/PDFPrintViewController.swift"
+                  timestampString = "518409321.185832"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "512"
+                  endingLineNumber = "512"
+                  offsetFromSymbolStart = "16429">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Contract.PDFPrintViewController.(loadPDFView () -&gt; ()).(implicit closure #11)"
+                  moduleName = "Contract"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aprillv/Desktop/BuildersAccess/Contract/Contract/Views/PDFPrintViewController.swift"
+                  timestampString = "518409321.188966"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "512"
+                  endingLineNumber = "512"
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
          </BreakpointContent>

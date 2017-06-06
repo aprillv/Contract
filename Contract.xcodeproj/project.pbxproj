@@ -81,13 +81,9 @@
 		119AA3441E33391000EF8D3C /* AddendumD.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 119AA32A1E33391000EF8D3C /* AddendumD.pdf */; };
 		119AA3451E33391000EF8D3C /* AddendumD201609060.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 119AA32B1E33391000EF8D3C /* AddendumD201609060.pdf */; };
 		119AA3461E33391000EF8D3C /* AddendumE.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 119AA32C1E33391000EF8D3C /* AddendumE.pdf */; };
-		119AA3471E33391000EF8D3C /* BaseContract_Austin.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 119AA32D1E33391000EF8D3C /* BaseContract_Austin.pdf */; };
-		119AA3481E33391000EF8D3C /* BaseContract.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 119AA32E1E33391000EF8D3C /* BaseContract.pdf */; };
 		119AA3491E33391000EF8D3C /* BuyersExpect.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 119AA32F1E33391000EF8D3C /* BuyersExpect.pdf */; };
 		119AA34A1E33391000EF8D3C /* DesignCenter.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 119AA3301E33391000EF8D3C /* DesignCenter.pdf */; };
 		119AA34B1E33391000EF8D3C /* EXHIBIT_A.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 119AA3311E33391000EF8D3C /* EXHIBIT_A.pdf */; };
-		119AA34C1E33391000EF8D3C /* EXHIBIT_B_Austin.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 119AA3321E33391000EF8D3C /* EXHIBIT_B_Austin.pdf */; };
-		119AA34D1E33391000EF8D3C /* EXHIBIT_B.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 119AA3331E33391000EF8D3C /* EXHIBIT_B.pdf */; };
 		119AA34E1E33391000EF8D3C /* EXHIBIT_C_General_Austin.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 119AA3341E33391000EF8D3C /* EXHIBIT_C_General_Austin.pdf */; };
 		119AA34F1E33391000EF8D3C /* EXHIBIT_C_General.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 119AA3351E33391000EF8D3C /* EXHIBIT_C_General.pdf */; };
 		119AA3501E33391000EF8D3C /* FloodaplainAcknowledement.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 119AA3361E33391000EF8D3C /* FloodaplainAcknowledement.pdf */; };
@@ -108,8 +104,13 @@
 		11EDB0CA1D151ACB0070BE3E /* EmailContractToBuyerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EDB0C91D151ACB0070BE3E /* EmailContractToBuyerViewController.swift */; };
 		11EEF03B1CCF5679006422ED /* SignatrureFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF03A1CCF5679006422ED /* SignatrureFields.swift */; };
 		11EEF03F1CCF6145006422ED /* toolpdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF03E1CCF6145006422ED /* toolpdf.swift */; };
+		420B4F991EC598A200C793B6 /* Acknowledgment_of_Environmental.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 420B4F981EC598A200C793B6 /* Acknowledgment_of_Environmental.pdf */; };
+		425CF1651EE656DA0031F448 /* EXHIBIT_B_DallasFortWorth.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 425CF1641EE656DA0031F448 /* EXHIBIT_B_DallasFortWorth.pdf */; };
+		425CF1681EE6819E0031F448 /* EXHIBIT_B.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 425CF1661EE6819E0031F448 /* EXHIBIT_B.pdf */; };
+		425CF1691EE6819E0031F448 /* EXHIBIT_B_Austin.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 425CF1671EE6819E0031F448 /* EXHIBIT_B_Austin.pdf */; };
 		426F83F41EAF237D00C099DD /* AddendumA_DallasFortWorth.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 426F83F31EAF237D00C099DD /* AddendumA_DallasFortWorth.pdf */; };
-		426F83F61EAF27B600C099DD /* EXHIBIT_B_DallasFortWorth.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 426F83F51EAF27B600C099DD /* EXHIBIT_B_DallasFortWorth.pdf */; };
+		428C75791ED0095D00BB562E /* BaseContract.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 428C75771ED0095D00BB562E /* BaseContract.pdf */; };
+		428C757A1ED0095D00BB562E /* BaseContract_Austin.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 428C75781ED0095D00BB562E /* BaseContract_Austin.pdf */; };
 		640AC2494E0AC9F5E5CA743E /* Pods_Contract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F18C19584528B1717CD718 /* Pods_Contract.framework */; };
 /* End PBXBuildFile section */
 
@@ -235,13 +236,9 @@
 		119AA32A1E33391000EF8D3C /* AddendumD.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumD.pdf; sourceTree = "<group>"; };
 		119AA32B1E33391000EF8D3C /* AddendumD201609060.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumD201609060.pdf; sourceTree = "<group>"; };
 		119AA32C1E33391000EF8D3C /* AddendumE.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumE.pdf; sourceTree = "<group>"; };
-		119AA32D1E33391000EF8D3C /* BaseContract_Austin.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BaseContract_Austin.pdf; sourceTree = "<group>"; };
-		119AA32E1E33391000EF8D3C /* BaseContract.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BaseContract.pdf; sourceTree = "<group>"; };
 		119AA32F1E33391000EF8D3C /* BuyersExpect.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BuyersExpect.pdf; sourceTree = "<group>"; };
 		119AA3301E33391000EF8D3C /* DesignCenter.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = DesignCenter.pdf; sourceTree = "<group>"; };
 		119AA3311E33391000EF8D3C /* EXHIBIT_A.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_A.pdf; sourceTree = "<group>"; };
-		119AA3321E33391000EF8D3C /* EXHIBIT_B_Austin.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_B_Austin.pdf; sourceTree = "<group>"; };
-		119AA3331E33391000EF8D3C /* EXHIBIT_B.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_B.pdf; sourceTree = "<group>"; };
 		119AA3341E33391000EF8D3C /* EXHIBIT_C_General_Austin.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_C_General_Austin.pdf; sourceTree = "<group>"; };
 		119AA3351E33391000EF8D3C /* EXHIBIT_C_General.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_C_General.pdf; sourceTree = "<group>"; };
 		119AA3361E33391000EF8D3C /* FloodaplainAcknowledement.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = FloodaplainAcknowledement.pdf; sourceTree = "<group>"; };
@@ -263,8 +260,13 @@
 		11EEF03A1CCF5679006422ED /* SignatrureFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatrureFields.swift; sourceTree = "<group>"; };
 		11EEF03E1CCF6145006422ED /* toolpdf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = toolpdf.swift; sourceTree = "<group>"; };
 		22F18C19584528B1717CD718 /* Pods_Contract.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Contract.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		420B4F981EC598A200C793B6 /* Acknowledgment_of_Environmental.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Acknowledgment_of_Environmental.pdf; sourceTree = "<group>"; };
+		425CF1641EE656DA0031F448 /* EXHIBIT_B_DallasFortWorth.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_B_DallasFortWorth.pdf; sourceTree = "<group>"; };
+		425CF1661EE6819E0031F448 /* EXHIBIT_B.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_B.pdf; sourceTree = "<group>"; };
+		425CF1671EE6819E0031F448 /* EXHIBIT_B_Austin.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_B_Austin.pdf; sourceTree = "<group>"; };
 		426F83F31EAF237D00C099DD /* AddendumA_DallasFortWorth.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumA_DallasFortWorth.pdf; sourceTree = "<group>"; };
-		426F83F51EAF27B600C099DD /* EXHIBIT_B_DallasFortWorth.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_B_DallasFortWorth.pdf; sourceTree = "<group>"; };
+		428C75771ED0095D00BB562E /* BaseContract.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BaseContract.pdf; sourceTree = "<group>"; };
+		428C75781ED0095D00BB562E /* BaseContract_Austin.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BaseContract_Austin.pdf; sourceTree = "<group>"; };
 		8FD0FE342786EA5417C6A9FD /* Pods-Contract.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Contract.release.xcconfig"; path = "Pods/Target Support Files/Pods-Contract/Pods-Contract.release.xcconfig"; sourceTree = "<group>"; };
 		AB0FE999F8EB22254D6D15D8 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E423097CA2371A0B4502711B /* Pods-Contract.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Contract.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Contract/Pods-Contract.debug.xcconfig"; sourceTree = "<group>"; };
@@ -519,7 +521,12 @@
 		119AA3231E3338EE00EF8D3C /* pdf */ = {
 			isa = PBXGroup;
 			children = (
-				426F83F51EAF27B600C099DD /* EXHIBIT_B_DallasFortWorth.pdf */,
+				425CF1661EE6819E0031F448 /* EXHIBIT_B.pdf */,
+				425CF1671EE6819E0031F448 /* EXHIBIT_B_Austin.pdf */,
+				425CF1641EE656DA0031F448 /* EXHIBIT_B_DallasFortWorth.pdf */,
+				428C75771ED0095D00BB562E /* BaseContract.pdf */,
+				428C75781ED0095D00BB562E /* BaseContract_Austin.pdf */,
+				420B4F981EC598A200C793B6 /* Acknowledgment_of_Environmental.pdf */,
 				426F83F31EAF237D00C099DD /* AddendumA_DallasFortWorth.pdf */,
 				119AA3241E33391000EF8D3C /* AddendumA_Austin.pdf */,
 				119AA3251E33391000EF8D3C /* AddendumA_Austin0.pdf */,
@@ -530,13 +537,9 @@
 				119AA32A1E33391000EF8D3C /* AddendumD.pdf */,
 				119AA32B1E33391000EF8D3C /* AddendumD201609060.pdf */,
 				119AA32C1E33391000EF8D3C /* AddendumE.pdf */,
-				119AA32D1E33391000EF8D3C /* BaseContract_Austin.pdf */,
-				119AA32E1E33391000EF8D3C /* BaseContract.pdf */,
 				119AA32F1E33391000EF8D3C /* BuyersExpect.pdf */,
 				119AA3301E33391000EF8D3C /* DesignCenter.pdf */,
 				119AA3311E33391000EF8D3C /* EXHIBIT_A.pdf */,
-				119AA3321E33391000EF8D3C /* EXHIBIT_B_Austin.pdf */,
-				119AA3331E33391000EF8D3C /* EXHIBIT_B.pdf */,
 				119AA3341E33391000EF8D3C /* EXHIBIT_C_General_Austin.pdf */,
 				119AA3351E33391000EF8D3C /* EXHIBIT_C_General.pdf */,
 				119AA3361E33391000EF8D3C /* FloodaplainAcknowledement.pdf */,
@@ -636,33 +639,34 @@
 				119AA3461E33391000EF8D3C /* AddendumE.pdf in Resources */,
 				119AA3401E33391000EF8D3C /* AddendumA.pdf in Resources */,
 				119AA3551E33391000EF8D3C /* Third_Party_Financing_Addendum_TREC.pdf in Resources */,
-				426F83F61EAF27B600C099DD /* EXHIBIT_B_DallasFortWorth.pdf in Resources */,
+				428C75791ED0095D00BB562E /* BaseContract.pdf in Resources */,
 				119AA34F1E33391000EF8D3C /* EXHIBIT_C_General.pdf in Resources */,
 				119AA3501E33391000EF8D3C /* FloodaplainAcknowledement.pdf in Resources */,
 				119AA3411E33391000EF8D3C /* AddendumA201609060.pdf in Resources */,
-				119AA34C1E33391000EF8D3C /* EXHIBIT_B_Austin.pdf in Resources */,
 				119AA34A1E33391000EF8D3C /* DesignCenter.pdf in Resources */,
 				119AA3491E33391000EF8D3C /* BuyersExpect.pdf in Resources */,
-				119AA3471E33391000EF8D3C /* BaseContract_Austin.pdf in Resources */,
+				428C757A1ED0095D00BB562E /* BaseContract_Austin.pdf in Resources */,
 				119AA3431E33391000EF8D3C /* AddendumC2.pdf in Resources */,
-				119AA3481E33391000EF8D3C /* BaseContract.pdf in Resources */,
 				119AA3441E33391000EF8D3C /* AddendumD.pdf in Resources */,
 				426F83F41EAF237D00C099DD /* AddendumA_DallasFortWorth.pdf in Resources */,
+				425CF1651EE656DA0031F448 /* EXHIBIT_B_DallasFortWorth.pdf in Resources */,
 				119AA34B1E33391000EF8D3C /* EXHIBIT_A.pdf in Resources */,
 				119AA3451E33391000EF8D3C /* AddendumD201609060.pdf in Resources */,
 				119AA3421E33391000EF8D3C /* AddendumC.pdf in Resources */,
 				1108B1BF1BFC2691004B5D48 /* LaunchScreen.storyboard in Resources */,
+				425CF1681EE6819E0031F448 /* EXHIBIT_B.pdf in Resources */,
 				119AA3511E33391000EF8D3C /* Hoa_Checklist.pdf in Resources */,
 				119AA3541E33391000EF8D3C /* INFORMATION_ABOUT_BROKERAGE_SERVICES2.pdf in Resources */,
 				1108B1B71BFC2691004B5D48 /* Main.storyboard in Resources */,
 				119AA33E1E33391000EF8D3C /* AddendumA_Austin.pdf in Resources */,
 				11661D611CC7750A00C974A0 /* Assets.xcassets in Resources */,
-				119AA34D1E33391000EF8D3C /* EXHIBIT_B.pdf in Resources */,
 				119AA3521E33391000EF8D3C /* Hoa_Checklist2.pdf in Resources */,
 				119AA3561E33391000EF8D3C /* trec_36-8.pdf in Resources */,
 				119AA33F1E33391000EF8D3C /* AddendumA_Austin0.pdf in Resources */,
 				119AA3571E33391000EF8D3C /* Warranty_Builder_s.pdf in Resources */,
 				119AA3531E33391000EF8D3C /* INFORMATION_ABOUT_BROKERAGE_SERVICES.pdf in Resources */,
+				425CF1691EE6819E0031F448 /* EXHIBIT_B_Austin.pdf in Resources */,
+				420B4F991EC598A200C793B6 /* Acknowledgment_of_Environmental.pdf in Resources */,
 				119AA34E1E33391000EF8D3C /* EXHIBIT_C_General_Austin.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

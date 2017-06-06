@@ -254,13 +254,6 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
                 cellitem.contractInfo = ddd![indexPath.row]
             }
         }
-        //        if let indexa = tableView.indexPathForSelectedRow{
-        //            if indexa == indexPath{
-        //                cell.contentView.backgroundColor = CConstants.SearchBarBackColor
-        //            }else{
-        //                cell.contentView.backgroundColor = UIColor.whiteColor()
-        //            }
-        //        }
         
         return cell
         
@@ -285,11 +278,31 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
         }
     }
     func GoToPrint(_ modelNm: [String]) {
-        self.filesNms = modelNm
-        //        self.filesNms = ["Addendum C"]
-        //        if modelNm.count == 1 {
-        //            callService(modelNm)
-        //        }else{
+         self.filesNms = modelNm
+//        if let indexPath = (tableView.indexPathForSelectedRow ?? selectRowIndex){
+//            let ddd = self.CiaNmArray?[self.CiaNm?[indexPath.section] ?? ""]
+//            let item: ContractsItem = ddd![indexPath.row]
+//            if (item.idcia == "100" && ((item.idproject ?? "").hasPrefix("214") || (item.idproject ?? "").hasPrefix("205"))) || (item.idcia == "9999"){
+//                var beforeList = ["Sign Contract", "Third Party Financing Addendum", "Information about Brokerage Services", "Addendum A", "Exhibit A", "Exhibit B", "Exhibit C General"];
+//                
+//                
+//                var index : Int?
+//                for i in 0..<beforeList.count {
+//                    index = modelNm.index(of: beforeList[beforeList.count - 1 - i]);
+//                    if (index != nil){
+//                        break
+//                    }
+//                }
+//                if index == nil {
+//                    index = 0
+//                }
+//                self.filesNms!.insert(CConstants.ActionTitleAcknowledgmentOfEnvironmental, at: index!)
+//            }
+//            
+////            print(filesNms);
+//            
+//            
+//        
         if modelNm.contains(CConstants.ActionTitleAddendumC){
             callService(modelNm)
         }else{
@@ -591,11 +604,11 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
             hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             hud?.labelText = CConstants.RequestMsg
         }
-        //       print(a)
+               print(a)
         // april need to change
         Alamofire.request(CConstants.ServerURL + CConstants.LoginServiceURL, method: .post, parameters: a).responseJSON{ (response) -> Void in
             if response.result.isSuccess {
-                //                print(response.result.value)
+                                print(response.result.value)
                 if let rtnValue = response.result.value as? [String: AnyObject]{
                     let rtn = Contract(dicInfo: rtnValue)
                     
