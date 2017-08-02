@@ -23,6 +23,7 @@ import UIKit
         @IBOutlet var buyer2Email: UILabel!
         
         
+        @IBOutlet weak var titlelbl: UILabel!
         
        var delegate : EmailContractToBuyerViewControllerDelegate?
         
@@ -83,6 +84,7 @@ import UIKit
             
             if let info = self.contractInfo {
 //                print(info.bemail1, info.bemail2)
+                titlelbl.text = "Project # \(info.idproject ?? "") ~ \(info.nproject ?? "")"
                 self.buyer1Email.text = (info.client ?? "") + " (" + (info.bemail1 ?? "") + ")"
                 if info.client2 ?? "" != "" {
                     if info.buyer1SignFinishedyn != 1 && info.buyer2SignFinishedyn != 1 && (info.verify_code == "" && info.verify_code2 == "") {

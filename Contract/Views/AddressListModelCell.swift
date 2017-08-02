@@ -14,6 +14,9 @@ class AddressListModelCell: UITableViewCell {
         self.setCellBackColor(highlighted)
     }
     
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var textlbl: UILabel!
+    @IBOutlet weak var photo: UIImageView!
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         self.setCellBackColor(selected)

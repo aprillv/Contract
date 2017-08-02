@@ -608,7 +608,7 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
         // april need to change
         Alamofire.request(CConstants.ServerURL + CConstants.LoginServiceURL, method: .post, parameters: a).responseJSON{ (response) -> Void in
             if response.result.isSuccess {
-                                print(response.result.value)
+//                                print(response.result.value)
                 if let rtnValue = response.result.value as? [String: AnyObject]{
                     let rtn = Contract(dicInfo: rtnValue)
                     

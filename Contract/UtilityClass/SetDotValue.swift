@@ -477,9 +477,16 @@ class SetDotValue : NSObject {
                 case "otherbroker":
                     if let p = pdfInfo?.broker_percent {
                         if !p.contains("0."){
-                        pv.value = "\(p)%"
+                            pv.value = "\(p)%"
                         }
                         
+                    }
+                    if let c = pdfInfo?.page9btsa {
+                        if let b = pv.value {
+                            pv.value = b + c;
+                        }else{
+                            pv.value = "0.00%" + c;
+                        }
                     }
                 case SignContractPDFFields.p9represents:
                     if let radio = pv as? PDFFormButtonField {

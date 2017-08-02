@@ -1042,7 +1042,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         //                hud.mode = .AnnularDeterminate
         hud?.labelText = CConstants.RequestMsg
-        //        print(param, serviceUrl)
+//                print(param, serviceUrl)
         
         
         
@@ -3463,6 +3463,9 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
             }
             //        return
 //                    print(param)
+//            param["buyer2email"] = "xiujun007@gmail.com"
+//            param["buyer1email"] = "xiujun007@gmail.com"
+            print("\(param)");
             //        return
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             //                hud.mode = .AnnularDeterminate
