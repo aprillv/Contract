@@ -3457,15 +3457,15 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                 b2 = " "
             }
             let userInfo = UserDefaults.standard
-            var param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"\(b1email)", "buyer2email":"\(b2email)","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":"","buyer1name":"\(b1)","buyer2name":"\(b2)","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
+            var param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"\(b1email)", "buyer2email":"\(b2email)","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":" ","buyer1name":"\(b1)","buyer2name":"\(b2)","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
             if (self.contractPdfInfo?.idcia ?? "") == "9999" {
                 param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"xiujun_85@163.com", "buyer2email":"april@buildersaccess.com","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":"","buyer1name":"\(b1)","buyer2name":"\(b2)","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
             }
-            //        return
+            
 //                    print(param)
 //            param["buyer2email"] = "xiujun007@gmail.com"
 //            param["buyer1email"] = "xiujun007@gmail.com"
-            print("\(param)");
+//            print("\(param)");
             //        return
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             //                hud.mode = .AnnularDeterminate
@@ -3473,7 +3473,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
             //        print(printModelNm, serviceUrl)
             
             
-            
+//            print(CConstants.ServerURL + "bacontract_SendContractToBuyer.json")
             Alamofire.request(CConstants.ServerURL + "bacontract_SendContractToBuyer.json",
                               method: .post,
                               parameters: param).responseJSON{ (response) -> Void in
