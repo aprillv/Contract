@@ -385,14 +385,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         
         let margins = getMargins()
         
-        //        var pageHeight : CGFloat = CConstants.PdfPageHeight
-        //        if let a  = NSUserDefaults.standardUserDefaults().valueForKey(CConstants.PdfPageMarginUserDefault) as? String{
-        //            if let n = NSNumberFormatter().numberFromString(a) {
-        //                pageHeight = CGFloat(n)
-        //
-        //            }
-        //        }
-        
         documents = [PDFDocument]()
         fileDotsDic = [String : [PDFWidgetAnnotationView]]()
         var allAdditionViews = [PDFWidgetAnnotationView]()
@@ -548,6 +540,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                 
                 
                 fileDotsDic![title] = additionViews
+                
                 
                 allAdditionViews.append( contentsOf: additionViews)
             }
@@ -2665,7 +2658,16 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         if signs == "" {
             return
         }
-        let signa = signs.components(separatedBy: ";").map(){$0.components(separatedBy: "|")}
+//        let signa = signs.components(separatedBy: ";").map(){$0.components(separatedBy: "|")}
+        let n = NSMutableArray();
+        for a in signs.components(separatedBy: ";") {
+            let n1 = NSMutableArray();
+            for b in a.components(separatedBy: "|") {
+                n1.add(b)
+            }
+            n.add(n1)
+        }
+        
         //        print(signa)
         si.frame = si.frame
         //         print(si.frame)
@@ -2685,7 +2687,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         //        if si.xname == "p1EBExhibitbp1sellerInitialSign" {
         //            print(si.xname)
         //        }
-        si.lineArray = si.getNewOriginLine(signa as! NSMutableArray)
+        si.lineArray = si.getNewOriginLine(n)
         si.lineArray = si.getNewOriginLine(si.lineArray as NSMutableArray)
         //        if si.xname == "p1EBbottom2" {
         //            print(si.lineArray)
@@ -3442,16 +3444,16 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
             var b2: String
             var b2email: String
             if hasbuyer1 {
-                b1email = contractPdfInfo?.bemail1 ?? ""
-                b1 = contractPdfInfo?.client ?? ""
+                b1email = contractPdfInfo?.bemail1 ?? " "
+                b1 = contractPdfInfo?.client ?? " "
             }else{
                 b1email = " "
                 b1 = " "
             }
             
             if hasbuyer2 {
-                b2email = contractPdfInfo?.bemail2 ?? ""
-                b2 = contractPdfInfo?.client2 ?? ""
+                b2email = contractPdfInfo?.bemail2 ?? " "
+                b2 = contractPdfInfo?.client2 ?? " "
             }else{
                 b2email = " "
                 b2 = " "
@@ -3459,10 +3461,10 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
             let userInfo = UserDefaults.standard
             var param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"\(b1email)", "buyer2email":"\(b2email)","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":" ","buyer1name":"\(b1)","buyer2name":"\(b2)","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
             if (self.contractPdfInfo?.idcia ?? "") == "9999" {
-                param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"xiujun_85@163.com", "buyer2email":"april@buildersaccess.com","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":"","buyer1name":"\(b1)","buyer2name":"\(b2)","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
+                param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"xiujun007@gmail.com", "buyer2email":"april@buildersaccess.com","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":" ","buyer1name":"\(b1)","buyer2name":"\(b2)","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
             }
             
-//                    print(param)
+                    print(param)
 //            param["buyer2email"] = "xiujun007@gmail.com"
 //            param["buyer1email"] = "xiujun007@gmail.com"
 //            print("\(param)");

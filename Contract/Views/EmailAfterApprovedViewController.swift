@@ -146,6 +146,9 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
         if emailcc1.hasSuffix(",") {
             emailcc1 = emailcc1.replacingOccurrences(of: ",", with: "")
         }
+        if emailcc1 == ""{
+            emailcc1 = " "
+        }
         
         let userInfo = UserDefaults.standard
         

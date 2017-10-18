@@ -357,9 +357,14 @@ class SetDotValue : NSObject {
                 case SignContractPDFFields.tobuyer6:
                     pv.value = tobuyer6
                 case SignContractPDFFields.tobuyer7:
-                    if (pdfInfo?.client2 ?? "") != "" && pdfInfo?.bemail2 != "" && (pdfInfo?.bemail1 ?? "") != (pdfInfo?.bemail2 ?? ""){
+                    if (pdfInfo?.client2 ?? "") != ""
+                        && pdfInfo?.bemail2 != ""
+                        && (pdfInfo?.bemail1 ?? "") != (pdfInfo?.bemail2 ?? ""){
                         pv.value = pdfInfo!.bemail1
                     }
+                case "toseller7":
+                    let userInfo = UserDefaults.standard
+                    pv.value = userInfo.string(forKey: CConstants.UserInfoEmail) ?? ""
                 case "tobuyer72":
                     if (pdfInfo?.client2 ?? "") != "" && pdfInfo?.bemail2 != "" && (pdfInfo?.bemail1 ?? "") != (pdfInfo?.bemail2 ?? ""){
                         pv.value = pdfInfo!.bemail2!
