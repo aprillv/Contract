@@ -444,13 +444,28 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                 
                 filePageCnt += CConstants.PdfFileNameINFORMATION_ABOUT_BROKERAGE_SERVICESPageCount
             case CConstants.ActionTitleAddendumA:
-//                print(contractInfo?.idcity, contractInfo?.isFortworth)
+//                print(contractInfo?.idcity, contractInfo?.isFortworth, contractInfo?.idcia)
                 if contractInfo?.idcity ?? "1" == "3" {
-                    str = CConstants.PdfFileNameAddendumA_austin
+                    if ((contractInfo?.idcia ?? "") == "265") {
+                        str = "AddendumA_Austin_TexasIntownhomes"
+                    }else{
+                        str = CConstants.PdfFileNameAddendumA_austin
+                    }
+                    
                 }else if (contractInfo?.idcity ?? "1" == "2" && (contractInfo?.isFortworth ?? "0") == "1") {
-                    str = "AddendumA_DallasFortWorth"
+                    if ((contractInfo?.idcia ?? "") == "265") {
+                        str = "AddendumA_DallasFortWorth_TexasIntownhomes"
+                        
+                    }else{
+                        str = "AddendumA_DallasFortWorth"
+                    }
+                    
                 }else{
-                    str = CConstants.PdfFileNameAddendumA
+                    if ((contractInfo?.idcia ?? "") == "265") {
+                        str = "AddendumA _TexasIntownhomes"
+                    }else{
+                        str = CConstants.PdfFileNameAddendumA
+                    }
                 }
                 
                 filePageCnt += CConstants.PdfFileNameAddendumAPageCount
@@ -488,7 +503,12 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                 
                 filePageCnt += CConstants.PdfFileNameHoaChecklistPageCount
             case CConstants.ActionTitleWarrantyAcknowledgement:
-                str = CConstants.PdfFileNameWarrantyAcknowledgement
+                if ((contractInfo?.idcia ?? "") == "265") {
+                   str = "Warranty_Builder_s_TexasIntownhomes"
+                }else{
+                   str = CConstants.PdfFileNameWarrantyAcknowledgement
+                }
+                
                 filePageCnt += CConstants.PdfFileNameWarrantyAcknowledgementPageCount
                 
             case CConstants.ActionTitleAddendumD:
@@ -498,22 +518,46 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                 str = CConstants.PdfFileNameAddendumE
                 filePageCnt += CConstants.PdfFileNameAddendumEPageCount
             case CConstants.ActionTitleEXHIBIT_A:
-                str = CConstants.PdfFileNameEXHIBIT_A
+                if ((contractInfo?.idcia ?? "") == "265") {
+                    str = "EXHIBIT_A_TexasIntownhomes"
+                }else{
+                    str = CConstants.PdfFileNameEXHIBIT_A
+                }
                 filePageCnt += CConstants.PdfFileNameEXHIBIT_APageCount
             case CConstants.ActionTitleEXHIBIT_B:
                 if contractInfo?.idcity ?? "1" == "3" {
-                    str = CConstants.PdfFileNameEXHIBIT_B_austin
+                    if ((contractInfo?.idcia ?? "") == "265") {
+                        str = "EXHIBIT_B_Austin_TexasIntownhomes"
+                    }else{
+                        str = CConstants.PdfFileNameEXHIBIT_B_austin
+                    }
                 }else if (contractInfo?.idcity ?? "1" == "2" && (contractInfo?.isFortworth ?? "0") == "1") {
-                    str = "EXHIBIT_B_DallasFortWorth"
+                    if ((contractInfo?.idcia ?? "") == "265") {
+                        str = "EXHIBIT_B_DallasFortWorth_TexasIntownhomes"
+                    }else{
+                        str = "EXHIBIT_B_DallasFortWorth"
+                    }
                 }else{
-                    str = CConstants.PdfFileNameEXHIBIT_B
+                    if ((contractInfo?.idcia ?? "") == "265") {
+                        str = "EXHIBIT_B_TexasIntownhomes"
+                    }else{
+                       str = CConstants.PdfFileNameEXHIBIT_B
+                    }
                 }
                 filePageCnt += CConstants.PdfFileNameEXHIBIT_BPageCount
             case CConstants.ActionTitleEXHIBIT_C:
                 if contractInfo?.idcity ?? "1" == "3" {
-                    str = CConstants.PdfFileNameEXHIBIT_C_austin
+                    if ((contractInfo?.idcia ?? "") == "265") {
+                        str = "EXHIBIT_C_General_Austin_TexasIntownhomes"
+                    }else{
+                        str = CConstants.PdfFileNameEXHIBIT_C_austin
+                    }
                 }else{
-                    str = CConstants.PdfFileNameEXHIBIT_C
+                    if ((contractInfo?.idcia ?? "") == "265") {
+                        str = "EXHIBIT_C_General_TexasIntownhomes"
+                    }else{
+                       str = CConstants.PdfFileNameEXHIBIT_C
+                    }
                 }
                 filePageCnt += CConstants.PdfFileNameEXHIBIT_CPageCount
             case CConstants.ActionTitleClosingMemo:
@@ -1856,6 +1900,44 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         return nameArray
     }
     override func saveToServer() {
+//    print(self.contractPdfInfo!)
+//        let  buyerSign =  isbuyer1 ? tlpdf.pdfBuyer1SignatureFields : tlpdf.pdfBuyer2SignatureFields
+//        for (x, f) in buyerSign {
+//            if f.contains(sign?.xname ?? "") && (sign?.xname ?? "") != "p1EBExhibitbp1sellerInitialSign" {
+//
+//                //                    self.PopMsgWithJustOK(msg: "There is a filed need sign in \(x) document.")
+//
+//                let alert: UIAlertController = UIAlertController(title: CConstants.MsgTitle, message: "There is a filed need to be signed in \(x) document. Go to that field?", preferredStyle: .alert)
+//
+//                //Create and add the OK action
+//                let oKAction: UIAlertAction = UIAlertAction(title: CConstants.MsgOKTitle, style: .default)  { Void in
+//
+//                    if let cg0 = sign?.center {
+//                        var cg = cg0
+//                        cg.x = 0
+//                        cg.y = cg.y - self.view.frame.height/2
+//                        if cg.y ?? 0 > 0 {
+//                            self.pdfView?.pdfView.scrollView.setContentOffset(cg, animated: false)
+//                        }
+//                    }
+//
+//
+//                }
+//                alert.addAction(oKAction)
+//
+//                let cancel: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel){ Void in
+//
+//                }
+//                alert.addAction(cancel)
+//
+//
+//
+//                //Present the AlertController
+//                self.present(alert, animated: true, completion: nil)
+//
+//            }
+//        }
+        
         saveToServer1(0)
     }
     func saveToServer1(_ xtype: Int8) {
@@ -3461,7 +3543,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
             let userInfo = UserDefaults.standard
             var param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"\(b1email)", "buyer2email":"\(b2email)","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":" ","buyer1name":"\(b1)","buyer2name":"\(b2)","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
             if (self.contractPdfInfo?.idcia ?? "") == "9999" {
-                param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"xiujun007@gmail.com", "buyer2email":"april@buildersaccess.com","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":" ","buyer1name":"\(b1)","buyer2name":"\(b2)","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
+                param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"aprillv@yahoo.com", "buyer2email":"april@buildersaccess.com","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":" ","buyer1name":"\(b1)","buyer2name":"\(b2)","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
             }
             
                     print(param)
@@ -3547,7 +3629,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                         //                        print(a.xname)
                         return (false, a)
                     }
-                    
                 }
             }
         }
