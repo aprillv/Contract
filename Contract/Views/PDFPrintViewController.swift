@@ -1,4 +1,4 @@
-//
+ //
 //  PDFPrintViewController.swift
 //  Contract
 //
@@ -462,7 +462,12 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                     
                 }else{
                     if ((contractInfo?.idcia ?? "") == "265") {
-                        str = "AddendumA _TexasIntownhomes"
+                        if ((contractInfo?.idproject ?? "").hasPrefix("108")){
+                            str = "AddendumA_TexasIntownhomes_CongressandShelby"
+                        }else{
+                            str = "AddendumA_TexasIntownhomes"
+                        }
+                        
                     }else{
                         str = CConstants.PdfFileNameAddendumA
                     }
