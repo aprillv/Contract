@@ -146,8 +146,8 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                             tool.setAddendumADots(info, additionViews: dots)
                         case CConstants.ActionTitleEXHIBIT_A:
                             tool.setExhibitADots(info, additionViews: dots)
-                        case CConstants.ActionTitleEXHIBIT_B:
-                            tool.setExhibitBDots(info, additionViews: dots)
+//                        case CConstants.ActionTitleEXHIBIT_B:
+//                            tool.setExhibitBDots(info, additionViews: dots)
                         case CConstants.ActionTitleEXHIBIT_C:
                             //                            print(dots)
                             tool.setExhibitCDots(info, additionViews: dots)
@@ -445,38 +445,47 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                 filePageCnt += CConstants.PdfFileNameINFORMATION_ABOUT_BROKERAGE_SERVICESPageCount
             case CConstants.ActionTitleAddendumA:
 //                print(contractInfo?.idcity, contractInfo?.isFortworth, contractInfo?.idcia)
+//                if contractInfo?.idcity ?? "1" == "3" {
+//                    if ((contractInfo?.idcia ?? "") == "265") {
+//                        str = "AddendumA_Austin_TexasIntownhomes"
+//                    }else{
+//                        str = CConstants.PdfFileNameAddendumA_austin
+//                    }
+//
+//                }else if (contractInfo?.idcity ?? "1" == "2" && (contractInfo?.isFortworth ?? "0") == "1") {
+//                    if ((contractInfo?.idcia ?? "") == "265") {
+//                        str = "AddendumA_DallasFortWorth_TexasIntownhomes"
+//
+//                    }else{
+//                        str = "AddendumA_DallasFortWorth"
+//                    }
+//
+//                }else{
+//                    if ((contractInfo?.idcia ?? "") == "265") {
+//                        if ((contractInfo?.idproject ?? "").hasPrefix("108")){
+//                            str = "AddendumA_TexasIntownhomes_CongressandShelby"
+//                        }else{
+//                            str = "AddendumA_TexasIntownhomes"
+//                        }
+//
+//                    }else{
+//                        str = CConstants.PdfFileNameAddendumA
+//                    }
+//                }
+//                print(contractInfo?.idcity ?? "april")
                 if contractInfo?.idcity ?? "1" == "3" {
-                    if ((contractInfo?.idcia ?? "") == "265") {
-                        str = "AddendumA_Austin_TexasIntownhomes"
-                    }else{
-                        str = CConstants.PdfFileNameAddendumA_austin
-                    }
-                    
-                }else if (contractInfo?.idcity ?? "1" == "2" && (contractInfo?.isFortworth ?? "0") == "1") {
-                    if ((contractInfo?.idcia ?? "") == "265") {
-                        str = "AddendumA_DallasFortWorth_TexasIntownhomes"
-                        
-                    }else{
-                        str = "AddendumA_DallasFortWorth"
-                    }
-                    
+                    str = CConstants.PdfFileNameAddendumA_austin
                 }else{
-                    if ((contractInfo?.idcia ?? "") == "265") {
-                        if ((contractInfo?.idproject ?? "").hasPrefix("108")){
-                            str = "AddendumA_TexasIntownhomes_CongressandShelby"
-                        }else{
-                            str = "AddendumA_TexasIntownhomes"
-                        }
-                        
-                    }else{
-                        str = CConstants.PdfFileNameAddendumA
-                    }
+                  str = CConstants.PdfFileNameAddendumA
                 }
                 
                 filePageCnt += CConstants.PdfFileNameAddendumAPageCount
             case CConstants.ActionTitleAcknowledgmentOfEnvironmental:
                 str = CConstants.PdfFileNameAcknowledgmentOfEnvironmental
                 filePageCnt += 2
+            case CConstants.ActionTitleEnvironmentalNotice:
+                str = CConstants.PdfFileNameEnvironmentalNotice
+                filePageCnt += 3
             case CConstants.ActionTitleAddendumHOA:
                 str = CConstants.PdfFileNameAddendumHOA
                 filePageCnt += CConstants.PdfFileNameAddendumHoaPageCount
@@ -529,27 +538,27 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                     str = CConstants.PdfFileNameEXHIBIT_A
                 }
                 filePageCnt += CConstants.PdfFileNameEXHIBIT_APageCount
-            case CConstants.ActionTitleEXHIBIT_B:
-                if contractInfo?.idcity ?? "1" == "3" {
-                    if ((contractInfo?.idcia ?? "") == "265") {
-                        str = "EXHIBIT_B_Austin_TexasIntownhomes"
-                    }else{
-                        str = CConstants.PdfFileNameEXHIBIT_B_austin
-                    }
-                }else if (contractInfo?.idcity ?? "1" == "2" && (contractInfo?.isFortworth ?? "0") == "1") {
-                    if ((contractInfo?.idcia ?? "") == "265") {
-                        str = "EXHIBIT_B_DallasFortWorth_TexasIntownhomes"
-                    }else{
-                        str = "EXHIBIT_B_DallasFortWorth"
-                    }
-                }else{
-                    if ((contractInfo?.idcia ?? "") == "265") {
-                        str = "EXHIBIT_B_TexasIntownhomes"
-                    }else{
-                       str = CConstants.PdfFileNameEXHIBIT_B
-                    }
-                }
-                filePageCnt += CConstants.PdfFileNameEXHIBIT_BPageCount
+//            case CConstants.ActionTitleEXHIBIT_B:
+//                if contractInfo?.idcity ?? "1" == "3" {
+//                    if ((contractInfo?.idcia ?? "") == "265") {
+//                        str = "EXHIBIT_B_Austin_TexasIntownhomes"
+//                    }else{
+//                        str = CConstants.PdfFileNameEXHIBIT_B_austin
+//                    }
+//                }else if (contractInfo?.idcity ?? "1" == "2" && (contractInfo?.isFortworth ?? "0") == "1") {
+//                    if ((contractInfo?.idcia ?? "") == "265") {
+//                        str = "EXHIBIT_B_DallasFortWorth_TexasIntownhomes"
+//                    }else{
+//                        str = "EXHIBIT_B_DallasFortWorth"
+//                    }
+//                }else{
+//                    if ((contractInfo?.idcia ?? "") == "265") {
+//                        str = "EXHIBIT_B_TexasIntownhomes"
+//                    }else{
+//                       str = CConstants.PdfFileNameEXHIBIT_B
+//                    }
+//                }
+//                filePageCnt += CConstants.PdfFileNameEXHIBIT_BPageCount
             case CConstants.ActionTitleEXHIBIT_C:
                 if contractInfo?.idcity ?? "1" == "3" {
                     if ((contractInfo?.idcia ?? "") == "265") {
@@ -1023,8 +1032,8 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                 switch filesArray![0]{
                 case CConstants.ActionTitleAddendumC:
                     self.pageChanged( 6)
-                case CConstants.ActionTitleEXHIBIT_B:
-                    self.pageChanged( 3)
+//                case CConstants.ActionTitleEXHIBIT_B:
+//                    self.pageChanged( 3)
                 case CConstants.ActionTitleINFORMATION_ABOUT_BROKERAGE_SERVICES,
                      CConstants.ActionTitleAddendumD,
                      CConstants.ActionTitleAddendumE,
@@ -1963,6 +1972,9 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         pdfname.append(CConstants.ActionTitleEXHIBIT_A)
         pdfname.append(CConstants.ActionTitleEXHIBIT_B)
         pdfname.append(CConstants.ActionTitleEXHIBIT_C)
+//         if (self.contractPdfInfo?.idcia == "100" && ((self.contractPdfInfo?.idproject ?? "").hasPrefix("214") || (self.contractPdfInfo?.idproject ?? "").hasPrefix("205"))) || (self.contractPdfInfo?.idcia == "9999"){
+//        pdfname.append(CConstants.ActionTitleAcknowledgmentOfEnvironmental)
+//        }
         pdfname.append(CConstants.ActionTitleBuyersExpect)
         pdfname.append(CConstants.ActionTitleAddendumC)
         pdfname.append(CConstants.ActionTitleAddendumD)
@@ -1973,7 +1985,12 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         pdfname.append(CConstants.ActionTitleHoaChecklist)
         pdfname.append(CConstants.ActionTitleAddendumHOA)
         
-        let cntArray = [9, 2, 2, 6, 1, 1, 3, 5, 2, 2, 2, 1, 2, 1, 3, 1]
+        var cntArray = [9, 2, 2, 6, 1,1, 3, 5, 2, 2, 2, 1, 2, 1, 3, 1]
+//         if (self.contractPdfInfo?.idcia == "100" && ((self.contractPdfInfo?.idproject ?? "").hasPrefix("214") || (self.contractPdfInfo?.idproject ?? "").hasPrefix("205"))) || (self.contractPdfInfo?.idcia == "9999"){
+//         cntArray = [9, 2, 2, 6, 1, 3, 3, 5, 2, 2, 2, 1, 2, 1, 3, 1]
+//
+//
+//        }
         
         var b1iynArray : [[String]]
         var b2iynArray : [[String]]
@@ -3209,7 +3226,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         }
         
         let fileBase64String = savedPdfData?.base64EncodedString(options: NSData.Base64EncodingOptions.endLineWithLineFeed)
-        
+//        print(fileBase64String)
         parame["username"] = UserDefaults.standard.value(forKey: CConstants.LoggedUserNameKey) as? String ?? ""
 //        print(parame)
         parame["file"] = fileBase64String
@@ -3218,12 +3235,12 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
             hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         }
         hud?.labelText = CConstants.SavedMsg
-        //            print(parame)
+//                    print(parame)
         
-        
+        print(CConstants.ServerURL + CConstants.ContractUploadPdfURL)
         Alamofire.request(CConstants.ServerURL + CConstants.ContractUploadPdfURL, method: .post,
                           parameters: parame).responseJSON{ (response) -> Void in
-                            //                    print(response.result.value)
+                                                print(response.result.value)
                             if response.result.isSuccess {
                                 if let rtnValue = response.result.value as? [String: String]{
                                     if rtnValue["status"] == "success" {

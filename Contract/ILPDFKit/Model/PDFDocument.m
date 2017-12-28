@@ -358,7 +358,7 @@ static void renderPage1(NSUInteger page, CGContextRef ctx, CGPDFDocumentRef doc,
         NSArray *addedviews = doc.addedviewss;
         
         for (NSUInteger page = 1; page <= [doc numberOfPages]; page++) {
-//            if (!addedviews || addedviews.count == 0){
+//            if (dcnt == 6){
 //                renderPage(page, ctx, doc.document, doc.forms);
 //            }else{
 //                NSLog(@"%@", addedviews);

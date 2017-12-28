@@ -283,7 +283,7 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
 //            let ddd = self.CiaNmArray?[self.CiaNm?[indexPath.section] ?? ""]
 //            let item: ContractsItem = ddd![indexPath.row]
 //            if (item.idcia == "100" && ((item.idproject ?? "").hasPrefix("214") || (item.idproject ?? "").hasPrefix("205"))) || (item.idcia == "9999"){
-//                var beforeList = ["Sign Contract", "Third Party Financing Addendum", "Information about Brokerage Services", "Addendum A", "Exhibit A", "Exhibit B", "Exhibit C General"];
+//                var beforeList = ["Sign Contract", "Third Party Financing Addendum", "Information about Brokerage Services", "Addendum A", "Exhibit A", "Exhibit B", "Exhibit B General"];
 //                
 //                
 //                var index : Int?

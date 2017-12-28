@@ -61,7 +61,7 @@ struct CConstants{
     static let SegueToAddressModelPopover : String = "Address switch"
     static let SegueToOperationsPopover : String = "Show Operations"
     
-    static let Administrator = "roberto@buildersaccess.com"
+    static let Administrator = "roberto1@buildersaccess.com"
     
     static let LoggedUserNameKey : String = "LoggedUserNameInDefaults"
     static let InstallAppLink : String = "itms-services://?action=download-manifest&url=https://www.buildersaccess.com/iphone/contract.plist"
@@ -113,6 +113,7 @@ struct CConstants{
     static let PdfFileNameWarrantyAcknowledgement = "Warranty_Builder_s"
     static let PdfFileNameAddendumHOA = "trec_36-8"
     static let PdfFileNameAcknowledgmentOfEnvironmental = "Acknowledgment_of_Environmental"
+    static let PdfFileNameEnvironmentalNotice = "Fannin_Environment_Disclosure"
     
     static let PdfPageHeight : CGFloat = 976.688235
 //    static let PdfPageMarginUserDefault = "pageHMargin"
@@ -162,7 +163,7 @@ struct CConstants{
     static let ActionTitleThirdPartyFinancingAddendum : String = "Third Party Financing Addendum"
     static let ActionTitleEXHIBIT_A : String = "Exhibit A"
     static let ActionTitleEXHIBIT_B : String = "Exhibit B"
-    static let ActionTitleEXHIBIT_C : String = "Exhibit C General"
+    static let ActionTitleEXHIBIT_C : String = "Exhibit B General"
 //    static let ActionTitleINFORMATION_ABOUT_BROKERAGE_SERVICES = "Information about brokerage services"
     static let ActionTitleINFORMATION_ABOUT_BROKERAGE_SERVICES = "Information about Brokerage Services"
     static let ActionTitleAddendumHOA : String = "Addendum for Property Subject to HOA"
@@ -173,6 +174,7 @@ struct CConstants{
     static let ActionTitleHoaChecklist : String = "HOA Checklist"
     static let ActionTitleWarrantyAcknowledgement : String = "Warranty Acknowledgement"
     static let ActionTitleAcknowledgmentOfEnvironmental = "Acknowledgment of Environmental"
+    static let ActionTitleEnvironmentalNotice = "Environmental Notice"
     static let ApplicationColor  = UIColor(red: 0, green: 164/255.0, blue: 236/255.0, alpha: 1)
     static let SearchBarBackColor = UIColor(red: 238/255.0, green: 238/255.0, blue: 238/255.0, alpha: 1)
     static let ApplicationBarFontName  =  "Futura"

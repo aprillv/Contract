@@ -1527,23 +1527,23 @@ class SetDotValue : NSObject {
     }
     
     func setExhibitBDots(_ pdfInfo: AddendumA?, additionViews: [PDFWidgetAnnotationView]){
-        for pv : PDFWidgetAnnotationView in additionViews{
-            switch pv.xname {
-            case ExhibitBPDFFields.To:
-                pv.value = pdfInfo?.Client!
-            case ExhibitBPDFFields.Property:
-                pv.value = pdfInfo?.nproject!
-            case ExhibitBPDFFields.CompanyName:
-                pv.value = pdfInfo?.CompanyName!
-            case ExhibitBPDFFields.adate:
-                pv.value = pdfInfo?.approvedate ?? ""
-            default:
-                break
-            }
-        }
+//        for pv : PDFWidgetAnnotationView in additionViews{
+//            switch pv.xname {
+//            case ExhibitBPDFFields.To:
+//                pv.value = pdfInfo?.Client!
+//            case ExhibitBPDFFields.Property:
+//                pv.value = pdfInfo?.nproject!
+//            case ExhibitBPDFFields.CompanyName:
+//                pv.value = pdfInfo?.CompanyName!
+//            case ExhibitBPDFFields.adate:
+//                pv.value = pdfInfo?.approvedate ?? ""
+//            default:
+//                break
+//            }
+//        }
     }
     
-    // MARK: Exhibit C
+    // MARK: Exhibit B General
     fileprivate struct ExhibitCPDFFields{
         static let GeneralPartner = "GeneralPartner"
         static let CompanyName = "CompanyName"

@@ -99,10 +99,9 @@
 		11EDB0CA1D151ACB0070BE3E /* EmailContractToBuyerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EDB0C91D151ACB0070BE3E /* EmailContractToBuyerViewController.swift */; };
 		11EEF03B1CCF5679006422ED /* SignatrureFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF03A1CCF5679006422ED /* SignatrureFields.swift */; };
 		11EEF03F1CCF6145006422ED /* toolpdf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EEF03E1CCF6145006422ED /* toolpdf.swift */; };
+		420792F21FF4760C004A085A /* AddendumA.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 420792F01FF4760C004A085A /* AddendumA.pdf */; };
+		420792F31FF4760C004A085A /* AddendumA_Austin.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 420792F11FF4760C004A085A /* AddendumA_Austin.pdf */; };
 		420B4F991EC598A200C793B6 /* Acknowledgment_of_Environmental.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 420B4F981EC598A200C793B6 /* Acknowledgment_of_Environmental.pdf */; };
-		421C336A1FA053E500FAA60A /* AddendumA_DallasFortWorth_TexasIntownhomes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 421C33611FA053E300FAA60A /* AddendumA_DallasFortWorth_TexasIntownhomes.pdf */; };
-		421C336E1FA053E500FAA60A /* AddendumA_Austin_TexasIntownhomes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 421C33651FA053E400FAA60A /* AddendumA_Austin_TexasIntownhomes.pdf */; };
-		421C336F1FA053E500FAA60A /* AddendumA _TexasIntownhomes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 421C33661FA053E500FAA60A /* AddendumA _TexasIntownhomes.pdf */; };
 		421C33731FA05B1A00FAA60A /* EXHIBIT_C_General_Austin_TexasIntownhomes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 421C33721FA05B1900FAA60A /* EXHIBIT_C_General_Austin_TexasIntownhomes.pdf */; };
 		421C33781FA0605100FAA60A /* EXHIBIT_B_Austin_TexasIntownhomes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 421C33741FA0604F00FAA60A /* EXHIBIT_B_Austin_TexasIntownhomes.pdf */; };
 		421C33791FA0605100FAA60A /* EXHIBIT_A_TexasIntownhomes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 421C33751FA0605000FAA60A /* EXHIBIT_A_TexasIntownhomes.pdf */; };
@@ -111,13 +110,12 @@
 		421C337D1FA0637200FAA60A /* EXHIBIT_C_General_TexasIntownhomes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 421C337C1FA0637100FAA60A /* EXHIBIT_C_General_TexasIntownhomes.pdf */; };
 		421C33851FA0840D00FAA60A /* Warranty_Builder_s_TexasIntownhomes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 421C33841FA0840D00FAA60A /* Warranty_Builder_s_TexasIntownhomes.pdf */; };
 		4221110E1F8EF1850061B8E4 /* BaseContract.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4221110D1F8EF1820061B8E4 /* BaseContract.pdf */; };
+		4236AFEF1FA6CB4600D228C5 /* AddendumA_TexasIntownhomes_CongressandShelby.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4236AFEE1FA6CB4600D228C5 /* AddendumA_TexasIntownhomes_CongressandShelby.pdf */; };
 		425CF1651EE656DA0031F448 /* EXHIBIT_B_DallasFortWorth.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 425CF1641EE656DA0031F448 /* EXHIBIT_B_DallasFortWorth.pdf */; };
 		425CF1681EE6819E0031F448 /* EXHIBIT_B.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 425CF1661EE6819E0031F448 /* EXHIBIT_B.pdf */; };
 		425CF1691EE6819E0031F448 /* EXHIBIT_B_Austin.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 425CF1671EE6819E0031F448 /* EXHIBIT_B_Austin.pdf */; };
-		427A4ED71F96DA0B008113E8 /* AddendumA_Austin.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 427A4ED41F96DA09008113E8 /* AddendumA_Austin.pdf */; };
-		427A4ED81F96DA0B008113E8 /* AddendumA_DallasFortWorth.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 427A4ED51F96DA0A008113E8 /* AddendumA_DallasFortWorth.pdf */; };
-		427A4ED91F96DA0B008113E8 /* AddendumA.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 427A4ED61F96DA0B008113E8 /* AddendumA.pdf */; };
 		428C757A1ED0095D00BB562E /* BaseContract_Austin.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 428C75781ED0095D00BB562E /* BaseContract_Austin.pdf */; };
+		429955071FED072C00AAC11A /* Fannin_Environment_Disclosure.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 429955061FED072C00AAC11A /* Fannin_Environment_Disclosure.pdf */; };
 		640AC2494E0AC9F5E5CA743E /* Pods_Contract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F18C19584528B1717CD718 /* Pods_Contract.framework */; };
 /* End PBXBuildFile section */
 
@@ -262,10 +260,9 @@
 		11EEF03A1CCF5679006422ED /* SignatrureFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignatrureFields.swift; sourceTree = "<group>"; };
 		11EEF03E1CCF6145006422ED /* toolpdf.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = toolpdf.swift; sourceTree = "<group>"; };
 		22F18C19584528B1717CD718 /* Pods_Contract.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Contract.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		420792F01FF4760C004A085A /* AddendumA.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumA.pdf; sourceTree = "<group>"; };
+		420792F11FF4760C004A085A /* AddendumA_Austin.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumA_Austin.pdf; sourceTree = "<group>"; };
 		420B4F981EC598A200C793B6 /* Acknowledgment_of_Environmental.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Acknowledgment_of_Environmental.pdf; sourceTree = "<group>"; };
-		421C33611FA053E300FAA60A /* AddendumA_DallasFortWorth_TexasIntownhomes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumA_DallasFortWorth_TexasIntownhomes.pdf; sourceTree = "<group>"; };
-		421C33651FA053E400FAA60A /* AddendumA_Austin_TexasIntownhomes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumA_Austin_TexasIntownhomes.pdf; sourceTree = "<group>"; };
-		421C33661FA053E500FAA60A /* AddendumA _TexasIntownhomes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AddendumA _TexasIntownhomes.pdf"; sourceTree = "<group>"; };
 		421C33721FA05B1900FAA60A /* EXHIBIT_C_General_Austin_TexasIntownhomes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_C_General_Austin_TexasIntownhomes.pdf; sourceTree = "<group>"; };
 		421C33741FA0604F00FAA60A /* EXHIBIT_B_Austin_TexasIntownhomes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_B_Austin_TexasIntownhomes.pdf; sourceTree = "<group>"; };
 		421C33751FA0605000FAA60A /* EXHIBIT_A_TexasIntownhomes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_A_TexasIntownhomes.pdf; sourceTree = "<group>"; };
@@ -274,13 +271,12 @@
 		421C337C1FA0637100FAA60A /* EXHIBIT_C_General_TexasIntownhomes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_C_General_TexasIntownhomes.pdf; sourceTree = "<group>"; };
 		421C33841FA0840D00FAA60A /* Warranty_Builder_s_TexasIntownhomes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Warranty_Builder_s_TexasIntownhomes.pdf; path = ../../../../Downloads/Warranty_Builder_s_TexasIntownhomes.pdf; sourceTree = "<group>"; };
 		4221110D1F8EF1820061B8E4 /* BaseContract.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BaseContract.pdf; sourceTree = "<group>"; };
+		4236AFEE1FA6CB4600D228C5 /* AddendumA_TexasIntownhomes_CongressandShelby.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumA_TexasIntownhomes_CongressandShelby.pdf; sourceTree = "<group>"; };
 		425CF1641EE656DA0031F448 /* EXHIBIT_B_DallasFortWorth.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_B_DallasFortWorth.pdf; sourceTree = "<group>"; };
 		425CF1661EE6819E0031F448 /* EXHIBIT_B.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_B.pdf; sourceTree = "<group>"; };
 		425CF1671EE6819E0031F448 /* EXHIBIT_B_Austin.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = EXHIBIT_B_Austin.pdf; sourceTree = "<group>"; };
-		427A4ED41F96DA09008113E8 /* AddendumA_Austin.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumA_Austin.pdf; sourceTree = "<group>"; };
-		427A4ED51F96DA0A008113E8 /* AddendumA_DallasFortWorth.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumA_DallasFortWorth.pdf; sourceTree = "<group>"; };
-		427A4ED61F96DA0B008113E8 /* AddendumA.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumA.pdf; sourceTree = "<group>"; };
 		428C75781ED0095D00BB562E /* BaseContract_Austin.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BaseContract_Austin.pdf; sourceTree = "<group>"; };
+		429955061FED072C00AAC11A /* Fannin_Environment_Disclosure.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Fannin_Environment_Disclosure.pdf; sourceTree = "<group>"; };
 		8FD0FE342786EA5417C6A9FD /* Pods-Contract.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Contract.release.xcconfig"; path = "Pods/Target Support Files/Pods-Contract/Pods-Contract.release.xcconfig"; sourceTree = "<group>"; };
 		AB0FE999F8EB22254D6D15D8 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E423097CA2371A0B4502711B /* Pods-Contract.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Contract.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Contract/Pods-Contract.debug.xcconfig"; sourceTree = "<group>"; };
@@ -535,6 +531,10 @@
 		119AA3231E3338EE00EF8D3C /* pdf */ = {
 			isa = PBXGroup;
 			children = (
+				420792F11FF4760C004A085A /* AddendumA_Austin.pdf */,
+				420792F01FF4760C004A085A /* AddendumA.pdf */,
+				429955061FED072C00AAC11A /* Fannin_Environment_Disclosure.pdf */,
+				4236AFEE1FA6CB4600D228C5 /* AddendumA_TexasIntownhomes_CongressandShelby.pdf */,
 				421C33841FA0840D00FAA60A /* Warranty_Builder_s_TexasIntownhomes.pdf */,
 				421C337C1FA0637100FAA60A /* EXHIBIT_C_General_TexasIntownhomes.pdf */,
 				421C33751FA0605000FAA60A /* EXHIBIT_A_TexasIntownhomes.pdf */,
@@ -542,12 +542,6 @@
 				421C33761FA0605000FAA60A /* EXHIBIT_B_DallasFortWorth_TexasIntownhomes.pdf */,
 				421C33771FA0605000FAA60A /* EXHIBIT_B_TexasIntownhomes.pdf */,
 				421C33721FA05B1900FAA60A /* EXHIBIT_C_General_Austin_TexasIntownhomes.pdf */,
-				421C33661FA053E500FAA60A /* AddendumA _TexasIntownhomes.pdf */,
-				421C33651FA053E400FAA60A /* AddendumA_Austin_TexasIntownhomes.pdf */,
-				421C33611FA053E300FAA60A /* AddendumA_DallasFortWorth_TexasIntownhomes.pdf */,
-				427A4ED41F96DA09008113E8 /* AddendumA_Austin.pdf */,
-				427A4ED51F96DA0A008113E8 /* AddendumA_DallasFortWorth.pdf */,
-				427A4ED61F96DA0B008113E8 /* AddendumA.pdf */,
 				4221110D1F8EF1820061B8E4 /* BaseContract.pdf */,
 				425CF1661EE6819E0031F448 /* EXHIBIT_B.pdf */,
 				425CF1671EE6819E0031F448 /* EXHIBIT_B_Austin.pdf */,
@@ -657,25 +651,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				427A4ED81F96DA0B008113E8 /* AddendumA_DallasFortWorth.pdf in Resources */,
 				119AA3461E33391000EF8D3C /* AddendumE.pdf in Resources */,
 				119AA3551E33391000EF8D3C /* Third_Party_Financing_Addendum_TREC.pdf in Resources */,
-				427A4ED91F96DA0B008113E8 /* AddendumA.pdf in Resources */,
+				420792F31FF4760C004A085A /* AddendumA_Austin.pdf in Resources */,
 				119AA34F1E33391000EF8D3C /* EXHIBIT_C_General.pdf in Resources */,
 				119AA3501E33391000EF8D3C /* FloodaplainAcknowledement.pdf in Resources */,
 				119AA34A1E33391000EF8D3C /* DesignCenter.pdf in Resources */,
+				420792F21FF4760C004A085A /* AddendumA.pdf in Resources */,
 				421C33791FA0605100FAA60A /* EXHIBIT_A_TexasIntownhomes.pdf in Resources */,
+				4236AFEF1FA6CB4600D228C5 /* AddendumA_TexasIntownhomes_CongressandShelby.pdf in Resources */,
 				119AA3491E33391000EF8D3C /* BuyersExpect.pdf in Resources */,
 				421C337A1FA0605100FAA60A /* EXHIBIT_B_DallasFortWorth_TexasIntownhomes.pdf in Resources */,
 				428C757A1ED0095D00BB562E /* BaseContract_Austin.pdf in Resources */,
-				421C336A1FA053E500FAA60A /* AddendumA_DallasFortWorth_TexasIntownhomes.pdf in Resources */,
 				119AA3431E33391000EF8D3C /* AddendumC2.pdf in Resources */,
-				421C336F1FA053E500FAA60A /* AddendumA _TexasIntownhomes.pdf in Resources */,
 				421C33851FA0840D00FAA60A /* Warranty_Builder_s_TexasIntownhomes.pdf in Resources */,
 				119AA3441E33391000EF8D3C /* AddendumD.pdf in Resources */,
 				425CF1651EE656DA0031F448 /* EXHIBIT_B_DallasFortWorth.pdf in Resources */,
 				119AA34B1E33391000EF8D3C /* EXHIBIT_A.pdf in Resources */,
-				427A4ED71F96DA0B008113E8 /* AddendumA_Austin.pdf in Resources */,
 				119AA3421E33391000EF8D3C /* AddendumC.pdf in Resources */,
 				421C337D1FA0637200FAA60A /* EXHIBIT_C_General_TexasIntownhomes.pdf in Resources */,
 				1108B1BF1BFC2691004B5D48 /* LaunchScreen.storyboard in Resources */,
@@ -683,7 +675,6 @@
 				421C33731FA05B1A00FAA60A /* EXHIBIT_C_General_Austin_TexasIntownhomes.pdf in Resources */,
 				119AA3511E33391000EF8D3C /* Hoa_Checklist.pdf in Resources */,
 				119AA3541E33391000EF8D3C /* INFORMATION_ABOUT_BROKERAGE_SERVICES2.pdf in Resources */,
-				421C336E1FA053E500FAA60A /* AddendumA_Austin_TexasIntownhomes.pdf in Resources */,
 				421C337B1FA0605100FAA60A /* EXHIBIT_B_TexasIntownhomes.pdf in Resources */,
 				421C33781FA0605100FAA60A /* EXHIBIT_B_Austin_TexasIntownhomes.pdf in Resources */,
 				1108B1B71BFC2691004B5D48 /* Main.storyboard in Resources */,
@@ -695,6 +686,7 @@
 				119AA3531E33391000EF8D3C /* INFORMATION_ABOUT_BROKERAGE_SERVICES.pdf in Resources */,
 				425CF1691EE6819E0031F448 /* EXHIBIT_B_Austin.pdf in Resources */,
 				420B4F991EC598A200C793B6 /* Acknowledgment_of_Environmental.pdf in Resources */,
+				429955071FED072C00AAC11A /* Fannin_Environment_Disclosure.pdf in Resources */,
 				119AA34E1E33391000EF8D3C /* EXHIBIT_C_General_Austin.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

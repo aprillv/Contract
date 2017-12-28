@@ -76,7 +76,7 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
         , CConstants.ActionTitleINFORMATION_ABOUT_BROKERAGE_SERVICES
         , CConstants.ActionTitleAddendumA
         , CConstants.ActionTitleEXHIBIT_A
-        , CConstants.ActionTitleEXHIBIT_B
+//        , CConstants.ActionTitleEXHIBIT_B
         , CConstants.ActionTitleEXHIBIT_C
     ]
     
@@ -170,8 +170,8 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
                 selected?.append(projectInfo?.printList?.contains(4) ?? true)
             case CConstants.ActionTitleEXHIBIT_A:
                 selected?.append(projectInfo?.printList?.contains(5) ?? true)
-            case CConstants.ActionTitleEXHIBIT_B:
-                selected?.append(projectInfo?.printList?.contains(6) ?? true)
+//            case CConstants.ActionTitleEXHIBIT_B:
+//                selected?.append(projectInfo?.printList?.contains(6) ?? true)
             case CConstants.ActionTitleEXHIBIT_C:
                 selected?.append(projectInfo?.printList?.contains(7) ?? true)
             case CConstants.ActionTitleBuyersExpect:
@@ -351,27 +351,48 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
                         if let delegate1 = self.delegate {
                             
                             let item = self.projectInfo
-                            if (item?.idcia == "100" && ((item?.idproject ?? "").hasPrefix("214") || (item?.idproject ?? "").hasPrefix("205"))) || (item?.idcia == "9999"){
+                            if (item?.idcia == "100" && ((item?.idproject ?? "").hasPrefix("214") || (item?.idproject ?? "").hasPrefix("205"))){
+                                var beforeList = ["Sign Contract", "Third Party Financing Addendum", "Information about Brokerage Services", "Addendum A", "Exhibit A", "Exhibit B General"];
                                 
-                                if (item?.idcia == "100" && ((item?.idproject ?? "").hasPrefix("214") || (item?.idproject ?? "").hasPrefix("205"))) || (item?.idcia == "9999"){
-                                    var beforeList = ["Sign Contract", "Third Party Financing Addendum", "Information about Brokerage Services", "Addendum A", "Exhibit A", "Exhibit B", "Exhibit C General"];
-                                    
-                                    
-                                    var index : Int?
-                                    for i in 0..<beforeList.count {
-                                        index = filesNames.index(of: beforeList[beforeList.count - 1 - i]);
-                                        if (index != nil){
-                                            break
-                                        }
+                                
+                                var index : Int?
+                                for i in 0..<beforeList.count {
+                                    index = filesNames.index(of: beforeList[beforeList.count - 1 - i]);
+                                    if (index != nil){
+                                        break
                                     }
-                                    if index == nil {
-                                        index = 0
+                                }
+                                if index == nil {
+                                    index = 0
+                                }else{
+                                    if (index! + 1) < filesNames.count {
+                                        index = index! + 1
                                     }
-                                    filesNames.insert(CConstants.ActionTitleAcknowledgmentOfEnvironmental, at: index!)
                                 }
                                 
+                                filesNames.insert(CConstants.ActionTitleAcknowledgmentOfEnvironmental, at: index!)
+                            }else if (item?.idcia == "101" && (item?.idproject ?? "").hasPrefix("117") || item?.idcia == "9999"){
+                                var beforeList = ["Sign Contract", "Third Party Financing Addendum", "Information about Brokerage Services", "Addendum A", "Exhibit A", "Exhibit B General"];
                                 
+                                
+                                var index : Int?
+                                for i in 0..<beforeList.count {
+                                    index = filesNames.index(of: beforeList[beforeList.count - 1 - i]);
+                                    if (index != nil){
+                                        break
+                                    
+                                    }
+                                }
+                                if index == nil {
+                                    index = 0
+                                }else{
+                                    if (index! + 1) < filesNames.count {
+                                        index = index! + 1
+                                    }
+                                }
+                                filesNames.insert(CConstants.ActionTitleEnvironmentalNotice, at: index!)
                             }
+                            
                             delegate1.GoToPrint(filesNames)
                             if self.projectInfo?.status ?? "" != "" && self.canEdit {
                                 self.UpdatePrintedFileList(filesNames)
@@ -409,12 +430,14 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
                 printedList.append("4")
             case CConstants.ActionTitleEXHIBIT_A:
                 printedList.append("5")
-            case CConstants.ActionTitleEXHIBIT_B:
-                printedList.append("6")
+//            case CConstants.ActionTitleEXHIBIT_B:
+//                printedList.append("6")
             case CConstants.ActionTitleEXHIBIT_C:
                 printedList.append("7")
             case CConstants.ActionTitleAcknowledgmentOfEnvironmental:
                 printedList.append("20")
+            case CConstants.ActionTitleEnvironmentalNotice:
+                printedList.append("19")
             case CConstants.ActionTitleBuyersExpect:
                 printedList.append("8")
             case CConstants.ActionTitleAddendumC:

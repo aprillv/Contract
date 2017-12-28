@@ -272,7 +272,7 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
                                 array.append("Exhibit B")
                                  arrayCnt.append(1)
                             case 7:
-                                array.append("Exhibit C General")
+                                array.append("Exhibit B General")
                                  arrayCnt.append(3)
                             case 8:
                                 array.append("Buyers Expect")
