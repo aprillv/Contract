@@ -36,6 +36,7 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
         }
         
     }
+    
     @IBOutlet var errorLbl: UILabel!
     @IBOutlet var reloadBtn: UIButton!
     @IBOutlet var webview: UIWebView!{
@@ -108,10 +109,17 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
                         }
                         emailList.append("phalycak@kirbytitle.com")
                         emailList.append("heatherb@kirbytitle.com")
-                        
-                        controller.xemailList = emailList
+                        if let realtorEmail = contrat.realtoremail {
+                            if realtorEmail != "" {
+                                emailList.append(realtorEmail)
+                            }
+                        }
                         let userInfo = UserDefaults.standard
                         let email = userInfo.value(forKey: CConstants.UserInfoEmail) as? String
+                        emailList.append(email ?? "")
+                        
+                        controller.xemailList = emailList
+                        
                         
                         controller.xemailcc = email ?? ""
                         controller.xdes = "This is the contract of your new house."
@@ -166,7 +174,7 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
                 , "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
         }
         
-        print(param)
+//        print(param)
          hud = MBProgressHUD.showAdded(to: webview, animated: true)
         //                hud.mode = .AnnularDeterminate
         hud?.labelText = "Sending Email..."

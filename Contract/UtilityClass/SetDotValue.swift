@@ -1354,7 +1354,27 @@ class SetDotValue : NSObject {
                 pv.value = pdfInfo?.stage!
                 
             case DesignCenterPDFFields.txtMaxHourEdit:
-                pv.value = ""
+                if pdfInfo?.dcChkMaster! == 0
+                && pdfInfo?.dcChkMasterCountertop! == 0
+                && pdfInfo?.dcChkSecond! == 0
+                && pdfInfo?.dcChkPowder! == 0
+                && pdfInfo?.dcChkWood! == 0
+                && pdfInfo?.dcChkKitchenCountertop! == 0
+                && pdfInfo?.dcChkMasterBath! == 0
+                && pdfInfo?.dcChk2ndBath! == 0
+                && pdfInfo?.dcChkEntryFloor! == 0
+                && pdfInfo?.dcChkCarpet! == 0
+                && pdfInfo?.dcChkKitchenBacksplash! == 0
+                && pdfInfo?.dcChkUtility! == 0
+                && pdfInfo?.dcChkInterior! == 0
+                && pdfInfo?.dcChkPlumbing! == 0
+                && pdfInfo?.dcChkHandware! == 0
+                {
+                    pv.value = "n/a"
+                }else{
+                    pv.value = "2"
+                }
+                
                 //Checkbox
             case DesignCenterPDFFields.txtBuyer1:
                 pv.value = pdfInfo?.buyer1!

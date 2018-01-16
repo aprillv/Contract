@@ -208,7 +208,7 @@
         
         font = [UIFont fontWithName:@"Verdana-Bold" size: _baseFontSize];
         [_textFieldOrTextView performSelector:@selector(setFont:) withObject:font];
-    }else if([self.xname isEqualToString:@"txtMaxHourEdit"]){
+    }else if([self.xname isEqualToString:@" Edit"]){
         _textFieldOrTextView.userInteractionEnabled = YES;
     }
     

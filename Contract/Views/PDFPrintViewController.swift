@@ -3001,11 +3001,17 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                         }
                         emailList.append("phalycak@kirbytitle.com")
                         emailList.append("heatherb@kirbytitle.com")
+                        if let realtorEmail = self.contractPdfInfo?.page9AssociatesEmailAddress {
+                            if realtorEmail != "" {
+                                emailList.append(realtorEmail)
+                            }
+                        }
                         
-                        controller.xemailList = emailList
+                        
                         let userInfo = UserDefaults.standard
                         let email = userInfo.value(forKey: CConstants.UserInfoEmail) as? String
-                        
+                        emailList.append(email ?? "")
+                        controller.xemailList = emailList
                         controller.xemailcc = email ?? ""
                         controller.xdes = "This is the contract of your new house."
                     }
@@ -3237,10 +3243,10 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         hud?.labelText = CConstants.SavedMsg
 //                    print(parame)
         
-        print(CConstants.ServerURL + CConstants.ContractUploadPdfURL)
+//        print(CConstants.ServerURL + CConstants.ContractUploadPdfURL)
         Alamofire.request(CConstants.ServerURL + CConstants.ContractUploadPdfURL, method: .post,
                           parameters: parame).responseJSON{ (response) -> Void in
-                                                print(response.result.value)
+//                                                print(response.result.value)
                             if response.result.isSuccess {
                                 if let rtnValue = response.result.value as? [String: String]{
                                     if rtnValue["status"] == "success" {
