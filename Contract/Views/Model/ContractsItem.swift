@@ -39,4 +39,6 @@ class ContractsItem: ContractObject {
     var realtoremail: String?
     
     var printList: [Int]?
+    
+    
 }

@@ -249,6 +249,108 @@ import Foundation
 
 class toolpdf: NSObject {
     
+    let pdfSpringDaleBuyer1SignatureFields = [
+                            "p1buyer1Sign",
+                           "p2bottom1",
+                           "p3bottom1",
+                           "p4bottom1",
+                           "p5bottom1",
+                           "p6bottom1",
+                           "p7bottom1",
+                           "p8bottom1",
+                           "p9bottom1",
+                           "p10bottom1",
+                           "p11bottom1",
+                           "p12bottom1",
+                           "p13bottom1",
+                           "p14bottom1",
+                           "p15bottom1",
+                           "p16bottom1",
+                           "p17bottom1",
+                           "p18bottom1",
+                           "p19bottom1",
+                           "p20buyer1Sign",
+                           "p20bottom1",
+                           "p21bottom1",
+                           "p22bottom1",
+                           "p23bottom1",
+                           "p24buyer1Sign",
+                           "p24bottom1",
+                           "p25bottom1",
+                           "p26bottom1",
+                           "p27buyer1Sign",
+                           "p27bottom1",
+                           "p28bottom1",
+                           "p29bottom1",
+                           "p30bottom1"]
+    
+    let pdfSpringDaleBuyer2SignatureFields = [
+        "p1buyer2Sign",
+        "p2bottom2",
+        "p3bottom2",
+        "p4bottom2",
+        "p5bottom2",
+        "p6bottom2",
+        "p7bottom2",
+        "p8bottom2",
+        "p9bottom2",
+        "p10bottom2",
+        "p11bottom2",
+        "p12bottom2",
+        "p13bottom2",
+        "p14bottom2",
+        "p15bottom2",
+        "p16bottom2",
+        "p17bottom2",
+        "p18bottom2",
+        "p19bottom2",
+        "p20buyer2Sign",
+        "p20bottom2",
+        "p21bottom2",
+        "p22bottom2",
+        "p23bottom2",
+        "p24buyer2Sign",
+        "p24bottom2",
+        "p25bottom2",
+        "p26bottom2",
+        "p27buyer2Sign",
+        "p27bottom2",
+        "p28bottom2",
+        "p29bottom2",
+        "p30bottom2"]
+    
+    let pdfSpringDaleSeller1SignatureFields = [
+        "p2bottom3",
+        "p3bottom3",
+        "p4bottom3",
+        "p5bottom3",
+        "p6bottom3",
+        "p7bottom3",
+        "p8bottom3",
+        "p9bottom3",
+        "p10bottom3",
+        "p11bottom3",
+        "p12bottom3",
+        "p13bottom3",
+        "p14bottom3",
+        "p15bottom3",
+        "p16bottom3",
+        "p17bottom3",
+        "p18bottom3",
+        "p19bottom3",
+        "p20bottom3",
+        "p21bottom3",
+        "p22bottom3",
+        "p23bottom3",
+        "p24bottom3",
+        "p25bottom3",
+        "p26bottom3",
+        "p27sellerSign",
+        "p27bottom3",
+        "p28bottom3",
+        "p29bottom3",
+        "p30bottom3"]
+    
     let pdfBuyer1SignatureFields = [
 //    ,
 //    "p1EBExhibitbp1sellerInitialSign"
@@ -749,20 +851,20 @@ let pdfBuyer2SignatureFields = [
     "p1ACbuyer2Sign",
     "p1ACseller1Sign"]]
     
-     func isBuyer2Sign(_ sign : SignatureView) -> Bool{
-        for (_, h) in self.pdfBuyer2SignatureFields {
+   
+     func isBuyer1Sign(_ sign : SignatureView) -> Bool{
+        if sign.xname == "p1EBExhibitbp1sellerInitialSign" {
+            return true
+        }
+        for (_, h) in self.pdfBuyer1SignatureFields {
             if h.contains(sign.xname) {
                 return true
             }
         }
         return false
     }
-    
-     func isBuyer1Sign(_ sign : SignatureView) -> Bool{
-        if sign.xname == "p1EBExhibitbp1sellerInitialSign" {
-            return true
-        }
-        for (_, h) in self.pdfBuyer1SignatureFields {
+    func isBuyer2Sign(_ sign : SignatureView) -> Bool{
+        for (_, h) in self.pdfBuyer2SignatureFields {
             if h.contains(sign.xname) {
                 return true
             }

@@ -95,12 +95,8 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
             let a = userinfo.integer(forKey: CConstants.ShowFilter)
             if a == 1 {
                 showHomeOwnerSign()
-                //                self.AddressList = self.AddressListOrigin?.filter(){
-                //                    return $0.status!.containsString("iPad Sign") || $0.status!.containsString("Email Sign")}
             }else if a == 2 {
                 showSalesSign()
-                //                self.AddressList = self.AddressListOrigin?.filter(){
-                //                    return !($0.status!.containsString("iPad Sign") || $0.status!.containsString("Email Sign"))}
             }else if a == 3 {
                 showReCreate()
             }else{
@@ -241,9 +237,6 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
                 
             }
             
-            
-            
-            
         }else{
             cell = tableView.dequeueReusableCell(withIdentifier: constants.DraftCellIdentifier, for: indexPath)
             //            cell.separatorInset = UIEdgeInsetsZero
@@ -279,36 +272,13 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
     }
     func GoToPrint(_ modelNm: [String]) {
          self.filesNms = modelNm
-//        if let indexPath = (tableView.indexPathForSelectedRow ?? selectRowIndex){
-//            let ddd = self.CiaNmArray?[self.CiaNm?[indexPath.section] ?? ""]
-//            let item: ContractsItem = ddd![indexPath.row]
-//            if (item.idcia == "100" && ((item.idproject ?? "").hasPrefix("214") || (item.idproject ?? "").hasPrefix("205"))) || (item.idcia == "9999"){
-//                var beforeList = ["Sign Contract", "Third Party Financing Addendum", "Information about Brokerage Services", "Addendum A", "Exhibit A", "Exhibit B", "Exhibit B General"];
-//                
-//                
-//                var index : Int?
-//                for i in 0..<beforeList.count {
-//                    index = modelNm.index(of: beforeList[beforeList.count - 1 - i]);
-//                    if (index != nil){
-//                        break
-//                    }
-//                }
-//                if index == nil {
-//                    index = 0
-//                }
-//                self.filesNms!.insert(CConstants.ActionTitleAcknowledgmentOfEnvironmental, at: index!)
-//            }
-//            
-////            print(filesNms);
-//            
-//            
-//        
         if modelNm.contains(CConstants.ActionTitleAddendumC){
             callService(modelNm)
         }else{
+            
+
             self.performSegue(withIdentifier: CConstants.SegueToPrintPdf, sender: modelNm)
         }
-        //        }
         
         
         
@@ -436,18 +406,31 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
         
         userInfo.set(self.tableView.tag == 2, forKey: CConstants.UserInfoIsContract)
         if self.tableView.tag == 2 {
-            if (contract?.status ?? "") == CConstants.ApprovedStatus && !(contract?.signfinishdate ?? "").contains("1980"){
-                if (userInfo.string(forKey: CConstants.UserInfoEmail) ?? "").lowercased() == CConstants.Administrator {
-                    GetPrintedFileList(contract)
+            let ddd = self.CiaNmArray?[self.CiaNm?[indexPath.section] ?? ""]
+            let item: ContractsItem = ddd![indexPath.row]
+//            if true {
+            if item.idcia == "9999" || item.idcia == "386" && item.idproject!.hasPrefix("210") {
+                self.performSegue(withIdentifier: "springdale", sender: item)
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            }else {
+                if (contract?.status ?? "") == CConstants.ApprovedStatus && !(contract?.signfinishdate ?? "").contains("1980"){
+                    if (userInfo.string(forKey: CConstants.UserInfoEmail) ?? "").lowercased() == CConstants.Administrator {
+                        GetPrintedFileList(contract)
+                    }else{
+                        self.performSegue(withIdentifier: "showSendEmailAfterAprroved1", sender: contract)
+                    }
+                    
                 }else{
-                    self.performSegue(withIdentifier: "showSendEmailAfterAprroved1", sender: contract)
+                    GetPrintedFileList(contract)
                 }
-                
-            }else{
-                GetPrintedFileList(contract)
             }
             
+            
+            
         }else{
+            //            springdale
+            
+            
             contract?.printList = nil
             self.performSegue(withIdentifier: CConstants.SegueToPrintModel, sender: contract)
         }
@@ -490,21 +473,7 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
                 }
                 break
             case "showFilter":
-                //                self.detailsPopover = [[self storyboard] instantiateViewControllerWithIdentifier:@"identifierName"];
-                //
-                //                //... config code for the popover
-                //
-                //                UIPopoverController *pc = [[UIPopoverController alloc] initWithContentViewController:detailsPopover];
-                //
-                //                //... store popover view controller in an ivar
-                //
-                //                [self.annotationPopoverController presentPopoverFromRect:selectedAnnotationView.bounds inView:selectedAnnotationView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-                
-                
-                //                let p = UIStoryboard(name: "Main").instantiateViewControllerWithIdentifier(identifier: "FilterViewController")
-                //
-                //                let pc = UIPopoverController(contentViewController: p)
-                //                self.navigationController?.presentViewController(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+               
                 
                 if let controller = segue.destination as? FilterViewController {
                     controller.delegate1 = self
@@ -513,7 +482,26 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
                     
                 }
                 break
+            case "springdale":
+                if let controller = segue.destination as? SpringDalePDFViewController {
+                    if let item = sender as? ContractsItem {
+                        item.approvedate = "01/01/1980"
+                        item.approveMonthdate = "01 Jun 80"
+                        let info = ContractPDFBaseModel(dicInfo: nil);
+                        info.idcia = item.idcia;
+                        info.idcity = item.idcity;
+                        info.idnumber = item.idnumber;
+                        info.idproject = item.idproject;
+                        info.nproject = item.nproject;
+                        info.code = item.code;
+                        controller.pdfInfo0 = info
+                        controller.filesArray = ["springdale"]
+                        controller.contractInfo = item
+                    }
+                    
+                }
             case CConstants.SegueToPrintPdf:
+//                SpringDalePDFViewController
                 if let controller = segue.destination as? PDFPrintViewController {
                     if let indexPath = (tableView.indexPathForSelectedRow ?? selectRowIndex){
                         let ddd = self.CiaNmArray?[self.CiaNm?[indexPath.section] ?? ""]

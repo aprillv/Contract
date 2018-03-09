@@ -16,7 +16,8 @@ import UIKit
 
     class EmailContractToBuyerViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
         
-        var contractInfo : ContractSignature?
+        var contractInfo : ContractBasicInfo?
+        
         @IBOutlet var buyer1Btn: UIButton!
         @IBOutlet var buyer2Btn: UIButton!
         @IBOutlet var buyer1Email: UILabel!
@@ -82,6 +83,7 @@ import UIKit
         override func viewDidLoad() {
             super.viewDidLoad()
             
+            
             if let info = self.contractInfo {
 //                print(info.bemail1, info.bemail2)
                 titlelbl.text = "Project # \(info.idproject ?? "") ~ \(info.nproject ?? "")"
@@ -112,7 +114,7 @@ import UIKit
                     
                     
                 }else{
-                self.topDistance.constant = 11
+                    self.topDistance.constant = 11
                     self.buyer2Email.isHidden  = true
                     self.buyer2Btn.isHidden = true
                     self.view.updateConstraints()

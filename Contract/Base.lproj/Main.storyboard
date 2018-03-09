@@ -406,13 +406,14 @@
                         <segue destination="6dt-qR-fh6" kind="presentation" identifier="printModel" modalTransitionStyle="coverVertical" id="HW8-IB-Dz2"/>
                         <segue destination="LV9-aA-wQE" kind="show" identifier="tofile" id="H6H-vv-SnI"/>
                         <segue destination="Rb0-rG-x1l" kind="show" identifier="showSendEmailAfterAprroved1" id="OP4-Gf-h3Z"/>
+                        <segue destination="THu-c9-Tnv" kind="show" identifier="springdale" id="0vA-RK-X1J"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="akO-Zu-3HL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2621" y="-1119"/>
         </scene>
-        <!--Files-->
+        <!--PDF-->
         <scene sceneID="22G-ff-vdT">
             <objects>
                 <viewController storyboardIdentifier="PDFPrintViewController" id="LV9-aA-wQE" customClass="PDFPrintViewController" customModule="Contract" customModuleProvider="target" sceneMemberID="viewController">
@@ -442,7 +443,7 @@
                         <barButtonItem enabled="NO" title="Copyright © 2016 All Rights Reserved" id="OR3-b6-PaK"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="jrx-yM-zrA"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Files" id="2JW-Am-K0b">
+                    <navigationItem key="navigationItem" title="PDF" id="2JW-Am-K0b">
                         <leftBarButtonItems>
                             <barButtonItem image="back" id="bw7-Ks-uq5">
                                 <connections>
@@ -498,7 +499,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cql-0G-MsS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3879" y="-1261"/>
+            <point key="canvasLocation" x="3641" y="-1213"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ugg-Z2-cHQ">
@@ -806,7 +807,7 @@
                                                 <rect key="frame" x="0.0" y="10" width="500" height="34"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="byd-0o-br8">
-                                                        <rect key="frame" x="449" y="-3" width="38" height="32"/>
+                                                        <rect key="frame" x="449" y="-3.5" width="38" height="32"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                                         <state key="normal" title="Close">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1103,7 +1104,7 @@
                                                 <rect key="frame" x="0.0" y="10" width="500" height="34"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8CH-JO-3Wx">
-                                                        <rect key="frame" x="449" y="-3" width="38" height="32"/>
+                                                        <rect key="frame" x="449" y="-2.5" width="38" height="32"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                                         <state key="normal" title="Close">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1656,7 +1657,7 @@
                                                 <rect key="frame" x="0.0" y="10" width="500" height="34"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QoM-uu-OK3">
-                                                        <rect key="frame" x="449" y="-2.5" width="38" height="32"/>
+                                                        <rect key="frame" x="449" y="-3" width="38" height="32"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                                         <state key="normal" title="Close">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1882,6 +1883,134 @@
             </objects>
             <point key="canvasLocation" x="3642" y="-1496"/>
         </scene>
+        <!--SpringdalePDF-->
+        <scene sceneID="QOZ-CT-hWG">
+            <objects>
+                <viewController storyboardIdentifier="SpringDalePDFViewController" id="THu-c9-Tnv" customClass="SpringDalePDFViewController" customModule="Contract" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zfW-xa-Nln"/>
+                        <viewControllerLayoutGuide type="bottom" id="QLl-ia-QBh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="c02-w7-2S2">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uyg-vG-D6I">
+                                <rect key="frame" x="0.0" y="64" width="768" height="916"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="QLl-ia-QBh" firstAttribute="top" secondItem="Uyg-vG-D6I" secondAttribute="bottom" id="7n3-e0-Fw0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Uyg-vG-D6I" secondAttribute="trailing" constant="-20" id="NZc-xG-Rob"/>
+                            <constraint firstItem="Uyg-vG-D6I" firstAttribute="top" secondItem="zfW-xa-Nln" secondAttribute="bottom" id="Omb-z0-Fcf"/>
+                            <constraint firstItem="Uyg-vG-D6I" firstAttribute="leading" secondItem="c02-w7-2S2" secondAttribute="leadingMargin" constant="-20" id="eIg-WS-wKC"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="4qo-hL-cdZ"/>
+                        <barButtonItem enabled="NO" title="Copyright © 2016 All Rights Reserved" id="N8n-kE-dFD"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="8r8-sx-iAP"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="SpringdalePDF" id="QgZ-o3-PpT">
+                        <leftBarButtonItems>
+                            <barButtonItem image="back" id="ejT-Tg-32K">
+                                <connections>
+                                    <action selector="goBack:" destination="THu-c9-Tnv" id="mFr-BC-wn6"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="1" title="Next B-1" id="WDu-4r-tYF">
+                                <connections>
+                                    <action selector="skiptoNext:" destination="THu-c9-Tnv" id="bWv-F3-ACm"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="2" title="Next B-2" id="wuy-ho-hYn">
+                                <connections>
+                                    <action selector="skiptoNext:" destination="THu-c9-Tnv" id="JQi-H7-SD2"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <rightBarButtonItems>
+                            <barButtonItem image="send" id="HEu-Uh-zr0">
+                                <connections>
+                                    <segue destination="f0l-Tr-nDo" kind="popoverPresentation" identifier="showoperations" popoverAnchorBarButtonItem="HEu-Uh-zr0" id="l5i-xj-NsZ">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="send_file" id="6HQ-kY-gSG">
+                                <connections>
+                                    <segue destination="5u8-cl-4Jn" kind="popoverPresentation" identifier="springfilelist" popoverAnchorBarButtonItem="6HQ-kY-gSG" id="PRx-vS-yyY">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="4" title="Re-Create PDF" id="EKr-RC-V8y">
+                                <connections>
+                                    <action selector="SellerSign:" destination="THu-c9-Tnv" id="90t-3b-5M1"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="768" height="1024"/>
+                    <connections>
+                        <outlet property="copyrightlbl" destination="N8n-kE-dFD" id="Q9r-5G-GDA"/>
+                        <outlet property="seller2Item" destination="EKr-RC-V8y" id="1BG-0w-qZp"/>
+                        <outlet property="sendItem" destination="HEu-Uh-zr0" id="9up-Ki-OUw"/>
+                        <outlet property="view2" destination="Uyg-vG-D6I" id="6cd-AW-jju"/>
+                        <segue destination="gjO-y6-k7V" kind="presentation" identifier="springdalechangetoemail" id="I9K-Mw-ko1"/>
+                        <segue destination="iOr-Kf-xa2" kind="presentation" identifier="showSubmit" id="yzX-Cz-Kkd"/>
+                        <segue destination="Rb0-rG-x1l" kind="show" identifier="showSendEmail" id="eeY-km-cJ4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A9K-Qz-jeb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3069" y="374"/>
+        </scene>
+        <!--Spring Dale Operations View Controller-->
+        <scene sceneID="WA6-98-rO9">
+            <objects>
+                <viewController id="f0l-Tr-nDo" customClass="SpringDaleOperationsViewController" customModule="Contract" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jiu-TY-rMw"/>
+                        <viewControllerLayoutGuide type="bottom" id="wJo-6d-8Aa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MGV-KC-Spk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Mia-Qb-Oo6">
+                                <rect key="frame" x="0.0" y="0.0" width="260" height="800"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="operationCellIdentifier" id="397-Bz-2Ac">
+                                        <rect key="frame" x="0.0" y="28" width="260" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="397-Bz-2Ac" id="Y56-Zu-fMW">
+                                            <rect key="frame" x="0.0" y="0.0" width="260" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="f0l-Tr-nDo" id="OOm-IO-Gqz"/>
+                                    <outlet property="delegate" destination="f0l-Tr-nDo" id="JKS-8Y-MuB"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Mia-Qb-Oo6" id="ZNm-ZN-afv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UQB-PM-XLp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4331" y="-2125"/>
+        </scene>
     </scenes>
     <resources>
         <image name="add" width="36" height="36"/>
@@ -1894,7 +2023,10 @@
         <image name="send_file" width="24" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="piF-a3-pSe"/>
-        <segue reference="Mt6-87-XR6"/>
+        <segue reference="I9K-Mw-ko1"/>
+        <segue reference="eeY-km-cJ4"/>
+        <segue reference="PRx-vS-yyY"/>
+        <segue reference="zgu-UJ-igY"/>
+        <segue reference="yzX-Cz-Kkd"/>
     </inferredMetricsTieBreakers>
 </document>

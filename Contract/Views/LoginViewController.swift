@@ -160,6 +160,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             CConstants.ServerURL + CConstants.CheckUpdateServiceURL, method: .post,
             parameters: parameter).responseJSON{ (response) -> Void in
             if response.result.isSuccess {
+//                print(response.result.value)
                 if let rtnValue = response.result.value as? NSNumber{
                     if rtnValue.intValue == 1 {
                         self.disAblePageControl()

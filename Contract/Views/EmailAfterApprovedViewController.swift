@@ -162,10 +162,22 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
         
         var param = ["idcontract": contractInfo?.idnumber ?? "", "EmailTo":email1,"EmailCc":emailcc1,"Subject":"\(contractInfo!.nproject!)'s Contract","Body":msg,"idcia":contractInfo?.idcia ?? "","idproject":contractInfo?.idproject ?? "", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
         
+//        if contractInfo?.idcia == "9999" {
+//            param = ["idcontract":contractInfo?.idnumber ?? ""
+//                , "EmailTo": "april@buildersaccess.com"
+//                , "EmailCc": "xiujun_85@163.com"
+//                , "Subject":"\(contractInfo!.nproject!)'s Contract"
+//                , "Body":msg
+//                , "idcia":contractInfo?.idcia ?? ""
+//                , "idproject":contractInfo?.idproject ?? ""
+//                , "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? ""
+//                , "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
+//        }
+        
         if contractInfo?.idcia == "9999" {
             param = ["idcontract":contractInfo?.idnumber ?? ""
-                , "EmailTo": "april@buildersaccess.com"
-                , "EmailCc": "xiujun_85@163.com"
+                , "EmailTo": "aprillv@yahoo.com"
+                , "EmailCc": "xiujun007@gmail.com"
                 , "Subject":"\(contractInfo!.nproject!)'s Contract"
                 , "Body":msg
                 , "idcia":contractInfo?.idcia ?? ""
@@ -174,7 +186,7 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
                 , "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
         }
         
-//        print(param)
+        print(param)
          hud = MBProgressHUD.showAdded(to: webview, animated: true)
         //                hud.mode = .AnnularDeterminate
         hud?.labelText = "Sending Email..."

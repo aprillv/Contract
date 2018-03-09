@@ -15,3 +15,4 @@ class Contract: ContractObject {
     var username: String?
     var contracts: [ContractsItem]?
 }
+

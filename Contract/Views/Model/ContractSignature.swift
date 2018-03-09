@@ -8,22 +8,18 @@
 
 import Foundation
 
-class ContractSignature: ContractPDFBaseModel {
+class ContractSignature: ContractBasicInfo {
     var cianame: String?
-    var client: String?
     var lot: String?
     var block: String?
     var section: String?
     var cityname: String?
     var country: String?
     var sold: String?
-    var client2: String?
     var bmobile1: String?
     var bmobile2: String?
     var bfax1: String?
     var bfax2: String?
-    var bemail1: String?
-    var bemail2: String?
     var base64pdf: String?
     var found: String?
     var message: String?
@@ -84,10 +80,7 @@ class ContractSignature: ContractPDFBaseModel {
     var approvedate : String?
     var approveMonthdate : String?
     
-    var verify_code : String?
-    var verify_code2 : String?
-    var buyer1SignFinishedyn : NSNumber?
-    var buyer2SignFinishedyn : NSNumber?
+  
     var isFortworth : String?
     
     

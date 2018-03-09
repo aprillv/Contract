@@ -96,12 +96,9 @@
             ((UITextField *)_textFieldOrTextView).autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged:) name:UITextFieldTextDidChangeNotification object:_textFieldOrTextView];
         }
-        
-        
-        
         _textFieldOrTextView.opaque = NO;
         _textFieldOrTextView.backgroundColor = [UIColor clearColor];
-        _baseFontSize = [PDFWidgetAnnotationView fontSizeForRect:frame value:nil multiline:multiline choice:NO font:@"Verdana"];
+        _baseFontSize = [PDFWidgetAnnotationView fontSizeForRect:frame value:nil multiline:multiline choice:NO font:@"Helvetica"];
         
         _currentFontSize = _baseFontSize;
         self.xname = xname;
@@ -114,7 +111,7 @@
 //            NSLog(@"%@ %@ %f %f", self.xname, self.value, _currentFontSize, _baseFontSize);
 //        }
         
-        UIFont *font = [UIFont fontWithName:@"Verdana" size: _baseFontSize];
+        UIFont *font = [UIFont fontWithName:@"Helvetica" size: _baseFontSize];
         
         
         [_textFieldOrTextView performSelector:@selector(setFont:) withObject:font];
@@ -238,6 +235,8 @@
     UIFont *font;
     if ([self.xname isEqualToString:@"txtDesignDate"]) {
         font = [UIFont fontWithName:@"Verdana-Bold" size:_currentFontSize = (_baseFontSize*zoom)];
+    }else if([self.xname hasPrefix: @"SpecialProvision"]){
+        font = [UIFont fontWithName:@"Helvetica" size:_currentFontSize = (_baseFontSize*zoom)];
     }else{
         font = [UIFont fontWithName:@"Verdana" size:_currentFontSize = (_baseFontSize*zoom)];
     }

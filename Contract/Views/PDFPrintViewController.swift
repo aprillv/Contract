@@ -35,7 +35,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 
-class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFViewDelegate, SubmitForApproveViewControllerDelegate, SaveAndEmailViewControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, GoToFileDelegate, EmailContractToBuyerViewControllerDelegate{
+class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, SubmitForApproveViewControllerDelegate, SaveAndEmailViewControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, GoToFileDelegate, EmailContractToBuyerViewControllerDelegate{
     @IBOutlet var copyrightlbl: UIBarButtonItem!{
         didSet{
             let currentDate = Date()
@@ -611,7 +611,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         //        let a = NSDate()
         //        print(NSDate())
         pdfView = PDFView(frame: view2.bounds, dataOrPathArray: filesNames, additionViews: allAdditionViews)
-        pdfView?.delegate = self
+        
         //        sendItem.im
         //        sendItem.title = "\(a) == \(NSDate())"
         //        print(self.document?.forms)
@@ -1093,9 +1093,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         //                hud.mode = .AnnularDeterminate
         hud?.labelText = CConstants.RequestMsg
-//                print(param, serviceUrl)
-        
-        
         
                 Alamofire.request((CConstants.ServerURL + serviceUrl!),
                                   method: .post,
@@ -2512,6 +2509,8 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
             serviceURL = "bacontract_GetAcknowledgmentOfEnvironmentalSignedContract.json"
             
             }
+        
+        
         Alamofire.request(CConstants.ServerURL + serviceURL, method: .post,
                           parameters: ["idcontract1" : self.contractInfo!.idnumber!]).responseJSON{ (response) -> Void in
                             //                hud.hide(true)
@@ -2558,6 +2557,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                                         self.initial_s1 = rtn.initial_s1
                                         self.signature_s1 = rtn.signature_s1
                                         
+//                                        print(rtn.initial_index)
                                         if rtn.initial_index == "" {
                                             let exhibitB = ["0"]
                                             var hoapage1 = [String]()
@@ -2701,7 +2701,26 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                                                             if l == sign.xname {
                                                                 ab = true
                                                                 if self.initial_b1! != "" {
-                                                                    self.setShowSignature(sign, signs: self.initial_b1!, idcator: self.initial_index![1][self.hoapage1fields.index(of: l)!])
+//                                                                    print(sign.xname)
+//                                                                    print("aaaaaaa")
+//                                                                    print(self.initial_b1!)
+//                                                                    print("bbbbbbb")
+//                                                                    print(self.initial_index![1])
+//                                                                    print("ccccc")
+//                                                                    print([self.hoapage1fields.index(of: l)!])
+//                                                                    if let xname = self.contractPdfInfo?.nproject {
+//                                                                        if xname == "835 Paige St." {
+//                                                                            self.setShowSignature(sign
+//                                                                                , signs: self.initial_b1!
+//                                                                                , idcator: "1")
+//                                                                        }else{
+                                                                            self.setShowSignature(sign
+                                                                                , signs: self.initial_b1!
+                                                                                , idcator: self.initial_index![1][self.hoapage1fields.index(of: l)!])
+
+//                                                                        }
+//                                                                    }
+                                                                    
                                                                 }
                                                                 
                                                                 break;
@@ -3323,10 +3342,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
         hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud?.labelText = "Sending Email..."
         
-        //        let a =  ["idcontract1" : self.contractInfo!.idnumber!, "idcia": self.contractInfo!.idcia!, "email": userInfo.stringForKey(CConstants.UserInfoEmail) ?? "", "emailto" : email, "emailcc": emailcc, "msg": msg]
-        
-        
-        
         var email1 = email.replacingOccurrences(of: " ", with: "")
         email1 = email1.replacingOccurrences(of: "\n", with: "")
         if email1.hasSuffix(",") {
@@ -3350,21 +3365,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                 , "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
         }
         
-        //        let a = [ "idcontract": contractPdfInfo?.idnumber ?? " ", "EmailTo": email1, "EmailCc" : emailcc1, "Subject": "\(contractInfo!.nproject!)'s Contract",
-        //                  "Body" : msg, "Attachment1": emailData ?? " ", "Attachment2": " ", "Attachment3": " "]
-        //        print(a)
-        
-        //        IdCia	query	int	No
-        //        EmailTo	query	string	No
-        //        EmailCc	query	string	No
-        //        Subject	query	string	No
-        //        Body	query	string	No
-        //        Attachment1	query	string	No
-        //        Attachment2	query	string	No
-        //        Attachment3
-        
-        //        return;
-//                print(a)
         
         Alamofire.request(CConstants.ServerURL + "bacontract_SendEmail2.json", method: .post,
                           parameters:a).responseJSON{ (response) -> Void in
@@ -3402,7 +3402,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
     }
     
     func ClearEmailData(){
-        //        emailData = nil
     }
     
     var imagePicker: UIImagePickerController?
@@ -3410,9 +3409,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
     override func attachPhoto() {
         self.performSegue(withIdentifier: "showAttachPhoto", sender: nil)
         return
-        
-        
-        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -3442,11 +3438,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, PDFVi
                 uploadAttachedPhoto(image)
             }
         }
-        
-        
-        
-        
-        
     }
     
     fileprivate func uploadAttachedPhoto(_ image : UIImage){
