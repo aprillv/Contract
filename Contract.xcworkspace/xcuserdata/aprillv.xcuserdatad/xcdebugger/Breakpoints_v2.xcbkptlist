@@ -378,7 +378,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/EmailContractToBuyerViewController.swift"
-            timestampString = "542111158.498713"
+            timestampString = "542860984.165565"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "90"
@@ -1065,7 +1065,7 @@
                   moduleName = "Contract"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/aprillv/Desktop/BuildersAccess/Contract/Contract/Views/PDFPrintViewController.swift"
-                  timestampString = "542277033.838173"
+                  timestampString = "542860984.471302"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "3564"
@@ -1080,7 +1080,7 @@
                   moduleName = "Contract"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/aprillv/Desktop/BuildersAccess/Contract/Contract/Views/PDFPrintViewController.swift"
-                  timestampString = "542277033.843083"
+                  timestampString = "542860984.476017"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "3564"
@@ -1225,11 +1225,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.54817"
+            timestampString = "542860984.166297"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
+            startingLineNumber = "552"
+            endingLineNumber = "552"
             landmarkName = "showSkipToNext()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1241,11 +1241,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/UtilityClass/toolpdf.swift"
-            timestampString = "542249872.361357"
+            timestampString = "542860984.166748"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "785"
-            endingLineNumber = "785"
+            startingLineNumber = "787"
+            endingLineNumber = "787"
             landmarkName = "pdfSignatureFields"
             landmarkType = "24">
          </BreakpointContent>
@@ -1257,11 +1257,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.548646"
+            timestampString = "542860984.1668071"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "554"
-            endingLineNumber = "554"
+            startingLineNumber = "573"
+            endingLineNumber = "573"
             landmarkName = "showSkipToNext()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1273,11 +1273,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.5489351"
+            timestampString = "542860984.167104"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "596"
-            endingLineNumber = "596"
+            startingLineNumber = "615"
+            endingLineNumber = "615"
             landmarkName = "CheckBuyerFinish(isbuyer1:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1289,11 +1289,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.549222"
+            timestampString = "542860984.167408"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1752"
-            endingLineNumber = "1752"
+            startingLineNumber = "1771"
+            endingLineNumber = "1771"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1305,11 +1305,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.549528"
+            timestampString = "542860984.167781"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1769"
-            endingLineNumber = "1769"
+            startingLineNumber = "1788"
+            endingLineNumber = "1788"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1321,11 +1321,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.549822"
+            timestampString = "542860984.168088"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1762"
-            endingLineNumber = "1762"
+            startingLineNumber = "1781"
+            endingLineNumber = "1781"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1337,11 +1337,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.550113"
+            timestampString = "542860984.168394"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1763"
-            endingLineNumber = "1763"
+            startingLineNumber = "1782"
+            endingLineNumber = "1782"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1353,7 +1353,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDaleOperationsViewController.swift"
-            timestampString = "542277033.550403"
+            timestampString = "542860984.168697"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "127"
@@ -1369,7 +1369,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDaleOperationsViewController.swift"
-            timestampString = "542277033.55046"
+            timestampString = "542860984.168754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "111"
@@ -1385,7 +1385,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDaleOperationsViewController.swift"
-            timestampString = "542277033.5505151"
+            timestampString = "542860984.1688091"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "108"
@@ -1401,11 +1401,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.55057"
+            timestampString = "542860984.168865"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "484"
-            endingLineNumber = "484"
+            startingLineNumber = "503"
+            endingLineNumber = "503"
             landmarkName = "setSendItema()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1417,11 +1417,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.550841"
+            timestampString = "542860984.1691951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "448"
-            endingLineNumber = "448"
+            startingLineNumber = "467"
+            endingLineNumber = "467"
             landmarkName = "setSendItema()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1433,11 +1433,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.551126"
+            timestampString = "542860984.169482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "728"
-            endingLineNumber = "728"
+            startingLineNumber = "747"
+            endingLineNumber = "747"
             landmarkName = "setBuyer2()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1449,11 +1449,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.551402"
+            timestampString = "542860984.1697741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1020"
-            endingLineNumber = "1020"
+            startingLineNumber = "1039"
+            endingLineNumber = "1039"
             landmarkName = "clearSignature(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1465,11 +1465,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.551679"
+            timestampString = "542860984.1700619"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "765"
-            endingLineNumber = "765"
+            startingLineNumber = "784"
+            endingLineNumber = "784"
             landmarkName = "setBuyer2()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1481,11 +1481,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.55195"
+            timestampString = "542860984.170354"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "771"
-            endingLineNumber = "771"
+            startingLineNumber = "790"
+            endingLineNumber = "790"
             landmarkName = "setBuyer2()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1497,11 +1497,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.552249"
+            timestampString = "542860984.1706409"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "780"
-            endingLineNumber = "780"
+            startingLineNumber = "799"
+            endingLineNumber = "799"
             landmarkName = "setBuyer2()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1513,7 +1513,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDaleOperationsViewController.swift"
-            timestampString = "542277033.552559"
+            timestampString = "542860984.170929"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "103"
@@ -1529,11 +1529,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.552615"
+            timestampString = "542860984.170987"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1294"
-            endingLineNumber = "1294"
+            startingLineNumber = "1313"
+            endingLineNumber = "1313"
             landmarkName = "saveToServer1(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1545,11 +1545,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.552898"
+            timestampString = "542860984.171275"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1302"
-            endingLineNumber = "1302"
+            startingLineNumber = "1321"
+            endingLineNumber = "1321"
             landmarkName = "saveToServer1(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1561,12 +1561,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Contract/Views/SpringDalePDFViewController.swift"
-            timestampString = "542277033.553178"
+            timestampString = "542860984.171564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "634"
-            endingLineNumber = "634"
-            landmarkName = "callService(param:)"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "contractPdfInfo"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Contract.SpringDalePDFViewController.contractPdfInfo.didset : Swift.Optional&lt;Contract.ContractSpringDaleInfo&gt;"
+                  moduleName = "Contract"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aprillv/Desktop/BuildersAccess/Contract/Contract/Views/SpringDalePDFViewController.swift"
+                  timestampString = "542854879.86439"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "140"
+                  endingLineNumber = "140"
+                  offsetFromSymbolStart = "18682">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #10 : @autoclosure () throws -&gt; Swift.String in Contract.SpringDalePDFViewController.contractPdfInfo.didset : Swift.Optional&lt;Contract.ContractSpringDaleInfo&gt;"
+                  moduleName = "Contract"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aprillv/Desktop/BuildersAccess/Contract/Contract/Views/SpringDalePDFViewController.swift"
+                  timestampString = "542854879.867669"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "140"
+                  endingLineNumber = "140"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Contract/Views/SpringDalePDFViewController.swift"
+            timestampString = "542860984.171859"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2278"
+            endingLineNumber = "2278"
+            landmarkName = "GoToSendEmailToBuyer(msg:hasbuyer1:hasbuyer2:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -93,7 +93,7 @@ class SpringDalePDFViewController: PDFBaseViewController
                 contractInfo?.status = info.status
                 contractInfo?.signfinishdate = info.signfinishdate
                 contractInfo?.approvedate = info.approvedate
-                contractInfo?.approveMonthdate = info.approveMonthdate
+//                contractInfo?.approveMonthdate = info.approveMonthdate
                 setBuyer2()
                 if let c = info.status {
                     if c ==  CConstants.ApprovedStatus {
@@ -120,8 +120,27 @@ class SpringDalePDFViewController: PDFBaseViewController
                     for (_, dots) in fDD {
                        
                         for n in dots {
-                             print(n.xname);
+//                             print(n.xname);
+                            
                             switch n.xname {
+                            case "buyer1_signdate", "seller_signdate":
+                                if CConstants.ApprovedStatus == (info.status ?? ""){
+                                    n.value = info.approvedate ?? ""
+                                    
+                                }
+//                            case :
+//                                if CConstants.ApprovedStatus == (info.status ?? "")
+//                                n.value = info.approvedate ?? ""
+                            case "buyer2_signdate":
+                                if ((CConstants.ApprovedStatus == (info.status ?? "")) && ((self.contractPdfInfo?.client2 ?? "") != "")){
+                                    n.value = info.approvedate ?? ""
+                                }
+                            case "titleyear":
+                                n.value = info.approveyear!
+                            case "titleday":
+                                n.value = info.approveday!
+                            case "titlemonth":
+                                n.value = info.approvemonth!
                             case "buyer1":
                                 n.value = self.contractPdfInfo?.client ?? ""
                             case "buyer2":
@@ -164,7 +183,7 @@ class SpringDalePDFViewController: PDFBaseViewController
                                     }
                                 }
                             case "purchasemethod":
-                                if self.contractPdfInfo!.methodofpurchasecash! == 0 {
+                                if self.contractPdfInfo!.methodofpurchasecash! == 1 {
                                     if let radio = n as? PDFFormButtonField {
                                         if radio.exportValue == "1" {
                                             radio.setValue2("1")
@@ -630,7 +649,7 @@ class SpringDalePDFViewController: PDFBaseViewController
                             hud?.hide(true)
                             if response.result.isSuccess {
                                 if let rtnValue = response.result.value as? [String: AnyObject]{
-                                    print(response.result.value)
+//                                    print(response.result.value)
                                     if let msg = rtnValue["message"] as? String{
                                         if msg.isEmpty{
                                             self.contractPdfInfo = ContractSpringDaleInfo(dicInfo: rtnValue)
@@ -2241,7 +2260,12 @@ class SpringDalePDFViewController: PDFBaseViewController
             let userInfo = UserDefaults.standard
             var param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"\(b1email)", "buyer2email":"\(b2email)","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":" ","buyer1name":"\(b1)","buyer2name":"\(b2)","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
             if (self.contractPdfInfo?.idcia ?? "") == "9999" {
-                param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"aprillv@yahoo.com", "buyer2email":"april@buildersaccess.com","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":" ","buyer1name":"\(b1)","buyer2name":"\(b2)","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
+                if(b2email == " ") {
+                    param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"aprillv@yahoo.com", "buyer2email":" ","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":" ","buyer1name":"\(b1)","buyer2name":" ","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
+                }else{
+                    param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"aprillv@yahoo.com", "buyer2email":"april@buildersaccess.com","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":" ","buyer1name":"\(b1)","buyer2name":"\(b2)","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
+                }
+                
             }
             
             print(param)
@@ -2553,8 +2577,7 @@ class SpringDalePDFViewController: PDFBaseViewController
         self.gotoBuyerSign(false)
     }
     override func gotoSellerSign() {
-        let tp = toolpdf()
-        let (t, sign) =  tp.CheckSellerFinish(self.fileDotsDic, documents: self.documents)
+        let (t, sign) =  self.CheckSellerFinish(self.fileDotsDic, documents: self.documents)
         if !t {
             if let cg0 = sign?.center {
                 var cg = cg0
@@ -2567,6 +2590,29 @@ class SpringDalePDFViewController: PDFBaseViewController
         }else{
             self.PopMsgWithJustOK(msg: "You have signed all fields.")
         }
+    }
+    
+    private func CheckSellerFinish( _ fileDotsDic : [String : [PDFWidgetAnnotationView]]?, documents : [PDFDocument]?) -> (Bool, SignatureView?) {
+        
+        let tp = toolpdf()
+        let tmpa = tp.pdfSpringDaleSeller1SignatureFields
+        
+        let alldots = self.fileDotsDic!["springdale"]
+        
+        for tmp in tmpa {
+            for c in alldots! {
+                if let a = c as? SignatureView {
+                    if tmp == a.xname {
+                        if !(a.lineArray != nil && a.lineArray.count > 0 && a.lineWidth != 0.0){
+                            return (false, a)
+                        }
+                    }
+                }
+            }
+        }
+        
+        return (true, nil)
+        
     }
     
     func gotoBuyerSign(_ isbuyer: Bool) {

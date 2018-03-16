@@ -19,7 +19,9 @@ import Foundation
 import Foundation
 
 class ContractSpringDaleInfo: ContractBasicInfo {
-    var approveMonthdate: String?
+    var approveyear: String?
+    var approveday: String?
+    var approvemonth: String?
     var approvedate: String?
     
     var attachline10: String?

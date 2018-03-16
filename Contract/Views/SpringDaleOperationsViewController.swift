@@ -134,7 +134,7 @@ class SpringDaleOperationsViewController: UIViewController, UITableViewDelegate,
                                     itemList?.append(constants.operationSubmitBuyer1)
                                     itemList?.append(constants.operationAttatchPhoto)
                                     itemList?.append(constants.operationChangebuyer2ToIpad)
-//                                    itemList?.append(constants.operationEmailToBuyer)
+                                    itemList?.append(constants.operationEmailToBuyer)
                                     
                                     //                                    itemList?.append(constants.operationGoToSign)
                                     
@@ -144,7 +144,7 @@ class SpringDaleOperationsViewController: UIViewController, UITableViewDelegate,
                                     itemList?.append(constants.operationSubmitBuyer2)
                                     itemList?.append(constants.operationAttatchPhoto)
                                     itemList?.append(constants.operationChangebuyer1ToIpad)
-//                                    itemList?.append(constants.operationEmailToBuyer)
+                                    itemList?.append(constants.operationEmailToBuyer)
                                     
                                     //                                    itemList?.append(constants.operationGoToSign)
                                 }
@@ -161,7 +161,7 @@ class SpringDaleOperationsViewController: UIViewController, UITableViewDelegate,
                                     itemList?.append(constants.operationSubmitBuyer2Finished)
                                     itemList?.append(constants.operationSubmit)
                                     itemList?.append(constants.operationAttatchPhoto)
-//                                    itemList?.append(constants.operationEmailToBuyer)
+                                    itemList?.append(constants.operationEmailToBuyer)
                                     
                                     
                                     //                                    itemList?.append(constants.operationGoToSign)
@@ -176,7 +176,7 @@ class SpringDaleOperationsViewController: UIViewController, UITableViewDelegate,
                                     itemList?.append(constants.operationSubmitBuyer2Finished)
                                     itemList?.append(constants.operationSubmit)
                                     itemList?.append(constants.operationAttatchPhoto)
-//                                    itemList?.append(constants.operationEmailToBuyer)
+                                    itemList?.append(constants.operationEmailToBuyer)
                                 }
                                 
                             }else if info.buyer1SignFinishedyn == 1 && info.buyer2SignFinishedyn == 0{
@@ -263,7 +263,7 @@ class SpringDaleOperationsViewController: UIViewController, UITableViewDelegate,
                                 if let i = itemList!.index(of: constants.operationEmailToBuyer){
                                     itemList?.remove(at: i)}
                             }
-//                            itemList?.append(constants.operationEmailToBuyer)
+                            itemList?.append(constants.operationEmailToBuyer)
                         }
                         
                         
