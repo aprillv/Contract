@@ -260,7 +260,7 @@ class SpringDalePDFViewController: PDFBaseViewController
                             case "seller":
                                 n.value = self.contractPdfInfo?.sales ?? ""
                             case "siteselection":
-                                n.value = "$ \(self.contractPdfInfo?.siteselectionpremium ?? "")"
+                                n.value = self.contractPdfInfo?.siteselectionpremium ?? ""
                             case "houseprice":
                                 n.value = self.contractPdfInfo?.houseprice ?? ""
                             case "line1":
@@ -381,6 +381,8 @@ class SpringDalePDFViewController: PDFBaseViewController
                                 n.value = self.contractPdfInfo?.SpecialProvision4 ?? "";
                             case "totalpayment":
                                 n.value = self.contractPdfInfo?.totalpayment ?? "";
+                            case "etotal":
+                                n.value = self.contractPdfInfo?.exbitetotalpayment ?? "";
                             default:
                                 break;
                             }

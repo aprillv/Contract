@@ -129,5 +129,6 @@ class ContractSpringDaleInfo: ContractBasicInfo {
     var SpecialProvision6: String?
     
     var totalpayment: String?
+    var exbitetotalpayment: String?
 }
 

@@ -117,10 +117,10 @@
 		426758B7205613980049B71C /* BaseContract.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 426758B5205613970049B71C /* BaseContract.pdf */; };
 		426758B8205613980049B71C /* BaseContract_Austin.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 426758B6205613980049B71C /* BaseContract_Austin.pdf */; };
 		429955071FED072C00AAC11A /* Fannin_Environment_Disclosure.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 429955061FED072C00AAC11A /* Fannin_Environment_Disclosure.pdf */; };
-		42A97DAE205B5C19006218FC /* springdale.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 42A97DAD205B5C19006218FC /* springdale.pdf */; };
 		42AF1CD31FFDABFF00F509D9 /* AddendumA_Austin.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 42AF1CD11FFDABFF00F509D9 /* AddendumA_Austin.pdf */; };
 		42AF1CD41FFDABFF00F509D9 /* AddendumA.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 42AF1CD21FFDABFF00F509D9 /* AddendumA.pdf */; };
 		42C9DE36204D5392005FEB49 /* SpringDalePDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C9DE35204D5392005FEB49 /* SpringDalePDFViewController.swift */; };
+		42DC57DD205F992F00B4D44B /* springdale.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 42DC57DC205F992F00B4D44B /* springdale.pdf */; };
 		640AC2494E0AC9F5E5CA743E /* Pods_Contract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F18C19584528B1717CD718 /* Pods_Contract.framework */; };
 /* End PBXBuildFile section */
 
@@ -283,10 +283,10 @@
 		426758B5205613970049B71C /* BaseContract.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BaseContract.pdf; sourceTree = "<group>"; };
 		426758B6205613980049B71C /* BaseContract_Austin.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BaseContract_Austin.pdf; sourceTree = "<group>"; };
 		429955061FED072C00AAC11A /* Fannin_Environment_Disclosure.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Fannin_Environment_Disclosure.pdf; sourceTree = "<group>"; };
-		42A97DAD205B5C19006218FC /* springdale.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = springdale.pdf; sourceTree = "<group>"; };
 		42AF1CD11FFDABFF00F509D9 /* AddendumA_Austin.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumA_Austin.pdf; sourceTree = "<group>"; };
 		42AF1CD21FFDABFF00F509D9 /* AddendumA.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumA.pdf; sourceTree = "<group>"; };
 		42C9DE35204D5392005FEB49 /* SpringDalePDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringDalePDFViewController.swift; sourceTree = "<group>"; };
+		42DC57DC205F992F00B4D44B /* springdale.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = springdale.pdf; sourceTree = "<group>"; };
 		8FD0FE342786EA5417C6A9FD /* Pods-Contract.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Contract.release.xcconfig"; path = "Pods/Target Support Files/Pods-Contract/Pods-Contract.release.xcconfig"; sourceTree = "<group>"; };
 		AB0FE999F8EB22254D6D15D8 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E423097CA2371A0B4502711B /* Pods-Contract.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Contract.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Contract/Pods-Contract.debug.xcconfig"; sourceTree = "<group>"; };
@@ -545,7 +545,7 @@
 		119AA3231E3338EE00EF8D3C /* pdf */ = {
 			isa = PBXGroup;
 			children = (
-				42A97DAD205B5C19006218FC /* springdale.pdf */,
+				42DC57DC205F992F00B4D44B /* springdale.pdf */,
 				426758B6205613980049B71C /* BaseContract_Austin.pdf */,
 				426758B5205613970049B71C /* BaseContract.pdf */,
 				42AF1CD11FFDABFF00F509D9 /* AddendumA_Austin.pdf */,
@@ -677,6 +677,7 @@
 				119AA3491E33391000EF8D3C /* BuyersExpect.pdf in Resources */,
 				421C337A1FA0605100FAA60A /* EXHIBIT_B_DallasFortWorth_TexasIntownhomes.pdf in Resources */,
 				426758B8205613980049B71C /* BaseContract_Austin.pdf in Resources */,
+				42DC57DD205F992F00B4D44B /* springdale.pdf in Resources */,
 				119AA3431E33391000EF8D3C /* AddendumC2.pdf in Resources */,
 				421C33851FA0840D00FAA60A /* Warranty_Builder_s_TexasIntownhomes.pdf in Resources */,
 				119AA3441E33391000EF8D3C /* AddendumD.pdf in Resources */,
@@ -696,7 +697,6 @@
 				1108B1B71BFC2691004B5D48 /* Main.storyboard in Resources */,
 				11661D611CC7750A00C974A0 /* Assets.xcassets in Resources */,
 				119AA3521E33391000EF8D3C /* Hoa_Checklist2.pdf in Resources */,
-				42A97DAE205B5C19006218FC /* springdale.pdf in Resources */,
 				119AA3561E33391000EF8D3C /* trec_36-8.pdf in Resources */,
 				119AA3571E33391000EF8D3C /* Warranty_Builder_s.pdf in Resources */,
 				119AA3531E33391000EF8D3C /* INFORMATION_ABOUT_BROKERAGE_SERVICES.pdf in Resources */,
