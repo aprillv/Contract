@@ -130,5 +130,8 @@ class ContractSpringDaleInfo: ContractBasicInfo {
     
     var totalpayment: String?
     var exbitetotalpayment: String?
+    
+    var totaldeposit: String?
+    var totalpurchaseprice: String?
 }
 

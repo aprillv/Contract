@@ -409,7 +409,7 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
             let ddd = self.CiaNmArray?[self.CiaNm?[indexPath.section] ?? ""]
             let item: ContractsItem = ddd![indexPath.row]
 //            if true {
-            if item.idcia == "9999" || item.idcia == "386" && item.idproject!.hasPrefix("210") {
+            if item.idcia == "9999" || item.idcia == "386" && item.idproject!.hasPrefix("201") {
                 self.performSegue(withIdentifier: "springdale", sender: item)
                 self.tableView.deselectRow(at: indexPath, animated: true)
             }else {

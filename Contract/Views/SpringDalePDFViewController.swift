@@ -315,58 +315,58 @@ class SpringDalePDFViewController: PDFBaseViewController
                                 n.value = self.contractPdfInfo?.attachline12m ?? ""
                             case "mline13":
                                 n.value = self.contractPdfInfo?.attachline13m ?? ""
-                            case "line1check":
-                                if let radio = n as? PDFFormButtonField {
-                                    radio.setValue2(self.contractPdfInfo!.attachline1c! == 1 ? "1" : "0")
-                                }
-                            case "line2check":
-                                if let radio = n as? PDFFormButtonField {
-                                    radio.setValue2(self.contractPdfInfo!.attachline2c! == 1 ? "1" : "0")
-                                }
-                            case "line3check":
-                                if let radio = n as? PDFFormButtonField {
-                                    radio.setValue2(self.contractPdfInfo!.attachline3c! == 1 ? "1" : "0")
-                                }
-                            case "line4check":
-                                if let radio = n as? PDFFormButtonField {
-                                    radio.setValue2(self.contractPdfInfo!.attachline4c! == 1 ? "1" : "0")
-                                }
-                            case "line5check":
-                                if let radio = n as? PDFFormButtonField {
-                                    radio.setValue2(self.contractPdfInfo!.attachline5c! == 1 ? "1" : "0")
-                                }
-                            case "line6check":
-                                if let radio = n as? PDFFormButtonField {
-                                    radio.setValue2(self.contractPdfInfo!.attachline6c! == 1 ? "1" : "0")
-                                }
-                            case "line7check":
-                                if let radio = n as? PDFFormButtonField {
-                                    radio.setValue2(self.contractPdfInfo!.attachline7c! == 1 ? "1" : "0")
-                                }
-                            case "line8check":
-                                if let radio = n as? PDFFormButtonField {
-                                    radio.setValue2(self.contractPdfInfo!.attachline8c! == 1 ? "1" : "0")
-                                }
-                            case "line9check":
-                                if let radio = n as? PDFFormButtonField {
-                                    radio.setValue2(self.contractPdfInfo!.attachline9c! == 1 ? "1" : "0")
-                                }
-                            case "line10check":
-                                if let radio = n as? PDFFormButtonField {
-                                    radio.setValue2(self.contractPdfInfo!.attachline10c! == 1 ? "1" : "0")
-                                }
-                            case "line11check":
-                                if let radio = n as? PDFFormButtonField {
-                                    radio.setValue2(self.contractPdfInfo!.attachline11c! == 1 ? "1" : "0")
-                                }
-                            case "line12check":
-                                if let radio = n as? PDFFormButtonField {
-                                    radio.setValue2(self.contractPdfInfo!.attachline12c! == 1 ? "1" : "0")
-                                }
-                            case "line13check":
-                                if let radio = n as? PDFFormButtonField {
-                                    radio.setValue2(self.contractPdfInfo!.attachline13c! == 1 ? "1" : "0")
-                                }
+//                            case "line1check":
+//                                if let radio = n as? PDFFormButtonField {
+//                                    radio.setValue2(self.contractPdfInfo!.attachline1c! == 1 ? "1" : "0")
+//                                }
+//                            case "line2check":
+//                                if let radio = n as? PDFFormButtonField {
+//                                    radio.setValue2(self.contractPdfInfo!.attachline2c! == 1 ? "1" : "0")
+//                                }
+//                            case "line3check":
+//                                if let radio = n as? PDFFormButtonField {
+//                                    radio.setValue2(self.contractPdfInfo!.attachline3c! == 1 ? "1" : "0")
+//                                }
+//                            case "line4check":
+//                                if let radio = n as? PDFFormButtonField {
+//                                    radio.setValue2(self.contractPdfInfo!.attachline4c! == 1 ? "1" : "0")
+//                                }
+//                            case "line5check":
+//                                if let radio = n as? PDFFormButtonField {
+//                                    radio.setValue2(self.contractPdfInfo!.attachline5c! == 1 ? "1" : "0")
+//                                }
+//                            case "line6check":
+//                                if let radio = n as? PDFFormButtonField {
+//                                    radio.setValue2(self.contractPdfInfo!.attachline6c! == 1 ? "1" : "0")
+//                                }
+//                            case "line7check":
+//                                if let radio = n as? PDFFormButtonField {
+//                                    radio.setValue2(self.contractPdfInfo!.attachline7c! == 1 ? "1" : "0")
+//                                }
+//                            case "line8check":
+//                                if let radio = n as? PDFFormButtonField {
+//                                    radio.setValue2(self.contractPdfInfo!.attachline8c! == 1 ? "1" : "0")
+//                                }
+//                            case "line9check":
+//                                if let radio = n as? PDFFormButtonField {
+//                                    radio.setValue2(self.contractPdfInfo!.attachline9c! == 1 ? "1" : "0")
+//                                }
+//                            case "line10check":
+//                                if let radio = n as? PDFFormButtonField {
+//                                    radio.setValue2(self.contractPdfInfo!.attachline10c! == 1 ? "1" : "0")
+//                                }
+//                            case "line11check":
+//                                if let radio = n as? PDFFormButtonField {
+//                                    radio.setValue2(self.contractPdfInfo!.attachline11c! == 1 ? "1" : "0")
+//                                }
+//                            case "line12check":
+//                                if let radio = n as? PDFFormButtonField {
+//                                    radio.setValue2(self.contractPdfInfo!.attachline12c! == 1 ? "1" : "0")
+//                                }
+//                            case "line13check":
+//                                if let radio = n as? PDFFormButtonField {
+//                                    radio.setValue2(self.contractPdfInfo!.attachline13c! == 1 ? "1" : "0")
+//                                }
                             case "SpecialProvision1":
                                 n.value = self.contractPdfInfo?.SpecialProvision1 ?? "";
                             case "SpecialProvision2":
@@ -383,6 +383,10 @@ class SpringDalePDFViewController: PDFBaseViewController
                                 n.value = self.contractPdfInfo?.totalpayment ?? "";
                             case "etotal":
                                 n.value = self.contractPdfInfo?.exbitetotalpayment ?? "";
+                            case "deposit":
+                                n.value = self.contractPdfInfo?.totaldeposit ?? "";
+                            case "totalpurchaseprice":
+                                n.value = self.contractPdfInfo?.totalpurchaseprice ?? ""
                             default:
                                 break;
                             }
@@ -1894,6 +1898,20 @@ class SpringDalePDFViewController: PDFBaseViewController
     }
     
     override func saveFinish() {
+        let (t, sign) =  self.CheckSellerFinish(self.fileDotsDic, documents: self.documents)
+        if !t {
+            self.PopMsgWithJustOK(msg: "Please finish all the required signature.", action1: { (_) in
+                if let cg0 = sign?.center {
+                    var cg = cg0
+                    cg.x = 0
+                    cg.y = cg.y - self.view.frame.height/2
+                    if cg.y ?? 0 > 0 {
+                        self.pdfView?.pdfView.scrollView.setContentOffset(cg, animated: false)
+                    }
+                }
+            })
+            return;
+        }
         self.saveToServer1(2)
     }
     
@@ -2000,6 +2018,20 @@ class SpringDalePDFViewController: PDFBaseViewController
     }
     
     override  func saveEmail() {
+        let (t, sign) =  self.CheckSellerFinish(self.fileDotsDic, documents: self.documents)
+        if !t {
+            self.PopMsgWithJustOK(msg: "Please finish all the required signature.", action1: { (_) in
+                if let cg0 = sign?.center {
+                    var cg = cg0
+                    cg.x = 0
+                    cg.y = cg.y - self.view.frame.height/2
+                    if cg.y ?? 0 > 0 {
+                        self.pdfView?.pdfView.scrollView.setContentOffset(cg, animated: false)
+                    }
+                }
+            })
+            return;
+        }
         saveToServer1(3)
     }
     
@@ -2263,7 +2295,7 @@ class SpringDalePDFViewController: PDFBaseViewController
             var param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"\(b1email)", "buyer2email":"\(b2email)","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":" ","buyer1name":"\(b1)","buyer2name":"\(b2)","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
             if (self.contractPdfInfo?.idcia ?? "") == "9999" {
                 if(b2email == " ") {
-                    param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"aprillv@yahoo.com", "buyer2email":" ","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":" ","buyer1name":"\(b1)","buyer2name":" ","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
+                    param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"april@buildersaccess.com", "buyer2email":" ","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":" ","buyer1name":"\(b1)","buyer2name":" ","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
                 }else{
                     param = ["idcontract":"\(self.contractInfo?.idnumber ?? "")","buyer1email":"aprillv@yahoo.com", "buyer2email":"april@buildersaccess.com","idcity":"\(self.contractInfo?.idcity ?? "")","idcia":"\(self.contractInfo?.idcia ?? "")","emailcc":" ","buyer1name":"\(b1)","buyer2name":"\(b2)","emailbody":"\(msg)","emailsubject":"Sign contract online", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
                 }

@@ -65,8 +65,7 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
         
         webview.scrollView.contentOffset = CGPoint.zero
         
-        
-       reloadPDF(nil)
+        reloadPDF(nil)
     }
     
     @IBAction func goBack(_ sender: AnyObject) {
@@ -176,7 +175,7 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
         
         if contractInfo?.idcia == "9999" {
             param = ["idcontract":contractInfo?.idnumber ?? ""
-                , "EmailTo": "aprillv@yahoo.com"
+                , "EmailTo": "APRIL@buildersaccess.com"
                 , "EmailCc": "xiujun007@gmail.com"
                 , "Subject":"\(contractInfo!.nproject!)'s Contract"
                 , "Body":msg
