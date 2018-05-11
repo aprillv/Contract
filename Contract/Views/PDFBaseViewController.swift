@@ -35,6 +35,8 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 
 class PDFBaseViewController: BaseViewController, DoOperationDelegate, UIPopoverPresentationControllerDelegate, MFMailComposeViewControllerDelegate, UIPrintInteractionControllerDelegate, ToDoPrintDelegate, ToSwitchAddressDelegate {
+    
+    
 //    @IBOutlet var view2: UIView!
     var document : PDFDocument?
     var documents : [PDFDocument]?
@@ -392,7 +394,7 @@ class PDFBaseViewController: BaseViewController, DoOperationDelegate, UIPopoverP
         
     }
     
-    func GoToPrint(_ modelNmA: [String]) {
+    func GoToPrint(_ modelNmA: [String], _ line1: String, _ line2: String) {
 //        if modelNmA.count == 1 {
 //            let modelNm = modelNmA[0]
 //            if modelNm == CConstants.ActionTitleINFORMATION_ABOUT_BROKERAGE_SERVICES {

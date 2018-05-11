@@ -295,6 +295,10 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                         switch str{
                         case CConstants.ActionTitleContract,
                              CConstants.ActionTitleDraftContract:
+                            if (info.status ?? "") == "" {
+                                info.trec1 = self.xline1;
+                                info.trec2 = self.xline2;
+                            }
                             tool.setSignContractDots(info, additionViews: dots, pdfview: self.pdfView!, item: contractInfo)
                             
                         case CConstants.ActionTitleAcknowledgmentOfEnvironmental:
@@ -323,7 +327,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                         case CConstants.ActionTitleClosingMemo:
                             for doc in documents! {
                                 if doc.pdfName == CConstants.ActionTitleClosingMemo {
-                                    doc.addedviewss = tool.setCloingMemoDots(info, additionViews: dots, pdfview: self.pdfView!)
+                                   tool.setCloingMemoDots(info, additionViews: dots, pdfview: self.pdfView!)
                                 }
                             }
                             return
@@ -1070,7 +1074,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
     
     // MARK: Request Data
     fileprivate func callService(_ printModelNm: String, param: [String: String]){
-        //        print(param)
+                print(param)
         var serviceUrl: String?
         switch printModelNm{
         case CConstants.ActionTitleDesignCenter:
@@ -2347,15 +2351,22 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
         }
         param["checked_photo"] = " "
         var reurl : String
-        if self.contractPdfInfo?.verify_code != "" {
-            param["whichBuyer"] = "2"
-            reurl = "bacontract_save_signNew.json"
-        }else if contractPdfInfo?.verify_code2 != "" {
-            param["whichBuyer"] = "1"
-            reurl = "bacontract_save_signNew.json"
+        if self.contractPdfInfo?.status == CConstants.ApprovedStatus {
+             reurl = "bacontract_save_sign.json"
+            
         }else{
-            reurl = "bacontract_save_sign.json"
+            if self.contractPdfInfo?.verify_code != "" {
+                param["whichBuyer"] = "2"
+                reurl = "bacontract_save_signNew.json"
+            }else if contractPdfInfo?.verify_code2 != "" {
+                param["whichBuyer"] = "1"
+                reurl = "bacontract_save_signNew.json"
+            }else{
+                reurl = "bacontract_save_sign.json"
+            }
+            
         }
+        
         
         //        print(reurl , param)
         //        return;
@@ -2392,7 +2403,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
             
             }
         }
-        
+        print(param);
         Alamofire.request(CConstants.ServerURL + reurl,
                           method: .post,
                           parameters: param).responseJSON{ (response) -> Void in
@@ -2463,7 +2474,8 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
             }
         }
     }
-    
+    var xline1: String?;
+    var xline2: String?;
     fileprivate func getStr(_ h : [[String]]?) -> String {
         if let a = h {
             var s : [String] = [String]()
@@ -3018,8 +3030,8 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                         if let email1 = contrat.buyer2email {
                             emailList.append(email1)
                         }
-                        emailList.append("phalycak@kirbytitle.com")
-                        emailList.append("heatherb@kirbytitle.com")
+//                        emailList.append("phalycak@kirbytitle.com")
+//                        emailList.append("heatherb@kirbytitle.com")
                         if let realtorEmail = self.contractPdfInfo?.page9AssociatesEmailAddress {
                             if realtorEmail != "" {
                                 emailList.append(realtorEmail)
@@ -3275,31 +3287,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                                         self.hud?.mode = .customView
                                         let image = UIImage(named: CConstants.SuccessImageNm)
                                         self.hud?.customView = UIImageView(image: image)
-                                        self.hud?.labelText = CConstants.SavedSuccessMsg
-                                        
-                                        
-                                        //                                self.pdfView?.removeFromSuperview()
-                                        //                                self.view2.hidden = true
-                                        //                                self.LaterWeb.hidden = false
-                                        //                                self.LaterWeb.scalesPageToFit = true
-                                        //                                self.LaterWeb.scrollView.bouncesZoom = false
-                                        //
-                                        ////                                _pdfView.scalesPageToFit = YES;
-                                        ////                                _pdfView.scrollView.delegate = self;
-                                        ////                                _pdfView.scrollView.bouncesZoom = NO;
-                                        ////                                _pdfView.delegate = self;
-                                        //                                self.LaterWeb.backgroundColor = UIColor.whiteColor()
-                                        ////                                NSString *url = @"http://google.com?get=something&...";
-                                        ////                                NSURL *nsUrl = [NSURL URLWithString:url];
-                                        ////                                NSURLRequest *request = [NSURLRequest requestWithURL:nsUrl cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
-                                        //
-                                        //                                let url = "https://contractssl.buildersaccess.com/bacontract_contractDocument2?idcia=9999&idproject=100005"
-                                        ////                                let blank = "about:blank"
-                                        //                                if let nsurl = NSURL(string: url){
-                                        //                                    let request = NSURLRequest(URL: nsurl)
-                                        //                                    self.LaterWeb.loadRequest(request)
-                                        //                                }
-                                        
+                                        self.hud?.labelText = "Saved successfully and We have send an email to Kirbytitle company to sign."
                                         
                                         
                                         if xtype == 3 {
@@ -3353,17 +3341,17 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
         }
         let userInfo = UserDefaults.standard
         var a = ["idcontract":contractInfo?.idnumber ?? "","EmailTo":email,"EmailCc":emailcc,"Subject":"\(contractInfo!.nproject!)'s Contract","Body":msg,"idcia":contractInfo?.idcia ?? "","idproject":contractInfo?.idproject ?? "", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
-        if contractInfo?.idcia == "9999" {
-            a = ["idcontract":contractInfo?.idnumber ?? ""
-                , "EmailTo": "april@buildersaccess.com"
-                , "EmailCc": "xiujun_85@163.com"
-                , "Subject":"\(contractInfo!.nproject!)'s Contract"
-                , "Body":msg
-                , "idcia":contractInfo?.idcia ?? ""
-                , "idproject":contractInfo?.idproject ?? ""
-                , "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? ""
-                , "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
-        }
+//        if contractInfo?.idcia == "9999" {
+//            a = ["idcontract":contractInfo?.idnumber ?? ""
+//                , "EmailTo": "april@buildersaccess.com"
+//                , "EmailCc": "xiujun_85@163.com"
+//                , "Subject":"\(contractInfo!.nproject!)'s Contract"
+//                , "Body":msg
+//                , "idcia":contractInfo?.idcia ?? ""
+//                , "idproject":contractInfo?.idproject ?? ""
+//                , "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? ""
+//                , "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
+//        }
         
         
         Alamofire.request(CConstants.ServerURL + "bacontract_SendEmail2.json", method: .post,

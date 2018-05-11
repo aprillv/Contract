@@ -28,22 +28,17 @@ class SaveAndEmailViewController: BaseViewController, UITableViewDelegate, UITab
     @IBOutlet var b1: UIView!{
         didSet{
             b1.layer.cornerRadius = 5.0
-            //            bview.layer.borderWidth = 1.0
-            //            bview.layer.borderColor = UIColor.lightGrayColor().CGColor
         }
     }
     @IBOutlet var bview: UIView!{
         didSet{
             bview.layer.cornerRadius = 5.0
-            //            bview.layer.borderWidth = 1.0
-            //            bview.layer.borderColor = UIColor.lightGrayColor().CGColor
         }
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.title = "Print"
         view.superview?.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
-        //        view.superview?.bounds = CGRect(x: 0, y: 0, width: tableview.frame.width, height: 44 * CGFloat(5))
     }
     @IBOutlet var xtitlelbl: UILabel!{
         didSet{
@@ -53,7 +48,6 @@ class SaveAndEmailViewController: BaseViewController, UITableViewDelegate, UITab
     @IBOutlet var toEmail: UITextView!
     @IBOutlet var xtitlelbl2: UILabel!
     @IBOutlet var toCC: UITextField!
-//    @IBOutlet var toEmail: UITextField!
     @IBOutlet var desView: UITextView!{
         didSet{
             desView.delegate = self
@@ -197,10 +191,6 @@ class SaveAndEmailViewController: BaseViewController, UITableViewDelegate, UITab
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        [[NSNotificationCenter defaultCenter] addObserver:self
-        //            selector:@selector(myKeyboardWillHideHandler:)
-        //        name:UIKeyboardWillHideNotification
-        //        object:nil];
         
         NotificationCenter.default.addObserver(self, selector: #selector(myKeyboardWillHideHandler(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(myKeyboardWillShowHandler(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -212,7 +202,6 @@ class SaveAndEmailViewController: BaseViewController, UITableViewDelegate, UITab
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-        //        [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
         
     }
     func OrientationchangedHandler(_ orientation : UIInterfaceOrientation)  {

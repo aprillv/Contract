@@ -114,15 +114,21 @@ class SpringDalePDFViewController: PDFBaseViewController
                 }
                 setSendItema()
                 
+//                let sv =  SetDotValue()
+                
                 
                 if let fDD = fileDotsDic {
                     
                     for (_, dots) in fDD {
-                       
+//                       sv.setCloingMemoDots(info.closingMemo!, additionViews: dots, pdfview: self.pdfView!)
                         for n in dots {
 //                             print(n.xname);
                             
                             switch n.xname {
+                            case "address":
+                                n.value = info.nproject ?? ""
+                            case "CompanyName":
+                                n.value = info.cianame ?? ""
                             case "buyer1_signdate", "seller_signdate":
                                 if CConstants.ApprovedStatus == (info.status ?? ""){
                                     n.value = info.approvedate ?? ""
@@ -315,58 +321,6 @@ class SpringDalePDFViewController: PDFBaseViewController
                                 n.value = self.contractPdfInfo?.attachline12m ?? ""
                             case "mline13":
                                 n.value = self.contractPdfInfo?.attachline13m ?? ""
-//                            case "line1check":
-//                                if let radio = n as? PDFFormButtonField {
-//                                    radio.setValue2(self.contractPdfInfo!.attachline1c! == 1 ? "1" : "0")
-//                                }
-//                            case "line2check":
-//                                if let radio = n as? PDFFormButtonField {
-//                                    radio.setValue2(self.contractPdfInfo!.attachline2c! == 1 ? "1" : "0")
-//                                }
-//                            case "line3check":
-//                                if let radio = n as? PDFFormButtonField {
-//                                    radio.setValue2(self.contractPdfInfo!.attachline3c! == 1 ? "1" : "0")
-//                                }
-//                            case "line4check":
-//                                if let radio = n as? PDFFormButtonField {
-//                                    radio.setValue2(self.contractPdfInfo!.attachline4c! == 1 ? "1" : "0")
-//                                }
-//                            case "line5check":
-//                                if let radio = n as? PDFFormButtonField {
-//                                    radio.setValue2(self.contractPdfInfo!.attachline5c! == 1 ? "1" : "0")
-//                                }
-//                            case "line6check":
-//                                if let radio = n as? PDFFormButtonField {
-//                                    radio.setValue2(self.contractPdfInfo!.attachline6c! == 1 ? "1" : "0")
-//                                }
-//                            case "line7check":
-//                                if let radio = n as? PDFFormButtonField {
-//                                    radio.setValue2(self.contractPdfInfo!.attachline7c! == 1 ? "1" : "0")
-//                                }
-//                            case "line8check":
-//                                if let radio = n as? PDFFormButtonField {
-//                                    radio.setValue2(self.contractPdfInfo!.attachline8c! == 1 ? "1" : "0")
-//                                }
-//                            case "line9check":
-//                                if let radio = n as? PDFFormButtonField {
-//                                    radio.setValue2(self.contractPdfInfo!.attachline9c! == 1 ? "1" : "0")
-//                                }
-//                            case "line10check":
-//                                if let radio = n as? PDFFormButtonField {
-//                                    radio.setValue2(self.contractPdfInfo!.attachline10c! == 1 ? "1" : "0")
-//                                }
-//                            case "line11check":
-//                                if let radio = n as? PDFFormButtonField {
-//                                    radio.setValue2(self.contractPdfInfo!.attachline11c! == 1 ? "1" : "0")
-//                                }
-//                            case "line12check":
-//                                if let radio = n as? PDFFormButtonField {
-//                                    radio.setValue2(self.contractPdfInfo!.attachline12c! == 1 ? "1" : "0")
-//                                }
-//                            case "line13check":
-//                                if let radio = n as? PDFFormButtonField {
-//                                    radio.setValue2(self.contractPdfInfo!.attachline13c! == 1 ? "1" : "0")
-//                                }
                             case "SpecialProvision1":
                                 n.value = self.contractPdfInfo?.SpecialProvision1 ?? "";
                             case "SpecialProvision2":
@@ -644,8 +598,8 @@ class SpringDalePDFViewController: PDFBaseViewController
     
     // MARK: Request Data
     fileprivate func callService(param: [String: String]){
-                print(param)
-        let serviceUrl = "bacontract_springdaleInfo.json";
+//                print(param)
+        let serviceUrl = "bacontract_springdaleInfo1.json";
         
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud?.labelText = CConstants.RequestMsg
@@ -659,6 +613,21 @@ class SpringDalePDFViewController: PDFBaseViewController
                                     if let msg = rtnValue["message"] as? String{
                                         if msg.isEmpty{
                                             self.contractPdfInfo = ContractSpringDaleInfo(dicInfo: rtnValue)
+                                            if let cl = rtnValue["closingMemo"] as? [String: AnyObject] {
+                                                self.contractPdfInfo?.closingMemo = ContractClosingMemo(dicInfo: cl)
+                                                let sv =  SetDotValue()
+                                                
+                                                
+                                                if let fDD = self.fileDotsDic {
+                                                    
+                                                    for (_, dots) in fDD {
+                                                        
+                                                    sv.setCloingMemoDots(self.contractPdfInfo?.closingMemo!, additionViews: dots, pdfview: self.pdfView!)
+                                                        
+                                                    }
+                                                    
+                                                }
+                                            }
                                             
                                         }else{
                                             self.PopMsgWithJustOK(msg: msg)
@@ -708,8 +677,8 @@ class SpringDalePDFViewController: PDFBaseViewController
                             //                          print(sign.xname)
                             if sender.tag == 1 && sign.xname.hasSuffix("bottom1")
                                 || sender.tag == 2 && sign.xname.hasSuffix("bottom2")
-                                || sender.tag == 3 && sign.xname.hasSuffix("bottom3")
-                                || sender.tag == 4 && sign.xname.hasSuffix("bottom4"){
+                                || sender.tag == 3 && sign.xname.hasSuffix("bottom3"){
+//                                || sender.tag == 4 && sign.xname.hasSuffix("bottom4"){
                                 //buyer1
                                 sign.toSignautre()
                                 return
@@ -1415,10 +1384,6 @@ class SpringDalePDFViewController: PDFBaseViewController
         
         
         var serviceURL = "bacontract_GetSpringnaleSignedContract.json"
-//        if self.contractInfo?.idcia == "9999" || (self.contractInfo?.idcia == "100" && ((self.contractInfo?.idproject ?? "").hasPrefix("214") || (self.contractInfo?.idproject ?? "").hasPrefix("205"))) {
-//            serviceURL = "bacontract_GetAcknowledgmentOfEnvironmentalSignedContract.json"
-//
-//        }
         
         
         Alamofire.request(CConstants.ServerURL + serviceURL, method: .post,
@@ -1449,10 +1414,10 @@ class SpringDalePDFViewController: PDFBaseViewController
                                     if let ss = self.contractInfo?.status {
                                         showseller =  ss == CConstants.ApprovedStatus
                                     }
-                                    let tp = toolpdf()
+//                                    let tp = toolpdf()
                                     for d in alldots{
                                         if let sign = d as? SignatureView {
-                                            if sign.xname.hasSuffix("bottom1") {
+                                            if sign.xname.hasSuffix("bottom1") || sign.xname.contains("Sign3") {
                                                 self.isCanSignature(sign: sign, ynarr: self.initial_b1yn, inarr: self.initial_b1)
                                             }else if sign.xname.hasSuffix("bottom2") {
                                                 //                                        print(sign.xname)
@@ -1517,16 +1482,6 @@ class SpringDalePDFViewController: PDFBaseViewController
         ct2.origin.y = 0.0
         si.frame = ct2
         si.frame = ct
-        
-        //        if si.xname == "p1EBbottom2" {
-        //            print(si.frame )
-        //        }
-        
-        //        print(si.frame)
-        //
-        //        if si.xname == "p1EBExhibitbp1sellerInitialSign" {
-        //            print(si.xname)
-        //        }
         si.lineArray = si.getNewOriginLine(n)
         si.lineArray = si.getNewOriginLine(si.lineArray as NSMutableArray)
         //        if si.xname == "p1EBbottom2" {
@@ -1713,15 +1668,24 @@ class SpringDalePDFViewController: PDFBaseViewController
                         "First Page",
                     "BASIC TERMS",
                     "AGREEMENT OF SALE AND PURCHASE",
-//                    "UNIT COMPLETION",
                     "TITLE COMPANY RECEIPT",
                     "EXHIBIT A",
                     "EXHIBIT B",
-                    "ATTACHMENT 1",
                     "EXHIBIT C",
                     "EXHIBIT D",
+                    "ATTACHMENT 1",
                     "EXHIBIT E",
-                    "EXHIBIT F"
+                    "EXHIBIT F",
+                    "EXHIBIT G",
+                    "EXHIBIT H",
+                    "EXHIBIT I",
+                    "EXHIBIT J",
+                    "EXHIBIT K",
+                    "EXHIBIT L",
+                    "Closing Procedure",
+                    "Indoor Air",
+                    "HOA Checklist",
+                    "Buyers constructions expectations"
                     ]
                 }
             }else if identifier == "showAttachPhoto" {
@@ -1743,8 +1707,8 @@ class SpringDalePDFViewController: PDFBaseViewController
                         if let email1 = contrat.buyer2email {
                             emailList.append(email1)
                         }
-                        emailList.append("phalycak@kirbytitle.com")
-                        emailList.append("heatherb@kirbytitle.com")
+//                        emailList.append("phalycak@kirbytitle.com")
+//                        emailList.append("heatherb@kirbytitle.com")
                         if let realtorEmail = self.contractPdfInfo?.otherbrokeremail {
                             if realtorEmail != "" {
                                 emailList.append(realtorEmail)
@@ -1806,18 +1770,11 @@ class SpringDalePDFViewController: PDFBaseViewController
                                 tvc.isapproved = isapproved
                                 tvc.FromWebSide = fromWeb
                                 tvc.hasCheckedPhoto = contractPdfInfo?.hasCheckedPhoto ?? "0"
-                                
-                                
-                               
-                                
-                                
                                 tvc.showSave = showSave
                                 tvc.showSubmit = showSubmit
-                                //                                tvc.showSubmit = true
                                 ppc.delegate = self
                                 tvc.delegate1 = self
                             }
-                            //                    tvc.text = "april"
                         }
                     case CConstants.SegueToPrintModelPopover:
                         self.dismiss(animated: true, completion: nil)
@@ -1826,17 +1783,14 @@ class SpringDalePDFViewController: PDFBaseViewController
                                 ppc.delegate = self
                                 tvc.delegate = self
                             }
-                            //                    tvc.text = "april"
                         }
                     case CConstants.SegueToAddressModelPopover:
                         self.dismiss(animated: true, completion: nil)
                         if let tvc = segue.destination as? AddressListModelViewController {
                             if let ppc = tvc.popoverPresentationController {
                                 ppc.delegate = self
-                                //                                tvc.AddressListOrigin = self.AddressList
                                 tvc.delegate = self
                             }
-                            //                    tvc.text = "april"
                         }
                     default: break
                     }
@@ -1928,17 +1882,18 @@ class SpringDalePDFViewController: PDFBaseViewController
             ,"filetype" : pdfInfo0?.nproject ?? "" + "_\(fileName!)_FromApp"]
         
         var savedPdfData: Data?
-        
-        if self.documents != nil && self.documents?.count > 0 {
-            savedPdfData = PDFDocument.mergedData(withDocuments: self.documents)
-        }else{
+        print(self.documents)
+//        savedPdfData = PDFDocument.mergedData(withDocuments: self.documents)
+////        if self.documents != nil && self.documents?.count > 0 {
+////
+////        }else{
             if let added = pdfView?.addedAnnotationViews{
                 //            print(added)
-                savedPdfData = document?.savedStaticPDFData(added)
+                savedPdfData = self.documents![0].savedStaticPDFData(added)
             }else{
-                savedPdfData = document?.savedStaticPDFData()
+                savedPdfData = self.documents![0].savedStaticPDFData()
             }
-        }
+////        }
         
         let fileBase64String = savedPdfData?.base64EncodedString(options: NSData.Base64EncodingOptions.endLineWithLineFeed)
         //        print(fileBase64String)
@@ -1965,7 +1920,7 @@ class SpringDalePDFViewController: PDFBaseViewController
                                         self.hud?.mode = .customView
                                         let image = UIImage(named: CConstants.SuccessImageNm)
                                         self.hud?.customView = UIImageView(image: image)
-                                        self.hud?.labelText = CConstants.SavedSuccessMsg
+                                        self.hud?.labelText = "Saved successfully and We have send an email to Kirbytitle company to sign."
                                         
                                         
                                         //                                self.pdfView?.removeFromSuperview()
@@ -2212,30 +2167,50 @@ class SpringDalePDFViewController: PDFBaseViewController
         case "BASIC TERMS":
             t = 2
         case "AGREEMENT OF SALE AND PURCHASE":
-            t = 3
+            t = 4
         case "TITLE COMPANY RECEIPT":
-            t = 21
-        case "EXHIBIT A":
             t = 22
-        case "EXHIBIT B":
+        case "EXHIBIT A":
             t = 23
-        case  "ATTACHMENT 1":
-            t = 25
+        case "EXHIBIT B":
+            t = 24
         case "EXHIBIT C":
-            t = 26
+            t = 25
         case "EXHIBIT D":
+            t = 26
+        case  "ATTACHMENT 1":
             t = 28
         case "EXHIBIT E":
             t = 29
         case "EXHIBIT F":
             t = 30
+        case "EXHIBIT G":
+            t = 31
+        case "EXHIBIT H":
+            t = 33
+        case "EXHIBIT I":
+            t = 36
+        case "EXHIBIT J":
+            t = 37
+        case "EXHIBIT K":
+            t = 38
+        case "EXHIBIT L":
+            t = 39
+        case "Closing Procedure":
+            t = 40
+        case "Indoor Air":
+            t = 41
+        case "HOA Checklist":
+            t = 43
+        case "Buyers constructions expectations":
+            t = 46
         default:
             break;
         }
         
         let h = (self.pdfView?.pdfView.scrollView.contentSize.height ?? 0) - getMargins2()
         if h > 0 {
-            let ch = (h / CGFloat(30)) * CGFloat(t - 1)
+            let ch = (h / CGFloat(50)) * CGFloat(t - 1)
             self.pdfView?.pdfView.scrollView.setContentOffset(CGPoint(x: 0.0, y: Double(ch)), animated: false)
         }
     }

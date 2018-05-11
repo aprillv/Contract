@@ -1104,7 +1104,7 @@
                                                 <rect key="frame" x="0.0" y="10" width="500" height="34"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8CH-JO-3Wx">
-                                                        <rect key="frame" x="449" y="-2.5" width="38" height="32"/>
+                                                        <rect key="frame" x="449" y="-3" width="38" height="32"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                                         <state key="normal" title="Close">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1986,7 +1986,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="operationCellIdentifier" id="397-Bz-2Ac">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="operationCellIdentifier" id="397-Bz-2Ac">
                                         <rect key="frame" x="0.0" y="28" width="260" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="397-Bz-2Ac" id="Y56-Zu-fMW">
@@ -2023,10 +2023,10 @@
         <image name="send_file" width="24" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="I9K-Mw-ko1"/>
-        <segue reference="eeY-km-cJ4"/>
-        <segue reference="PRx-vS-yyY"/>
-        <segue reference="zgu-UJ-igY"/>
-        <segue reference="yzX-Cz-Kkd"/>
+        <segue reference="eus-3U-PtQ"/>
+        <segue reference="piF-a3-pSe"/>
+        <segue reference="b0C-Cl-miU"/>
+        <segue reference="Mt6-87-XR6"/>
+        <segue reference="PP8-6v-OBJ"/>
     </inferredMetricsTieBreakers>
 </document>

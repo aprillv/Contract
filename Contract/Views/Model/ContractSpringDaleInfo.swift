@@ -133,5 +133,6 @@ class ContractSpringDaleInfo: ContractBasicInfo {
     
     var totaldeposit: String?
     var totalpurchaseprice: String?
+    var closingMemo: ContractClosingMemo?
 }
 

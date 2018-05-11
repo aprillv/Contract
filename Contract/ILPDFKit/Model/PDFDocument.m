@@ -116,8 +116,9 @@ static void renderPage1(NSUInteger page, CGContextRef ctx, CGPDFDocumentRef doc,
 //    CGFloat xf = 612.0*297.0/210.0;
     
     for (PDFWidgetAnnotationView *addedView in viewarray) {
+//        NSLog(@"++++++++++++ %@ %@", addedView.xname, addedView.value);
 //        if ([addedView.value hasPrefix:@"Lot 12 Blk "]) {
-//            NSLog(@"++++++++++++ %@ %@", addedView.xname, addedView.value);
+//
 //        }
         
 //        NSLog(@"addedView.pagenomargin %@", addedView.pagenomargin);
@@ -156,6 +157,10 @@ static void renderPage1(NSUInteger page, CGContextRef ctx, CGPDFDocumentRef doc,
             correctedFrame.origin.y -= xf;
         }
         
+        if ([addedView.xname isEqualToString: @"aprilclosing"]) {
+            correctedFrame.origin.y += 75;
+            
+        }
         
         if ([addedView isKindOfClass:[PDFFormTextField class]]) {
             CGContextSaveGState(ctx);

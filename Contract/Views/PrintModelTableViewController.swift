@@ -11,7 +11,7 @@ import Alamofire
 
 protocol ToDoPrintDelegate
 {
-    func GoToPrint(_ modelNm: [String])
+    func GoToPrint(_ modelNm: [String], _ line1: String, _ line2: String)
 }
 class PrintModelTableViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate{
     // MARK: - Constanse
@@ -393,11 +393,14 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
                                 filesNames.insert(CConstants.ActionTitleEnvironmentalNotice, at: index!)
                             }
                             
-                            delegate1.GoToPrint(filesNames)
+                            
                             if self.projectInfo?.status ?? "" != "" && self.canEdit {
                                 self.UpdatePrintedFileList(filesNames)
+                            }else {
+                                self.GetPrintedString(filesNames);
+                                
                             }
-                            
+                            delegate1.GoToPrint(filesNames, self.line1 ?? "", self.line2 ?? "")
                             
                             
                         }
@@ -413,7 +416,105 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
 
         
     }
-    
+    var line1: String?
+    var line2: String?
+    func GetPrintedString(_ filesNames : [String]){
+        var printedList : [String] = [String]()
+        for x in filesNames {
+            switch x {
+            case CConstants.ActionTitleContract, CConstants.ActionTitleDraftContract:
+                printedList.append("1")
+            case CConstants.ActionTitleThirdPartyFinancingAddendum:
+                printedList.append("2")
+            case CConstants.ActionTitleINFORMATION_ABOUT_BROKERAGE_SERVICES:
+                printedList.append("3")
+            case CConstants.ActionTitleAddendumA:
+                printedList.append("4")
+            case CConstants.ActionTitleEXHIBIT_A:
+                printedList.append("5")
+                //            case CConstants.ActionTitleEXHIBIT_B:
+            //                printedList.append("6")
+            case CConstants.ActionTitleEXHIBIT_C:
+                printedList.append("7")
+            case CConstants.ActionTitleAcknowledgmentOfEnvironmental:
+                printedList.append("20")
+            case CConstants.ActionTitleEnvironmentalNotice:
+                printedList.append("19")
+            case CConstants.ActionTitleBuyersExpect:
+                printedList.append("8")
+            case CConstants.ActionTitleAddendumC:
+                printedList.append("9")
+            case CConstants.ActionTitleAddendumD:
+                printedList.append("10")
+            case CConstants.ActionTitleAddendumE:
+                printedList.append("11")
+            case CConstants.ActionTitleFloodPlainAck:
+                printedList.append("12")
+            case CConstants.ActionTitleHoaChecklist:
+                printedList.append("13")
+            case CConstants.ActionTitleWarrantyAcknowledgement:
+                printedList.append("14")
+            case CConstants.ActionTitleDesignCenter:
+                printedList.append("15")
+            case CConstants.ActionTitleAddendumHOA:
+                printedList.append("17")
+            default:
+                break
+            }
+            var otherString : String = "";
+            
+            if (printedList.contains("4") || printedList.contains("9") || printedList.contains("10") || printedList.contains("11"))
+            {
+                otherString = "Add ";
+                if (printedList.contains("4"))
+                {
+                    otherString += "A,";
+                }
+                if (printedList.contains("9"))
+                {
+                    otherString += "C,";
+                }
+                if (printedList.contains("10"))
+                {
+                    otherString += "D,";
+                }
+                if (printedList.contains("11"))
+                {
+                    otherString += "E,";
+                }
+            }
+            if (printedList.contains("14"))
+            {
+                otherString += "Warr. Ack.,";
+            }
+            if (printedList.contains("5") || printedList.contains("7"))
+            {
+                otherString += "Exhibits ";
+                if (printedList.contains("5"))
+                {
+                    otherString += "A,";
+                }
+                
+                if (printedList.contains("7"))
+                {
+                    otherString += "B";
+                }
+            }
+            
+            var otherStringLine2 = "";
+            if (printedList.contains("20"))
+            {
+                otherStringLine2 += "Ack.of Environmental,";
+            }
+            if (printedList.contains("8"))
+            {
+                otherStringLine2 += "Construction Expectat";
+            }
+            
+            line1 = otherString
+            line2 = otherStringLine2
+        }
+    }
     
     func UpdatePrintedFileList(_ filesNames : [String]){
         
@@ -615,7 +716,7 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
                         }
                         let userinfo = UserDefaults.standard
                         userinfo.setValue(filesNames, forKey: CConstants.UserInfoPrintModel)
-                        delegate1.GoToPrint(filesNames)
+                        delegate1.GoToPrint(filesNames, self.line1 ?? "", self.line2 ?? "")
                     }
                 }
             }

@@ -270,8 +270,15 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
             copyrightlbl.title = "Copyright © " + usDateFormat.string(from: currentDate) + " All Rights Reserved"
         }
     }
-    func GoToPrint(_ modelNm: [String]) {
+    
+    
+    var xline1: String?;
+    var xline2: String?;
+    func GoToPrint(_ modelNm: [String], _ line1: String, _ line2: String) {
+       
          self.filesNms = modelNm
+        xline1 = line1;
+        xline2 = line2;
         if modelNm.contains(CConstants.ActionTitleAddendumC){
             callService(modelNm)
         }else{
@@ -408,8 +415,8 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
         if self.tableView.tag == 2 {
             let ddd = self.CiaNmArray?[self.CiaNm?[indexPath.section] ?? ""]
             let item: ContractsItem = ddd![indexPath.row]
-//            if true {
-            if item.idcia == "9999" || item.idcia == "386" && item.idproject!.hasPrefix("201") {
+//            if true {item.idcia == "9999" || 
+            if item.idcia == "386" && item.idproject!.hasPrefix("201") {
                 self.performSegue(withIdentifier: "springdale", sender: item)
                 self.tableView.deselectRow(at: indexPath, animated: true)
             }else {
@@ -555,8 +562,11 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
                             info.idnumber = item.idnumber
                             info.idcity = item.idcity
                             info.nproject = item.nproject
+                            
                             controller.contractInfo = item
                             controller.pdfInfo0 = info
+                            controller.xline1 = self.xline1;
+                            controller.xline2 = self.xline2;
                             //                            controller.AddressList = self.AddressListOrigin
                             controller.filesArray = self.filesNms
                             controller.page2 = false

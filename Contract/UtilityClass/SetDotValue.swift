@@ -428,6 +428,7 @@ class SetDotValue : NSObject {
                 case SignContractPDFFields.seller_2:
                     pv.value = pdfInfo!.cianame!
                 case SignContractPDFFields.pdf2211:
+//                    pv.value = "Add A,C,D,E, Warr. Ack.,Exhibits A,B"
                     pv.value = pdfInfo?.trec1 ?? ""
 //                    if (pdfInfo?.idcia ?? "100") == "386" {
 //                        pv.value = "Addendums A,C,D, Exhibits A-C, Buyer & Constr."
@@ -724,19 +725,37 @@ class SetDotValue : NSObject {
         static let Allowance = "txtAllowance"
         static let Title = "txtTitle"
         static let Mortgage = "txtMortgage"
-        static let Bank = "txtBank"
+        static let Bank = "txtBank1"
         static let SalesPrice = "txtSalesPrice"
-        static let Check = "txtCheck"
-        static let XType = "txtType"
-        static let Amount = "txtAmount"
+        static let Check = "txtCheck1"
+        static let XType = "txtType1"
+        static let Amount = "txtAmount1"
     }
     
-    func setCloingMemoDots(_ pdfInfo: ContractClosingMemo?, additionViews: [PDFWidgetAnnotationView], pdfview: PDFView) ->[PDFWidgetAnnotationView]{
-        var bankField : PDFFormTextField?
-        var checkField : PDFFormTextField?
-        var typeField : PDFFormTextField?
-        var amountField : PDFFormTextField?
+    func setCloingMemoDots(_ pdfInfo: ContractClosingMemo?, additionViews: [PDFWidgetAnnotationView], pdfview: PDFView){
+//        var bankField : PDFFormTextField?
+//        var checkField : PDFFormTextField?
+//        var typeField : PDFFormTextField?
+//        var amountField : PDFFormTextField?
+        if pdfInfo?.memoItemlist!.count > 1 {
+            var i = 1;
+            
+            for item in pdfInfo!.memoItemlist!{
+                for pv : PDFWidgetAnnotationView in additionViews{
+                    if (pv.xname == "txtBank\(i)") {
+                        pv.value = item.bankName ?? ""
+                    }else if (pv.xname == "txtCheck\(i)") {
+                        pv.value = item.check ?? ""
+                    }else if (pv.xname == "txtType\(i)") {
+                        pv.value = item.type ?? ""
+                    }else if (pv.xname == "txtAmount\(i)") {
+                        pv.value = item.amount ?? ""
+                    }
+                }
+                i = i + 1;
+            }
         
+        }
         for pv : PDFWidgetAnnotationView in additionViews{
             switch pv.xname{
                 //left top
@@ -834,91 +853,93 @@ class SetDotValue : NSObject {
                 pv.value = pdfInfo?.titleInsurance!
                 
                 // non - refundable
-            case ClosingMemoPDFFields.Bank:
-                bankField = pv as? PDFFormTextField
-                if let item = pdfInfo?.memoItemlist?.first{
-                    pv.value = item.bankName!
-                }
-            case ClosingMemoPDFFields.Check:
-                checkField = pv as? PDFFormTextField
-                if let item = pdfInfo?.memoItemlist?.first{
-                    pv.value = item.check!
-                }
-            case ClosingMemoPDFFields.XType:
-                typeField = pv as? PDFFormTextField
-                if let item = pdfInfo?.memoItemlist?.first{
-                    pv.value = item.type!
-                }
-            case ClosingMemoPDFFields.Amount:
-                amountField = pv as? PDFFormTextField
-                if let item = pdfInfo?.memoItemlist?.first{
-                    pv.value = item.amount!
-                }
+//            case ClosingMemoPDFFields.Bank:
+//                bankField = pv as? PDFFormTextField
+//                if let item = pdfInfo?.memoItemlist?.first{
+//                    pv.value = item.bankName!
+//                }
+//            case ClosingMemoPDFFields.Check:
+//                checkField = pv as? PDFFormTextField
+//                if let item = pdfInfo?.memoItemlist?.first{
+//                    pv.value = item.check!
+//                }
+//            case ClosingMemoPDFFields.XType:
+//                typeField = pv as? PDFFormTextField
+//                if let item = pdfInfo?.memoItemlist?.first{
+//                    pv.value = item.type!
+//                }
+//            case ClosingMemoPDFFields.Amount:
+//                amountField = pv as? PDFFormTextField
+//                if let item = pdfInfo?.memoItemlist?.first{
+//                    pv.value = item.amount!
+//                }
             default:
                 break
             }
         }
     
-        var addedAnnotationViews : [PDFWidgetAnnotationView] = [PDFWidgetAnnotationView]()
-        var originy = bankField!.frame.origin.y
-        originy += bankField!.frame.size.height * 1.2
-        let line = PDFWidgetAnnotationView(frame: CGRect(x: bankField!.frame.origin.x - 3, y: originy, width: amountField!.frame.size.width + amountField!.frame.origin.x + 6 - bankField!.frame.origin.x, height: 1))
-        line.backgroundColor = UIColor.lightGray
-        addedAnnotationViews.append(line)
-        line.pagenomargin = (bankField?.pagenomargin ?? 0.0)!
-        
-        if pdfInfo?.memoItemlist!.count > 1 {
-            var i = true
-            let lastLineInfo : [PDFFormTextField] = [bankField!, checkField!, typeField!, amountField!]
-            let font = floor(bankField!.currentFontSize())
-            
-            for item in pdfInfo!.memoItemlist!{
-                
-                if i {
-                    i = false
-                    continue
-                }else{
-                    originy += bankField!.frame.size.height * 0.8
-                    var y = 0
-                    for itemField in lastLineInfo {
-                        var bankFrame = itemField.frame
-                        bankFrame.origin.y = originy
-                        let xvalue : String
-                        var alignment : NSTextAlignment = .left
-                        switch y {
-                        case 0:
-                            xvalue = item.bankName!
-                        case 1:
-                            xvalue = item.check!
-                        case 2:
-                            xvalue = item.type!
-                        case 3:
-                            xvalue = item.amount!
-                            alignment = .right
-                        default:
-                            xvalue = ""
-                            break
-                        }
-                        let bank1 = PDFFormTextField(frame: bankFrame, multiline: false, alignment: alignment, secureEntry: false, readOnly: true, withFont: font)
-                        bank1?.xname = "april"
-                        bank1?.value = xvalue
-                        bank1?.pagenomargin = (bankField?.pagenomargin ?? 0.0)!
-//                        print(bank1.pagenomargin)
-                        addedAnnotationViews.append(bank1!)
-                        y += 1
-                    }
-                    originy += bankField!.frame.size.height * 1.2
-                    let line = PDFWidgetAnnotationView(frame: CGRect(x: bankField!.frame.origin.x - 3, y: originy, width: amountField!.frame.size.width + amountField!.frame.origin.x + 6 - bankField!.frame.origin.x, height: 1))
-                    line.backgroundColor = UIColor.lightGray
-                    line.pagenomargin = (bankField?.pagenomargin ?? 0.0)!
-                    addedAnnotationViews.append(line)
-                }
-            }
-         
-        }
-        pdfview.addMoreDots(addedAnnotationViews)
-        
-        return addedAnnotationViews
+//        var addedAnnotationViews : [PDFWidgetAnnotationView] = [PDFWidgetAnnotationView]()
+//        var originy = bankField!.frame.origin.y
+//        originy += bankField!.frame.size.height * 1.2
+//        let line = PDFWidgetAnnotationView(frame: CGRect(x: bankField!.frame.origin.x - 3, y: originy, width: amountField!.frame.size.width + amountField!.frame.origin.x + 6 - bankField!.frame.origin.x, height: 1))
+//        line.backgroundColor = UIColor.lightGray
+//        line.xname = "aprilclosing"
+//        addedAnnotationViews.append(line)
+//        line.pagenomargin = (bankField?.pagenomargin ?? 0.0)!
+//
+//        if pdfInfo?.memoItemlist!.count > 1 {
+//            var i = true
+//            let lastLineInfo : [PDFFormTextField] = [bankField!, checkField!, typeField!, amountField!]
+//            let font = floor(bankField!.currentFontSize())
+//
+//            for item in pdfInfo!.memoItemlist!{
+//
+//                if i {
+//                    i = false
+//                    continue
+//                }else{
+//                    originy += bankField!.frame.size.height * 0.8
+//                    var y = 0
+//                    for itemField in lastLineInfo {
+//                        var bankFrame = itemField.frame
+//                        bankFrame.origin.y = originy
+//                        let xvalue : String
+//                        var alignment : NSTextAlignment = .left
+//                        switch y {
+//                        case 0:
+//                            xvalue = item.bankName!
+//                        case 1:
+//                            xvalue = item.check!
+//                        case 2:
+//                            xvalue = item.type!
+//                        case 3:
+//                            xvalue = item.amount!
+//                            alignment = .right
+//                        default:
+//                            xvalue = ""
+//                            break
+//                        }
+//                        let bank1 = PDFFormTextField(frame: bankFrame, multiline: false, alignment: alignment, secureEntry: false, readOnly: true, withFont: font)
+//                        bank1?.xname = "aprilclosing"
+//                        bank1?.value = xvalue
+//                        bank1?.pagenomargin = (bankField?.pagenomargin ?? 0.0)!
+////                        print(bank1.pagenomargin)
+//                        addedAnnotationViews.append(bank1!)
+//                        y += 1
+//                    }
+//                    originy += bankField!.frame.size.height * 1.2
+//                    let line = PDFWidgetAnnotationView(frame: CGRect(x: bankField!.frame.origin.x - 3, y: originy, width: amountField!.frame.size.width + amountField!.frame.origin.x + 6 - bankField!.frame.origin.x, height: 1))
+//                    line.xname = "aprilclosing"
+//                    line.backgroundColor = UIColor.lightGray
+//                    line.pagenomargin = (bankField?.pagenomargin ?? 0.0)!
+//                    addedAnnotationViews.append(line)
+//                }
+//            }
+//
+//        }
+//        pdfview.addMoreDots(addedAnnotationViews)
+//
+//        return nil
     }
     // MARK: Addendum A
     fileprivate struct AddendumAPDFFields{
