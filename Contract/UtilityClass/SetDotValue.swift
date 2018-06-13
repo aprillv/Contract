@@ -365,6 +365,7 @@ class SetDotValue : NSObject {
                 case "toseller7":
                     let userInfo = UserDefaults.standard
                     pv.value = userInfo.string(forKey: CConstants.UserInfoEmail) ?? ""
+//                     pv.value = "brandonr@intown-homes.com"
                 case "tobuyer72":
                     if (pdfInfo?.client2 ?? "") != "" && pdfInfo?.bemail2 != "" && (pdfInfo?.bemail1 ?? "") != (pdfInfo?.bemail2 ?? ""){
                         pv.value = pdfInfo!.bemail2!
@@ -453,10 +454,12 @@ class SetDotValue : NSObject {
 //                            pv.value = "Expectations, Builder Express Ltd Warranty & Performance St"
 //                        }
 //                    }
+                case "2214":
+                    pv.value = pdfInfo?.trec4 ?? ""
+                case "2215":
+                    pv.value = pdfInfo?.trec5 ?? ""
                 case SignContractPDFFields.pdf2213:
                      pv.value = pdfInfo?.trec3 ?? ""
-//                    pv.value = "Addendum For Communities with a Homeowners's Association"
-                    
                 case SignContractPDFFields.pdf22a1:
                     if let radio = pv as? PDFFormButtonField {
                         radio.setValue2(pdfInfo!.page7ThirdPartyFinacingAddendum!)

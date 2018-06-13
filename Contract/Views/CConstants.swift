@@ -61,7 +61,7 @@ struct CConstants{
     static let SegueToAddressModelPopover : String = "Address switch"
     static let SegueToOperationsPopover : String = "Show Operations"
     
-    static let Administrator = "roberto1@buildersaccess.com"
+    static let Administrator = "roberto@buildersaccess.com"
     
     static let LoggedUserNameKey : String = "LoggedUserNameInDefaults"
     static let InstallAppLink : String = "itms-services://?action=download-manifest&url=https://www.buildersaccess.com/iphone/contract.plist"
@@ -90,6 +90,8 @@ struct CConstants{
     
     static let PdfFileNameContract = "BaseContract"
     static let PdfFielNameContract_Austin = "BaseContract_Austin"
+    
+    static let PdfFileNameContract1 = "Contract23-15"
     static let PdfFileNameThirdPartyFinancingAddendum = "Third_Party_Financing_Addendum_TREC"
     static let PdfFileNameClosingMemo = "ClosingMemo"
     static let PdfFileNameDesignCenter = "DesignCenter"
@@ -118,6 +120,7 @@ struct CConstants{
     static let PdfPageHeight : CGFloat = 976.688235
 //    static let PdfPageMarginUserDefault = "pageHMargin"
     static let PdfFileNameContractPageCount = 9
+    static let PdfFileNameContractPageCount1 = 10
     static let PdfFileNameThirdPartyFinancingAddendumPageCount = 2
     static let PdfFileNameClosingMemoPageCount = 1
     static let PdfFileNameDesignCenterPageCount = 1

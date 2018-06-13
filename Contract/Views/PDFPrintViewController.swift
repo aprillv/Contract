@@ -38,6 +38,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, SubmitForApproveViewControllerDelegate, SaveAndEmailViewControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, GoToFileDelegate, EmailContractToBuyerViewControllerDelegate{
     @IBOutlet var copyrightlbl: UIBarButtonItem!{
         didSet{
+            
             let currentDate = Date()
             let usDateFormat = DateFormatter()
             usDateFormat.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy", options: 0, locale: Locale(identifier: "en-US"))
@@ -405,18 +406,16 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                 && title != CConstants.ActionTitleContract
                 && title != CConstants.ActionTitleDraftContract {
                 if called{
-                    //                    print("a1", title)
                     self.callService(title, param: param)
                     called = false;
                 }
                 
-            }else{
+            }else{  
                 if !calledContract{
                     calledContract = (title == CConstants.ActionTitleContract
                         || title == CConstants.ActionTitleDraftContract)
                 }
                 
-                //                print("b1", title)
                 self.callService(title, param: param)
             }
             
@@ -428,14 +427,33 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
             switch title {
             case CConstants.ActionTitleContract,
                  CConstants.ActionTitleDraftContract:
-                //                print(contractPdfInfo?.idcity)
-                if (contractInfo?.idcity ?? "1") == "3" {
-                    str = CConstants.PdfFielNameContract_Austin
-                }else{
-                    str = CConstants.PdfFileNameContract
+                var isOld = false;
+                if let signdate = contractInfo?.signfinishdate {
+                    if (!signdate.contains("1980")) {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MM/dd/yyyy"
+                        dateFormatter.locale = Locale(identifier:"en_US_POSIX")
+                        let date = dateFormatter.date(from: signdate)!
+                        let date1 = dateFormatter.date(from: "06/11/2018")!
+                        isOld = date < date1
+                    }
+                    
                 }
                 
-                filePageCnt += CConstants.PdfFileNameContractPageCount
+                if contractInfo!.idnumber == "15068" || contractInfo!.idnumber == "15117" || isOld{
+                    if contractInfo!.idcity == "3" {
+                         str = CConstants.PdfFielNameContract_Austin
+                    }else{
+                         str = CConstants.PdfFileNameContract
+                    }
+                   
+                    filePageCnt += CConstants.PdfFileNameContractPageCount
+                }else{
+                    str = CConstants.PdfFileNameContract1
+                    filePageCnt += CConstants.PdfFileNameContractPageCount1
+                }
+                
+                
             case CConstants.ActionTitleThirdPartyFinancingAddendum:
                 str = CConstants.PdfFileNameThirdPartyFinancingAddendum
                 filePageCnt += CConstants.PdfFileNameThirdPartyFinancingAddendumPageCount
@@ -592,11 +610,12 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
             
             filesNames.append(str)
             
+            
             let document = PDFDocument.init(resource: str)
             document?.pdfName = title
             documents?.append(document!)
             
-            //            print(CGFloat(lastheight))
+                        print(document?.forms)
             
             if let additionViews = document?.forms.createWidgetAnnotationViewsForSuperview(withWidth: view.bounds.size.width, margin: margins.x, hMargin: margins.y, pageMargin: CGFloat(lastheight)) as? [PDFWidgetAnnotationView]{
                 
@@ -1074,7 +1093,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
     
     // MARK: Request Data
     fileprivate func callService(_ printModelNm: String, param: [String: String]){
-                print(param)
+//                print(param)
         var serviceUrl: String?
         switch printModelNm{
         case CConstants.ActionTitleDesignCenter:
@@ -1093,7 +1112,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
         default:
             serviceUrl = CConstants.AddendumAServiceURL
         }
-        //        print(param)
+        print(param, serviceUrl)
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         //                hud.mode = .AnnularDeterminate
         hud?.labelText = CConstants.RequestMsg
@@ -1102,7 +1121,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                                   method: .post,
                     parameters: param).responseJSON{ (response) -> Void in
                         hud?.hide(true)
-//                        print(param, serviceUrl)
+                        print(param, serviceUrl)
                         if response.result.isSuccess {
         
                             if let rtnValue = response.result.value as? [String: AnyObject]{
@@ -2044,13 +2063,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
         for _ in 0...6{
             hoapage3.append("0")
         }
-        //        }
-        
-        
-        
-        
-        
-        
         
         let nameArray = getPDFSignaturePrefix()
         
@@ -2293,20 +2305,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
         param["idcontract1"] = contractInfo?.idnumber
         param["doc"] = "1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16"
         param["page"] = "9;2;2;6;1;1;3;5;2;2;2;1;2;1;3;1"
-        //        param["doc"] = "\([1 23;4;5;6;7;8;9;10;11;12;13;14;15;16])"
-        //        param["page"] = "\(cntArray)"
-        //        try{
-        //        let a = NSJSONSerialization.dataWithJSONObject("\(b1iynArray)", options: nil)
-        //        let c = String(data: a)
-        //            print(c)
-        //        }catch{}
-        //        return
-        
-        //        print(getStr(b1iynArray))
-        //        return
-        //        brokerb1 = false
-        //        brokerb2 = false
-        
         param["brokerInfoPage2"] = (brokerb1 ? "1" : "0") + "|" +  (brokerb2 ? "1" : "0")
         var initial_index : [[String]] =  [[String]]()
         initial_index.append(exhibitB)
@@ -2316,17 +2314,13 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
         
         if contractInfo!.status! == CConstants.ApprovedStatus {
             param["initial_index"] = " "
-            //        print(getStr(initial_index))
             param["initial_b1yn"] = " "
-            //        print(getStr(b1iynArray))
-            
             param["initial_b2yn"] = " "
             param["signature_b1yn"] = " "
             param["signature_b2yn"] = " "
             param["initial_s1yn"] = getStr(s1iynArray)
             param["signature_s1yn"] = getStr(s1isnArray)
             param["initial_b1"] = " "
-            //        print(getStr(b1i))
             param["initial_b2"] = " "
             param["signature_b1"] = " "
             param["signature_b2"] = " "
@@ -2334,12 +2328,10 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
             param["signature_s1"] = getStr(s1s)
         }else{
             param["initial_index"] = getStr(initial_index)
-            //        print(getStr(initial_index))
             param["initial_b1yn"] = getStr(b1iynArray)
             param["initial_b2yn"] = getStr(b2iynArray)
             param["signature_b1yn"] = getStr(b1isnArray)
             param["signature_b2yn"] = getStr(b2isnArray)
-            
             param["initial_s1yn"] = "0|0|0|0|0|0|0|0|0;0|0;0|0;0|0|0|0|0|0;0;0;0|0|0;0|0|0|0|0;0|0;0|0;0|0;0;0|0;0;0|0|0;0"
             param["signature_s1yn"] = "0|0|0|0|0|0|0|0|0;0|0;0|0;0|0|0|0|0|0;0;0;0|0|0;0|0|0|0|0;0|0;0|0;0|0;0;0|0;0;0|0|0;0"
             param["initial_b1"] = getStr(b1i)
@@ -2397,13 +2389,13 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
 //                                print(param0)
                                 if response.result.isSuccess {
                                     if let rtnValue = response.result.value as? Bool{
-                                        print("asdfasdfasd")
+//                                        print("asdfasdfasd")
                                     }
                                 }
             
             }
         }
-        print(param);
+//        print(param);
         Alamofire.request(CConstants.ServerURL + reurl,
                           method: .post,
                           parameters: param).responseJSON{ (response) -> Void in
@@ -2543,7 +2535,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                                                 let cc = rtn.brokerInfoPage2!.components(separatedBy: "|")
                                                 brokerb1 = (cc[0] == "1")
                                                 brokerb2 = (cc[1] == "1")
-                                            }else{
+                                              }else{
                                                 brokerb1 = (rtn.brokerInfoPage2! == "1")
                                             }
                                         }
@@ -2870,11 +2862,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
     func submitStep0() {
         // do submit for approve
         let userInfo = UserDefaults.standard
-        
-        //        print(["idcontract1" : self.contractInfo!.idnumber!, "idcia": self.contractInfo!.idcia!, "email": userInfo.stringForKey(CConstants.UserInfoEmail) ?? ""])
-        
-        
-        
         Alamofire.request(CConstants.ServerURL + "bacontract_getSubmitForApproveEmail.json", method: .post,
                           parameters: ["idcontract1" : self.contractInfo!.idnumber!, "idcia": self.contractInfo!.idcia!, "email": userInfo.string(forKey: CConstants.UserInfoEmail) ?? ""]).responseJSON{ (response) -> Void in
                             self.hud!.hide(true)
@@ -3340,7 +3327,10 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
             emailcc1 = emailcc1.replacingOccurrences(of: ",", with: "")
         }
         let userInfo = UserDefaults.standard
-        var a = ["idcontract":contractInfo?.idnumber ?? "","EmailTo":email,"EmailCc":emailcc,"Subject":"\(contractInfo!.nproject!)'s Contract","Body":msg,"idcia":contractInfo?.idcia ?? "","idproject":contractInfo?.idproject ?? "", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
+        let a = ["idcontract":contractInfo?.idnumber ?? "","EmailTo":email,"EmailCc":emailcc,"Subject":"\(contractInfo!.nproject!)'s Contract","Body":msg,"idcia":contractInfo?.idcia ?? "","idproject":contractInfo?.idproject ?? "", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
+        
+
+        
 //        if contractInfo?.idcia == "9999" {
 //            a = ["idcontract":contractInfo?.idnumber ?? ""
 //                , "EmailTo": "april@buildersaccess.com"

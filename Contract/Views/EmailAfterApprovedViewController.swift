@@ -117,9 +117,7 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
                         let email = userInfo.value(forKey: CConstants.UserInfoEmail) as? String
                         emailList.append(email ?? "")
                         
-//                        emailList = [String]()
-//                        emailList.append("phalycak@kirbytitle.com")
-//                        emailList.append("heatherb@kirbytitle.com")
+                      
                         controller.xemailList = emailList
                         
                         
@@ -146,7 +144,7 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
     var hud : MBProgressHUD?
     func GoToEmailSubmit(_ email: String, emailcc: String, msg: String) {
         let str = "bacontract_SendEmail2.json"
-        
+
         var email1 = email.replacingOccurrences(of: " ", with: "")
         email1 = email1.replacingOccurrences(of: "\n", with: "")
         if email1.hasSuffix(",") {
@@ -159,12 +157,20 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
         if emailcc1 == ""{
             emailcc1 = " "
         }
-        
+
         let userInfo = UserDefaults.standard
-        
-        var param = ["idcontract": contractInfo?.idnumber ?? "", "EmailTo":email1,"EmailCc":emailcc1,"Subject":"\(contractInfo!.nproject!)'s Contract","Body":msg,"idcia":contractInfo?.idcia ?? "","idproject":contractInfo?.idproject ?? "", "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? "", "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
-        param["salesemail"] = "springw@lovetthomes.com"
-        
+
+        var param = ["idcontract": contractInfo?.idnumber ?? ""
+            , "EmailTo":email1
+            ,"EmailCc":emailcc1
+            ,"Subject":"\(contractInfo!.nproject!)'s Contract"
+            ,"Body":msg
+            ,"idcia":contractInfo?.idcia ?? ""
+            ,"idproject":contractInfo?.idproject ?? ""
+            , "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? ""
+            , "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
+
+
 //        if contractInfo?.idcia == "9999" {
 //            param = ["idcontract":contractInfo?.idnumber ?? ""
 //                , "EmailTo": "april@buildersaccess.com"
@@ -176,7 +182,7 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
 //                , "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? ""
 //                , "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
 //        }
-        print(param)
+//        print(param)
 //        if contractInfo?.idcia == "9999" {
 //            param = ["idcontract":contractInfo?.idnumber ?? ""
 //                , "EmailTo": "APRIL@buildersaccess.com"
@@ -188,17 +194,17 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
 //                , "salesemail": userInfo.string(forKey: CConstants.UserInfoEmail) ?? ""
 //                , "salesname": userInfo.string(forKey: CConstants.UserInfoName) ?? ""]
 //        }
-        
+
 //        print(param)
          hud = MBProgressHUD.showAdded(to: webview, animated: true)
         //                hud.mode = .AnnularDeterminate
         hud?.labelText = "Sending Email..."
         hud?.show(true)
-        
+
         Alamofire.request(CConstants.ServerURL + str,
                           method: .post,
             parameters: param).responseJSON{ (response) -> Void in
-                
+
                 //                print(param, serviceUrl, response.result.value)
                 if response.result.isSuccess {
                     print(response.result.value)
@@ -207,14 +213,14 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
                             self.hud?.mode = .customView
                             let image = UIImage(named: CConstants.SuccessImageNm)
                             self.hud?.customView = UIImageView(image: image)
-                            
+
                             self.hud?.labelText = "Email sent successfully."
                             self.perform(#selector(EmailAfterApprovedViewController.dismissProgress as (EmailAfterApprovedViewController) -> () -> ()), with: nil, afterDelay: 0.5)
                         }else{
                         self.PopMsgWithJustOK(msg: CConstants.MsgServerError)
                             self.perform(#selector(EmailAfterApprovedViewController.dismissProgress as (EmailAfterApprovedViewController) -> () -> ()), with: nil, afterDelay: 0.5)
                         }
-                        
+
                     }else{
                         self.PopMsgWithJustOK(msg: CConstants.MsgServerError)
                         self.perform(#selector(EmailAfterApprovedViewController.dismissProgress as (EmailAfterApprovedViewController) -> () -> ()), with: nil, afterDelay: 0.5)
@@ -224,8 +230,11 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
                     self.perform(#selector(EmailAfterApprovedViewController.dismissProgress as (EmailAfterApprovedViewController) -> () -> ()), with: nil, afterDelay: 0.5)
                 }
         }
-        
+
     }
+    
+    
+
     
     func dismissProgress(){
         self.hud?.hide(true)
@@ -278,9 +287,9 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
                                 arrayCnt.append(1)
                             case 1:
                                 array.append("Print Contract")
-                                arrayCnt.append(9)
+                                arrayCnt.append(10)
                             case 2:
-                            array.append("Third Party Financing Addendum")
+                                array.append("Third Party Financing Addendum")
                                 arrayCnt.append(2)
                             case 3:
                                 array.append("Information about Brokerage Services")

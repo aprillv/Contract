@@ -457,7 +457,8 @@ class toolpdf: NSObject {
             "p7bottom1",
             "p8bottom1",
             "p8buyer1Sign",
-            "p9bottom1"],
+            "p9bottom1",
+            "p10bottom1"],
         
         
         "Third Party Financing Addendum" : ["p1T3bottom1",
@@ -561,7 +562,6 @@ class toolpdf: NSObject {
         
         "Addendum for Property Subject to HOA" : ["p1AHbuyer1Sign",
             "p1AHbottom1"],
-       
         
         ]
     
@@ -594,7 +594,8 @@ let pdfBuyer2SignatureFields = [
         "p7bottom2",
         "p8bottom2",
         "p8buyer2Sign",
-        "p9bottom2"],
+        "p9bottom2",
+        "p10bottom2"],
     
     "Third Party Financing Addendum" : ["p1T3bottom2",
         "p2T3buyer2Sign",
@@ -697,7 +698,8 @@ let pdfBuyer2SignatureFields = [
                         "p7bottom3",
                         "p8bottom3",
                         "p8seller1Sign",
-                        "p9bottom3"],
+                        "p9bottom3",
+                        "p10bottom3"],
                       "Addendum for Property Subject to HOA" : ["p1AHseller1Sign",
                         "p1AHbottom3"],
                       "Third Party Financing Addendum" : ["p1T3bottom3",

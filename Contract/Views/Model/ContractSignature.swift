@@ -42,6 +42,9 @@ class ContractSignature: ContractBasicInfo {
     var trec1 : String?
     var trec2 : String?
     var trec3 : String?
+    var trec4 : String?
+    var trec5 : String?
+    
     
 
     

@@ -807,7 +807,7 @@
                                                 <rect key="frame" x="0.0" y="10" width="500" height="34"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="byd-0o-br8">
-                                                        <rect key="frame" x="449" y="-3.5" width="38" height="32"/>
+                                                        <rect key="frame" x="449" y="-3" width="38" height="32"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                                         <state key="normal" title="Close">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1104,7 +1104,7 @@
                                                 <rect key="frame" x="0.0" y="10" width="500" height="34"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8CH-JO-3Wx">
-                                                        <rect key="frame" x="449" y="-3" width="38" height="32"/>
+                                                        <rect key="frame" x="449" y="-2.5" width="38" height="32"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                                         <state key="normal" title="Close">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1657,7 +1657,7 @@
                                                 <rect key="frame" x="0.0" y="10" width="500" height="34"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QoM-uu-OK3">
-                                                        <rect key="frame" x="449" y="-3" width="38" height="32"/>
+                                                        <rect key="frame" x="449" y="-2.5" width="38" height="32"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                                         <state key="normal" title="Close">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

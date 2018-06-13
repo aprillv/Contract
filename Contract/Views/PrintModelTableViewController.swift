@@ -153,9 +153,10 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
 //        11	Addendum E
 //        12	Floodaplain Acknowledgement
 //        13	HOA Checklist
-//        14	Warranty Acknowledgement
+//        14    Acknowledgement
 //        15	Design Center
 //        17	Addendum for Property Subject to HOA
+        // 20 environmental remediation acknowledgment
         
         for x in printList {
             switch x {
