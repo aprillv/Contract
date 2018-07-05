@@ -372,7 +372,7 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
                                 }
                                 
                                 filesNames.insert(CConstants.ActionTitleAcknowledgmentOfEnvironmental, at: index!)
-                            }else if (item?.idcia == "101" && (item?.idproject ?? "").hasPrefix("117") || item?.idcia == "9999"){
+                            }else if (item?.idcia == "101" && (item?.idproject ?? "").hasPrefix("117")){
                                 var beforeList = ["Sign Contract", "Third Party Financing Addendum", "Information about Brokerage Services", "Addendum A", "Exhibit A", "Exhibit B General"];
                                 
                                 

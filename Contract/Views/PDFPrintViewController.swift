@@ -466,42 +466,29 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                 
                 filePageCnt += CConstants.PdfFileNameINFORMATION_ABOUT_BROKERAGE_SERVICESPageCount
             case CConstants.ActionTitleAddendumA:
-//                print(contractInfo?.idcity, contractInfo?.isFortworth, contractInfo?.idcia)
-//                if contractInfo?.idcity ?? "1" == "3" {
-//                    if ((contractInfo?.idcia ?? "") == "265") {
-//                        str = "AddendumA_Austin_TexasIntownhomes"
-//                    }else{
-//                        str = CConstants.PdfFileNameAddendumA_austin
-//                    }
-//
-//                }else if (contractInfo?.idcity ?? "1" == "2" && (contractInfo?.isFortworth ?? "0") == "1") {
-//                    if ((contractInfo?.idcia ?? "") == "265") {
-//                        str = "AddendumA_DallasFortWorth_TexasIntownhomes"
-//
-//                    }else{
-//                        str = "AddendumA_DallasFortWorth"
-//                    }
-//
-//                }else{
-//                    if ((contractInfo?.idcia ?? "") == "265") {
-//                        if ((contractInfo?.idproject ?? "").hasPrefix("108")){
-//                            str = "AddendumA_TexasIntownhomes_CongressandShelby"
-//                        }else{
-//                            str = "AddendumA_TexasIntownhomes"
-//                        }
-//
-//                    }else{
-//                        str = CConstants.PdfFileNameAddendumA
-//                    }
-//                }
-//                print(contractInfo?.idcity ?? "april")
-                if contractInfo?.idcity ?? "1" == "3" {
-                    str = CConstants.PdfFileNameAddendumA_austin
-                }else{
-                  str = CConstants.PdfFileNameAddendumA
-                }
                 
-                filePageCnt += CConstants.PdfFileNameAddendumAPageCount
+                var isOld = false;
+                if let signdate = contractInfo?.signfinishdate {
+                    if (!signdate.contains("1980")) {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MM/dd/yyyy"
+                        dateFormatter.locale = Locale(identifier:"en_US_POSIX")
+                        let date = dateFormatter.date(from: signdate)!
+                        let date1 = dateFormatter.date(from: "06/19/2018")!
+                        isOld = date < date1
+                    }
+                }
+                if contractInfo!.idnumber == "15068" || contractInfo!.idnumber == "15119"  || contractInfo!.idnumber == "14909" || isOld{
+                    if contractInfo?.idcity ?? "1" == "3" {
+                        str = CConstants.PdfFileNameAddendumA_austin
+                    }else{
+                        str = CConstants.PdfFileNameAddendumA
+                    }
+                    filePageCnt += CConstants.PdfFileNameAddendumAPageCount
+                }else{
+                    str = CConstants.PdfFileNameAddendumA_06152018
+                    filePageCnt += CConstants.PdfFileNameAddendumA_06152018_PageCount
+                }
             case CConstants.ActionTitleAcknowledgmentOfEnvironmental:
                 str = CConstants.PdfFileNameAcknowledgmentOfEnvironmental
                 filePageCnt += 2
@@ -582,19 +569,20 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
 //                }
 //                filePageCnt += CConstants.PdfFileNameEXHIBIT_BPageCount
             case CConstants.ActionTitleEXHIBIT_C:
-                if contractInfo?.idcity ?? "1" == "3" {
-                    if ((contractInfo?.idcia ?? "") == "265") {
-                        str = "EXHIBIT_C_General_Austin_TexasIntownhomes"
-                    }else{
-                        str = CConstants.PdfFileNameEXHIBIT_C_austin
-                    }
-                }else{
-                    if ((contractInfo?.idcia ?? "") == "265") {
-                        str = "EXHIBIT_C_General_TexasIntownhomes"
-                    }else{
-                       str = CConstants.PdfFileNameEXHIBIT_C
-                    }
-                }
+//                if contractInfo?.idcity ?? "1" == "3" {
+//                    if ((contractInfo?.idcia ?? "") == "265") {
+//                        str = "EXHIBIT_C_General_Austin_TexasIntownhomes"
+//                    }else{
+//                        str = CConstants.PdfFileNameEXHIBIT_C_austin
+//                    }
+//                }else{
+//                    if ((contractInfo?.idcia ?? "") == "265") {
+//                        str = "EXHIBIT_C_General_TexasIntownhomes"
+//                    }else{
+//                       str = CConstants.PdfFileNameEXHIBIT_C
+//                    }
+//                }
+                str = CConstants.PdfFileNameEXHIBITB_06152018
                 filePageCnt += CConstants.PdfFileNameEXHIBIT_CPageCount
             case CConstants.ActionTitleClosingMemo:
                 str = CConstants.PdfFileNameClosingMemo
@@ -1934,6 +1922,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
         return nameArray
     }
     override func saveToServer() {
+        
 //    print(self.contractPdfInfo!)
 //        let  buyerSign =  isbuyer1 ? tlpdf.pdfBuyer1SignatureFields : tlpdf.pdfBuyer2SignatureFields
 //        for (x, f) in buyerSign {
@@ -1972,7 +1961,65 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
 //            }
 //        }
         
-        saveToServer1(0)
+        var notsign: SignatureView?
+        
+        if let list = self.navigationItem.leftBarButtonItems {
+            if list.count >= 3 {
+                let b1 = list[1]
+                let b2 = list[2]
+                if (b1.title ?? "") == "Next B-1" {
+                    let tp = toolpdf()
+                    let (t, sign) =  tp.CheckBuyerFinish(self.fileDotsDic, documents: self.documents, isbuyer1: true)
+                    if !t {
+                        notsign = sign
+                        
+                    }else{
+                        if (b2.title ?? "") == "Next B-2" {
+                            let tp = toolpdf()
+                            let (t, sign) =  tp.CheckBuyerFinish(self.fileDotsDic, documents: self.documents, isbuyer1: false)
+                            if !t {
+                                notsign = sign
+                                
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+        if let xnotsign = notsign {
+            let alert: UIAlertController = UIAlertController(title: CConstants.MsgTitle, message: "There is a filed required to be signed. Go to that field?", preferredStyle: .alert)
+            
+            //Create and add the OK action
+            let oKAction: UIAlertAction = UIAlertAction(title: CConstants.MsgOKTitle, style: .default)  { Void in
+                
+                var cg =  xnotsign.center
+                cg.x = 0
+                cg.y = cg.y - self.view.frame.height/2
+                if cg.y > 0 {
+                    self.pdfView?.pdfView.scrollView.setContentOffset(cg
+                        , animated: false)
+                }
+                
+                
+            }
+            alert.addAction(oKAction)
+            
+            let cancel: UIAlertAction = UIAlertAction(title: "Continue to Save", style: .cancel){ Void in
+                self.saveToServer1(0);
+            }
+            alert.addAction(cancel)
+            self.present(alert, animated: true, completion: nil)
+            
+            
+        }else{
+           self.saveToServer1(0);
+        }
+        
+        
+        
+       
     }
     func saveToServer1(_ xtype: Int8) {
         
@@ -2354,6 +2401,12 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                 param["whichBuyer"] = "1"
                 reurl = "bacontract_save_signNew.json"
             }else{
+                param["whichBuyer"] = "0"
+                reurl = "bacontract_save_sign.json"
+            }
+            
+            if (param["whichBuyer"] == "1" || param["whichBuyer"] == "2") && initial_b1 != " " && initial_b2 != " " {
+                param["whichBuyer"] = "0"
                 reurl = "bacontract_save_sign.json"
             }
             
@@ -2423,6 +2476,8 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                                             self.hud?.labelText = "Submitting to Sever..."
                                             // submit buyer2's sign finishe.
                                             self.submitBuyerSignStep2(false)
+                                        }else if xtype == 0 {
+                                            
                                         }else{
                                             self.hud?.mode = .customView
                                             let image = UIImage(named: CConstants.SuccessImageNm)
@@ -2837,22 +2892,69 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
     
     
     override func submit() {
-        let alert: UIAlertController = UIAlertController(title: CConstants.MsgTitle, message: "Do you want to submit for approval?", preferredStyle: .alert)
+        var notsign: SignatureView?
         
-        //Create and add the OK action
-        let oKAction: UIAlertAction = UIAlertAction(title: "Yes", style: .default) { action -> Void in
-            //save signature to sever
-            //            self.locked = true
-            self.saveToServer1(1)
+        if let list = self.navigationItem.leftBarButtonItems {
+            if list.count >= 3 {
+                let b1 = list[1]
+                let b2 = list[2]
+                if (b1.title ?? "") == "Next B-1" {
+                    let tp = toolpdf()
+                    let (t, sign) =  tp.CheckBuyerFinish(self.fileDotsDic, documents: self.documents, isbuyer1: true)
+                    if !t {
+                        notsign = sign
+                        
+                    }else{
+                        if (b2.title ?? "") == "Next B-2" {
+                            let tp = toolpdf()
+                            let (t, sign) =  tp.CheckBuyerFinish(self.fileDotsDic, documents: self.documents, isbuyer1: false)
+                            if !t {
+                                notsign = sign
+                                
+                            }
+                        }
+                    }
+                }
+            }
             
         }
-        alert.addAction(oKAction)
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addAction(cancelAction)
-        
-        //Present the AlertController
-        self.present(alert, animated: true, completion: nil)
+        if let xnotsign = notsign {
+            let alert: UIAlertController = UIAlertController(title: CConstants.MsgTitle, message: "There is a filed required to be signed before submit for approve.", preferredStyle: .alert)
+            
+            //Create and add the OK action
+            let oKAction: UIAlertAction = UIAlertAction(title: CConstants.MsgOKTitle, style: .default)  { Void in
+                
+                var cg =  xnotsign.center
+                cg.x = 0
+                cg.y = cg.y - self.view.frame.height/2
+                if cg.y > 0 {
+                    self.pdfView?.pdfView.scrollView.setContentOffset(cg
+                        , animated: false)
+                }
+            }
+            alert.addAction(oKAction)
+            self.present(alert, animated: true, completion: nil)
+            
+            
+        }else{
+            let alert: UIAlertController = UIAlertController(title: CConstants.MsgTitle, message: "Do you want to submit for approval?", preferredStyle: .alert)
+            
+            //Create and add the OK action
+            let oKAction: UIAlertAction = UIAlertAction(title: "Yes", style: .default) { action -> Void in
+                //save signature to sever
+                //            self.locked = true
+                self.saveToServer1(1)
+                
+            }
+            alert.addAction(oKAction)
+            
+            let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alert.addAction(cancelAction)
+            
+            //Present the AlertController
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     

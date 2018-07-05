@@ -948,6 +948,7 @@ class SetDotValue : NSObject {
     fileprivate struct AddendumAPDFFields{
         static let Nonrefundable = "Nonrefundable"
         static let CompanyName = "CompanyName"
+         static let CompanyName1 = "sellercompany"
         static let delayfees_word = "delayfees_word"
         static let delayfees_amount = "delayfees_amount"
         static let ExcutedDay = "ExcutedDay"
@@ -966,14 +967,40 @@ class SetDotValue : NSObject {
                 pv.value = pdfInfo?.Nonrefundable!
             case AddendumAPDFFields.CompanyName:
                 pv.value = pdfInfo?.CompanyName!
+            case AddendumAPDFFields.CompanyName1:
+                pv.value = pdfInfo?.CompanyName!
             case AddendumAPDFFields.delayfees_word:
                 pv.value = pdfInfo?.delayfees_word!
             case AddendumAPDFFields.delayfees_amount:
                 pv.value = pdfInfo?.delayfees_amount!
             case AddendumAPDFFields.GeneralPartner:
-                pv.value = "By \(pdfInfo!.GeneralPartner!), General Partner"
+                if pdfInfo!.GeneralPartner! == "" {
+                    pv.value = " "
+                }else{
+                    pv.value = "\(pdfInfo!.GeneralPartner!), General Partner"
+                }
+            case "GeneralPartner1":
+                if pdfInfo!.GeneralPartner! == "" {
+                    pv.value = " "
+                }else{
+                    pv.value = "\(pdfInfo!.GeneralPartner!), General Partner"
+                }
+                
             case AddendumAPDFFields.ExcutedDay:
                 pv.value = pdfInfo?.ExcutedDay!
+            case "cityname":
+//                print(pdfInfo?.city!)
+                pv.value = pdfInfo?.city!
+                
+//                if pdfInfo?.idcity! == "1" {
+//                   pv.value = "Houston"
+//                }else if pdfInfo?.idcity! == "2" {
+//                    pv.value = "Dallas"
+//                }else if pdfInfo?.idcity! == "3" {
+//                    pv.value = "Austin"
+//                }
+                
+                
             default:
                 break
             }
@@ -1591,6 +1618,7 @@ class SetDotValue : NSObject {
     fileprivate struct ExhibitCPDFFields{
         static let GeneralPartner = "GeneralPartner"
         static let CompanyName = "CompanyName"
+        static let CompanyName1 = "sellercompany"
          static let adate = "SignatureDate"
     }
     
@@ -1601,6 +1629,10 @@ class SetDotValue : NSObject {
                 pv.value = "\(pdfInfo!.GeneralPartner!),"
             case ExhibitCPDFFields.CompanyName:
                 pv.value = pdfInfo?.CompanyName!
+            case ExhibitCPDFFields.CompanyName1:
+                pv.value = pdfInfo?.CompanyName!
+            case "sellercompanyCapital":
+                pv.value = pdfInfo?.CompanyName!.uppercased()
             case ExhibitCPDFFields.adate:
                 pv.value = pdfInfo?.approvedate ?? ""
             default:

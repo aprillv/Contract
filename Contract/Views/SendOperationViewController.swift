@@ -415,9 +415,10 @@ class SendOperationViewController: UIViewController, UITableViewDelegate, UITabl
                         delegate0.startover()
                     }
                 case constants.operationSubmit:
-                    if self.showSubmit! {
-                        delegate0.submit()
-                    }
+//                    if self.showSubmit! {
+//                        delegate0.submit()
+//                    }
+                    delegate0.submit()
                 case constants.operationSaveFinish:
                     if self.showSubmit! {
                         delegate0.saveFinish()

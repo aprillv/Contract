@@ -17,7 +17,7 @@ class EmailAfterApprovedViewController: BaseViewController, UIWebViewDelegate, S
         errorLbl.isHidden = true
         reloadBtn.isHidden = true
         
-        let url = "https://contractssl.buildersaccess.com/bacontract_contractDocument2?idcia=" + (contractInfo?.idcia ?? "") + "&idproject=" + (contractInfo?.idproject ?? "")
+        let url = "https://contractssl.buildersaccess.com/bacontract_contractDocument2?idcia=\((contractInfo?.idcia ?? ""))&idproject=\((contractInfo?.idproject ?? ""))"
         
         //        CGPDFDocumentRef pdf = CGPDFDocumentCreateWithURL((CFURLRef)[NSURL fileURLWithPath:@"your path"]);
         //        int pageCount = CGPDFDocumentGetNumberOfPages(pdf);

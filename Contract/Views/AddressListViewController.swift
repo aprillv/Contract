@@ -396,7 +396,7 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
     
     var selectRowIndex : IndexPath?
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        checkUpate()
         self.txtField.resignFirstResponder()
         var contract : ContractsItem?
         if tableView.tag == 2{
@@ -687,9 +687,43 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
     }
     
     
+    func checkUpate(){
+        let version = Bundle.main.infoDictionary?["CFBundleVersion"]
+        let parameter = ["version": "\((version == nil ?  "" : version!))"]
+        Alamofire.request(
+            CConstants.ServerURL + CConstants.CheckUpdateServiceURL, method: .post,
+            parameters: parameter).responseJSON{ (response) -> Void in
+                if response.result.isSuccess {
+                    //                print(response.result.value)
+                    if let rtnValue = response.result.value as? NSNumber{
+                        if rtnValue.intValue == 1 {
+                            
+                        }else{
+                            if let url = URL(string: CConstants.InstallAppLink){
+                               
+                                if #available(iOS 10.0, *) {
+                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                } else {
+                                    UIApplication.shared.openURL(url)
+                                    // Fallback on earlier versions
+                                }
+                            }else{
+                            }
+                        }
+                    }else{
+                        //                    self.doLogin()
+                    }
+                }else{
+                    //                self.doLogin()
+                }
+        }
+        //     NSString*   version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        
         //        self.navigationController?.hidesBarsOnSwipe = true
         let userinfo = UserDefaults.standard
         userinfo.setValue(nil, forKey: CConstants.UserInfoPrintModel)

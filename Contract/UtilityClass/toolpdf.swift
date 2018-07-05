@@ -477,7 +477,9 @@ class toolpdf: NSObject {
             "p4Abottom1",
             "p5Abottom1",
             "p6Abuyer1Sign",
-            "p6Abottom1"],
+            "p6Abottom1"
+            ,"p7Abottom1"
+        ],
         
         "Exhibit A" : ["p1EAbottom1",
             "p1EAbuyer1Sign"],
@@ -613,7 +615,8 @@ let pdfBuyer2SignatureFields = [
         "p4Abottom2",
         "p5Abottom2",
         "p6Abuyer2Sign",
-        "p6Abottom2"],
+        "p6Abottom2"
+    , "p7Abottom2"],
     
     "Exhibit A" : ["p1EAbuyer2Sign",
         "p1EAbottom2"],
@@ -671,7 +674,8 @@ let pdfBuyer2SignatureFields = [
                         "p4Abottom3",
                         "p5Abottom3",
                         "p6Aseller1Sign",
-                        "p6Abottom3"],
+                        "p6Abottom3"
+        , "p7Abottom3"],
                       "Addendum C" : ["p1ACseller1Sign",
                         "p1ACbottom3"],
                       "Exhibit B General" : ["p1ECbottom3",
