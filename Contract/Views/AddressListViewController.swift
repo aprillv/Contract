@@ -182,10 +182,9 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
         
         self.tableView.reloadData()
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+        
+        
     }
-    
-    
-    
     
     // MARK: - Search Bar Deleagte
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -280,15 +279,19 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
         xline1 = line1;
         xline2 = line2;
         if modelNm.contains(CConstants.ActionTitleAddendumC){
-            callService(modelNm)
-        }else{
+            if let indexPath = (tableView.indexPathForSelectedRow ?? selectRowIndex){
+                let ddd = self.CiaNmArray?[self.CiaNm?[indexPath.section] ?? ""]
+                if (ddd![indexPath.row].addendumcDownloaded ?? false) {
+                    self.performSegue(withIdentifier: CConstants.SegueToPrintPdf, sender: self.filesNms)
+                }else{
+                    ddd![indexPath.row].hasgotonextpage = false
+                }
+                
+            }
             
-
+        }else{
             self.performSegue(withIdentifier: CConstants.SegueToPrintPdf, sender: modelNm)
         }
-        
-        
-        
     }
     
     @IBOutlet var filterItem: UIBarButtonItem!
@@ -360,39 +363,8 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
                                     self.PopMsgWithJustOK(msg: CConstants.MsgNetworkError)
                                 }
             }
-            
-            
         }
     }
-    
-    
-    //    override func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
-    //        removebackFromCell()
-    //        if let cell  = tableView.cellForRowAtIndexPath(indexPath) {
-    //        cell.contentView.backgroundColor = CConstants.SearchBarBackColor
-    //        }
-    //
-    //    }
-    //
-    //    override func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
-    //        if let cell  = tableView.cellForRowAtIndexPath(indexPath) {
-    //            lastSelectedIndexPath = indexPath
-    //            cell.contentView.backgroundColor = .clearColor()
-    //        }
-    //
-    //    }
-    
-    //    private func removebackFromCell(){
-    //        if let _ = lastSelectedIndexPath {
-    //            if let cell = tableView.cellForRowAtIndexPath(lastSelectedIndexPath!){
-    //                cell.contentView.backgroundColor = .clearColor()
-    //            }
-    //        }
-    //    }
-    
-    //    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-    //        removebackFromCell()
-    //    }
     
     var selectRowIndex : IndexPath?
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -420,6 +392,9 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
                 self.performSegue(withIdentifier: "springdale", sender: item)
                 self.tableView.deselectRow(at: indexPath, animated: true)
             }else {
+                item.addendumcDownloaded = false
+                item.hasgotonextpage = true
+                GetAddendumcPDF(item)
                 if (contract?.status ?? "") == CConstants.ApprovedStatus && !(contract?.signfinishdate ?? "").contains("1980"){
                     if (userInfo.string(forKey: CConstants.UserInfoEmail) ?? "").lowercased() == CConstants.Administrator {
                         GetPrintedFileList(contract)
@@ -443,7 +418,58 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
         }
     }
     
+    var request: Alamofire.Request?
+    func GetAddendumcPDF(_ contract : ContractsItem?){
+        
+        self.request?.cancel()
+        
+        if let c = contract, let url = URL(string: CConstants.ServerURL + "bacontract_GetAddendumC?idcontract1=\(c.idnumber ?? "")") {
+            print(url);
+            c.addendumcDownloaded = false;
+            
+            var hud : MBProgressHUD?
+            hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud?.labelText = CConstants.RequestMsg
+            
+            let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+                let filePath0 = NSSearchPathForDirectoriesInDomains(.documentDirectory,  FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+                let url = NSURL(fileURLWithPath: filePath0)
+                let pathComponent = url.appendingPathComponent(CConstants.DownloadedAddendumCPath)!
+                
+                return (pathComponent, [.removePreviousFile, .createIntermediateDirectories])
+            }
+           
+          
+//            print("start =====================", Date())
+            
+           self.request = Alamofire.download(
+                url,
+                method: .get,
+                parameters: nil,
+                encoding: JSONEncoding.default,
+                headers: nil,
+                to: destination).downloadProgress(closure: { (progress) in
+//                    self.request?.cancel()
+                }).response(completionHandler: { [unowned self] (DefaultDownloadResponse) in
+                    c.addendumcDownloaded = true
+                    hud?.hide(true)
+                    if (!(c.hasgotonextpage ?? true)) {
+                        self.performSegue(withIdentifier: CConstants.SegueToPrintPdf, sender: self.filesNms)
+                    }
+                    
+                })
+            
+           
+            
+        }
+    }
+    
+    
+    
+    
+    
     func GetPrintedFileList(_ contract : ContractsItem?){
+        
         if let c = contract {
             let param = ["idcontract1" : c.idnumber ?? ""]
             //            print(param,  CConstants.ServerURL + "bacontract_GetPrintedFileList.json")
@@ -462,7 +488,15 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
         }
     }
     
-    
+    func cancelPrint() {
+        if let indexPath = (tableView.indexPathForSelectedRow ?? selectRowIndex){
+            let ddd = self.CiaNmArray?[self.CiaNm?[indexPath.section] ?? ""]
+            ddd![indexPath.row].addendumcDownloaded = false
+            ddd![indexPath.row].hasgotonextpage = true
+        }
+        
+        self.request?.cancel()
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -513,6 +547,7 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
                     if let indexPath = (tableView.indexPathForSelectedRow ?? selectRowIndex){
                         let ddd = self.CiaNmArray?[self.CiaNm?[indexPath.section] ?? ""]
                         let item: ContractsItem = ddd![indexPath.row]
+                        
                         item.approvedate = "01/01/1980"
                         item.approveMonthdate = "01 Jun 80"
                         if let info = sender as? ContractAddendumC {
@@ -727,7 +762,7 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
         //        self.navigationController?.hidesBarsOnSwipe = true
         let userinfo = UserDefaults.standard
         userinfo.setValue(nil, forKey: CConstants.UserInfoPrintModel)
-        CFDateFormatterKey.doesRelativeDateFormattingKey
+//        CFDateFormatterKey.doesRelativeDateFormattingKey
         
         self.refreshControl?.beginRefreshing()
         self.getAddressListFromServer(self.refreshControl)
@@ -736,7 +771,31 @@ class AddressListViewController: UITableViewController, UISearchBarDelegate, ToD
         //        self.edgesForExtendedLayout = .None
         //        self.automaticallyAdjustsScrollViewInsets = true
         
+        //delete addendum c files
+        
+//        self.deleteExistingFile()
+        
     }
+    
+//    private func deleteExistingFile(){
+//        let filePath0 = NSSearchPathForDirectoriesInDomains(.documentDirectory,  FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+//        let url = NSURL(fileURLWithPath: filePath0)
+//        if let pathComponent = url.appendingPathComponent(CConstants.DownloadedAddendumCPath) {
+//            let filePath = pathComponent.path
+//            let fileManager = FileManager.default
+//            if fileManager.fileExists(atPath: filePath) {
+//                do{
+//                    try fileManager.removeItem(atPath: filePath)
+//                }catch {
+//                    print("Could not clear temp folder: \(error)")
+//                }
+//            } else {
+//                print("FILE NOT AVAILABLE")
+//            }
+//        } else {
+//            print("FILE PATH NOT AVAILABLE")
+//        }
+//    }
     
     func showAll() {
         let userInfo = UserDefaults.standard

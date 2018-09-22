@@ -179,6 +179,7 @@
 //    NSLog(@"%@", self.addedCCCCAnnotationViews);
     _pdfWidgetAnnotationViews = [[NSMutableArray alloc] initWithArray:nwidgetAnnotationViews];
     for (PDFWidgetAnnotationView *element in _pdfWidgetAnnotationViews) {
+       
         element.alpha = 0;
         element.parentView = self;
         [_pdfView.scrollView addSubview: element];
@@ -373,9 +374,19 @@
         CGContextRef writeContext = CGPDFContextCreateWithURL(pdfURLOutput, NULL, NULL);
         
         for (NSString *source1 in listOfPaths) {
-            NSString *source = [[NSBundle mainBundle] pathForResource:source1 ofType:@"pdf"];
+            NSString *source;
+            CFURLRef pdfURL;
+            if ([source1 hasPrefix:@"AddendumC"]) {
+                
+                NSString *fileName = @"AddendumC.pdf";
+                NSString *pdfPathOutput1 = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:fileName];
+                 pdfURL = (  CFURLRef)CFBridgingRetain([[NSURL alloc] initFileURLWithPath:pdfPathOutput1]);
+            }else{
+                source = [[NSBundle mainBundle] pathForResource:source1 ofType:@"pdf"];
+                 pdfURL = (  CFURLRef)CFBridgingRetain([[NSURL alloc] initFileURLWithPath:source]);
+            }
             
-            CFURLRef pdfURL = (  CFURLRef)CFBridgingRetain([[NSURL alloc] initFileURLWithPath:source]);
+            
             
             //file ref
             CGPDFDocumentRef pdfRef = CGPDFDocumentCreateWithURL((CFURLRef) pdfURL);

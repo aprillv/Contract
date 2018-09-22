@@ -73,12 +73,25 @@
 
 -(void)addSignautre: (UIView *)view{
     if (!self.menubtn && self.LineWidth == 0 ) {
+        if ([self.xname isEqualToString:@"p1ACbottom1"]) {
+             NSLog(@"%@ %f %f", self.xname, self.frame.origin.x, self.frame.origin.y);
+        }
+        if ([self.xname isEqualToString:@"p2ACbottom1"]) {
+             NSLog(@"%@ %f %f", self.xname, self.frame.origin.x, self.frame.origin.y);
+        }
         
+        if ([self.xname isEqualToString:@"p1ADbottom1"]) {
+            NSLog(@"%@ %f %f", self.xname, self.frame.origin.x, self.frame.origin.y);
+        }
+        if ([self.xname isEqualToString:@"p2ADbottom1"]) {
+             NSLog(@"%@ %f %f", self.xname, self.frame.origin.x, self.frame.origin.y);
+            
+        }
         
         
         //    return;
         CGRect ct = self.frame;
-        //    ct.origin.y += ct.size.height/2.0;
+       
         ct.origin.x += ct.size.width/2.0;
         
         UIButton *btn = [[UIButton alloc]init];

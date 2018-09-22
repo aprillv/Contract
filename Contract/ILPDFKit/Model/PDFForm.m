@@ -298,6 +298,9 @@
 }
 
 - (PDFWidgetAnnotationView *)createWidgetAnnotationViewForSuperviewWithWidth:(CGFloat)vwidth xMargin:(CGFloat)xmargin yMargin:(CGFloat)ymargin pageMargin:(CGFloat)pageMargin {
+    if ([_name hasPrefix:@"p2AC"]) {
+        _page = 2;
+    }
     if ((_annotFlags & PDFAnnotationFlagHidden) > 0) return nil;
     if ((_annotFlags & PDFAnnotationFlagInvisible) > 0) return nil;
     if ((_annotFlags & PDFAnnotationFlagNoView) > 0) return nil;

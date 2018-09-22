@@ -57,18 +57,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
         static let operationSellerGoToSign = "Seller Go To Sign"
         
     }
-    //    var currentlyEditingView : SPUserResizableView?
-    //    var lastEditedView : SPUserResizableView?
-    //
-    //    func userResizableViewDidBeginEditing(userResizableView: SPUserResizableView!) {
-    //        currentlyEditingView?.hideEditingHandles()
-    //        currentlyEditingView = userResizableView;
-    //    }
-    //    func userResizableViewDidEndEditing(userResizableView: SPUserResizableView!) {
-    //         lastEditedView = userResizableView;
-    //    }
-    //    @IBAction func draw(sender: AnyObject) {
-    ////        let b = MyView()
     @IBAction func skiptoNext(_ sender: UIBarButtonItem) {
         if let xt = sender.title {
             if xt == "" {
@@ -88,52 +76,11 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
             }
         }
     }
-    ////        b.frame = CGRect(x: 0, y: 64, width: view.frame.size.width, height: view.frame.size.height - 113)
-    ////        b.backgroundColor = UIColor.clearColor()
-    ////        self.view.addSubview(b)
-    //
-    //        let gripFrame = CGRectMake(50, 50, 200, 150)
-    //        let userResizableView = SPUserResizableView(frame: gripFrame)
-    //        let contentView = UIView(frame: gripFrame)
-    //        contentView.backgroundColor = UIColor.blackColor()
-    //        userResizableView.contentView = contentView
-    //        userResizableView.delegate = self
-    //        currentlyEditingView = userResizableView
-    //        lastEditedView = userResizableView
-    //        userResizableView.showEditingHandles()
-    //        self.pdfView?.pdfView.scrollView.addSubview(userResizableView)
-    //
-    //
-    //        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideEditingHandles))
-    //        gestureRecognizer.delegate = self
-    //        self.pdfView?.pdfView.scrollView.addGestureRecognizer(gestureRecognizer)
-    //
-    //
-    //    }
-    //
-    //    func hideEditingHandles()  {
-    //        lastEditedView?.hideEditingHandles()
-    //    }
-    //
-    //    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
-    //
-    //        if let c = currentlyEditingView {
-    //        return c.hitTest(touch.locationInView(currentlyEditingView), withEvent: nil) == nil
-    //        }
-    //        return true
-    //
-    //    }
     
     var isDownload : Bool?
     @IBOutlet var view2: UIView!
     var addendumApdfInfo : AddendumA?{
         didSet{
-            //            self.setBuyer2()
-            //            if let c = contractInfo?.status {
-            //                if c == CConstants.ApprovedStatus {
-            //                    addendumApdfInfo?.approvedDate = contractInfo?.approvedate
-            //                }
-            //            }
             if let info = addendumApdfInfo {
                 if let fDD = fileDotsDic {
                     let tool = SetDotValue()
@@ -177,68 +124,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
     
     
     var addendumCpdfInfo : ContractAddendumC?
-    fileprivate func setAddendumC(){
-        if let info = addendumCpdfInfo {
-            if let fDD = fileDotsDic {
-                let tool = SetDotValue()
-                var i = 0
-                for (str, dots) in fDD {
-                    switch str{
-                    case CConstants.ActionTitleAddendumC:
-                        for doc in documents! {
-                            if doc.pdfName == CConstants.ActionTitleAddendumC {
-                                
-                                
-                                
-                                doc.addedviewss = tool.setAddendumCDots(info, additionViews: dots, pdfview: self.pdfView!, has2Pages0: self.page2!)
-                                for sign in doc.addedviewss {
-                                    
-                                    if (sign as AnyObject) is SignatureView {
-                                        if let si = sign as? SignatureView {
-                                            if contractInfo?.status != CConstants.ApprovedStatus {
-                                                if si.xname.contains("seller") || si.xname.contains("bottom3"){
-                                                    continue
-                                                }
-                                            }else{
-                                                if si.xname.contains("buyer")
-                                                    || si.xname.contains("bottom1")
-                                                    || si.xname.contains("bottom2"){
-                                                    continue
-                                                }
-                                            }
-                                            
-                                            if  !info.buyer!.contains(" / ")
-                                                && ( si.xname == "p1ACbuyer2Sign"
-                                                    || si.xname == "p1ACbuyer2DateSign")
-                                            {
-                                                if si.menubtn != nil {
-                                                    si.menubtn.removeFromSuperview()
-                                                    si.menubtn = nil
-                                                }
-                                                continue
-                                            }
-                                            //                                            print(si.xname)
-                                            si.pdfViewsssss = pdfView!
-                                            pdfView!.addedCCCCAnnotationViews = doc.addedviewss
-                                            //                                            if contractInfo?.status ?? "" == CConstants.DraftStatus || (contractInfo?.status ?? "" == CConstants.ApprovedStatus && contractInfo?.signfinishdate ?? "" == "01/01/1980") {
-                                            //                                                si.addSignautre(pdfView!.pdfView!.scrollView)
-                                            //                                            }
-                                            
-                                            
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        return
-                    default:
-                        i += 1
-                    }
-                    
-                }
-            }
-        }
-    }
+   
     var contractPdfInfo : ContractSignature?{
         didSet{
             
@@ -301,7 +187,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                                 info.trec2 = self.xline2;
                             }
                             tool.setSignContractDots(info, additionViews: dots, pdfview: self.pdfView!, item: contractInfo)
-                            
                         case CConstants.ActionTitleAcknowledgmentOfEnvironmental:
                             tool.setAcknowledgmentOfEnvironmental(self.contractPdfInfo, additionViews: dots)
                             
@@ -371,12 +256,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
     var filesPageCountArray : [Int]?
     var fileDotsDic : [String : [PDFWidgetAnnotationView]]?
     
-    
-    
-    
-    
-    
-    
     fileprivate func getFileName() -> String{
         return "contract1pdf_" + self.pdfInfo0!.idcity! + "_" + self.pdfInfo0!.idcia!
     }
@@ -402,15 +281,15 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
         for title in filesArray! {
             if title !=  CConstants.ActionTitleDesignCenter
                 && title != CConstants.ActionTitleClosingMemo
-                && title != CConstants.ActionTitleAddendumC
                 && title != CConstants.ActionTitleContract
+                && title != CConstants.ActionTitleAddendumC
                 && title != CConstants.ActionTitleDraftContract {
                 if called{
                     self.callService(title, param: param)
                     called = false;
                 }
                 
-            }else{  
+            }else{
                 if !calledContract{
                     calledContract = (title == CConstants.ActionTitleContract
                         || title == CConstants.ActionTitleDraftContract)
@@ -418,6 +297,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                 
                 self.callService(title, param: param)
             }
+            
             
             var str : String
             
@@ -429,7 +309,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                  CConstants.ActionTitleDraftContract:
                 var isOld = false;
                 if let signdate = contractInfo?.signfinishdate {
-                    if (!signdate.contains("1980")) {
+                    if (!signdate.contains("1980") && signdate != "") {
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "MM/dd/yyyy"
                         dateFormatter.locale = Locale(identifier:"en_US_POSIX")
@@ -469,7 +349,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                 
                 var isOld = false;
                 if let signdate = contractInfo?.signfinishdate {
-                    if (!signdate.contains("1980")) {
+                    if (!signdate.contains("1980") && signdate != "") {
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "MM/dd/yyyy"
                         dateFormatter.locale = Locale(identifier:"en_US_POSIX")
@@ -547,41 +427,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                     str = CConstants.PdfFileNameEXHIBIT_A
                 }
                 filePageCnt += CConstants.PdfFileNameEXHIBIT_APageCount
-//            case CConstants.ActionTitleEXHIBIT_B:
-//                if contractInfo?.idcity ?? "1" == "3" {
-//                    if ((contractInfo?.idcia ?? "") == "265") {
-//                        str = "EXHIBIT_B_Austin_TexasIntownhomes"
-//                    }else{
-//                        str = CConstants.PdfFileNameEXHIBIT_B_austin
-//                    }
-//                }else if (contractInfo?.idcity ?? "1" == "2" && (contractInfo?.isFortworth ?? "0") == "1") {
-//                    if ((contractInfo?.idcia ?? "") == "265") {
-//                        str = "EXHIBIT_B_DallasFortWorth_TexasIntownhomes"
-//                    }else{
-//                        str = "EXHIBIT_B_DallasFortWorth"
-//                    }
-//                }else{
-//                    if ((contractInfo?.idcia ?? "") == "265") {
-//                        str = "EXHIBIT_B_TexasIntownhomes"
-//                    }else{
-//                       str = CConstants.PdfFileNameEXHIBIT_B
-//                    }
-//                }
-//                filePageCnt += CConstants.PdfFileNameEXHIBIT_BPageCount
             case CConstants.ActionTitleEXHIBIT_C:
-//                if contractInfo?.idcity ?? "1" == "3" {
-//                    if ((contractInfo?.idcia ?? "") == "265") {
-//                        str = "EXHIBIT_C_General_Austin_TexasIntownhomes"
-//                    }else{
-//                        str = CConstants.PdfFileNameEXHIBIT_C_austin
-//                    }
-//                }else{
-//                    if ((contractInfo?.idcia ?? "") == "265") {
-//                        str = "EXHIBIT_C_General_TexasIntownhomes"
-//                    }else{
-//                       str = CConstants.PdfFileNameEXHIBIT_C
-//                    }
-//                }
                 str = CConstants.PdfFileNameEXHIBITB_06152018
                 filePageCnt += CConstants.PdfFileNameEXHIBIT_CPageCount
             case CConstants.ActionTitleClosingMemo:
@@ -599,11 +445,35 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
             filesNames.append(str)
             
             
-            let document = PDFDocument.init(resource: str)
+            let document: PDFDocument?
+            if str != CConstants.PdfFileNameAddendumC {
+                document = PDFDocument.init(resource: str)
+            }else{
+                
+                let filePath0 = NSSearchPathForDirectoriesInDomains(.documentDirectory,  FileManager.SearchPathDomainMask.userDomainMask, true)[0]
+                let url = NSURL(fileURLWithPath: filePath0)
+                if let pathComponent = url.appendingPathComponent(CConstants.DownloadedAddendumCPath) {
+                    let filePath = pathComponent.path
+                    document = PDFDocument.init(path: filePath)
+                    if ((document?.pages.count ?? 1) == 2) {
+                        for i in 0...(self.filesArray?.count ?? 0){
+                            if (self.filesArray![i] == "Addendum C") {
+                                filesNames[i] =  CConstants.PdfFileNameAddendumC2;
+                                self.filesPageCountArray![i] = 2;
+                                filePageCnt += 1;
+                                break;
+                            }
+                        }
+                    }
+                    
+                }else{
+                    document = PDFDocument.init(resource: str)
+                }
+                
+            }
+            
             document?.pdfName = title
             documents?.append(document!)
-            
-                        print(document?.forms)
             
             if let additionViews = document?.forms.createWidgetAnnotationViewsForSuperview(withWidth: view.bounds.size.width, margin: margins.x, hMargin: margins.y, pageMargin: CGFloat(lastheight)) as? [PDFWidgetAnnotationView]{
                 
@@ -619,17 +489,10 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
         if (!calledContract) {
             callService(CConstants.ActionTitleContract, param: param)
         }
-        //        let a = NSDate()
-        //        print(NSDate())
         pdfView = PDFView(frame: view2.bounds, dataOrPathArray: filesNames, additionViews: allAdditionViews)
-        
-        //        sendItem.im
-        //        sendItem.title = "\(a) == \(NSDate())"
-        //        print(self.document?.forms)
-        setAddendumC()
-        
-        
+       
         view2.addSubview(pdfView!)
+        setBuyer2()
         getSignature()
         
         getAllSignature()
@@ -1039,35 +902,8 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
         if userinfo.bool(forKey: CConstants.UserInfoIsContract) {
             self.navigationItem.title = "Contract"
             
-            if filesArray != nil {
-                switch filesArray![0]{
-                case CConstants.ActionTitleAddendumC:
-                    self.pageChanged( 6)
-//                case CConstants.ActionTitleEXHIBIT_B:
-//                    self.pageChanged( 3)
-                case CConstants.ActionTitleINFORMATION_ABOUT_BROKERAGE_SERVICES,
-                     CConstants.ActionTitleAddendumD,
-                     CConstants.ActionTitleAddendumE,
-                     CConstants.ActionTitleHoaChecklist:
-                    self.pageChanged( 1)
-                case CConstants.ActionTitleAddendumA:
-                    self.pageChanged( 2)
-                case CConstants.ActionTitleEXHIBIT_C:
-                    self.pageChanged( 4)
-                case CConstants.ActionTitleDesignCenter:
-                    self.pageChanged( 5)
-                default:
-                    break
-                }
-            }
         }else{
             self.navigationItem.title = "Draft"
-            //            buyer1Date.title = ""
-            //            buyer2Date.title = ""
-            //            buyer1Item.title = ""
-            //            buyer2Item.title = ""
-            //            seller1Item.title = ""
-            //            seller2Item.title = ""
         }
         
         
@@ -1087,8 +923,8 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
         case CConstants.ActionTitleDesignCenter:
             serviceUrl = CConstants.DesignCenterServiceURL
         case CConstants.ActionTitleAddendumC:
-            return
-        //            serviceUrl = CConstants.AddendumCServiceURL
+            
+                    serviceUrl = CConstants.AddendumCServiceURL
         case CConstants.ActionTitleClosingMemo:
             serviceUrl = CConstants.ClosingMemoServiceURL
             //        case CConstants.ActionTitleAddendumHOA:
@@ -1123,6 +959,10 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                                             self.closingMemoPdfInfo = ContractClosingMemo(dicInfo: rtnValue)
                                         case CConstants.ActionTitleDesignCenter:
                                             self.designCenterPdfInfo = ContractDesignCenter(dicInfo: rtnValue)
+                                        case CConstants.ActionTitleAddendumC:
+                                            break;
+//                                            self.addendumCpdfInfo = ContractAddendumC(dicInfo: rtnValue)
+//                                            self.setAddendumC()
                                         case CConstants.ActionTitleContract,
                                         CConstants.ActionTitleDraftContract:
         //                                    print(rtnValue)
@@ -1364,90 +1204,10 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
         }
         
     }
-    //
-    //    @IBOutlet var buyer1Date: UIBarButtonItem!
-    //    @IBOutlet var buyer2Date: UIBarButtonItem!
-    //    @IBOutlet var buyer1Item: UIBarButtonItem!
-    //    @IBOutlet var buyer2Item: UIBarButtonItem!
+    
     @IBOutlet var seller2Item: UIBarButtonItem!
-    //    @IBOutlet var seller1Item: UIBarButtonItem!
-    func pageChanged(_ no: Int) {
-        return;
-        //        if no == 0 {
-        //            buyer1Date.title = ""
-        //            buyer2Date.title = ""
-        //            buyer1Item.title = "Buyer1"
-        //            buyer2Item.title = "Buyer2"
-        ////            seller1Item.title = "Seller1"
-        //            seller2Item.title = "Seller2"
-        //        } else if no == 1 {
-        //            // broker
-        //            buyer1Date.title = ""
-        //            buyer2Date.title = ""
-        //            buyer1Item.title = "Buyer1"
-        //            buyer2Item.title = "Date1"
-        ////            seller1Item.title = "Buyer2"
-        //            seller2Item.title = "Date2"
-        //        } else if no == 2 {
-        //            // addendum a
-        //            buyer1Date.title = ""
-        //            buyer2Date.title = ""
-        //            buyer1Item.title = "Buyer1"
-        //            buyer2Item.title = "Buyer2"
-        ////            seller1Item.title = "Seller"
-        //            seller2Item.title = "Day"
-        //        } else if no == 3 {
-        //            // exhibit b
-        //            buyer1Date.title = ""
-        //            buyer2Date.title = ""
-        //            buyer1Item.title = "Buyer1"
-        //            buyer2Item.title = "Buyer2"
-        ////            seller1Item.title = ""
-        //            seller2Item.title = "Initial"
-        //        } else if no == 4 {
-        //            // exhibit c
-        //            buyer1Date.title = ""
-        //            buyer2Date.title = ""
-        //            buyer1Item.title = "BY"
-        //            buyer2Item.title = "Name"
-        ////            seller1Item.title = ""
-        //            seller2Item.title = "Title"
-        //        } else if no == 5 {
-        //            // Design center
-        //            buyer1Date.title = ""
-        //            buyer2Date.title = ""
-        //            buyer1Item.title = "Buyer1"
-        //            buyer2Item.title = "Date1"
-        ////            seller1Item.title = "Buyer2"
-        //            seller2Item.title = "Date2"
-        //        } else if no == 6 {
-        //            // Addendum c
-        //            buyer1Item.title = "Buyer1"
-        //            buyer2Item.title = "Date1"
-        //            buyer1Date.title = "Buyer2"
-        //            buyer2Date.title = "Date2"
-        ////            seller1Item.title = "Seller"
-        //            seller2Item.title = "Date"
-        //        }
-        
-    }
-    func setBuyer21() {
-        
-        //        let a = [buyer1Item, buyer2Item,buyer1Date,buyer2Date]
-        //        for item in a {
-        //            if item.title == "Buyer2" || item.title == "Date2" {
-        //                item.title = ""
-        //            }
-        //        }
-    }
+
     func setBuyer2(){
-        
-        //        buyer1Date.title = ""
-        //        buyer2Date.title = ""
-        //        buyer1Item.title = ""
-        //        buyer2Item.title = ""
-        //        seller1Item.title = ""
-        //        seller2Item.title = ""
         var showBuyer2 = false;
         var showBuyer1 = true
         if let contract = self.contractPdfInfo {
@@ -1469,10 +1229,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                 showBuyer2 = false
             }
         }
-        
-        
-        
-        
         var alldots = [PDFWidgetAnnotationView]()
         if let fileDotsDic1 = fileDotsDic{
             for (_,allAdditionViews) in fileDotsDic1 {
@@ -1489,15 +1245,10 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
         }
         
         let tlpdf = toolpdf()
-        //        if let fileDotsDic1 = fileDotsDic{
-        //            for (_,allAdditionViews) in fileDotsDic1 {
         for sign in alldots {
+            
             if sign.isKind(of: SignatureView.self) {
-                //                        print(sign.xname!)
                 if let si = sign as? SignatureView {
-                    //                            if si.xname.hasSuffix("bottom3"){
-                    //                                print("\"\(si.xname)\",")
-                    //                            }
                     
                     if contractInfo?.status != CConstants.ApprovedStatus {
                         if si.xname != "p1EBExhibitbp1sellerInitialSign" {
@@ -1571,6 +1322,9 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                         || (contractPdfInfo?.status ?? "" == CConstants.ApprovedStatus
                             && contractPdfInfo?.signfinishdate ?? "" == "01/01/1980"
                             && !(contractPdfInfo?.approvedate?.hasSuffix("1980") ?? true)) {
+                        if si.xname == "p1ACbottom1" || si.xname == "p2ACbottom1" {
+                            let a = "";
+                        }
                         si.addSignautre(pdfView!.pdfView!.scrollView)
                     }
                     
@@ -1578,10 +1332,6 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                 }
             }
         }
-        //            }
-        //        }
-        
-        //        getSignature()
     }
     
     var selfSignatureViews: [SignatureView]?
@@ -2578,7 +2328,12 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                                 if let rtnValue = response.result.value as? [String: AnyObject]{
 //                                                           print(rtnValue)
                                     
-                                  let isRavenna = self.contractInfo?.idcia == "9999" || (self.contractInfo?.idcia == "100" && ((self.contractInfo?.idproject ?? "").hasPrefix("214") || (self.contractInfo?.idproject ?? "").hasPrefix("205")))
+                                  let isRavenna = self.contractInfo?.idcia == "9999"
+                                    || (self.contractInfo?.idcia == "100"
+                                        && ((self.contractInfo?.idproject ?? "").hasPrefix("214")
+                                            || (self.contractInfo?.idproject ?? "").hasPrefix("205")
+                                        )
+                                    )
                                     
                                     let rtn = SignatrureFields(dicInfo: rtnValue)
                                     if rtn.initial_b1yn! != "" {
@@ -2728,6 +2483,7 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                                                 
                                                 
                                                 if sign.xname.hasSuffix("bottom1") {
+                                                   
                                                     if sign.xname == "p3Hbottom1" {
                                                         self.isCanSignature(nameArray, sign: sign, ynarr: self.initial_b1yn, inarr: self.initial_b1)
                                                     }else{
@@ -3237,15 +2993,15 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
                             }
                             //                    tvc.text = "april"
                         }
-                    case CConstants.SegueToPrintModelPopover:
-                        self.dismiss(animated: true, completion: nil)
-                        if let tvc = segue.destination as? PrintModelTableViewController {
-                            if let ppc = tvc.popoverPresentationController {
-                                ppc.delegate = self
-                                tvc.delegate = self
-                            }
-                            //                    tvc.text = "april"
-                        }
+//                    case CConstants.SegueToPrintModelPopover:
+//                        self.dismiss(animated: true, completion: nil)
+//                        if let tvc = segue.destination as? PrintModelTableViewController {
+//                            if let ppc = tvc.popoverPresentationController {
+//                                ppc.delegate = self
+//                                tvc.delegate = self
+//                            }
+//                            //                    tvc.text = "april"
+//                        }
                     case CConstants.SegueToAddressModelPopover:
                         self.dismiss(animated: true, completion: nil)
                         if let tvc = segue.destination as? AddressListModelViewController {
@@ -4009,6 +3765,8 @@ class PDFPrintViewController: PDFBaseViewController, UIScrollViewDelegate, Submi
             self.PopMsgWithJustOK(msg: "You have signed all fields.")
         }
     }
+    
+    
     
     //    {"idcontract":"String","buyer1email":"String","buyer2email":"String","idcity":"String","idcia":"String","emailcc":"String","buyer1name":"String","buyer2name":"String","emailbody":"String","emailsubject":"String"}
 }

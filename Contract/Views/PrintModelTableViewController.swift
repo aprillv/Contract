@@ -12,6 +12,7 @@ import Alamofire
 protocol ToDoPrintDelegate
 {
     func GoToPrint(_ modelNm: [String], _ line1: String, _ line2: String)
+    func cancelPrint()
 }
 class PrintModelTableViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate{
     // MARK: - Constanse
@@ -408,6 +409,7 @@ class PrintModelTableViewController: BaseViewController, UITableViewDataSource, 
                     }
                 }
             }else if cell.cancel.frame.contains(point){
+                self.delegate?.cancelPrint()
                 self.dismiss(animated: true){}
             
             }

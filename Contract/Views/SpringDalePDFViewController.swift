@@ -1776,14 +1776,14 @@ class SpringDalePDFViewController: PDFBaseViewController
                                 tvc.delegate1 = self
                             }
                         }
-                    case CConstants.SegueToPrintModelPopover:
-                        self.dismiss(animated: true, completion: nil)
-                        if let tvc = segue.destination as? PrintModelTableViewController {
-                            if let ppc = tvc.popoverPresentationController {
-                                ppc.delegate = self
-                                tvc.delegate = self
-                            }
-                        }
+//                    case CConstants.SegueToPrintModelPopover:
+//                        self.dismiss(animated: true, completion: nil)
+//                        if let tvc = segue.destination as? PrintModelTableViewController {
+//                            if let ppc = tvc.popoverPresentationController {
+//                                ppc.delegate = self
+//                                tvc.delegate = self
+//                            }
+//                        }
                     case CConstants.SegueToAddressModelPopover:
                         self.dismiss(animated: true, completion: nil)
                         if let tvc = segue.destination as? AddressListModelViewController {

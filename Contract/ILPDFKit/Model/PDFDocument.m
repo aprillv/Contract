@@ -123,7 +123,10 @@ static void renderPage1(NSUInteger page, CGContextRef ctx, CGPDFDocumentRef doc,
         
 //        NSLog(@"addedView.pagenomargin %@", addedView.pagenomargin);
          CGRect frame = addedView.frame;
-//        NSLog(@"addedView.pageno %@", addedView.pageno);
+//        if ([addedView.xname isEqualToString:@"buyer1DateSign1"]) {
+//            NSLog(@"addedView.pageno %@", addedView.xname);
+//        }
+        
         if (addedView.pageno ) {
             if ( [addedView.pageno integerValue] == 1) {
                 if (page !=2) {
