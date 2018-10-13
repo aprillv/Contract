@@ -40,5 +40,8 @@ class ContractsItem: ContractObject {
     
     var printList: [Int]?
     
+    var addendumcDownloaded: Bool?
+    var hasgotonextpage: Bool?
+    
     
 }

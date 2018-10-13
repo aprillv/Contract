@@ -110,6 +110,7 @@
 		426758B7205613980049B71C /* BaseContract.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 426758B5205613970049B71C /* BaseContract.pdf */; };
 		426758B8205613980049B71C /* BaseContract_Austin.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 426758B6205613980049B71C /* BaseContract_Austin.pdf */; };
 		4272697B20F5E73600AEE90F /* Warranty_Builder_s_TexasIntownhomes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4272697A20F5E73600AEE90F /* Warranty_Builder_s_TexasIntownhomes.pdf */; };
+		4291E715217049AA00014555 /* springdale.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4291E714217049AA00014555 /* springdale.pdf */; };
 		429955071FED072C00AAC11A /* Fannin_Environment_Disclosure.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 429955061FED072C00AAC11A /* Fannin_Environment_Disclosure.pdf */; };
 		42A3EE2520D10F7A0028D9E2 /* Contract23-15.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 42A3EE2420D10F7A0028D9E2 /* Contract23-15.pdf */; };
 		42AF1CD31FFDABFF00F509D9 /* AddendumA_Austin.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 42AF1CD11FFDABFF00F509D9 /* AddendumA_Austin.pdf */; };
@@ -117,7 +118,7 @@
 		42B4BD0A20D905FB003954C0 /* AddendumA_06152018.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 42B4BD0820D905FB003954C0 /* AddendumA_06152018.pdf */; };
 		42B4BD0B20D905FB003954C0 /* ExhibitB_06152018.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 42B4BD0920D905FB003954C0 /* ExhibitB_06152018.pdf */; };
 		42C9DE36204D5392005FEB49 /* SpringDalePDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C9DE35204D5392005FEB49 /* SpringDalePDFViewController.swift */; };
-		42F5E0802089F8D700BC43E3 /* springdale.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 42F5E07F2089F8D700BC43E3 /* springdale.pdf */; };
+		42F5E0802089F8D700BC43E3 /* springdale_v1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 42F5E07F2089F8D700BC43E3 /* springdale_v1.pdf */; };
 		640AC2494E0AC9F5E5CA743E /* Pods_Contract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F18C19584528B1717CD718 /* Pods_Contract.framework */; };
 /* End PBXBuildFile section */
 
@@ -273,6 +274,7 @@
 		426758B5205613970049B71C /* BaseContract.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BaseContract.pdf; sourceTree = "<group>"; };
 		426758B6205613980049B71C /* BaseContract_Austin.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = BaseContract_Austin.pdf; sourceTree = "<group>"; };
 		4272697A20F5E73600AEE90F /* Warranty_Builder_s_TexasIntownhomes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Warranty_Builder_s_TexasIntownhomes.pdf; sourceTree = "<group>"; };
+		4291E714217049AA00014555 /* springdale.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = springdale.pdf; sourceTree = "<group>"; };
 		429955061FED072C00AAC11A /* Fannin_Environment_Disclosure.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Fannin_Environment_Disclosure.pdf; sourceTree = "<group>"; };
 		42A3EE2420D10F7A0028D9E2 /* Contract23-15.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Contract23-15.pdf"; sourceTree = "<group>"; };
 		42AF1CD11FFDABFF00F509D9 /* AddendumA_Austin.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumA_Austin.pdf; sourceTree = "<group>"; };
@@ -280,7 +282,7 @@
 		42B4BD0820D905FB003954C0 /* AddendumA_06152018.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AddendumA_06152018.pdf; sourceTree = "<group>"; };
 		42B4BD0920D905FB003954C0 /* ExhibitB_06152018.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ExhibitB_06152018.pdf; sourceTree = "<group>"; };
 		42C9DE35204D5392005FEB49 /* SpringDalePDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringDalePDFViewController.swift; sourceTree = "<group>"; };
-		42F5E07F2089F8D700BC43E3 /* springdale.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = springdale.pdf; sourceTree = "<group>"; };
+		42F5E07F2089F8D700BC43E3 /* springdale_v1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = springdale_v1.pdf; sourceTree = "<group>"; };
 		8FD0FE342786EA5417C6A9FD /* Pods-Contract.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Contract.release.xcconfig"; path = "Pods/Target Support Files/Pods-Contract/Pods-Contract.release.xcconfig"; sourceTree = "<group>"; };
 		AB0FE999F8EB22254D6D15D8 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E423097CA2371A0B4502711B /* Pods-Contract.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Contract.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Contract/Pods-Contract.debug.xcconfig"; sourceTree = "<group>"; };
@@ -539,11 +541,12 @@
 		119AA3231E3338EE00EF8D3C /* pdf */ = {
 			isa = PBXGroup;
 			children = (
+				4291E714217049AA00014555 /* springdale.pdf */,
 				4272697A20F5E73600AEE90F /* Warranty_Builder_s_TexasIntownhomes.pdf */,
 				42B4BD0820D905FB003954C0 /* AddendumA_06152018.pdf */,
 				42B4BD0920D905FB003954C0 /* ExhibitB_06152018.pdf */,
 				42A3EE2420D10F7A0028D9E2 /* Contract23-15.pdf */,
-				42F5E07F2089F8D700BC43E3 /* springdale.pdf */,
+				42F5E07F2089F8D700BC43E3 /* springdale_v1.pdf */,
 				426758B6205613980049B71C /* BaseContract_Austin.pdf */,
 				426758B5205613970049B71C /* BaseContract.pdf */,
 				42AF1CD11FFDABFF00F509D9 /* AddendumA_Austin.pdf */,
@@ -657,6 +660,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4291E715217049AA00014555 /* springdale.pdf in Resources */,
 				119AA3461E33391000EF8D3C /* AddendumE.pdf in Resources */,
 				42AF1CD31FFDABFF00F509D9 /* AddendumA_Austin.pdf in Resources */,
 				4272697B20F5E73600AEE90F /* Warranty_Builder_s_TexasIntownhomes.pdf in Resources */,
@@ -676,7 +680,7 @@
 				119AA3421E33391000EF8D3C /* AddendumC.pdf in Resources */,
 				421C337D1FA0637200FAA60A /* EXHIBIT_C_General_TexasIntownhomes.pdf in Resources */,
 				1108B1BF1BFC2691004B5D48 /* LaunchScreen.storyboard in Resources */,
-				42F5E0802089F8D700BC43E3 /* springdale.pdf in Resources */,
+				42F5E0802089F8D700BC43E3 /* springdale_v1.pdf in Resources */,
 				426758B7205613980049B71C /* BaseContract.pdf in Resources */,
 				421C33731FA05B1A00FAA60A /* EXHIBIT_C_General_Austin_TexasIntownhomes.pdf in Resources */,
 				119AA3511E33391000EF8D3C /* Hoa_Checklist.pdf in Resources */,

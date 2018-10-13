@@ -129,7 +129,7 @@ class SpringDalePDFViewController: PDFBaseViewController
                                 n.value = info.nproject ?? ""
                             case "CompanyName":
                                 n.value = info.cianame ?? ""
-                            case "buyer1_signdate", "seller_signdate":
+                            case "buyer1_signdate", "seller_signdate", "approvedate":
                                 if CConstants.ApprovedStatus == (info.status ?? ""){
                                     n.value = info.approvedate ?? ""
                                     
@@ -141,11 +141,11 @@ class SpringDalePDFViewController: PDFBaseViewController
                                 if ((CConstants.ApprovedStatus == (info.status ?? "")) && ((self.contractPdfInfo?.client2 ?? "") != "")){
                                     n.value = info.approvedate ?? ""
                                 }
-                            case "titleyear":
+                            case "titleyear", "approveyear":
                                 n.value = info.approveyear!
-                            case "titleday":
+                            case "titleday", "approveday":
                                 n.value = info.approveday!
-                            case "titlemonth":
+                            case "titlemonth", "approvemonth":
                                 n.value = info.approvemonth!
                             case "buyer1":
                                 n.value = self.contractPdfInfo?.client ?? ""
@@ -225,6 +225,21 @@ class SpringDalePDFViewController: PDFBaseViewController
                                 break;
                             case "titlecompany":
                                 break;
+                            case "Street Address and City":
+                                n.value = "\(self.contractPdfInfo?.nproject ?? "") / \(self.contractPdfInfo?.cityname ?? "")"
+                                break;
+                            case "Name of Property Owners Association Association and Phone Number":
+                                n.value = "\(self.contractPdfInfo?.hoaname ?? "") \(self.contractPdfInfo?.hoaphone ?? "")"
+                                break;
+                            
+                                
+                            case "D DEPOSITS FOR RESERVES Buyer shall pay any deposits for reserves required at closing by the Association":
+                                n.value = self.contractPdfInfo?.hoafee ?? ""
+                            case "4Buyer does not require delivery of the Subdivision Information":
+                                if let radio = n as? PDFFormButtonField {
+                                    radio .setValue2("1")
+                                }
+
                             case "otherbrokerlicenseno":
                                 n.value = self.contractPdfInfo?.otherbrokerlicenseno ?? ""
                             case "otherassociatename":
@@ -1682,10 +1697,10 @@ class SpringDalePDFViewController: PDFBaseViewController
                     "EXHIBIT J",
                     "EXHIBIT K",
                     "EXHIBIT L",
-                    "Closing Procedure",
-                    "Indoor Air",
-                    "HOA Checklist",
-                    "Buyers constructions expectations"
+//                    "Closing Procedure",
+//                    "Indoor Air",
+//                    "HOA Checklist",
+//                    "Buyers constructions expectations"
                     ]
                 }
             }else if identifier == "showAttachPhoto" {
@@ -2183,34 +2198,26 @@ class SpringDalePDFViewController: PDFBaseViewController
         case "EXHIBIT E":
             t = 29
         case "EXHIBIT F":
-            t = 30
-        case "EXHIBIT G":
             t = 31
+        case "EXHIBIT G":
+            t = 34
         case "EXHIBIT H":
-            t = 33
-        case "EXHIBIT I":
             t = 36
-        case "EXHIBIT J":
-            t = 37
-        case "EXHIBIT K":
-            t = 38
-        case "EXHIBIT L":
+        case "EXHIBIT I":
             t = 39
-        case "Closing Procedure":
-            t = 40
-        case "Indoor Air":
+        case "EXHIBIT J":
             t = 41
-        case "HOA Checklist":
-            t = 43
-        case "Buyers constructions expectations":
-            t = 46
+        case "EXHIBIT K":
+            t = 42
+        case "EXHIBIT L":
+            t = 47
         default:
             break;
         }
         
         let h = (self.pdfView?.pdfView.scrollView.contentSize.height ?? 0) - getMargins2()
         if h > 0 {
-            let ch = (h / CGFloat(50)) * CGFloat(t - 1)
+            let ch = (h / CGFloat(54)) * CGFloat(t - 1)
             self.pdfView?.pdfView.scrollView.setContentOffset(CGPoint(x: 0.0, y: Double(ch)), animated: false)
         }
     }

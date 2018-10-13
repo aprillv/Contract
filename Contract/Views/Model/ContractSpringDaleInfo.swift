@@ -66,6 +66,10 @@ class ContractSpringDaleInfo: ContractBasicInfo {
     var attachline8m: String?
     var attachline9m: String?
     
+    var hoaname: String?
+    var hoaphone: String?
+    var hoafee: String?
+    
 //    var bemail1: String?
 //    var bemail2: String?
     var bfax1: String?

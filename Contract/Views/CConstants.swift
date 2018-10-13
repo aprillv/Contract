@@ -42,6 +42,8 @@ struct CConstants{
     static let CheckImgNm = "check"
     static let SuccessImageNm = "checkmark"
     
+    static let DownloadedAddendumCPath = "AddendumC.pdf"
+    
     static let SegueToAddressList :  String = "adressList"
     static let SegueToPrintPdf : String = "tofile"
 //    static let SegueToSignaturePdf : String = "pdfSignature"
